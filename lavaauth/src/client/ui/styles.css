@@ -1,0 +1,490 @@
+/* LavaAuth styles. Tokens must match DESIGN.md. No cards, no solid panels. */
+
+:root {
+  --lava-void: #05030c;
+  --lava-deep-navy: #0d0826;
+  --lava-magenta: #ff2bd6;
+  --lava-violet: #7b2cff;
+  --lava-electric-blue: #2f5bff;
+  --lava-coral: #ff5a6e;
+  --lava-ember: #ff6a1f;
+  --lava-ice: #9fe7ff;
+  --lava-glass-edge: rgba(255, 255, 255, 0.1);
+  --lava-text: #f4eeff;
+  --lava-text-quiet: rgba(244, 238, 255, 0.62);
+
+  --font-display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --font-body: "Inter Tight", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --slow: 900ms;
+  --gutter: clamp(24px, 6vw, 96px);
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--lava-void);
+  color: var(--lava-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#lamp {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: block;
+}
+
+/* No WebGL 2: a still, quiet gradient in the lamp's colours. */
+body.no-webgl #lamp {
+  display: none;
+}
+body.no-webgl {
+  background:
+    radial-gradient(40vmax 30vmax at 25% 80%, rgba(255, 43, 214, 0.35), transparent 70%),
+    radial-gradient(35vmax 30vmax at 75% 30%, rgba(47, 91, 255, 0.3), transparent 70%),
+    radial-gradient(30vmax 25vmax at 60% 70%, rgba(123, 44, 255, 0.3), transparent 70%),
+    linear-gradient(to top, var(--lava-deep-navy), var(--lava-void));
+}
+
+body.is-stirring {
+  touch-action: none;
+  cursor: crosshair;
+  user-select: none;
+}
+
+/* ------------------------------------------------------------- glass */
+
+.glass {
+  background: rgba(20, 10, 40, 0.22);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid var(--lava-glass-edge);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: rgba(12, 6, 26, 0.72);
+  }
+}
+
+/* ------------------------------------------------------------- screens */
+
+.stage {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  padding: var(--gutter);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity var(--slow) var(--ease),
+    visibility 0s linear var(--slow);
+}
+
+.screen.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    opacity var(--slow) var(--ease) 200ms,
+    visibility 0s;
+}
+
+/* The lamp keeps receiving pointer events through empty space. */
+.screen.is-active > * {
+  pointer-events: auto;
+}
+.screen-stir.is-active,
+.screen-landing.is-active,
+.screen-waiting.is-active {
+  pointer-events: none;
+}
+
+.screen-landing,
+.screen-choose,
+.screen-success {
+  display: flex;
+  align-items: flex-end;
+}
+
+.landing-copy,
+.choose-copy {
+  max-width: min(1100px, 100%);
+  padding-bottom: clamp(16px, 6vh, 72px);
+}
+
+.screen-stir,
+.screen-waiting {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------- type */
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(56px, 12.5vw, 200px);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  margin: 0 0 0.18em -0.04em;
+  text-wrap: balance;
+}
+
+.display-medium {
+  font-size: clamp(34px, 6vw, 88px);
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.display-light {
+  font-weight: 300;
+}
+
+.lede {
+  font-size: clamp(16px, 1.4vw, 19px);
+  color: var(--lava-text-quiet);
+  max-width: 38ch;
+  margin: 0 0 32px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.lede .mono {
+  font-size: 0.95em;
+  color: var(--lava-text);
+}
+
+.hint {
+  font-size: 14px;
+  color: var(--lava-text-quiet);
+  margin: 8px 0 0;
+}
+
+.quiet {
+  color: var(--lava-text-quiet);
+}
+
+/* ------------------------------------------------------------- buttons */
+
+.button {
+  font: 500 16px/1 var(--font-body);
+  color: var(--lava-text);
+  padding: 16px 30px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: none;
+  cursor: pointer;
+  transition:
+    background-color 600ms var(--ease),
+    border-color 600ms var(--ease),
+    color 600ms var(--ease);
+}
+
+.button.glass:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.button-quiet {
+  color: var(--lava-text-quiet);
+  padding-inline: 18px;
+}
+.button-quiet:hover {
+  color: var(--lava-text);
+}
+
+.button-small {
+  font-size: 13px;
+  padding: 10px 14px;
+}
+
+.button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--lava-ice);
+  outline-offset: 4px;
+}
+
+/* Breathes on a 4-second cycle: brightness, not scale. */
+.button-enter {
+  padding: 18px 44px;
+  font-size: 17px;
+  animation: breathe 4s var(--ease) infinite;
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 0 0 0 rgba(255, 43, 214, 0);
+    border-color: var(--lava-glass-edge);
+  }
+  50% {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.14),
+      0 0 48px 4px rgba(255, 43, 214, 0.22);
+    border-color: rgba(255, 43, 214, 0.45);
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.actions-centre {
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* ------------------------------------------------------------- sign up */
+
+.signup {
+  margin-top: 24px;
+  padding: 20px 22px;
+  border-radius: 24px;
+  max-width: 520px;
+}
+
+.signup label {
+  display: block;
+  font-size: 14px;
+  color: var(--lava-text-quiet);
+  margin-bottom: 10px;
+}
+
+.signup-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.signup input {
+  flex: 1 1 200px;
+  font: 400 15px/1 var(--font-mono);
+  color: var(--lava-text);
+  background: rgba(5, 3, 12, 0.35);
+  border: 1px solid var(--lava-glass-edge);
+  border-radius: 999px;
+  padding: 15px 20px;
+}
+
+.signup .button {
+  background: rgba(255, 43, 214, 0.16);
+  border-color: rgba(255, 43, 214, 0.4);
+}
+.signup .button:hover {
+  background: rgba(255, 43, 214, 0.26);
+}
+
+/* ------------------------------------------------------------- stir ring */
+
+.ring {
+  position: absolute;
+  width: min(72vmin, 640px);
+  height: min(72vmin, 640px);
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  rotate: -90deg;
+  overflow: visible;
+}
+
+.ring-track {
+  fill: none;
+  stroke: rgba(244, 238, 255, 0.1);
+  stroke-width: 0.6;
+}
+
+.ring-arc {
+  fill: none;
+  stroke: var(--lava-text);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 3px rgba(255, 43, 214, 0.9)) drop-shadow(0 0 10px rgba(123, 44, 255, 0.6));
+  transition: stroke-dashoffset 300ms var(--ease);
+}
+
+.stir-copy {
+  position: relative;
+}
+
+.readout {
+  margin: 4px 0 0;
+}
+
+/* ------------------------------------------------------------- controls */
+
+.controls {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 8px 14px;
+  padding: 14px 16px;
+  border-radius: 20px;
+  width: min(300px, calc(100vw - 32px));
+  z-index: 2;
+}
+
+.controls-label {
+  font-size: 13px;
+  color: var(--lava-text-quiet);
+  grid-column: 1 / -1;
+}
+
+.controls input[type="range"] {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.health {
+  grid-column: 1 / 2;
+  font-size: 12px;
+  color: var(--lava-text-quiet);
+  transition: color 900ms var(--ease);
+}
+
+body[data-lamp="offline"] .health {
+  color: var(--lava-coral);
+}
+body[data-lamp="cooling"] .health {
+  color: var(--lava-ice);
+}
+
+.controls .button-small {
+  grid-column: 2 / 3;
+  justify-self: end;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 22px;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--lava-ice), var(--lava-electric-blue), var(--lava-violet), var(--lava-magenta));
+}
+input[type="range"]::-moz-range-track {
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to right, var(--lava-ice), var(--lava-electric-blue), var(--lava-violet), var(--lava-magenta));
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -8px;
+  border-radius: 50%;
+  background: var(--lava-text);
+  box-shadow: 0 0 12px rgba(255, 43, 214, 0.6);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--lava-text);
+  box-shadow: 0 0 12px rgba(255, 43, 214, 0.6);
+}
+
+/* ------------------------------------------------------------- status */
+
+.status {
+  position: fixed;
+  left: 50%;
+  top: max(20px, env(safe-area-inset-top));
+  translate: -50% -8px;
+  margin: 0;
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  max-width: calc(100vw - 32px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 700ms var(--ease),
+    translate 700ms var(--ease);
+  z-index: 3;
+}
+.status.is-visible {
+  opacity: 1;
+  translate: -50% 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------- small screens */
+
+@media (max-width: 640px) {
+  .controls {
+    width: auto;
+    left: 16px;
+  }
+  .landing-copy,
+  .choose-copy {
+    padding-bottom: 150px;
+  }
+}
+
+/* ------------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  .button-enter {
+    animation: none;
+  }
+  .screen,
+  .screen.is-active,
+  .status {
+    transition-duration: 400ms;
+  }
+  .status,
+  .status.is-visible {
+    translate: -50% 0;
+  }
+}

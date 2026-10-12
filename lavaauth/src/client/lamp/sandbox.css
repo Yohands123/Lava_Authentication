@@ -1,0 +1,31 @@
+.tuner {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 280px;
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  padding: 16px 18px;
+  border-radius: 20px;
+}
+.tuner-title {
+  margin: 0 0 8px;
+  font-weight: 500;
+}
+.tuner-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 8px;
+  font-size: 13px;
+  color: var(--lava-text-quiet);
+}
+.tuner-row input {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+.tuner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}

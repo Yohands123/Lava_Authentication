@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LavaAuth lamp sandbox</title>
+  </head>
+  <body>
+    <canvas id="lamp" aria-hidden="true"></canvas>
+    <aside class="glass tuner" aria-label="Lamp tuning">
+      <p class="tuner-title">Lamp tuning</p>
+      <div data-sliders></div>
+      <div class="tuner-actions">
+        <button class="button button-quiet button-small" type="button" data-copy>Copy values</button>
+        <button class="button button-quiet button-small" type="button" data-burst>Burst</button>
+        <button class="button button-quiet button-small" type="button" data-drop>Drop</button>
+      </div>
+      <p class="mono quiet" data-fps></p>
+    </aside>
+    <script type="module" src="/src/client/lamp/sandbox.ts"></script>
+  </body>
+</html>

@@ -34,7 +34,6 @@ below as "built, needs review" until the user has watched it and confirmed.
 
 ## Carried over from Phase 3
 - Slow strokes should stretch blobs into necks (not built)
-- Hold Space credits frame timing, not key timing
 - Stirring not yet felt on mouse or touch by the user
 
 ## Not built yet
@@ -45,10 +44,12 @@ below as "built, needs review" until the user has watched it and confirmed.
 
 ## Recent requests (2026-10-11)
 - [x] Sign in hidden behind the lamp controls on narrow screens: fixed (screens reserve the controls' measured height)
-- [x] Wax stays outside the entropy ring while stirring (physics keep-out + shader edge fade). Needs the user to watch it.
+- [x] Clear the ring (replaces the keep-out-only version): wax gathers into the ring, user must stir it all out (human-like motion only) before Sign in appears. No skip or keyboard path, by owner's decision; CLAUDE.md 2.3 updated. Needs the user to try it.
+- [ ] DESIGN.md "Motion" still says "press-and-hold replaces stirring": owner to update (CLAUDE.md says propose, don't edit)
+- [ ] Stir hint is hard to read over bright wax while the ring is full (WCAG AA, CLAUDE.md 2.3): needs a dark glass tint behind the stir copy
 
 ## Tuned values worth remembering
-- Ring keep-out (2026-10-11, not yet watched): STIR.RING_CLEARANCE = 1.15, RING_PUSH_RATE = 6, RING_SOFT_EDGE = 0.08
+- Clear the ring (2026-10-11, not yet watched): STIR.RING_CLEARANCE = 0.6, RING_FLING = 1.2, RING_HOLD_DRAG = 1.8, RING_PUSH_RATE = 6, RING_SOFT_EDGE = 0.08. Scripted curvy stirring clears it in about 4 s.
 - Base `LAMP` values approved as-is on 2026-10-11: BUOYANCY = 0.06, DRAG = 0.6, MAX_DRIFT_SPEED = 0.08, RADIUS 0.045–0.105, COUNT_DESKTOP = 13, GRAIN = 0.035
 
 ## Open questions
@@ -65,3 +66,4 @@ below as "built, needs review" until the user has watched it and confirmed.
 - 2026-10-11: User approved requiring user verification. Options now "required", verify routes check the UV flag; README updated.
 - 2026-10-11: Phase 5 closed, Phase 6 started. Filled wax-response gaps (ring flicker, slow rate-limit dim, fizzles for text-only messages, no burst under reduced motion). Moved wax responses to ui/wax.ts.
 - 2026-10-11: Phase 6 closed at user's request, Phase 7 started. Built Lab mode and NIST tests; demo script E2E passes. 41 unit, 9 E2E passing.
+- 2026-10-11: Narrow-screen fix. Clear-the-ring sign-in replaces Skip/Hold Space (owner's decision). 46 unit, 9 E2E passing.

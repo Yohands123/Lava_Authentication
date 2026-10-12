@@ -40,8 +40,8 @@ name = "lavaauth"
 
 [env.production.vars]
 RP_NAME = "LavaAuth"
-RP_ID = "lavaauth.example.com"
-ORIGIN = "https://lavaauth.example.com"
+RP_ID = "lavaauth.yohance611.workers.dev"
+ORIGIN = "https://lavaauth.yohance611.workers.dev"
 CHALLENGE_TTL_SECONDS = "60"
 SESSION_TTL_SECONDS = "604800"
 

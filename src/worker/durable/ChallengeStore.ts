@@ -21,6 +21,11 @@ export type ConsumeResult =
 
 export type { ChallengeStats } from "../entropy/stats";
 
+// Expired rows are kept this long before the alarm sweeps them, so a late
+// verification gets an honest "expired" (410) instead of "unknown" (409).
+// They can never be consumed successfully: consume() rejects them by time.
+const SWEEP_GRACE_MS = 10 * 60 * 1000;
+
 export class ChallengeStore extends DurableObject<Env> {
   private readonly sql: SqlStorage;
 
@@ -59,7 +64,7 @@ export class ChallengeStore extends DurableObject<Env> {
     this.bump("issued");
     for (const source of sources) this.bump(SOURCE_STAT[source]);
     if ((await this.ctx.storage.getAlarm()) === null) {
-      await this.ctx.storage.setAlarm(expiresAt + 1000);
+      await this.ctx.storage.setAlarm(expiresAt + SWEEP_GRACE_MS);
     }
   }
 
@@ -102,10 +107,10 @@ export class ChallengeStore extends DurableObject<Env> {
   }
 
   override async alarm(): Promise<void> {
-    this.sql.exec("DELETE FROM challenges WHERE expires_at < ?", Date.now());
+    this.sql.exec("DELETE FROM challenges WHERE expires_at < ?", Date.now() - SWEEP_GRACE_MS);
     const next = this.sql
       .exec<{ t: number | null }>("SELECT MIN(expires_at) AS t FROM challenges")
       .one();
-    if (next.t !== null) await this.ctx.storage.setAlarm(next.t + 1000);
+    if (next.t !== null) await this.ctx.storage.setAlarm(next.t + SWEEP_GRACE_MS);
   }
 }

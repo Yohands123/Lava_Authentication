@@ -96,8 +96,10 @@ The project is a playful nod to Cloudflare's famous wall of lava lamps, built ar
 
 ## Demo
 
-<!-- Replace with your recorded video or GIF -->
-![LavaAuth demo](docs/media/demo.gif)
+<!-- Add the recorded video or GIF here as docs/media/demo.gif -->
+![Signing in: the wax fills the entropy ring and you stir it all out before Sign in appears](docs/media/clear-the-ring.png)
+
+*Signing in: the wax gathers inside the ring. Stir it all out with human-like motion and **Sign in** appears.*
 
 The 60-second demo shows: landing → stir the lamp → passkey login → Lab mode → freeze the lamp → log in again with the lamp frozen.
 
@@ -109,7 +111,7 @@ The 60-second demo shows: landing → stir the lamp → passkey login → Lab mo
 | --- | --- | --- |
 | 1 | **Landing** | The lamp drifts slowly. Your cursor is a gentle heat source: nearby blobs warm, turn magenta and rise toward it. One headline, one tagline, one frosted "Enter" button breathing on a 4-second cycle. |
 | 2 | **Sign up** | Blobs gather into a glowing ring in the centre while your device asks for a biometric. On success, the ring bursts and the wax rises in a slow celebratory wave. |
-| 3 | **Log in: Stir the Lamp** | "Stir the lamp." Blobs scatter from your pointer and swirl in its wake; fast strokes split them, slow strokes stretch them. A luminous ring fills as entropy is collected. When it closes, the wax drifts back, the passkey prompt appears, and success warms the whole lamp. |
+| 3 | **Log in: Stir the Lamp** | "Stir the lamp." The wax gathers inside the luminous ring. Stir it all back out: blobs scatter from your pointer and swirl in its wake, but only human-like motion moves them, and wax you push out stays out. The ring's arc fills as the wax leaves. When the ring is clear, **Sign in** fades in; press it, the wax drifts back, the passkey prompt appears, and success warms the whole lamp. |
 | 4 | **Lab mode** | Split screen: lamp on one side, the entropy pipeline on the other as glowing flow lines, with live meters for snapshots accepted/rejected, stir entropy, lamp health, camera health and randomness tests. |
 | 5 | **Freeze the Lamp** | Turn the dial to zero: the wax stops, colours cool to ice blue, frost creeps across the glass, lamp health turns red. *"Lamp offline. Secure generator holding the line."* Login still works. |
 | 6 | **Failure states** | Camera covered: the lamp dims. Repeated snapshot: a droplet falls and fizzles instead of merging. Robotic stirring: the ring stalls and flickers, *"Too regular, keep stirring."* |

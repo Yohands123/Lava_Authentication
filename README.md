@@ -417,7 +417,6 @@ lavaauth/
 ├── docs/
 │   └── media/                ← demo GIF, screenshots
 ├── public/
-│   ├── fonts/
 │   └── sound/                ← hum.ogg, bubble.ogg, stir.ogg
 ├── src/
 │   ├── client/

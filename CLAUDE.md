@@ -67,7 +67,7 @@ These rules are never broken, even if a task seems to call for it. If a request 
    - Bouncy, springy or elastic easing
 3. **All UI surfaces are frosted glass** (see [section 8.4](#84-glass)).
 4. **Colours come only from the tokens** in [section 8.1](#81-colour-tokens). Never introduce a new colour without adding it to `DESIGN.md` and asking first.
-5. **Fonts are only** Unbounded (display), Inter Tight (body) and JetBrains Mono (technical). Self-hosted from `public/fonts/`, never from a CDN.
+5. **Fonts are only** Unbounded (display), Inter Tight (body) and JetBrains Mono (technical). Self-hosted via the `@fontsource` packages (bundled by Vite), never from a CDN.
 6. **Nothing snaps.** No transition under 300ms. Default easing `cubic-bezier(0.22, 1, 0.36, 1)`.
 7. **One headline per screen, maximum.**
 
@@ -202,7 +202,7 @@ After completing a phase, update `PROGRESS.md`, run `npm run check`, and stop. D
 ### 6.1 General
 - **TypeScript strict mode** everywhere (`"strict": true`, `"noUncheckedIndexedAccess": true`).
 - **No UI framework.** Plain TypeScript and DOM APIs. Small, focused modules.
-- **No new dependencies without asking.** Approved: `@simplewebauthn/browser`, `@simplewebauthn/server`, `vite`, `wrangler`, `vitest`, `@playwright/test`, `eslint`, `typescript`. If something else seems necessary, explain why and wait.
+- **No new dependencies without asking.** Approved: `@simplewebauthn/browser`, `@simplewebauthn/server`, `vite`, `wrangler`, `vitest`, `@playwright/test`, `eslint`, `typescript`, `@fontsource/unbounded`, `@fontsource/inter-tight`, `@fontsource/jetbrains-mono`. If something else seems necessary, explain why and wait.
 - Prefer pure functions. Side effects live at the edges (render loop, event handlers, route handlers).
 - Named exports only; no default exports.
 - No `any`. Use `unknown` and narrow.

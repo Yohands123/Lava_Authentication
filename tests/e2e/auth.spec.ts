@@ -11,7 +11,7 @@ import {
   signOut,
 } from "./helpers";
 
-// Order matters: one Worker, one client IP. Rate limiting runs last.
+// One Worker, one client IP: rate limiting runs last, in rate-limit.spec.ts.
 
 test("register → log in (hold Space to stir) → log out", async ({ page }) => {
   await addAuthenticator(page);
@@ -120,17 +120,4 @@ test("sign out everywhere revokes every session", async ({ browser }) => {
   await expect(laptop.getByRole("heading", { name: "LavaAuth" })).toBeVisible();
   expect((await session(laptop)).status()).toBe(401);
   expect((await session(phone)).status()).toBe(401);
-});
-
-test("too many login attempts are rate limited with 429", async ({ page }) => {
-  await page.goto("/");
-  let limited = null;
-  for (let i = 0; i < 25 && !limited; i++) {
-    const res = await post(page, "/api/login/options", { digests: {} });
-    if (res.status() === 429) limited = res;
-    else expect(res.status()).toBe(200);
-  }
-  expect(limited, "no 429 within 25 requests").not.toBeNull();
-  expect((await limited!.json()).error.code).toBe("rate_limited");
-  expect(Number(limited!.headers()["retry-after"])).toBeGreaterThan(0);
 });

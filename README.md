@@ -588,7 +588,7 @@ Start registration.
 { "username": "sara" }
 
 // Response 200
-{ "challenge": "…", "rp": { "name": "LavaAuth", "id": "lavaauth.example.com" }, "user": { … }, "pubKeyCredParams": [ … ], "authenticatorSelection": { "residentKey": "required", "userVerification": "preferred" } }
+{ "challenge": "…", "rp": { "name": "LavaAuth", "id": "lavaauth.example.com" }, "user": { … }, "pubKeyCredParams": [ … ], "authenticatorSelection": { "residentKey": "required", "userVerification": "required" } }
 ```
 
 ### `POST /api/register/verify`
@@ -610,7 +610,7 @@ Start login. Client digests are optional; each must be exactly 32 bytes when pre
 { "digests": { "stir": "base64url…", "lamp": "base64url…", "camera": null } }
 
 // Response 200
-{ "challenge": "…", "rpId": "lavaauth.example.com", "userVerification": "preferred", "timeout": 60000 }
+{ "challenge": "…", "rpId": "lavaauth.example.com", "userVerification": "required", "timeout": 60000 }
 ```
 
 ### `POST /api/login/verify`

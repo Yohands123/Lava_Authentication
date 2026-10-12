@@ -61,6 +61,17 @@ test("log in with the lamp frozen", async ({ page }) => {
   expect((await session(page)).status()).toBe(200);
 });
 
+test("login without user verification is refused", async ({ page }) => {
+  const key = await addAuthenticator(page);
+  await register(page);
+  await signOut(page);
+  // The passkey is present, but the user fails the biometric/PIN check.
+  await key.cdp.send("WebAuthn.setUserVerified", { authenticatorId: key.id, isUserVerified: false });
+  await signInWithSkip(page, false);
+  await expect(page.getByRole("heading", { name: "No passwords here" })).toBeVisible({ timeout: 15_000 });
+  expect((await session(page)).status()).toBe(401);
+});
+
 test("a reused challenge is rejected with 409", async ({ page }) => {
   await addAuthenticator(page);
   await register(page);

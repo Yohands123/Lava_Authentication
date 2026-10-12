@@ -46,7 +46,7 @@ export async function registerOptions(request: Request, env: Env): Promise<Respo
     challenge,
     attestationType: "none",
     timeout: challengeTtl(env) * 1000,
-    authenticatorSelection: { residentKey: "required", userVerification: "preferred" },
+    authenticatorSelection: { residentKey: "required", userVerification: "required" },
   });
 
   await challenges(env).issue(
@@ -81,7 +81,7 @@ export async function registerVerify(request: Request, env: Env): Promise<Respon
       expectedChallenge: challenge,
       expectedOrigin: env.ORIGIN,
       expectedRPID: env.RP_ID,
-      requireUserVerification: false,
+      requireUserVerification: true, // CLAUDE.md 2.1 rule 6
     });
   } catch {
     return fail("verification_failed", 401, "That passkey couldn't be verified.");

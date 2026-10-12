@@ -26,7 +26,7 @@ export async function loginOptions(request: Request, env: Env): Promise<Response
   const options = await generateAuthenticationOptions({
     rpID: env.RP_ID,
     challenge,
-    userVerification: "preferred",
+    userVerification: "required",
     timeout: challengeTtl(env) * 1000,
   });
 
@@ -64,7 +64,7 @@ export async function loginVerify(request: Request, env: Env): Promise<Response>
       expectedChallenge: challenge,
       expectedOrigin: env.ORIGIN,
       expectedRPID: env.RP_ID,
-      requireUserVerification: false,
+      requireUserVerification: true, // CLAUDE.md 2.1 rule 6
       credential: {
         id: stored.id,
         publicKey: stored.publicKey,

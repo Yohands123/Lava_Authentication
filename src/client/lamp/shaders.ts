@@ -16,7 +16,7 @@ precision highp float;
 uniform vec2 u_res;        // canvas size in pixels
 uniform float u_ppu;       // pixels per short-edge unit
 uniform float u_time;
-uniform vec4 u_blobs[MAX_BLOBS]; // x, y, radius, temperature (units, y up)
+uniform vec4 u_blobs[MAX_BLOBS]; // x, y, radius, temperature (+2 when out of the ring) (units, y up)
 uniform int u_count;
 uniform float u_freeze;    // 0 = warm, 1 = frozen
 uniform float u_glow;      // success warmth, 0..1
@@ -52,6 +52,7 @@ void main() {
 
   // Metaball field, its gradient, and a field-weighted temperature.
   float field = 0.0;
+  float fieldOut = 0.0; // wax already pushed out of the ring
   vec2 grad = vec2(0.0);
   float tempSum = 0.0;
   for (int i = 0; i < MAX_BLOBS; i++) {
@@ -61,14 +62,18 @@ void main() {
     float d2 = dot(d, d) + 1e-5;
     float r2 = b.z * b.z;
     float f = r2 / d2;
+    float isOut = step(1.5, b.w);
     field += f;
+    fieldOut += f * isOut;
     grad += -2.0 * r2 * d / (d2 * d2);
-    tempSum += f * b.w;
+    tempSum += f * (b.w - 2.0 * isOut);
   }
   float temp = tempSum / max(field, 1e-5);
-  // Many blobs' field tails add up and would bulge into the entropy ring; fade the wax out at its edge.
+  // Wax that is out of the ring stays out visually too: its field tails would
+  // otherwise add up and bulge inside. Wax still inside is drawn as is.
   float ringDist = length(p - u_ring.xy);
-  field *= mix(1.0, smoothstep(u_ring.z, u_ring.z + u_ringMask.y, ringDist), u_ringMask.x);
+  float outMask = mix(1.0, smoothstep(u_ring.z, u_ring.z + u_ringMask.y, ringDist), u_ringMask.x);
+  field -= fieldOut * (1.0 - outMask);
   vec3 base = tempColor(temp);
 
   // Background: deep navy at the bottom fading to void, heater glow, faint streaks.

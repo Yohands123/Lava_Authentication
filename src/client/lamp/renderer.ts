@@ -10,6 +10,8 @@ export interface FrameState {
   /** Entropy ring the wax stays out of, and how strongly (0..1). */
   ring: { cx: number; cy: number; radius: number };
   ringAmount: number;
+  /** Wax already pushed out of the ring; only its field is faded at the ring's edge. */
+  isOut: (b: Blob) => boolean;
 }
 
 export class LampRenderer {
@@ -71,7 +73,8 @@ export class LampRenderer {
     const count = Math.min(blobs.length, LAMP.MAX_BLOBS);
     for (let i = 0; i < count; i++) {
       const b = blobs[i]!;
-      this.blobData.set([b.x, b.y, b.r, b.t], i * 4);
+      // Temperature is 0..1; +2 flags wax that is out of the ring (decoded in the shader).
+      this.blobData.set([b.x, b.y, b.r, b.t + (state.isOut(b) ? 2 : 0)], i * 4);
     }
     gl.useProgram(this.program);
     gl.uniform2f(this.u.u_res!, this.canvas.width, this.canvas.height);

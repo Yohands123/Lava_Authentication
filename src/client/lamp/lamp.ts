@@ -85,12 +85,14 @@ export class Lamp {
     // Ease visual state slowly; nothing snaps.
     this.glow += (this.glowTarget - this.glow) * (1 - Math.exp(-dt * LAMP.VISUAL_EASE));
     this.dim += (this.dimTarget - this.dim) * (1 - Math.exp(-dt * this.dimEase));
-    const keepOut = this.physics.keepOut;
-    if (keepOut) this.ring = { ...keepOut };
-    this.ringAmount += ((keepOut ? 1 : 0) - this.ringAmount) * (1 - Math.exp(-dt * STIR.RING_PUSH_RATE));
+    const ring = this.physics.ring;
+    if (ring) this.ring = { cx: ring.cx, cy: ring.cy, radius: ring.radius };
+    const ringOn = ring?.phase === "clear" ? 1 : 0;
+    this.ringAmount += (ringOn - this.ringAmount) * (1 - Math.exp(-dt * STIR.RING_PUSH_RATE));
 
     this.renderer.render(this.physics.blobs, {
       time: this.time, freeze: this.freeze, glow: this.glow, dim: this.dim, ring: this.ring, ringAmount: this.ringAmount,
+      isOut: (b) => ring?.isOut(b) ?? false,
     });
     this.onFrame?.();
     this.adapt(frameMs, now);

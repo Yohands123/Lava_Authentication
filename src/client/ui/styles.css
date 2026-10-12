@@ -337,6 +337,21 @@ input:focus-visible {
   transition: stroke-dashoffset 300ms var(--ease);
 }
 
+/* Clear the ring: Sign in fades in only once all the wax is out. */
+.button-passkey {
+  opacity: 0;
+  translate: 0 6px;
+  transition:
+    opacity var(--slow) var(--ease),
+    translate var(--slow) var(--ease),
+    background-color 600ms var(--ease),
+    border-color 600ms var(--ease);
+}
+.screen-stir.is-clear .button-passkey {
+  opacity: 1;
+  translate: 0 0;
+}
+
 /* Robotic stirring: the ring stalls and flickers. Every step is at least 300ms. */
 .ring.is-stalled .ring-arc {
   animation: ring-flicker 1500ms var(--ease) 1;

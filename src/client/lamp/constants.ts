@@ -75,10 +75,18 @@ export const STIR = {
   SPLIT_COOLDOWN: 0.7,
   /** Seconds for the wax to gather back to centre after the ring closes. */
   RETURN_SECONDS: 2,
-  /** While stirring, blobs keep their surface this many radii outside the entropy ring. */
-  RING_CLEARANCE: 1.15,
-  /** How fast wax inside the ring eases out, per second (≈0.4 s to clear). Higher = snappier. */
+  /** A blob counts as out once its centre is this many radii past the ring's edge (the shader fades the rest). */
+  RING_CLEARANCE: 0.6,
+  /** How fast wax that is out eases back if it strays in, per second (≈0.4 s). Higher = firmer. */
   RING_PUSH_RATE: 6,
+  /** Outward push on stirred wax inside the ring, per unit of pointer speed. Higher = clears faster. */
+  RING_FLING: 1.2,
+  /** Drag multiplier on wax still held in the ring: thicker, so it only moves when stirred. */
+  RING_HOLD_DRAG: 1.8,
+  /** Longest the wax takes to gather into the ring before stirring starts, seconds. */
+  RING_GATHER_SECONDS: 2.5,
+  /** A stir sample keeps pushing wax for this long after the meter accepts it, ms. */
+  HUMAN_GRACE_MS: 160,
   /** Width of the soft edge where wax fades out against the ring, short-edge units. Wider = softer. */
   RING_SOFT_EDGE: 0.08,
 

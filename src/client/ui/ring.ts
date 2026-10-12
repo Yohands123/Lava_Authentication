@@ -1,7 +1,6 @@
 import { $ } from "./dom";
-import { STIR } from "../lamp/constants";
 
-/** The luminous entropy ring and its mono readout. */
+/** The luminous entropy ring: its arc shows how much wax is out; the readout shows credited bits. */
 export class EntropyRing {
   private readonly arc = $("[data-ring-arc]") as unknown as SVGCircleElement;
   private readonly bits = $("[data-bits]");
@@ -12,7 +11,6 @@ export class EntropyRing {
     this.circumference = 2 * Math.PI * r;
     this.arc.style.strokeDasharray = `${this.circumference}`;
     this.set(0, 0);
-    $("[data-bits-target]").textContent = String(STIR.TARGET_BITS);
   }
 
   /** Robotic stirring: the ring stalls and flickers (a slow fade under reduced motion). */
@@ -27,6 +25,16 @@ export class EntropyRing {
   }
 
   private stallTimer = 0;
+  private readonly screen = $("[data-screen=stir]");
+  private readonly passkey = $("[data-action=passkey]");
+
+  /** Ring clear: Sign in fades in and takes focus. Until then it can't be reached. */
+  showClear(clear: boolean): void {
+    this.screen.classList.toggle("is-clear", clear);
+    this.passkey.inert = !clear;
+    this.passkey.setAttribute("aria-hidden", String(!clear));
+    if (clear) window.setTimeout(() => this.passkey.focus({ preventScroll: true }), 650);
+  }
 
   set(bits: number, progress: number): void {
     this.arc.style.strokeDashoffset = `${this.circumference * (1 - progress)}`;

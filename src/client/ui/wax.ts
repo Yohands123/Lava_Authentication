@@ -38,19 +38,30 @@ export class Wax {
     p.formation = { kind: "ring", ...this.centre, radius: Math.min(p.width, p.height) * 0.26 };
   }
 
-  /** Stirring: the wax stays outside the entropy ring. Pass null to let it back in. */
-  clearRing(ring: Element | null): void {
-    const lamp = this.lamp;
-    if (!lamp) return;
-    if (!ring) {
-      lamp.physics.keepOut = null;
-      return;
-    }
-    // Measured from the page, so it follows resizes and Lab mode's split screen.
+  /** Sign-in: the wax gathers into the entropy ring, and the user stirs it back out. */
+  fillRing(ring: Element): void {
+    const g = this.ringGeometry(ring);
+    if (g) this.lamp!.physics.beginRing(g.cx, g.cy, g.radius);
+  }
+
+  /** Keep the ring's position current (resizes, Lab mode's split screen). */
+  trackRing(ring: Element): void {
+    const g = this.ringGeometry(ring);
+    if (g) this.lamp!.physics.ring?.setGeometry(g.cx, g.cy, g.radius);
+  }
+
+  /** Leaving the ring: the wax is free again. */
+  releaseRing(): void {
+    this.lamp?.physics.endRing();
+  }
+
+  private ringGeometry(ring: Element): { cx: number; cy: number; radius: number } | null {
+    if (!this.lamp) return null;
+    // Measured from the page, so it matches the ring on any screen size.
     const box = ring.getBoundingClientRect();
-    const c = lamp.renderer.toWorld(box.left + box.width / 2, box.top + box.height / 2);
-    const edge = lamp.renderer.toWorld(box.right, box.top + box.height / 2);
-    lamp.physics.keepOut = { cx: c.x, cy: c.y, radius: edge.x - c.x };
+    const c = this.lamp.renderer.toWorld(box.left + box.width / 2, box.top + box.height / 2);
+    const edge = this.lamp.renderer.toWorld(box.right, box.top + box.height / 2);
+    return { cx: c.x, cy: c.y, radius: edge.x - c.x };
   }
 
   release(): void {

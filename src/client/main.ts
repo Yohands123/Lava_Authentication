@@ -83,14 +83,13 @@ const stir = lamp
         ring.stall();
         showStatus("Too regular, keep stirring.");
       },
-    }, prefersReducedMotion)
+    })
   : null;
 
 if (lamp) {
   lamp.onStep = (dt) => {
     if (screen === "landing" && cursor) lamp!.physics.heatAt(cursor.x, cursor.y, dt);
-    // While stirring, the wax stays outside the entropy ring.
-    wax.clearRing(screen === "stir" ? ringArc : null);
+    if (screen === "stir") wax.trackRing(ringArc); // follow resizes and Lab mode's split
     stir?.update(dt);
   };
   lamp.onFrame = () => {
@@ -106,8 +105,20 @@ if (lamp) {
 // ---------------------------------------------------------------- screens
 
 function go(next: typeof screen): void {
+  if (next !== "stir") wax.releaseRing();
   screen = next;
   showScreen(next);
+}
+
+// Clear the ring: Sign in only appears once all the wax is out.
+let passkeyPressed: (() => void) | null = null;
+
+function setLampPaused(paused: boolean): void {
+  if (!lamp) return;
+  lamp.setPaused(paused);
+  const button = $("[data-action=pause]");
+  button.setAttribute("aria-pressed", String(paused));
+  button.textContent = paused ? "Resume lamp" : "Pause lamp";
 }
 
 function signedIn(user: User): void {
@@ -122,10 +133,20 @@ const usernameInput = $("#username") as HTMLInputElement;
 
 async function startSignIn(): Promise<void> {
   go("stir");
-  announce("Stir the lamp, hold Space, or choose skip.");
-  const result = stir ? await stir.run() : { digest: null, skipped: true };
+  ring.showClear(false);
+  if (lamp?.isPaused) setLampPaused(false); // a paused lamp can't be stirred
+  wax.fillRing(ringArc);
+  announce("Stir all the wax out of the ring to sign in.");
+  // No WebGL means no wax to clear: Sign in is available straight away.
+  const result = stir ? await stir.run() : { digest: null };
   if (screen !== "stir") return; // cancelled
-  lab.stirFinished(result.skipped);
+  lab.stirFinished(!stir);
+
+  ring.showClear(true);
+  announce("Ring clear. Press Sign in.");
+  await new Promise<void>((resolve) => (passkeyPressed = resolve));
+  passkeyPressed = null;
+  if (screen !== "stir") return; // cancelled
 
   // The wax gathers back before the passkey prompt.
   wax.gather(STIR.RETURN_SECONDS * 1000);
@@ -185,12 +206,13 @@ document.addEventListener("click", (e) => {
       signupForm.hidden = false;
       usernameInput.focus();
       break;
-    case "skip":
-      stir?.skip();
+    case "passkey":
+      passkeyPressed?.();
       break;
     case "back":
       stir?.cancel();
       go("choose");
+      passkeyPressed?.();
       break;
     case "signout":
       void logout().finally(() => {
@@ -212,14 +234,9 @@ document.addEventListener("click", (e) => {
     case "lab":
       lab.toggle();
       break;
-    case "pause": {
-      if (!lamp) break;
-      const paused = !lamp.isPaused;
-      lamp.setPaused(paused);
-      target.setAttribute("aria-pressed", String(paused));
-      target.textContent = paused ? "Resume lamp" : "Pause lamp";
+    case "pause":
+      if (lamp) setLampPaused(!lamp.isPaused);
       break;
-    }
   }
 });
 

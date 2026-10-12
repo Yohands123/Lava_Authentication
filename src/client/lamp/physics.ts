@@ -2,6 +2,7 @@
 // reads blob positions. Math.random() here is visual only, not security.
 
 import { LAMP, LANDING, STIR } from "./constants";
+import { RingField } from "./ring-field";
 
 export interface Blob {
   x: number;
@@ -35,8 +36,8 @@ export class LampPhysics {
   /** Global speed multiplier (reduced motion). */
   speed = 1;
   formation: Formation = null;
-  /** A circle the wax stays out of (the entropy ring while stirring). */
-  keepOut: { cx: number; cy: number; radius: number } | null = null;
+  /** Clear the ring: active while signing in (see ring-field.ts). */
+  ring: RingField | null = null;
   private time = 0;
 
   constructor(private targetCount: number) {}
@@ -84,10 +85,13 @@ export class LampPhysics {
       b.t = clamp01(b.t);
 
       // Forces
-      let ax = Math.sin(this.time * 0.13 + b.phase) * LAMP.WANDER;
-      let ay = (b.t - 0.5) * LAMP.BUOYANCY * this.heatScale + Math.cos(this.time * 0.11 + b.phase * 1.7) * LAMP.WANDER * 0.5;
+      // Wax held in the ring doesn't rise or wander: only stirring moves it.
+      const held = this.ring?.isHeld(b) ?? false;
+      const free = held ? 0 : 1;
+      let ax = Math.sin(this.time * 0.13 + b.phase) * LAMP.WANDER * free;
+      let ay = ((b.t - 0.5) * LAMP.BUOYANCY * this.heatScale + Math.cos(this.time * 0.11 + b.phase * 1.7) * LAMP.WANDER * 0.5) * free;
 
-      let damping = drag;
+      let damping = held ? drag * STIR.RING_HOLD_DRAG : drag;
       if (this.formation) {
         const target = this.formationTarget(i);
         ax += (target.x - b.x) * LAMP.FORMATION_SPRING;
@@ -114,7 +118,7 @@ export class LampPhysics {
 
       b.x += b.vx * dt;
       b.y += b.vy * dt;
-      if (this.keepOut) this.pushOut(b, dt);
+      this.ring?.constrain(b, dt);
 
       // Soft walls
       const m = b.r * 0.3;
@@ -132,6 +136,19 @@ export class LampPhysics {
 
     this.blobs = this.blobs.filter((b) => !b.fizzle || b.fizzle.life > 0);
     this.recombine();
+    this.ring?.update(this.blobs, dt);
+  }
+
+  /** Sign-in: gather the wax into the ring; the user then stirs it out. */
+  beginRing(cx: number, cy: number, radius: number): void {
+    this.ring = new RingField();
+    this.ring.setGeometry(cx, cy, radius);
+    this.formation = { kind: "point", cx, cy, spread: radius * 0.4 };
+  }
+
+  endRing(): void {
+    if (this.formation?.kind === "point" && this.ring?.phase === "gather") this.formation = null;
+    this.ring = null;
   }
 
   private formationTarget(i: number): { x: number; y: number } {
@@ -142,27 +159,6 @@ export class LampPhysics {
       return { x: f.cx + Math.cos(angle) * f.radius, y: f.cy + Math.sin(angle) * f.radius };
     }
     return { x: f.cx + Math.cos(angle) * f.spread, y: f.cy + Math.sin(angle) * f.spread };
-  }
-
-  /** Ease a blob out of the keep-out circle and cancel its inward motion, so wax parts rather than jumps. */
-  private pushOut(b: Blob, dt: number): void {
-    const k = this.keepOut!;
-    const dx = b.x - k.cx;
-    const dy = b.y - k.cy;
-    const d = Math.hypot(dx, dy);
-    const min = k.radius + b.r * STIR.RING_CLEARANCE;
-    if (d >= min) return;
-    // A blob dead centre has no direction; send it upward, the way warm wax goes.
-    const nx = d > 1e-4 ? dx / d : 0;
-    const ny = d > 1e-4 ? dy / d : 1;
-    const ease = 1 - Math.exp(-STIR.RING_PUSH_RATE * dt);
-    b.x += nx * (min - d) * ease;
-    b.y += ny * (min - d) * ease;
-    const inward = b.vx * nx + b.vy * ny;
-    if (inward < 0) {
-      b.vx -= inward * nx;
-      b.vy -= inward * ny;
-    }
   }
 
   /** Merge one overlapping pair per step when above the resting count. Conserves area. */
@@ -225,6 +221,18 @@ export class LampPhysics {
       b.vx += (nx * STIR.REPEL * (0.3 + speed) + pvx * STIR.DRAG_ALONG + -ny * curl * speed * STIR.SWIRL) * fall * dt;
       b.vy += (ny * STIR.REPEL * (0.3 + speed) + pvy * STIR.DRAG_ALONG + nx * curl * speed * STIR.SWIRL) * fall * dt;
       b.t = clamp01(b.t + STIR.HEAT_GAIN * fall * dt);
+
+      // Clear the ring: stirred wax inside is flung outward from the ring's centre,
+      // so circling the pointer works, not only strokes that start in the middle.
+      const ring = this.ring;
+      if (ring?.isHeld(b)) {
+        const rx = b.x - ring.cx;
+        const ry = b.y - ring.cy;
+        const rd = Math.max(Math.hypot(rx, ry), 1e-4);
+        const fling = STIR.RING_FLING * (0.3 + speed) * fall * dt;
+        b.vx += (rx / rd) * fling;
+        b.vy += (ry / rd) * fling;
+      }
 
       const canSplit =
         speed > STIR.SPLIT_SPEED &&

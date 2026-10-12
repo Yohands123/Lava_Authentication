@@ -24,10 +24,12 @@ below as "built, needs review" until the user has watched it and confirmed.
 - ESLint config (`npm run lint` currently runs the type check)
 
 ## Tuned values worth remembering
--
+- Base `LAMP` values approved as-is on 2026-10-11: BUOYANCY = 0.06, DRAG = 0.6, MAX_DRIFT_SPEED = 0.08, RADIUS 0.045–0.105, COUNT_DESKTOP = 13, GRAIN = 0.035
 
 ## Open questions
 - Production domain for RP_ID?
 
 ## Log
 - Base code created: lamp engine, Stir the Lamp, glass UI, Worker routes, Durable Objects, 21 unit tests passing.
+- 2026-10-11: Repo moved to project root and pushed to GitHub. Fonts documented as bundled via @fontsource.
+- 2026-10-11: User watched `npm run lamp` and approved the current lamp look and motion. No values changed.

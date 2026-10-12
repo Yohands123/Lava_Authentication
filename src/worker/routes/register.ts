@@ -5,6 +5,7 @@ import { toBase64Url } from "../lib/base64url";
 import { sessionCookie } from "../lib/cookies";
 import { clientIp, fail, json, readBody } from "../lib/http";
 import { challenges, challengeTtl, sessions, sessionTtl, users, type Env } from "../env";
+import { presentSources } from "../entropy/stats";
 import { challengeFromResponse, consumeFailure, rateLimit, USERNAME_PATTERN } from "./shared";
 
 export async function registerOptions(request: Request, env: Env): Promise<Response> {
@@ -51,6 +52,7 @@ export async function registerOptions(request: Request, env: Env): Promise<Respo
   await challenges(env).issue(
     { challenge: options.challenge, purpose: "register", userId: toBase64Url(userId), username },
     challengeTtl(env),
+    presentSources(digests),
   );
   return json(options);
 }

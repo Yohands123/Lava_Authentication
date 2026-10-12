@@ -3,6 +3,7 @@
 
 import { DurableObject } from "cloudflare:workers";
 import type { Env } from "../env";
+import { emptyStats, SOURCE_STAT, type ChallengeStats, type DigestSource } from "../entropy/stats";
 
 export type ChallengePurpose = "register" | "login";
 
@@ -18,12 +19,7 @@ export type ConsumeResult =
   | { status: "expired" }
   | { status: "unknown" };
 
-export interface ChallengeStats {
-  issued: number;
-  consumed: number;
-  expired: number;
-  unknown: number;
-}
+export type { ChallengeStats } from "../entropy/stats";
 
 export class ChallengeStore extends DurableObject<Env> {
   private readonly sql: SqlStorage;
@@ -50,7 +46,7 @@ export class ChallengeStore extends DurableObject<Env> {
     );
   }
 
-  async issue(record: ChallengeRecord, ttlSeconds: number): Promise<void> {
+  async issue(record: ChallengeRecord, ttlSeconds: number, sources: readonly DigestSource[] = []): Promise<void> {
     const expiresAt = Date.now() + ttlSeconds * 1000;
     this.sql.exec(
       "INSERT INTO challenges (challenge, purpose, user_id, username, expires_at) VALUES (?, ?, ?, ?, ?)",
@@ -61,6 +57,7 @@ export class ChallengeStore extends DurableObject<Env> {
       expiresAt,
     );
     this.bump("issued");
+    for (const source of sources) this.bump(SOURCE_STAT[source]);
     if ((await this.ctx.storage.getAlarm()) === null) {
       await this.ctx.storage.setAlarm(expiresAt + 1000);
     }
@@ -97,7 +94,7 @@ export class ChallengeStore extends DurableObject<Env> {
   }
 
   async stats(): Promise<ChallengeStats> {
-    const out: ChallengeStats = { issued: 0, consumed: 0, expired: 0, unknown: 0 };
+    const out = emptyStats();
     for (const row of this.sql.exec<{ k: string; v: number }>("SELECT k, v FROM stats")) {
       if (row.k in out) out[row.k as keyof ChallengeStats] = row.v;
     }

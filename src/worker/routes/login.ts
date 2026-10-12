@@ -4,6 +4,7 @@ import { buildChallenge, parseDigests, BadDigestError } from "../entropy/mix";
 import { sessionCookie } from "../lib/cookies";
 import { clientIp, fail, json, readBody } from "../lib/http";
 import { challenges, challengeTtl, sessions, sessionTtl, users, type Env } from "../env";
+import { presentSources } from "../entropy/stats";
 import { challengeFromResponse, consumeFailure, rateLimit } from "./shared";
 
 export async function loginOptions(request: Request, env: Env): Promise<Response> {
@@ -32,6 +33,7 @@ export async function loginOptions(request: Request, env: Env): Promise<Response
   await challenges(env).issue(
     { challenge: options.challenge, purpose: "login", userId: null, username: null },
     challengeTtl(env),
+    presentSources(digests),
   );
   return json(options);
 }

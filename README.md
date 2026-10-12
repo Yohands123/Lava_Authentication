@@ -12,10 +12,6 @@ Passkeys on Cloudflare Workers · an entropy pool you can stir with your finger 
 
 ---
 
-> **Note for Claude Code:** This README is the source of truth for the project. Read it, plus `DESIGN.md`, before any task. Build one phase at a time (see [Build phases](#build-phases)). Never add cards, default component-library styling, gradient pill buttons, emoji, icon sets, spinners or dashboard grids. The lamp is the interface.
-
----
-
 ## Table of contents
 
 1. [What is LavaAuth?](#what-is-lavaauth)
@@ -60,7 +56,7 @@ Passkeys on Cloudflare Workers · an entropy pool you can stir with your finger 
 LavaAuth is a passwordless authentication system with an unusual front end: the entire screen is a living, glowing lava lamp. Soft blobs of magenta, violet, electric blue and ember red melt into each other on a near-black background, and every security event shows up as something the wax does.
 
 - Signing up gathers the wax into a glowing portal.
-- Logging in asks you to **stir the lamp**: drag your mouse or finger through the wax, the blobs scatter and swirl, and that motion is hashed into the entropy pool.
+- Logging in asks you to **stir the lamp**: the wax fills a glowing ring, and you drag your mouse or finger to stir it all back out. That motion is hashed into the entropy pool, and **Sign in** appears once the ring is clear.
 - Failures fizzle. Successes glow.
 - A temperature dial lets you **freeze the lamp** completely, and login still works securely, because the real randomness was never coming from the lamp.
 
@@ -74,7 +70,7 @@ The project is a playful nod to Cloudflare's famous wall of lava lamps, built ar
 - Passkey (WebAuthn) sign-up and login: Face ID, Touch ID, Windows Hello, Android biometrics, or a hardware security key
 - No passwords, no emails required to log in, nothing to phish
 - Single-use, short-lived challenges stored in Durable Objects
-- Rate limiting per IP and per account
+- Rate limiting per IP, and per username for sign-up
 - Revocable sessions in `HttpOnly`, `Secure`, `SameSite=Strict` cookies
 
 **Entropy**
@@ -85,18 +81,20 @@ The project is a playful nod to Cloudflare's famous wall of lava lamps, built ar
 - Health checks that reject repeated snapshots, robotic stirring and covered cameras
 
 **Experience**
-- WebGL metaball lamp with temperature-driven physics, bloom and film grain
-- Frosted-glass UI that refracts the wax behind it
-- Lab mode: a live, animated view of the entropy pipeline
+- WebGL metaball lamp with temperature-driven physics, a soft glow and film grain
+- Frosted-glass UI over the wax
+- Clear the ring: stir the wax out of the ring to reveal Sign in
+- Lab mode: a live, animated view of the entropy pipeline, with NIST monobit and runs tests
 - Freeze the Lamp: the demo's showpiece
-- Full reduced-motion and keyboard support
-- Optional ambient sound (muted by default)
+- Reduced-motion support, and every action except clearing the ring works by keyboard
+- Planned: a real two-pass bloom, glass that refracts the wax, and optional ambient sound
 
 ---
 
 ## Demo
 
-<!-- Add the recorded video or GIF here as docs/media/demo.gif -->
+Demo video coming soon.
+
 <p align="center">
   <img src="docs/media/clear-the-ring.png" width="48%" alt="The wax fills the entropy ring at sign-in" />
   <img src="docs/media/ring-cleared.png" width="48%" alt="The ring cleared, with the wax pressed around its edge and Sign in showing" />
@@ -104,7 +102,7 @@ The project is a playful nod to Cloudflare's famous wall of lava lamps, built ar
 
 *Signing in. Left: the wax gathers inside the ring. Right: stirred out with human-like motion, the ring is clear and **Sign in** appears.*
 
-The 60-second demo shows: landing → stir the lamp → passkey login → Lab mode → freeze the lamp → log in again with the lamp frozen.
+The 60-second video will show: landing → clear the ring → passkey login → Lab mode → freeze the lamp → log in again with the lamp frozen.
 
 ---
 
@@ -165,7 +163,7 @@ sequenceDiagram
 
 ## Stir the Lamp: pointer entropy
 
-Stirring is the centrepiece of the login. It collects roughly 3–5 seconds of motion, credits it conservatively, and mixes its hash into the challenge.
+Stirring is the centrepiece of the login. While you clear the ring (typically 3–5 seconds), it collects your motion, credits it conservatively, and mixes its hash into the challenge.
 
 ### What the wax does
 
@@ -174,9 +172,9 @@ Stirring is the centrepiece of the login. It collects roughly 3–5 seconds of m
 | Repulsion | Each blob is pushed away from the pointer with falloff `1 / (1 + (d / r)²)`, where `r ≈ 18%` of the short screen edge |
 | Swirl | A tangential force proportional to pointer velocity, so blobs curl into the wake like stirred liquid |
 | Heat | Stirred blobs gain temperature, shift toward magenta, and rise once the pointer leaves |
-| Splitting | Strokes above a speed threshold split large blobs into 2–4 droplets |
-| Stretching | Slow strokes stretch blobs into long necks instead of splitting |
-| Return | When the ring completes, a soft attractor pulls everything back to centre over about 2 seconds |
+| Splitting | Strokes above a speed threshold split a large blob in two, conserving area |
+| Clear the ring | Wax inside the ring is held still and moves only while your motion passes the health checks; stirred wax is flung outward, and wax you push out stays out |
+| Return | When you press Sign in, a soft attractor pulls everything back to centre over about 2 seconds |
 
 ### What gets captured
 
@@ -215,18 +213,15 @@ export const digest = () => pool; // only this ever leaves the device
 | --- | --- |
 | Max credit per accepted event | 1 bit |
 | Max credit per second | 60 bits |
-| Target to close the ring | 256 credited bits |
-| Typical time to close | 3–5 seconds at 60–120 Hz sampling |
+| What unlocks Sign in | A clear ring, not a bit count; the bits are shown as a conservative estimate |
 | Rejected (0 bits) | No movement · repeated time delta · near-zero direction change across the last 8 samples (straight lines, constant velocity) · untrusted events |
 
 > **Honesty note:** browsers deliberately coarsen `performance.now()`, and human motion is partly predictable. These numbers are a **conservative UX meter**, not a formal entropy measurement. Lab mode says so on screen.
 
-### Accessibility alternatives
+### No skip, by design
 
 - **Clear the ring:** when you sign in, the wax gathers inside the ring. Stir it all back out; only human-like motion moves it, and wax you push out stays out. Then **Sign in** appears.
-- **No skip, by design:** clearing the ring is required. It's a ritual, not a security check: your passkey's fingerprint, face or PIN is what proves a person is there.
-
-Stirring is **never** required to log in.
+- **Required:** there is no skip and no keyboard alternative. It's a ritual, not a security check: your passkey's fingerprint, face or PIN is what proves a person is there. See [Accessibility](#accessibility) for who this excludes.
 
 ---
 
@@ -264,7 +259,8 @@ flowchart LR
 ### Mixing
 
 ```ts
-// src/worker/entropy/mix.ts
+// src/worker/entropy/mix.ts (simplified: the real one also adds a one-byte
+// tag per source, so an absent digest is distinct from any present one)
 export async function buildChallenge(client: ClientDigests): Promise<Uint8Array> {
   const server = crypto.getRandomValues(new Uint8Array(32)); // always present
   const time = new TextEncoder().encode(Date.now().toString());
@@ -334,7 +330,7 @@ So how does LavaAuth stay secure? Every challenge is built by hashing the client
 | Replay of a signed assertion | Single-use challenges, deleted on consumption |
 | Slow replay | 60-second challenge expiry |
 | Attacker sends chosen client digests | Server random bytes are always mixed in; client input cannot reduce entropy |
-| Brute-force or enumeration | Rate limiting per IP and per account in a Durable Object |
+| Brute-force or enumeration | Rate limiting per IP (and per username for sign-up) in a Durable Object |
 | Cloned authenticator | Signature counter checks where the authenticator supports them |
 | Session theft via XSS | `HttpOnly` cookies, strict Content Security Policy, no inline scripts |
 | CSRF | `SameSite=Strict` cookies and origin checks on state-changing routes |
@@ -390,7 +386,7 @@ flowchart TB
 
 | Layer | Choice | Why |
 | --- | --- | --- |
-| Rendering | WebGL 2 fragment shader | Metaballs, bloom and grain at 60 fps |
+| Rendering | WebGL 2 fragment shader | Metaballs, glow and grain at 60 fps |
 | Physics | TypeScript | Easy to tune; positions passed to the shader each frame |
 | Front end | Vite + TypeScript, no UI framework | Full control; no default component styling to fight |
 | Passkeys (client) | `@simplewebauthn/browser` | Well-maintained WebAuthn wrapper |
@@ -406,71 +402,67 @@ flowchart TB
 ## Project structure
 
 ```
-lavaauth/
+Lava_Authentication/
 ├── README.md                 ← you are here
 ├── DESIGN.md                 ← colours, type, motion rules, bans
-├── CLAUDE.md                 ← short instructions for Claude Code
+├── CLAUDE.md                 ← instructions for Claude Code
+├── PROGRESS.md               ← build phases, what's done and what's open
+├── LICENSE
 ├── wrangler.toml
 ├── package.json
-├── vite.config.ts
-├── tsconfig.json
-├── design/                   ← reference images and videos
-│   ├── ref-classic-lamp.png
-│   ├── ref-neon-blobs.png
-│   └── ref-gradient-metaballs.png
-├── docs/
-│   └── media/                ← demo GIF, screenshots
+├── vite.config.ts            ← client build and unit-test config
+├── playwright.config.ts      ← end-to-end tests against a local Worker
+├── tsconfig.json, tsconfig.worker.json
+├── index.html                ← the app
+├── sandbox.html              ← the lamp alone, with a tuning panel (npm run lamp)
+├── design/                   ← reference images (read-only)
+├── docs/media/               ← screenshots
 ├── public/
-│   └── sound/                ← hum.ogg, bubble.ogg, stir.ogg
+│   └── _headers              ← CSP and security headers for static assets
 ├── src/
 │   ├── client/
-│   │   ├── main.ts
+│   │   ├── main.ts           ← screens and sign-in flow
 │   │   ├── lamp/
-│   │   │   ├── renderer.ts   ← WebGL setup, render loop
-│   │   │   ├── lamp.frag     ← metaballs, colour, specular
-│   │   │   ├── bloom.frag
-│   │   │   ├── grain.frag
-│   │   │   ├── frost.frag    ← Freeze mode
-│   │   │   ├── physics.ts    ← temperature, buoyancy, merge, split
-│   │   │   └── constants.ts  ← every tunable value lives here
+│   │   │   ├── constants.ts  ← every tunable value lives here
+│   │   │   ├── lamp.ts       ← render loop, fixed timestep, eased visual state
+│   │   │   ├── physics.ts    ← temperature, buoyancy, merge, split, stir forces
+│   │   │   ├── ring-field.ts ← clear the ring: hold, fling out, keep out
+│   │   │   ├── renderer.ts   ← WebGL setup and uniforms
+│   │   │   ├── shaders.ts    ← metaballs, colour, gloss, frost, grain
+│   │   │   └── sandbox.ts    ← tuning panel
 │   │   ├── stir/
-│   │   │   ├── capture.ts    ← pointer + coalesced events
-│   │   │   ├── forces.ts     ← repulsion, swirl, heat, split
-│   │   │   ├── pool.ts       ← hashing + crediting
-│   │   │   └── health.ts     ← robotic-motion detection
+│   │   │   ├── controller.ts ← pointer capture and the ring
+│   │   │   ├── health.ts     ← crediting and robotic-motion detection
+│   │   │   └── pool.ts       ← running SHA-256 pool
 │   │   ├── entropy/
-│   │   │   ├── snapshot.ts
-│   │   │   └── camera.ts
+│   │   │   ├── snapshot.ts   ← lamp snapshots, repeat detection
+│   │   │   ├── camera.ts     ← optional camera noise
+│   │   │   └── randomness.ts ← NIST monobit and runs tests
 │   │   ├── auth/
-│   │   │   ├── register.ts
-│   │   │   └── login.ts
+│   │   │   ├── api.ts
+│   │   │   └── passkeys.ts   ← register and log in (@simplewebauthn/browser)
 │   │   ├── ui/
-│   │   │   ├── glass.css
+│   │   │   ├── styles.css    ← glass, type, screens
+│   │   │   ├── wax.ts        ← the wax response for each auth event
 │   │   │   ├── ring.ts       ← entropy ring
-│   │   │   ├── screens/      ← landing, signup, login, lab, freeze
-│   │   │   └── sound.ts
+│   │   │   ├── lab.ts, lab.css ← Lab mode
+│   │   │   ├── camera-control.ts
+│   │   │   └── dom.ts, status.ts, messages.ts
 │   │   └── a11y/
-│   │       └── motion.ts     ← reduced-motion handling
+│   │       ├── motion.ts     ← reduced-motion handling
+│   │       └── announce.ts   ← polite live region
 │   └── worker/
-│       ├── index.ts          ← router
-│       ├── routes/
-│       │   ├── register.ts
-│       │   ├── login.ts
-│       │   ├── session.ts
-│       │   └── health.ts
+│       ├── index.ts          ← router and origin check
+│       ├── env.ts
+│       ├── routes/           ← register, login, session, health
 │       ├── entropy/
-│       │   └── mix.ts
-│       ├── durable/
-│       │   ├── ChallengeStore.ts
-│       │   ├── RateLimiter.ts
-│       │   ├── SessionStore.ts
-│       │   └── UserStore.ts
-│       └── lib/
-│           ├── cookies.ts
-│           └── csp.ts
+│       │   ├── mix.ts        ← challenge builder (security-critical)
+│       │   └── stats.ts      ← /api/health report
+│       ├── durable/          ← ChallengeStore, RateLimiter, SessionStore, UserStore
+│       └── lib/              ← cookies, CSP, base64url, http
 └── tests/
-    ├── unit/
-    └── e2e/
+    ├── unit/                 ← Vitest
+    └── e2e/                  ← Playwright with a virtual authenticator
 ```
 
 ---
@@ -487,8 +479,8 @@ lavaauth/
 ### Install
 
 ```bash
-git clone https://github.com/<your-username>/lavaauth.git
-cd lavaauth
+git clone https://github.com/Yohands123/Lava_Authentication.git
+cd Lava_Authentication
 npm install
 ```
 
@@ -515,8 +507,8 @@ Open `http://localhost:8787`. Browsers treat `localhost` as a secure context, so
 | `npm run lamp` | Open the lamp engine alone, with a tuning panel (no auth) |
 | `npm test` | Unit tests (Vitest) |
 | `npm run test:e2e` | End-to-end tests (Playwright with a virtual authenticator) |
-| `npm run lint` | ESLint + type check |
-| `npm run deploy` | Build and `wrangler deploy` |
+| `npm run lint` | Type check (ESLint isn't set up yet) |
+| `npm run deploy` | Build and deploy to production (`wrangler deploy --env production`) |
 
 ---
 
@@ -524,46 +516,12 @@ Open `http://localhost:8787`. Browsers treat `localhost` as a secure context, so
 
 ### `wrangler.toml`
 
-```toml
-name = "lavaauth"
-main = "src/worker/index.ts"
-compatibility_date = "2026-10-01"
+The real file is [`wrangler.toml`](wrangler.toml). In short:
 
-[assets]
-directory = "./dist"
-binding = "ASSETS"
-
-[vars]
-RP_NAME = "LavaAuth"
-RP_ID = "localhost"            # your domain in production, e.g. lavaauth.example.com
-ORIGIN = "http://localhost:8787"
-CHALLENGE_TTL_SECONDS = "60"
-SESSION_TTL_SECONDS = "604800"
-
-[[durable_objects.bindings]]
-name = "CHALLENGES"
-class_name = "ChallengeStore"
-
-[[durable_objects.bindings]]
-name = "RATE_LIMITER"
-class_name = "RateLimiter"
-
-[[durable_objects.bindings]]
-name = "SESSIONS"
-class_name = "SessionStore"
-
-[[durable_objects.bindings]]
-name = "USERS"
-class_name = "UserStore"
-
-[[migrations]]
-tag = "v1"
-new_sqlite_classes = ["ChallengeStore", "RateLimiter", "SessionStore", "UserStore"]
-
-[env.production.vars]
-RP_ID = "lavaauth.example.com"
-ORIGIN = "https://lavaauth.example.com"
-```
+- The top level is for local development: `RP_ID = "localhost"`, `ORIGIN = "http://localhost:8787"`.
+- `[env.production]` repeats the variables and Durable Object bindings for the live site, with `RP_ID` and `ORIGIN` set to the production address.
+- All four Durable Objects are SQLite-backed (`new_sqlite_classes` in the migrations).
+- Static assets are served from `dist/`; `/api/*` always runs the Worker first.
 
 ### Environment variables
 
@@ -669,10 +627,10 @@ Powers the Lab mode meters.
 
 | Object | Keyed by | Holds | Notes |
 | --- | --- | --- | --- |
-| `ChallengeStore` | Challenge ID | Challenge bytes, created-at, purpose | Deleted on first read; alarm sweeps expired entries |
-| `RateLimiter` | IP and username | Sliding-window counters | Returns `Retry-After` |
-| `SessionStore` | User ID | Session IDs, created-at, user agent | Supports revoke one / revoke all |
-| `UserStore` | Username | User ID, credential IDs, public keys, counters, transports | Source of truth for passkeys |
+| `ChallengeStore` | One instance; rows keyed by challenge | Challenge, purpose, user, expiry; issue and rejection counts | Deleted on first read; expired rows kept 10 minutes so late attempts get `410`, then swept by an alarm |
+| `RateLimiter` | One instance per key (IP, or username for sign-up) | Fixed-window counter | Returns `Retry-After` |
+| `SessionStore` | One instance; rows keyed by session ID | User ID, username, created-at, expiry | Supports revoke one / revoke all |
+| `UserStore` | One instance | Users, credential IDs, public keys, counters, transports | Source of truth for passkeys |
 
 Single-use is enforced by reading and deleting the challenge in the same Durable Object request, which is strongly consistent.
 
@@ -685,7 +643,7 @@ Single-use is enforced by reading and deleting the challenge in the same Durable
 - **Metaballs** in a WebGL 2 fragment shader. Each blob contributes a field value; a smooth-min blend makes touching blobs melt together.
 - **Colour from temperature**, not randomness: hot is magenta to coral, cooling is violet, coldest is electric blue.
 - **Inner gradient** lit from below, plus a soft specular highlight at the top-left of each blob.
-- **Bloom:** threshold around 0.7, two-pass blur, so only the hottest cores glow.
+- **Glow:** a soft halo around each blob for now; a real two-pass bloom (threshold around 0.7) is planned.
 - **Film grain:** 3–4% animated noise. Removes gradient banding and fits the randomness theme.
 - **Background:** `#05030C` fading to `#0D0826` near the bottom, with faint vertical light streaks.
 
@@ -700,7 +658,7 @@ Each blob has a position, velocity, radius and temperature.
 | Cooling | Blobs lose heat near the top |
 | Drag | Keeps everything slow and viscous |
 | Merge | Overlapping blobs combine, conserving area |
-| Split | Stretched or fast blobs divide |
+| Split | Fast strokes split a blob in two |
 | Pointer | Heat on landing; repulsion and swirl during stirring |
 
 Blob data is packed into a uniform array and sent to the shader every frame. Every tunable value lives in `src/client/lamp/constants.ts`.
@@ -772,10 +730,10 @@ No cards or solid panels · no component-library defaults · no gradient pill bu
 - **Reduced motion:** when `prefers-reduced-motion: reduce` is set, the lamp runs at 15% speed, bursts and waves are replaced by fades.
 - **Clearing the ring is required:** it needs a mouse, trackpad or touch. This is a deliberate choice and excludes keyboard-only and some assistive-technology users.
 - **Keyboard:** every other action is reachable by keyboard.
-- **Screen readers:** the canvas is `aria-hidden`; every state change is announced in a polite live region ("Entropy collected", "Lamp frozen", "Signed in").
-- **Contrast:** all text meets WCAG AA against the darkest and brightest areas the lamp can produce; glass panels add a dark tint behind text.
-- **Sound** is muted by default.
-- **Pause:** a pause control stops the lamp entirely.
+- **Screen readers:** the canvas is `aria-hidden`; state changes are announced in a polite live region ("Ring clear. Press Sign in.", "Lamp offline. Secure generator holding the line.", "Signed in as …").
+- **Contrast:** glass panels add a dark tint behind text. Known gap: the stir hint can be hard to read over bright wax while the ring is full.
+- **Pause:** a pause control stops the lamp entirely. Opening the ring resumes it, because paused wax can't be stirred.
+- **No WebGL:** the ring is skipped and Sign in appears straight away, since there is no wax to clear.
 
 ---
 
@@ -785,8 +743,7 @@ No cards or solid panels · no component-library defaults · no gradient pill bu
 | --- | --- | --- |
 | Frame rate | 60 fps | 30+ fps |
 | Shader resolution scale | 1.0 | 0.5–0.75 |
-| Max blobs | 16 | 12 |
-| Bloom passes | 2 | 1 |
+| Resting blob count | 13 | 10 |
 | First paint of lamp | < 1 s | < 1.5 s |
 
 Additional rules:
@@ -823,8 +780,10 @@ Covered:
 - Challenge builder always includes server randomness, even with all client digests missing
 - Digests that aren't 32 bytes are rejected
 - Robotic-motion detection (straight lines, constant velocity, repeated timings)
-- Snapshot repeat detection
-- Physics stability (no blobs escaping, area conserved on merge)
+- Stir pool, snapshot repeat detection and camera covered-lens detection
+- Cookie flags, and the `/api/health` report
+- NIST monobit and runs tests, checked against the SP 800-22 worked examples
+- Clear the ring: wax gathers in, can't float out on its own, can be stirred out (even frozen), and stays out
 
 ### End-to-end tests
 
@@ -834,13 +793,15 @@ npm run test:e2e
 
 Playwright uses Chrome's virtual authenticator to test:
 
-- Sign up → log in → log out
+- Sign up → log in (clear the ring) → log out
 - A straight scripted drag can't clear the ring
 - Login with the lamp frozen
+- Login without user verification is refused
 - Reused challenge returns `409`
 - Expired challenge returns `410`
 - Rate limiting returns `429`
 - Revoke all sessions
+- The demo script, end to end
 
 ---
 
@@ -867,7 +828,7 @@ A 60-second recording that shows everything:
 | --- | --- |
 | 0:00 | Landing. Move the cursor; blobs rise toward it. |
 | 0:08 | Click Enter → Sign up. Portal forms, Face ID, burst. |
-| 0:18 | Log in. Stir the lamp; ring fills; passkey; lamp glows. |
+| 0:18 | Log in. Stir the wax out of the ring; Sign in appears; passkey; lamp glows. |
 | 0:30 | Open Lab mode. Show the pipeline and meters. |
 | 0:40 | Freeze the Lamp. Wax stops, frost spreads, health goes red. |
 | 0:48 | Log in again while frozen. It works. |
@@ -881,7 +842,7 @@ A 60-second recording that shows everything:
 | --- | --- | --- |
 | 1. Design before code | ½ day | Palette, fonts, motion rules and bans are in `DESIGN.md`; each screen describable in one sentence |
 | 2. Lamp engine | 1½ days | Watched for a full minute it feels like warm wax; necks stretch before splitting; 60 fps on a laptop |
-| 3. Pointer interaction | 1 day | Stirring feels satisfying on mouse and touch; ring fills in 3–5 s; a scripted straight-line drag stalls it |
+| 3. Pointer interaction | 1 day | Stirring feels satisfying on mouse and touch; the ring clears in 3–5 s of stirring; a scripted straight-line drag can't clear it |
 | 4. Entropy pipeline | ½ day | Lab numbers come from real data; repeated snapshots rejected |
 | 5. Authentication | 1 day | Login works with the lamp frozen and camera off; reused challenge fails |
 | 6. Wire UI to events | ½ day | Every auth event has a wax response; no spinner anywhere |
@@ -993,7 +954,9 @@ A respectful nod to their lava-lamp wall, and Workers plus Durable Objects are a
 - [ ] Multiple passkeys per account with a management screen
 - [ ] Account recovery via a second registered device
 - [ ] Real-lamp mode: dedicated camera pipeline tuned for a physical lava lamp
-- [ ] NIST SP 800-22-style test suite visualised in Lab mode (for education, not certification)
+- [x] NIST SP 800-22 monobit and runs tests in Lab mode (for education, not certification)
+- [ ] More of the NIST suite in Lab mode
+- [ ] A keyboard and assistive-technology path through the ring
 - [ ] Shareable "lamp signature" art generated from your login session
 - [ ] Theme presets (classic orange lamp, neon, gradient)
 

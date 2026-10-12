@@ -28,6 +28,8 @@ The project must be two things at once:
 - **Visually exceptional.** It must not look AI-generated or templated.
 - **Honestly secure.** Decorative entropy can add to security; it can never replace or weaken the secure generator.
 
+`README.md` is the source of truth for what the product does. When it and the code disagree, say so and fix whichever is wrong; never leave them out of step.
+
 ---
 
 ## 2. Non-negotiable rules

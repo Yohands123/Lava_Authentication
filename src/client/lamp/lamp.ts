@@ -20,6 +20,8 @@ export class Lamp {
   glowTarget = 0;
   private dim = 0;
   dimTarget = 0;
+  /** Per-second easing for dim; lower for slow dims (rate limiting). */
+  dimEase = LAMP.VISUAL_EASE;
   private paused = false;
   private time = 0;
   private last = 0;
@@ -78,9 +80,8 @@ export class Lamp {
     }
 
     // Ease visual state slowly; nothing snaps.
-    const ease = 1 - Math.exp(-dt * 1.6);
-    this.glow += (this.glowTarget - this.glow) * ease;
-    this.dim += (this.dimTarget - this.dim) * ease;
+    this.glow += (this.glowTarget - this.glow) * (1 - Math.exp(-dt * LAMP.VISUAL_EASE));
+    this.dim += (this.dimTarget - this.dim) * (1 - Math.exp(-dt * this.dimEase));
 
     this.renderer.render(this.physics.blobs, { time: this.time, freeze: this.freeze, glow: this.glow, dim: this.dim });
     this.onFrame?.();

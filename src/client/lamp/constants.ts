@@ -47,6 +47,15 @@ export const LAMP = {
   RESOLUTION_SCALE_MIN: 0.5,
   /** Lamp speed multiplier when prefers-reduced-motion is set. */
   REDUCED_MOTION_SPEED: 0.15,
+
+  /** How fast glow and dim ease toward their targets, per second (≈0.6 s to settle). */
+  VISUAL_EASE: 1.6,
+  /** Slower dim easing for rate limiting, per second (≈3 s to settle): the lamp "dims slowly". */
+  SLOW_DIM_EASE: 0.35,
+  /** How dark a rate limit makes the lamp (0..1). */
+  RATE_LIMIT_DIM: 0.6,
+  /** Longest the lamp stays dimmed for a rate limit, seconds, even if Retry-After is longer. */
+  RATE_LIMIT_DIM_MAX_SECONDS: 30,
 };
 
 export const STIR = {

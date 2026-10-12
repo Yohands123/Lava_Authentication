@@ -337,6 +337,22 @@ input:focus-visible {
   transition: stroke-dashoffset 300ms var(--ease);
 }
 
+/* Robotic stirring: the ring stalls and flickers. Every step is at least 300ms. */
+.ring.is-stalled .ring-arc {
+  animation: ring-flicker 1500ms var(--ease) 1;
+}
+@keyframes ring-flicker {
+  0%, 100% { opacity: 1; }
+  20% { opacity: 0.3; }
+  40% { opacity: 0.85; }
+  60% { opacity: 0.25; }
+  80% { opacity: 0.8; }
+}
+@keyframes ring-fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
 .stir-copy {
   position: relative;
 }
@@ -492,5 +508,8 @@ input[type="range"]::-moz-range-thumb {
   .status,
   .status.is-visible {
     translate: -50% 0;
+  }
+  .ring.is-stalled .ring-arc {
+    animation-name: ring-fade;
   }
 }

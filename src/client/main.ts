@@ -17,6 +17,7 @@ import { $, showScreen } from "./ui/dom";
 import { EntropyRing } from "./ui/ring";
 import { showStatus } from "./ui/status";
 import { messageFor } from "./ui/messages";
+import { Wax } from "./ui/wax";
 
 // ---------------------------------------------------------------- lamp setup
 
@@ -34,6 +35,9 @@ const applyMotion = (reduced: boolean) => {
 applyMotion(prefersReducedMotion());
 onReducedMotionChange(applyMotion);
 
+// Every auth event's wax response lives in ui/wax.ts.
+const wax = new Wax(lamp, () => camera.enabled && camera.covered);
+
 // Landing: the cursor is a gentle heat source.
 let screen: "landing" | "choose" | "stir" | "waiting" | "success" = "landing";
 let cursor: { x: number; y: number } | null = null;
@@ -49,7 +53,7 @@ function takeSnapshot(): Promise<Uint8Array | null> {
   return new Promise((resolve) => {
     snapshotRequest = async (pixels) => {
       const { digest, accepted } = await snapshots.capture(pixels);
-      if (!accepted) lamp?.physics.drop(true); // repeated snapshot fizzles
+      if (!accepted) wax.fizzle(); // repeated snapshot fizzles
       resolve(accepted ? digest : null);
     };
   });
@@ -69,8 +73,7 @@ function showCamera(): void {
 }
 
 camera.onHealth = (covered) => {
-  // A covered lens dims the lamp; uncovering brings it back.
-  if (lamp) lamp.dimTarget = covered ? 0.45 : 0;
+  wax.cameraHealth(); // a covered lens dims the lamp; uncovering brings it back
   if (covered) announce("Camera covered");
   showCamera();
 };
@@ -81,7 +84,7 @@ document.addEventListener("visibilitychange", () => {
 async function cameraDigest(): Promise<Uint8Array | null> {
   if (!camera.enabled) return null;
   const result = await camera.capture();
-  if (result?.reason === "repeated") lamp?.physics.drop(true); // repeated frame fizzles
+  if (result?.reason === "repeated") wax.fizzle(); // repeated frame fizzles
   return result?.digest ?? null;
 }
 
@@ -89,7 +92,10 @@ const ring = new EntropyRing();
 const stir = lamp
   ? new StirController(lamp.renderer, lamp.physics, {
       onProgress: (bits, progress) => ring.set(bits, progress),
-      onTooRegular: () => showStatus("Too regular, keep stirring."),
+      onTooRegular: () => {
+        ring.stall();
+        showStatus("Too regular, keep stirring.");
+      },
     }, prefersReducedMotion)
   : null;
 
@@ -106,42 +112,6 @@ if (lamp) {
     }
   };
   lamp.start();
-}
-
-// ---------------------------------------------------------------- formations
-
-const centre = () => (lamp ? { cx: lamp.physics.width / 2, cy: lamp.physics.height / 2 } : { cx: 0, cy: 0 });
-
-function gatherBriefly(ms = 1400): void {
-  if (!lamp) return;
-  lamp.physics.formation = { kind: "point", ...centre(), spread: 0.18 };
-  window.setTimeout(() => {
-    if (lamp && lamp.physics.formation?.kind === "point") lamp.physics.formation = null;
-  }, ms);
-}
-
-function formPortal(): void {
-  if (!lamp) return;
-  const short = Math.min(lamp.physics.width, lamp.physics.height);
-  lamp.physics.formation = { kind: "ring", ...centre(), radius: short * 0.26 };
-}
-
-function release(): void {
-  if (lamp) lamp.physics.formation = null;
-}
-
-function warmUp(): void {
-  if (!lamp) return;
-  lamp.glowTarget = 1;
-  window.setTimeout(() => lamp && (lamp.glowTarget = 0.35), 2600);
-}
-
-function failVisual(): void {
-  if (!lamp) return;
-  release();
-  lamp.physics.drop(true);
-  lamp.dimTarget = 0.4;
-  window.setTimeout(() => lamp && (lamp.dimTarget = 0), 1800);
 }
 
 // ---------------------------------------------------------------- screens
@@ -168,18 +138,18 @@ async function startSignIn(): Promise<void> {
   if (screen !== "stir") return; // cancelled
 
   // The wax gathers back before the passkey prompt.
-  gatherBriefly(STIR.RETURN_SECONDS * 1000);
+  wax.gather(STIR.RETURN_SECONDS * 1000);
   waitingText.textContent = "Touch your sensor to sign in";
   go("waiting");
-  lamp?.physics.drop(false); // a droplet melts in: your entropy joining the lamp
+  wax.melt(); // your entropy joining the lamp
 
   try {
     const lampDigest = await takeSnapshot();
     const user = await login({ stir: result.digest, lamp: lampDigest, camera: await cameraDigest() });
-    warmUp();
+    wax.warmUp();
     signedIn(user);
   } catch (err) {
-    failVisual();
+    wax.fail(err);
     showStatus(messageFor(err));
     go("choose");
   }
@@ -188,15 +158,15 @@ async function startSignIn(): Promise<void> {
 async function startSignUp(username: string): Promise<void> {
   waitingText.textContent = "Confirm with your device to create your passkey";
   go("waiting");
-  formPortal();
+  wax.portal();
   try {
     const lampDigest = await takeSnapshot();
     const user = await register(username, { stir: null, lamp: lampDigest, camera: await cameraDigest() });
-    lamp?.physics.burst();
-    warmUp();
+    wax.burst();
+    wax.warmUp();
     signedIn(user);
   } catch (err) {
-    failVisual();
+    wax.fail(err);
     showStatus(messageFor(err));
     go("choose");
     signupForm.hidden = false;
@@ -210,7 +180,7 @@ document.addEventListener("click", (e) => {
   if (!target) return;
   switch (target.dataset.action) {
     case "enter":
-      gatherBriefly();
+      wax.gather();
       go("choose");
       break;
     case "signin":
@@ -230,14 +200,14 @@ document.addEventListener("click", (e) => {
       break;
     case "signout":
       void logout().finally(() => {
-        if (lamp) lamp.glowTarget = 0;
+        wax.coolDown();
         go("landing");
         announce("Signed out");
       });
       break;
     case "revoke-all":
       void revokeAll().finally(() => {
-        if (lamp) lamp.glowTarget = 0;
+        wax.coolDown();
         go("landing");
         showStatus("Signed out on every device.");
       });
@@ -253,7 +223,10 @@ document.addEventListener("click", (e) => {
             showCamera();
             announce("Camera on. Frames stay on this device.");
           },
-          () => showStatus("Camera unavailable. Sign-in works without it."),
+          () => {
+            wax.fizzle();
+            showStatus("Camera unavailable. Sign-in works without it.");
+          },
         );
       }
       break;
@@ -272,6 +245,7 @@ signupForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const username = usernameInput.value.trim().toLowerCase();
   if (!/^[a-z0-9_-]{3,32}$/.test(username)) {
+    wax.fizzle();
     showStatus("Use 3 to 32 characters: lowercase letters, numbers, - or _.");
     usernameInput.focus();
     return;

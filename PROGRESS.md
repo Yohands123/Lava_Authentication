@@ -43,7 +43,12 @@ below as "built, needs review" until the user has watched it and confirmed.
 - challenge-store.test.ts (a unit test of a Durable Object needs `@cloudflare/vitest-pool-workers`, not an approved dependency; consume-once and expiry are covered by E2E for now)
 - ESLint config (`npm run lint` currently runs the type check)
 
+## Recent requests (2026-10-11)
+- [x] Sign in hidden behind the lamp controls on narrow screens: fixed (screens reserve the controls' measured height)
+- [x] Wax stays outside the entropy ring while stirring (physics keep-out + shader edge fade). Needs the user to watch it.
+
 ## Tuned values worth remembering
+- Ring keep-out (2026-10-11, not yet watched): STIR.RING_CLEARANCE = 1.15, RING_PUSH_RATE = 6, RING_SOFT_EDGE = 0.08
 - Base `LAMP` values approved as-is on 2026-10-11: BUOYANCY = 0.06, DRAG = 0.6, MAX_DRIFT_SPEED = 0.08, RADIUS 0.045–0.105, COUNT_DESKTOP = 13, GRAIN = 0.035
 
 ## Open questions

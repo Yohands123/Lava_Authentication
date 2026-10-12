@@ -97,9 +97,12 @@ The project is a playful nod to Cloudflare's famous wall of lava lamps, built ar
 ## Demo
 
 <!-- Add the recorded video or GIF here as docs/media/demo.gif -->
-![Signing in: the wax fills the entropy ring and you stir it all out before Sign in appears](docs/media/clear-the-ring.png)
+<p align="center">
+  <img src="docs/media/clear-the-ring.png" width="48%" alt="The wax fills the entropy ring at sign-in" />
+  <img src="docs/media/ring-cleared.png" width="48%" alt="The ring cleared, with the wax pressed around its edge and Sign in showing" />
+</p>
 
-*Signing in: the wax gathers inside the ring. Stir it all out with human-like motion and **Sign in** appears.*
+*Signing in. Left: the wax gathers inside the ring. Right: stirred out with human-like motion, the ring is clear and **Sign in** appears.*
 
 The 60-second demo shows: landing → stir the lamp → passkey login → Lab mode → freeze the lamp → log in again with the lamp frozen.
 

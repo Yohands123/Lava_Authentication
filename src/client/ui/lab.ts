@@ -39,15 +39,7 @@ export class Lab {
   };
   private session: Uint8Array[] = [];
 
-  constructor(private readonly inputs: LabInputs) {
-    // The panel sits above the lamp controls; track their real height so the two never overlap.
-    const controls = document.querySelector<HTMLElement>(".controls");
-    if (controls) {
-      new ResizeObserver(() => {
-        document.documentElement.style.setProperty("--lava-controls-height", `${controls.offsetHeight}px`);
-      }).observe(controls);
-    }
-  }
+  constructor(private readonly inputs: LabInputs) {}
 
   get isOpen(): boolean {
     return this.open;

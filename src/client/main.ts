@@ -13,7 +13,7 @@ import { CameraSource } from "./entropy/camera";
 import { currentUser, login, logout, register, revokeAll, type User } from "./auth/passkeys";
 import { prefersReducedMotion, onReducedMotionChange } from "./a11y/motion";
 import { announce } from "./a11y/announce";
-import { $, showScreen } from "./ui/dom";
+import { $, showScreen, trackControlsHeight } from "./ui/dom";
 import { EntropyRing } from "./ui/ring";
 import { showStatus } from "./ui/status";
 import { messageFor } from "./ui/messages";
@@ -37,6 +37,8 @@ const applyMotion = (reduced: boolean) => {
 };
 applyMotion(prefersReducedMotion());
 onReducedMotionChange(applyMotion);
+
+trackControlsHeight(); // screens and Lab mode stay clear of the lamp controls
 
 // Every auth event's wax response lives in ui/wax.ts.
 const wax = new Wax(lamp, () => camera.enabled && camera.covered);

@@ -488,9 +488,10 @@ input[type="range"]::-moz-range-thumb {
     width: auto;
     left: 16px;
   }
+  /* The controls span the bottom here: keep every action above them, whatever their height. */
   .landing-copy,
   .choose-copy {
-    padding-bottom: 150px;
+    padding-bottom: calc(var(--lava-controls-height, 220px) + 8px);
   }
 }
 

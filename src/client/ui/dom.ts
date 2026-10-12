@@ -4,6 +4,15 @@ export function $(selector: string, root: ParentNode = document): HTMLElement {
   return el;
 }
 
+/** Publish the lamp controls' real height as --lava-controls-height, so nothing hides behind them. */
+export function trackControlsHeight(): void {
+  const controls = document.querySelector<HTMLElement>(".controls");
+  if (!controls) return;
+  new ResizeObserver(() => {
+    document.documentElement.style.setProperty("--lava-controls-height", `${controls.offsetHeight}px`);
+  }).observe(controls);
+}
+
 export type ScreenName = "landing" | "choose" | "stir" | "waiting" | "success";
 
 /** Cross-fade to a screen. CSS handles the slow ease; nothing snaps. */

@@ -6,3 +6,5 @@ dist/
 .DS_Store
 docs/media/*.mov
 docs/media/*.mp4
+test-results/
+playwright-report/

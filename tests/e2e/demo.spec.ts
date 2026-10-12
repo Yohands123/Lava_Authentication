@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { addAuthenticator, enter, register, session, signInWithSkip, signOut } from "./helpers";
+import { addAuthenticator, register, session, signIn, signOut } from "./helpers";
 
 // README "Demo script", start to finish, without touching code. The final
 // beat (a real lava lamp in front of the webcam) needs a camera, so it's manual.
@@ -17,16 +17,9 @@ test("the README demo script runs end to end", async ({ page }) => {
   // 0:08 Enter → Sign up. Portal forms, passkey, burst.
   await register(page);
 
-  // 0:18 Log in. Stir the lamp (hold Space); ring fills; passkey; lamp glows.
+  // 0:18 Log in. Stir the wax out of the ring; Sign in appears; passkey; lamp glows.
   await signOut(page);
-  await enter(page);
-  await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page.getByRole("heading", { name: "Stir the lamp" })).toBeVisible();
-  await page.waitForTimeout(800);
-  await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur());
-  await page.keyboard.down("Space");
-  await expect(page.getByRole("heading", { name: "You're in" })).toBeVisible({ timeout: 20_000 });
-  await page.keyboard.up("Space");
+  await signIn(page);
 
   // 0:30 Open Lab mode. The pipeline and meters show real numbers.
   await page.getByRole("button", { name: "Lab mode" }).click();
@@ -48,12 +41,11 @@ test("the README demo script runs end to end", async ({ page }) => {
   await expect(flow("lamp")).toHaveAttribute("data-state", "frozen");
   await expect(flow("server")).toHaveAttribute("data-state", "active");
 
-  // 0:48 Log in again while frozen. It works.
+  // 0:48 Log in again while frozen: the wax is thick but still stirs out. It works.
   await signOut(page);
-  await signInWithSkip(page);
+  await signIn(page);
   expect((await session(page)).status()).toBe(200);
-  await expect(meter("stir")).toHaveText("skipped, not sent");
-  await expect(meter("digests")).toHaveText(/lamp none · camera none$/);
+  await expect(meter("digests")).toHaveText(/^stir [0-9a-f]{8}… · lamp none · camera none$/);
   await page.waitForTimeout(2500); // frost and ice palette settle
   await page.screenshot({ path: "test-results/demo-frozen.png" });
 });

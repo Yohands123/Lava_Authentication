@@ -61,13 +61,40 @@ export async function signOut(page: Page): Promise<void> {
   await expect(page.getByRole("heading", { name: "LavaAuth" })).toBeVisible();
 }
 
-/** From the landing screen: Enter → Sign in → Skip stirring → passkey. */
-export async function signInWithSkip(page: Page, expectSuccess = true): Promise<void> {
+export const passkeyButton = (page: Page) => page.locator("[data-action=passkey]");
+export const ringIsClear = (page: Page) => page.locator("[data-screen=stir].is-clear");
+
+/** Wobbly, irregular circles around the ring, the way a person stirs, until the ring is clear. */
+export async function clearRing(page: Page, timeoutMs = 30_000): Promise<void> {
+  const { width, height } = page.viewportSize()!;
+  const cx = width / 2;
+  const cy = height / 2;
+  const short = Math.min(width, height);
+  const start = Date.now();
+  let a = 0;
+  while (!(await ringIsClear(page).count())) {
+    if (Date.now() - start > timeoutMs) throw new Error("ring not cleared in time");
+    for (let i = 0; i < 40; i++) {
+      a += 0.12 + Math.random() * 0.1; // test input only
+      const r = short * (0.08 + 0.3 * Math.abs(Math.sin(a * 0.31)) + Math.random() * 0.03);
+      await page.mouse.move(cx + Math.cos(a) * r, cy + Math.sin(a * 1.17) * r);
+    }
+  }
+}
+
+/** From the choose screen's Sign in: clear the ring, then press Sign in. */
+export async function stirAndSignIn(page: Page, expectSuccess = true): Promise<void> {
+  await expect(page.getByRole("heading", { name: "Stir the lamp" })).toBeVisible();
+  await clearRing(page);
+  await passkeyButton(page).click();
+  if (expectSuccess) await signedIn(page);
+}
+
+/** From the landing screen: Enter → Sign in → clear the ring → Sign in → passkey. */
+export async function signIn(page: Page, expectSuccess = true): Promise<void> {
   await enter(page);
   await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page.getByRole("heading", { name: "Stir the lamp" })).toBeVisible();
-  await page.getByRole("button", { name: "Skip" }).click();
-  if (expectSuccess) await signedIn(page);
+  await stirAndSignIn(page, expectSuccess);
 }
 
 export const session = (page: Page): Promise<APIResponse> => page.request.get("/api/session");

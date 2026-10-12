@@ -218,9 +218,8 @@ export const digest = () => pool; // only this ever leaves the device
 
 ### Accessibility alternatives
 
-- **Skip:** always visible. Fills the ring from the secure generator with a slow automatic swirl.
-- **Keyboard:** hold <kbd>Space</kbd> to "heat" the lamp; key timing feeds the same pipeline.
-- **Reduced motion:** a single press-and-hold replaces stirring.
+- **Clear the ring:** when you sign in, the wax gathers inside the ring. Stir it all back out; only human-like motion moves it, and wax you push out stays out. Then **Sign in** appears.
+- **No skip, by design:** clearing the ring is required. It's a ritual, not a security check: your passkey's fingerprint, face or PIN is what proves a person is there.
 
 Stirring is **never** required to log in.
 
@@ -765,9 +764,9 @@ No cards or solid panels · no component-library defaults · no gradient pill bu
 
 ## Accessibility
 
-- **Reduced motion:** when `prefers-reduced-motion: reduce` is set, the lamp runs at 15% speed, bursts and waves are replaced by fades, and stirring becomes press-and-hold.
-- **Stirring is optional:** a visible "skip" link is always available.
-- **Keyboard:** every action is reachable by keyboard; hold <kbd>Space</kbd> to stir.
+- **Reduced motion:** when `prefers-reduced-motion: reduce` is set, the lamp runs at 15% speed, bursts and waves are replaced by fades.
+- **Clearing the ring is required:** it needs a mouse, trackpad or touch. This is a deliberate choice and excludes keyboard-only and some assistive-technology users.
+- **Keyboard:** every other action is reachable by keyboard.
 - **Screen readers:** the canvas is `aria-hidden`; every state change is announced in a polite live region ("Entropy collected", "Lamp frozen", "Signed in").
 - **Contrast:** all text meets WCAG AA against the darkest and brightest areas the lamp can produce; glass panels add a dark tint behind text.
 - **Sound** is muted by default.
@@ -831,7 +830,7 @@ npm run test:e2e
 Playwright uses Chrome's virtual authenticator to test:
 
 - Sign up → log in → log out
-- Login with stirring skipped
+- A straight scripted drag can't clear the ring
 - Login with the lamp frozen
 - Reused challenge returns `409`
 - Expired challenge returns `410`
@@ -879,7 +878,7 @@ A 60-second recording that shows everything:
 | 2. Lamp engine | 1½ days | Watched for a full minute it feels like warm wax; necks stretch before splitting; 60 fps on a laptop |
 | 3. Pointer interaction | 1 day | Stirring feels satisfying on mouse and touch; ring fills in 3–5 s; a scripted straight-line drag stalls it |
 | 4. Entropy pipeline | ½ day | Lab numbers come from real data; repeated snapshots rejected |
-| 5. Authentication | 1 day | Login works with stirring skipped, lamp frozen, camera off; reused challenge fails |
+| 5. Authentication | 1 day | Login works with the lamp frozen and camera off; reused challenge fails |
 | 6. Wire UI to events | ½ day | Every auth event has a wax response; no spinner anywhere |
 | 7. Lab mode and Freeze | ½ day | Full demo script runs without touching code |
 | 8. Polish | As long as possible | The [quality bar](#quality-bar) passes on a mid-range phone |
@@ -936,8 +935,8 @@ Do not use any UI library, cards, gradient buttons, emoji or icons.
 - [ ] Glass panels visibly blur and bend the blobs behind them
 - [ ] Nothing snaps; no transition under 300ms; no spinners
 - [ ] 60 fps on a laptop, 30+ fps on a mid-range phone
-- [ ] Reduced motion, keyboard stirring and "skip" all work
-- [ ] Login succeeds with stirring skipped, lamp frozen and camera off
+- [ ] Reduced motion works; clearing the ring works on mouse and touch
+- [ ] Login succeeds with the lamp frozen and camera off
 - [ ] Reused and expired challenges are rejected; rate limiting works
 - [ ] A stranger shown a screenshot would not guess it was AI-generated
 
@@ -952,7 +951,7 @@ Do not use any UI library, cards, gradient buttons, emoji or icons.
 | Passkeys stopped working after a domain change | Passkeys are bound to `RP_ID`; users must register again |
 | Lamp is black | WebGL 2 may be disabled; check `chrome://gpu` or try another browser |
 | Lamp stutters on phone | Lower the resolution scale and blob count in `constants.ts` |
-| Ring won't fill | Stir with curves, not straight lines; or press "skip" |
+| Ring won't clear | Stir in loose, uneven curves; straight lines and steady circles don't move the wax |
 | Camera health always low | Check camera permission and that the lens isn't covered |
 | `429` while testing | Wait for `Retry-After`, or raise limits in `RateLimiter` for local dev |
 | Durable Object errors after renaming a class | Add a new `[[migrations]]` entry with `renamed_classes` |

@@ -73,9 +73,9 @@ These rules are never broken, even if a task seems to call for it. If a request 
 
 ### 2.3 Accessibility rules
 
-1. Respect `prefers-reduced-motion: reduce` everywhere: lamp at 15% speed, no bursts or waves (fades only), stirring becomes press-and-hold.
-2. Stirring is **never** required. A visible "skip" control is always present on the login screen.
-3. Every action is reachable by keyboard. Hold <kbd>Space</kbd> to stir.
+1. Respect `prefers-reduced-motion: reduce` everywhere: lamp at 15% speed, no bursts or waves (fades only).
+2. **Clearing the ring is required to sign in** (owner's decision, 2026-10-11). The user stirs all the wax out of the entropy ring with a pointer; only then does Sign in appear. There is no skip and no keyboard alternative. This knowingly excludes keyboard-only, screen-reader and some motor-impaired users; revisit before any public launch. It is a ritual, not a security control: never describe it as bot protection.
+3. Every action except clearing the ring is reachable by keyboard.
 4. The canvas is `aria-hidden="true"`. State changes are announced through a single polite `aria-live` region.
 5. All text meets WCAG AA contrast against the brightest area the lamp can produce behind it. Glass panels behind text carry a dark tint to guarantee this.
 6. Sound is muted by default.
@@ -164,7 +164,7 @@ Work only on the current phase listed in `PROGRESS.md`. Never start a later phas
   - [ ] Fast strokes split blobs; slow strokes stretch them
   - [ ] Ring fills in 3–5 seconds of genuine curved stirring
   - [ ] A scripted straight-line drag at constant speed stalls the ring
-  - [ ] Keyboard (hold Space) and reduced-motion (press-and-hold) alternatives work
+  - [ ] Clearing the ring by hand reveals Sign in; robotic motion doesn't move the wax
   - [ ] Unit tests for crediting and health checks pass
 
 ### Phase 4: Entropy pipeline
@@ -179,7 +179,7 @@ Work only on the current phase listed in `PROGRESS.md`. Never start a later phas
 - **Scope:** `src/client/auth/`, `src/worker/routes/`, `src/worker/durable/`.
 - **Done when:**
   - [ ] Register and log in with a passkey locally
-  - [ ] Login works with stirring skipped, lamp frozen and camera off
+  - [ ] Login works with the lamp frozen and camera off
   - [ ] Reused challenge → `409`; expired → `410`; rate limited → `429`
   - [ ] Logout and revoke-all work
   - [ ] E2E tests pass with Playwright's virtual authenticator
@@ -266,7 +266,7 @@ After completing a phase, update `PROGRESS.md`, run `npm run check`, and stop. D
 - Reject (credit 0): no movement; `dt` identical to the previous sample; near-zero direction change across the last 8 samples.
 - Raw samples never leave the browser and are cleared from memory after each flush.
 - When the ring completes: attractor pulls blobs to centre over ~2 seconds, then show the passkey prompt.
-- "Skip": fill the ring with a slow automatic swirl; send no stir digest.
+- Clear the ring: on the stir screen the wax gathers into the ring; it is held there (no buoyancy or wander) and moves only while the meter accepts the motion as human-like. Wax pushed out stays out. When the ring is clear, Sign in appears; pressing it starts the passkey. Logic: `src/client/lamp/ring-field.ts`.
 - Label the bit count in the UI and Lab mode as a "conservative estimate", never as measured entropy.
 
 ### 7.4 Lamp snapshots and camera
@@ -390,7 +390,7 @@ If you add a new event, it must have a wax response. No event is allowed to show
   - `stir-health.test.ts`: straight lines, constant velocity and repeated `dt` credit 0; curved human-like paths credit > 0; per-second cap holds
   - `snapshot.test.ts`: repeats rejected
   - `cookies.test.ts`: flags present and correct
-- Required E2E tests (Playwright virtual authenticator): register → login → logout; login with skip; login with lamp frozen; reused challenge `409`; expired `410`; rate limit `429`; revoke all.
+- Required E2E tests (Playwright virtual authenticator): register → login → logout; straight-line drag can't clear the ring; login with lamp frozen; reused challenge `409`; expired `410`; rate limit `429`; revoke all.
 - Never weaken or delete a test to make it pass. If a test seems wrong, explain why and ask.
 - Never mock `crypto.getRandomValues` to return constant values in tests of `mix.ts` behaviour, except in a test that specifically proves the client digests are also included.
 
@@ -427,8 +427,8 @@ The project ships only when all of these pass:
 - [ ] Glass panels visibly blur and bend the wax
 - [ ] Nothing snaps; no transition under 300ms; no spinners
 - [ ] 60 fps on a laptop, 30+ fps on a mid-range phone
-- [ ] Reduced motion, keyboard stirring, skip and pause all work
-- [ ] Login succeeds with stirring skipped, lamp frozen and camera off
+- [ ] Reduced motion and pause work; clearing the ring works on mouse and touch
+- [ ] Login succeeds with the lamp frozen and camera off
 - [ ] Reused and expired challenges rejected; rate limiting works
 - [ ] A stranger shown a screenshot would not guess it was AI-generated
 

@@ -1,0 +1,203 @@
+/* Lab mode: a glass pane over the right half; the lamp keeps the viewport. */
+
+.lab {
+  position: fixed;
+  top: max(16px, env(safe-area-inset-top));
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(var(--lava-controls-height, 200px) + max(16px, env(safe-area-inset-bottom)) + 12px);
+  width: min(440px, 44vw);
+  padding: 20px 24px;
+  border-radius: 20px;
+  overflow-y: auto;
+  z-index: 2;
+  background: rgba(14, 7, 30, 0.42); /* darker tint: text stays AA over bright wax */
+  opacity: 0;
+  translate: 12px 0;
+  visibility: hidden;
+  transition:
+    opacity var(--slow) var(--ease),
+    translate var(--slow) var(--ease),
+    visibility 0s linear var(--slow);
+}
+
+body.lab-open .lab {
+  opacity: 1;
+  translate: 0 0;
+  visibility: visible;
+  transition:
+    opacity var(--slow) var(--ease),
+    translate var(--slow) var(--ease),
+    visibility 0s;
+}
+
+/* Split screen: the screens move into the left half while the lab is open. */
+.stage {
+  transition: right var(--slow) var(--ease);
+}
+body.lab-open .stage {
+  right: calc(min(440px, 44vw) + 32px);
+}
+
+.lab-title {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--lava-text-quiet);
+  letter-spacing: 0.02em;
+}
+
+.lab-formula {
+  margin: 8px 0 0;
+  font-size: 11.5px;
+  color: var(--lava-text-quiet);
+  overflow-wrap: anywhere;
+}
+
+.lab-note {
+  margin: 14px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--lava-text-quiet);
+}
+
+/* ------------------------------------------------------------- pipeline */
+
+.pipeline {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.pipe-label,
+.pipe-sub {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  fill: var(--lava-text);
+}
+.pipe-label {
+  font-size: 12px;
+}
+.pipe-sub {
+  font-size: 9.5px;
+  fill: var(--lava-text-quiet);
+}
+.pipe-server {
+  fill: var(--lava-ember);
+}
+
+.flow {
+  fill: none;
+  stroke: var(--lava-text-quiet);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 3 9;
+  opacity: 0.28;
+  transition:
+    opacity var(--slow) var(--ease),
+    stroke var(--slow) var(--ease);
+}
+.flow[data-state="active"] {
+  stroke: var(--lava-magenta);
+  opacity: 0.95;
+  filter: drop-shadow(0 0 3px rgba(255, 43, 214, 0.8));
+  animation: lab-flow 1.8s linear infinite;
+}
+.flow[data-state="off"] {
+  opacity: 0.1;
+}
+.flow[data-state="frozen"] {
+  stroke: var(--lava-ice);
+  opacity: 0.45;
+}
+.flow-server[data-state="active"] {
+  stroke: var(--lava-ember);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 4px rgba(255, 106, 31, 0.85));
+}
+.flow-out[data-state="active"] {
+  stroke: var(--lava-violet);
+  filter: drop-shadow(0 0 4px rgba(123, 44, 255, 0.85));
+}
+
+@keyframes lab-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.node {
+  fill: var(--lava-text-quiet);
+  opacity: 0.4;
+  transition:
+    opacity var(--slow) var(--ease),
+    fill var(--slow) var(--ease);
+}
+.node[data-state="active"] {
+  fill: var(--lava-text);
+  opacity: 1;
+}
+.node[data-state="frozen"] {
+  fill: var(--lava-ice);
+  opacity: 0.8;
+}
+.node-server[data-state="active"] {
+  fill: var(--lava-ember);
+}
+.node-mix[data-state="active"] {
+  fill: var(--lava-violet);
+  filter: drop-shadow(0 0 6px rgba(123, 44, 255, 0.9));
+}
+
+/* ------------------------------------------------------------- meters */
+
+.lab-meters {
+  margin: 12px 0 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 16px;
+  font-size: 13px;
+}
+.lab-meters dt {
+  color: var(--lava-text-quiet);
+}
+.lab-meters dd {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* The generator stays ember even when the lamp is offline: that's the demo. */
+.controls .health-server,
+body[data-lamp] .controls .health-server {
+  color: var(--lava-ember);
+}
+.controls .button-small {
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------- small screens */
+
+@media (max-width: 640px) {
+  .lab {
+    left: 16px;
+    right: 16px;
+    width: auto;
+    bottom: auto;
+    max-height: 52vh;
+  }
+  body.lab-open .stage {
+    right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow[data-state="active"] {
+    animation: none;
+    stroke-dasharray: none;
+  }
+  .lab,
+  body.lab-open .lab {
+    translate: 0 0;
+  }
+}

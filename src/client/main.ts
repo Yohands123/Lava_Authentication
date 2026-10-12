@@ -18,6 +18,9 @@ import { EntropyRing } from "./ui/ring";
 import { showStatus } from "./ui/status";
 import { messageFor } from "./ui/messages";
 import { Wax } from "./ui/wax";
+import { CameraControl } from "./ui/camera-control";
+import { Lab, type LampHealth } from "./ui/lab";
+import "./ui/lab.css";
 
 // ---------------------------------------------------------------- lamp setup
 
@@ -61,37 +64,18 @@ function takeSnapshot(): Promise<Uint8Array | null> {
 
 // Optional camera noise: off until the user turns it on.
 const camera = new CameraSource();
-const cameraButton = $("[data-action=camera]");
-const cameraHealth = $("[data-camera-health]");
+const cameraControl = new CameraControl(camera, wax);
 
-function showCamera(): void {
-  const on = camera.enabled;
-  cameraButton.setAttribute("aria-pressed", String(on));
-  cameraButton.textContent = on ? "Stop camera" : "Use camera";
-  cameraHealth.textContent = !on ? "Camera off" : camera.covered ? "Camera covered" : "Camera healthy";
-  document.body.dataset.camera = !on ? "off" : camera.covered ? "covered" : "healthy";
-}
-
-camera.onHealth = (covered) => {
-  wax.cameraHealth(); // a covered lens dims the lamp; uncovering brings it back
-  if (covered) announce("Camera covered");
-  showCamera();
-};
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) showCamera();
-});
-
-async function cameraDigest(): Promise<Uint8Array | null> {
-  if (!camera.enabled) return null;
-  const result = await camera.capture();
-  if (result?.reason === "repeated") wax.fizzle(); // repeated frame fizzles
-  return result?.digest ?? null;
-}
+// Lab mode: the pipeline, live, from real counters.
+const lab = new Lab({ snapshots, camera, lampHealth });
 
 const ring = new EntropyRing();
 const stir = lamp
   ? new StirController(lamp.renderer, lamp.physics, {
-      onProgress: (bits, progress) => ring.set(bits, progress),
+      onProgress: (bits, progress) => {
+        ring.set(bits, progress);
+        lab.stirring(bits);
+      },
       onTooRegular: () => {
         ring.stall();
         showStatus("Too regular, keep stirring.");
@@ -136,6 +120,7 @@ async function startSignIn(): Promise<void> {
   announce("Stir the lamp, hold Space, or choose skip.");
   const result = stir ? await stir.run() : { digest: null, skipped: true };
   if (screen !== "stir") return; // cancelled
+  lab.stirFinished(result.skipped);
 
   // The wax gathers back before the passkey prompt.
   wax.gather(STIR.RETURN_SECONDS * 1000);
@@ -145,7 +130,9 @@ async function startSignIn(): Promise<void> {
 
   try {
     const lampDigest = await takeSnapshot();
-    const user = await login({ stir: result.digest, lamp: lampDigest, camera: await cameraDigest() });
+    const digests = { stir: result.digest, lamp: lampDigest, camera: await cameraControl.digest() };
+    lab.sent(digests);
+    const user = await login(digests);
     wax.warmUp();
     signedIn(user);
   } catch (err) {
@@ -161,7 +148,9 @@ async function startSignUp(username: string): Promise<void> {
   wax.portal();
   try {
     const lampDigest = await takeSnapshot();
-    const user = await register(username, { stir: null, lamp: lampDigest, camera: await cameraDigest() });
+    const digests = { stir: null, lamp: lampDigest, camera: await cameraControl.digest() };
+    lab.sent(digests);
+    const user = await register(username, digests);
     wax.burst();
     wax.warmUp();
     signedIn(user);
@@ -213,22 +202,10 @@ document.addEventListener("click", (e) => {
       });
       break;
     case "camera":
-      if (camera.enabled) {
-        camera.disable();
-        showCamera();
-        announce("Camera off");
-      } else {
-        camera.enable().then(
-          () => {
-            showCamera();
-            announce("Camera on. Frames stay on this device.");
-          },
-          () => {
-            wax.fizzle();
-            showStatus("Camera unavailable. Sign-in works without it.");
-          },
-        );
-      }
+      cameraControl.toggle();
+      break;
+    case "lab":
+      lab.toggle();
       break;
     case "pause": {
       if (!lamp) break;
@@ -256,6 +233,13 @@ signupForm.addEventListener("submit", (e) => {
 // ---------------------------------------------------------------- freeze dial
 
 const dial = $("#temperature") as HTMLInputElement;
+function dialHealth(): "healthy" | "cooling" | "offline" {
+  const warmth = Number(dial.value) / 100;
+  return warmth === 0 ? "offline" : warmth < 0.6 ? "cooling" : "healthy";
+}
+function lampHealth(): LampHealth {
+  return lamp?.isPaused ? "paused" : dialHealth();
+}
 const health = $("[data-health]");
 dial.addEventListener("input", () => {
   const warmth = Number(dial.value) / 100;
@@ -263,7 +247,7 @@ dial.addEventListener("input", () => {
     lamp.physics.heatScale = warmth;
     lamp.freeze = 1 - warmth;
   }
-  const state = warmth === 0 ? "offline" : warmth < 0.6 ? "cooling" : "healthy";
+  const state = dialHealth();
   document.body.dataset.lamp = state;
   health.textContent =
     state === "offline"

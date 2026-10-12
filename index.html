@@ -78,6 +78,45 @@
       <button class="button button-quiet button-small" type="button" data-action="pause" aria-pressed="false">Pause lamp</button>
       <output class="mono health health-camera" data-camera-health>Camera off</output>
       <button class="button button-quiet button-small" type="button" data-action="camera" aria-pressed="false">Use camera</button>
+      <output class="mono health health-server">Secure generator on</output>
+      <button class="button button-quiet button-small" type="button" data-action="lab" aria-pressed="false" aria-controls="lab">Lab mode</button>
+    </aside>
+
+    <aside id="lab" class="glass lab" data-lab aria-labelledby="lab-title" aria-hidden="true" inert>
+      <p id="lab-title" class="lab-title">Lab mode · where this sign-in's randomness comes from</p>
+      <svg class="pipeline" viewBox="0 0 360 192" aria-hidden="true">
+        <path class="flow" data-flow="stir" d="M188 20 C 240 20, 240 92, 290 92" />
+        <path class="flow" data-flow="lamp" d="M188 68 C 240 68, 240 92, 290 92" />
+        <path class="flow" data-flow="camera" d="M188 116 C 240 116, 240 92, 290 92" />
+        <path class="flow flow-server" data-flow="server" d="M188 164 C 240 164, 240 92, 290 92" />
+        <path class="flow flow-out" data-flow="out" d="M290 92 L 354 92" />
+        <circle class="node" data-flow="stir" cx="188" cy="20" r="3.5" />
+        <circle class="node" data-flow="lamp" cx="188" cy="68" r="3.5" />
+        <circle class="node" data-flow="camera" cx="188" cy="116" r="3.5" />
+        <circle class="node node-server" data-flow="server" cx="188" cy="164" r="4.5" />
+        <circle class="node node-mix" data-flow="out" cx="290" cy="92" r="7" />
+        <circle class="node" data-flow="out" cx="354" cy="92" r="3.5" />
+        <text class="pipe-label" x="0" y="18">stir</text>
+        <text class="pipe-sub" x="0" y="32" data-meter="stir"></text>
+        <text class="pipe-label" x="0" y="66">lamp snapshot</text>
+        <text class="pipe-sub" x="0" y="80" data-meter="lamp"></text>
+        <text class="pipe-label" x="0" y="114">camera</text>
+        <text class="pipe-sub" x="0" y="128" data-meter="camera"></text>
+        <text class="pipe-label pipe-server" x="0" y="162">secure generator</text>
+        <text class="pipe-sub" x="0" y="176" data-meter="server"></text>
+        <text class="pipe-sub" x="290" y="72" text-anchor="middle">mix</text>
+        <text class="pipe-sub" x="354" y="110" text-anchor="end">challenge</text>
+      </svg>
+      <p class="lab-formula mono">SHA-256(server ‖ stir ‖ lamp ‖ camera ‖ time)</p>
+
+      <dl class="lab-meters">
+        <dt>Challenges</dt><dd class="mono" data-meter="challenges"></dd>
+        <dt>Sent with</dt><dd class="mono" data-meter="shares"></dd>
+        <dt>Last digests</dt><dd class="mono" data-meter="digests"></dd>
+        <dt>NIST tests</dt><dd class="mono" data-meter="tests"></dd>
+      </dl>
+
+      <p class="lab-note">Any SHA-256 digest passes these tests, whatever went in, so a pass proves nothing about the lamp. It doesn't need to: every challenge also holds 32 bytes from the Worker's secure generator.</p>
     </aside>
 
     <p class="glass status" data-status aria-hidden="true"></p>

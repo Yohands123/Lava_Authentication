@@ -9,6 +9,7 @@ import { Lamp } from "./lamp/lamp";
 import { LAMP, STIR } from "./lamp/constants";
 import { StirController } from "./stir/controller";
 import { SnapshotSource } from "./entropy/snapshot";
+import { CameraSource } from "./entropy/camera";
 import { currentUser, login, logout, register, revokeAll, type User } from "./auth/passkeys";
 import { prefersReducedMotion, onReducedMotionChange } from "./a11y/motion";
 import { announce } from "./a11y/announce";
@@ -52,6 +53,36 @@ function takeSnapshot(): Promise<Uint8Array | null> {
       resolve(accepted ? digest : null);
     };
   });
+}
+
+// Optional camera noise: off until the user turns it on.
+const camera = new CameraSource();
+const cameraButton = $("[data-action=camera]");
+const cameraHealth = $("[data-camera-health]");
+
+function showCamera(): void {
+  const on = camera.enabled;
+  cameraButton.setAttribute("aria-pressed", String(on));
+  cameraButton.textContent = on ? "Stop camera" : "Use camera";
+  cameraHealth.textContent = !on ? "Camera off" : camera.covered ? "Camera covered" : "Camera healthy";
+  document.body.dataset.camera = !on ? "off" : camera.covered ? "covered" : "healthy";
+}
+
+camera.onHealth = (covered) => {
+  // A covered lens dims the lamp; uncovering brings it back.
+  if (lamp) lamp.dimTarget = covered ? 0.45 : 0;
+  if (covered) announce("Camera covered");
+  showCamera();
+};
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) showCamera();
+});
+
+async function cameraDigest(): Promise<Uint8Array | null> {
+  if (!camera.enabled) return null;
+  const result = await camera.capture();
+  if (result?.reason === "repeated") lamp?.physics.drop(true); // repeated frame fizzles
+  return result?.digest ?? null;
 }
 
 const ring = new EntropyRing();
@@ -144,7 +175,7 @@ async function startSignIn(): Promise<void> {
 
   try {
     const lampDigest = await takeSnapshot();
-    const user = await login({ stir: result.digest, lamp: lampDigest, camera: null });
+    const user = await login({ stir: result.digest, lamp: lampDigest, camera: await cameraDigest() });
     warmUp();
     signedIn(user);
   } catch (err) {
@@ -160,7 +191,7 @@ async function startSignUp(username: string): Promise<void> {
   formPortal();
   try {
     const lampDigest = await takeSnapshot();
-    const user = await register(username, { stir: null, lamp: lampDigest, camera: null });
+    const user = await register(username, { stir: null, lamp: lampDigest, camera: await cameraDigest() });
     lamp?.physics.burst();
     warmUp();
     signedIn(user);
@@ -210,6 +241,21 @@ document.addEventListener("click", (e) => {
         go("landing");
         showStatus("Signed out on every device.");
       });
+      break;
+    case "camera":
+      if (camera.enabled) {
+        camera.disable();
+        showCamera();
+        announce("Camera off");
+      } else {
+        camera.enable().then(
+          () => {
+            showCamera();
+            announce("Camera on. Frames stay on this device.");
+          },
+          () => showStatus("Camera unavailable. Sign-in works without it."),
+        );
+      }
       break;
     case "pause": {
       if (!lamp) break;

@@ -385,6 +385,12 @@ body[data-lamp="offline"] .health {
 body[data-lamp="cooling"] .health {
   color: var(--lava-ice);
 }
+body[data-lamp] .health-camera {
+  color: var(--lava-text-quiet);
+}
+body[data-camera="covered"] .health-camera {
+  color: var(--lava-coral);
+}
 
 .controls .button-small {
   grid-column: 2 / 3;

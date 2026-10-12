@@ -10,7 +10,7 @@ below as "built, needs review" until the user has watched it and confirmed.
 - [x] 2. Lamp engine: signed off by user 2026-10-11. Real two-pass bloom deferred to Phase 8 (halo only for now).
 - [ ] 3. Pointer interaction: user moved on 2026-10-11 with items open (see "Carried over from Phase 3").
 - [ ] 4. Entropy pipeline: built and tested 2026-10-11; user moved on before trying the camera toggle.
-- [ ] 5. Authentication: all 7 E2E flows pass (2026-10-11). Open: real passkey check by user, user-verification decision.
+- [ ] 5. Authentication: all 8 E2E flows pass (2026-10-11). User verification now required. Open: real passkey check by user.
 - [ ] 6. Wire UI to events: portal, burst, droplet, fizzle, warm glow built.
 - [ ] 7. Lab mode and Freeze: freeze dial built. Lab mode not built.
 - [ ] 8. Polish: not started (glass refraction in shader, sound, real bloom, phone testing).
@@ -20,7 +20,8 @@ below as "built, needs review" until the user has watched it and confirmed.
 - [x] Login works with stirring skipped, lamp frozen and camera off (E2E)
 - [x] Reused challenge → 409; expired → 410; rate limited → 429 (E2E)
 - [x] Logout and revoke-all work (E2E, revoke-all across two devices)
-- [x] E2E tests pass with Playwright's virtual authenticator (`npm run test:e2e`, 7/7)
+- [x] E2E tests pass with Playwright's virtual authenticator (`npm run test:e2e`, 8/8)
+- [x] User verification required and checked on register and login (E2E: failed UV is refused)
 
 ## Carried over from Phase 4
 - User has not tried the camera toggle: permission prompt, covered lens dims the lamp, tracks stop
@@ -43,7 +44,6 @@ below as "built, needs review" until the user has watched it and confirmed.
 
 ## Open questions
 - Production domain for RP_ID?
-- User verification: CLAUDE.md 2.1.6 says verify the UV flag, but both verify routes pass `requireUserVerification: false` and README shows `userVerification: "preferred"`. Which wins?
 - Worker API responses lack `Permissions-Policy` (CLAUDE.md 7.5); adding it means touching csp.ts.
 
 ## Log
@@ -53,3 +53,4 @@ below as "built, needs review" until the user has watched it and confirmed.
 - 2026-10-11: Phase 2 signed off. Phase 3 started.
 - 2026-10-11: Moved to Phase 4 at user's request. Added camera source, snapshot/pool/camera/health tests, real /api/health. 36 unit tests passing.
 - 2026-10-11: Moved to Phase 5. Added Playwright E2E suite (7/7). Fixed ChallengeStore sweeping expired challenges after 1 s, which turned 410 into 409.
+- 2026-10-11: User approved requiring user verification. Options now "required", verify routes check the UV flag; README updated.

@@ -1,4 +1,4 @@
-import { LAMP } from "./constants";
+import { LAMP, STIR } from "./constants";
 import { FRAGMENT, VERTEX } from "./shaders";
 import type { Blob } from "./physics";
 
@@ -7,6 +7,9 @@ export interface FrameState {
   freeze: number;
   glow: number;
   dim: number;
+  /** Entropy ring the wax stays out of, and how strongly (0..1). */
+  ring: { cx: number; cy: number; radius: number };
+  ringAmount: number;
 }
 
 export class LampRenderer {
@@ -25,7 +28,7 @@ export class LampRenderer {
     this.canvas = canvas;
     this.gl = gl;
     this.program = this.link(VERTEX, FRAGMENT);
-    for (const name of ["u_res", "u_ppu", "u_time", "u_blobs", "u_count", "u_freeze", "u_glow", "u_dim", "u_grain"]) {
+    for (const name of ["u_res", "u_ppu", "u_time", "u_blobs", "u_count", "u_freeze", "u_glow", "u_dim", "u_grain", "u_ring", "u_ringMask"]) {
       this.u[name] = gl.getUniformLocation(this.program, name);
     }
     this.scale = isMobile() ? LAMP.RESOLUTION_SCALE_MOBILE : LAMP.RESOLUTION_SCALE;
@@ -80,6 +83,8 @@ export class LampRenderer {
     gl.uniform1f(this.u.u_glow!, state.glow);
     gl.uniform1f(this.u.u_dim!, state.dim);
     gl.uniform1f(this.u.u_grain!, LAMP.GRAIN);
+    gl.uniform3f(this.u.u_ring!, state.ring.cx, state.ring.cy, state.ring.radius);
+    gl.uniform2f(this.u.u_ringMask!, state.ringAmount, STIR.RING_SOFT_EDGE);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
   }
 

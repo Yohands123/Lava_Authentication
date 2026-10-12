@@ -72,6 +72,7 @@ const cameraControl = new CameraControl(camera, wax);
 const lab = new Lab({ snapshots, camera, lampHealth });
 
 const ring = new EntropyRing();
+const ringArc = $("[data-ring-arc]");
 const stir = lamp
   ? new StirController(lamp.renderer, lamp.physics, {
       onProgress: (bits, progress) => {
@@ -88,6 +89,8 @@ const stir = lamp
 if (lamp) {
   lamp.onStep = (dt) => {
     if (screen === "landing" && cursor) lamp!.physics.heatAt(cursor.x, cursor.y, dt);
+    // While stirring, the wax stays outside the entropy ring.
+    wax.clearRing(screen === "stir" ? ringArc : null);
     stir?.update(dt);
   };
   lamp.onFrame = () => {

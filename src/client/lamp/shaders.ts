@@ -22,6 +22,8 @@ uniform float u_freeze;    // 0 = warm, 1 = frozen
 uniform float u_glow;      // success warmth, 0..1
 uniform float u_dim;       // failure / covered camera, 0..1
 uniform float u_grain;
+uniform vec3 u_ring;       // keep-out ring while stirring: centre x, y, radius (units)
+uniform vec2 u_ringMask;   // mask strength 0..1, soft edge width (units)
 
 out vec4 outColor;
 
@@ -64,6 +66,9 @@ void main() {
     tempSum += f * b.w;
   }
   float temp = tempSum / max(field, 1e-5);
+  // Many blobs' field tails add up and would bulge into the entropy ring; fade the wax out at its edge.
+  float ringDist = length(p - u_ring.xy);
+  field *= mix(1.0, smoothstep(u_ring.z, u_ring.z + u_ringMask.y, ringDist), u_ringMask.x);
   vec3 base = tempColor(temp);
 
   // Background: deep navy at the bottom fading to void, heater glow, faint streaks.
@@ -77,7 +82,8 @@ void main() {
   // Blob surface: pseudo-normal from the field gradient.
   float aa = 0.06;
   float inside = smoothstep(1.0 - aa, 1.0 + aa, field);
-  vec3 n = normalize(vec3(-grad / (field * 14.0), 1.0));
+  // Guard: where the ring mask zeroes the field, dividing by it would give NaN (black).
+  vec3 n = normalize(vec3(-grad / (max(field, 0.05) * 14.0), 1.0));
   float core = smoothstep(1.0, 5.0, field);
   vec3 surf = base * (0.5 + 0.55 * core);           // lit from within
   surf += base * max(0.0, -n.y) * 0.35;              // underlight from the heater

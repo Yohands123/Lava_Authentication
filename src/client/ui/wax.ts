@@ -38,6 +38,21 @@ export class Wax {
     p.formation = { kind: "ring", ...this.centre, radius: Math.min(p.width, p.height) * 0.26 };
   }
 
+  /** Stirring: the wax stays outside the entropy ring. Pass null to let it back in. */
+  clearRing(ring: Element | null): void {
+    const lamp = this.lamp;
+    if (!lamp) return;
+    if (!ring) {
+      lamp.physics.keepOut = null;
+      return;
+    }
+    // Measured from the page, so it follows resizes and Lab mode's split screen.
+    const box = ring.getBoundingClientRect();
+    const c = lamp.renderer.toWorld(box.left + box.width / 2, box.top + box.height / 2);
+    const edge = lamp.renderer.toWorld(box.right, box.top + box.height / 2);
+    lamp.physics.keepOut = { cx: c.x, cy: c.y, radius: edge.x - c.x };
+  }
+
   release(): void {
     if (this.lamp) this.lamp.physics.formation = null;
   }

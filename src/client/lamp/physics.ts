@@ -35,6 +35,8 @@ export class LampPhysics {
   /** Global speed multiplier (reduced motion). */
   speed = 1;
   formation: Formation = null;
+  /** A circle the wax stays out of (the entropy ring while stirring). */
+  keepOut: { cx: number; cy: number; radius: number } | null = null;
   private time = 0;
 
   constructor(private targetCount: number) {}
@@ -112,6 +114,7 @@ export class LampPhysics {
 
       b.x += b.vx * dt;
       b.y += b.vy * dt;
+      if (this.keepOut) this.pushOut(b, dt);
 
       // Soft walls
       const m = b.r * 0.3;
@@ -139,6 +142,27 @@ export class LampPhysics {
       return { x: f.cx + Math.cos(angle) * f.radius, y: f.cy + Math.sin(angle) * f.radius };
     }
     return { x: f.cx + Math.cos(angle) * f.spread, y: f.cy + Math.sin(angle) * f.spread };
+  }
+
+  /** Ease a blob out of the keep-out circle and cancel its inward motion, so wax parts rather than jumps. */
+  private pushOut(b: Blob, dt: number): void {
+    const k = this.keepOut!;
+    const dx = b.x - k.cx;
+    const dy = b.y - k.cy;
+    const d = Math.hypot(dx, dy);
+    const min = k.radius + b.r * STIR.RING_CLEARANCE;
+    if (d >= min) return;
+    // A blob dead centre has no direction; send it upward, the way warm wax goes.
+    const nx = d > 1e-4 ? dx / d : 0;
+    const ny = d > 1e-4 ? dy / d : 1;
+    const ease = 1 - Math.exp(-STIR.RING_PUSH_RATE * dt);
+    b.x += nx * (min - d) * ease;
+    b.y += ny * (min - d) * ease;
+    const inward = b.vx * nx + b.vy * ny;
+    if (inward < 0) {
+      b.vx -= inward * nx;
+      b.vy -= inward * ny;
+    }
   }
 
   /** Merge one overlapping pair per step when above the resting count. Conserves area. */

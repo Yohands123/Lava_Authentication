@@ -75,6 +75,12 @@ export const STIR = {
   SPLIT_COOLDOWN: 0.7,
   /** Seconds for the wax to gather back to centre after the ring closes. */
   RETURN_SECONDS: 2,
+  /** While stirring, blobs keep their surface this many radii outside the entropy ring. */
+  RING_CLEARANCE: 1.15,
+  /** How fast wax inside the ring eases out, per second (≈0.4 s to clear). Higher = snappier. */
+  RING_PUSH_RATE: 6,
+  /** Width of the soft edge where wax fades out against the ring, short-edge units. Wider = softer. */
+  RING_SOFT_EDGE: 0.08,
 
   /** Entropy meter: target credited bits to close the ring. */
   TARGET_BITS: 256,

@@ -72,9 +72,11 @@ export class StirController {
     if (this.skipping || this.holding) {
       // Automatic swirl around the centre (skip, Space, or reduced-motion hold).
       this.holdAngle += dt * (this.reducedMotion() ? 0.6 : 1.8);
-      const r = Math.min(width, height) * 0.22;
-      const x = width / 2 + Math.cos(this.holdAngle) * r;
-      const y = height / 2 + Math.sin(this.holdAngle) * r;
+      // Orbit just outside the entropy ring, where the wax is kept while stirring.
+      const ring = this.physics.keepOut;
+      const r = ring ? ring.radius + 0.08 : Math.min(width, height) * 0.22;
+      const x = (ring?.cx ?? width / 2) + Math.cos(this.holdAngle) * r;
+      const y = (ring?.cy ?? height / 2) + Math.sin(this.holdAngle) * r;
       const v = this.reducedMotion() ? 0.2 : 0.9;
       this.physics.stir(x, y, -Math.sin(this.holdAngle) * v, Math.cos(this.holdAngle) * v, dt);
       if (this.skipping) {

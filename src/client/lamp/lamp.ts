@@ -1,7 +1,7 @@
 // Owns the render loop: fixed-timestep physics, eased visual state, pause,
 // tab-visibility pause, and adaptive resolution.
 
-import { LAMP } from "./constants";
+import { LAMP, STIR } from "./constants";
 import { LampPhysics } from "./physics";
 import { LampRenderer, isMobile } from "./renderer";
 
@@ -22,6 +22,9 @@ export class Lamp {
   dimTarget = 0;
   /** Per-second easing for dim; lower for slow dims (rate limiting). */
   dimEase = LAMP.VISUAL_EASE;
+  // The ring mask eases in and out; the last ring is kept while it fades away.
+  private ring = { cx: 0, cy: 0, radius: 0 };
+  private ringAmount = 0;
   private paused = false;
   private time = 0;
   private last = 0;
@@ -82,8 +85,13 @@ export class Lamp {
     // Ease visual state slowly; nothing snaps.
     this.glow += (this.glowTarget - this.glow) * (1 - Math.exp(-dt * LAMP.VISUAL_EASE));
     this.dim += (this.dimTarget - this.dim) * (1 - Math.exp(-dt * this.dimEase));
+    const keepOut = this.physics.keepOut;
+    if (keepOut) this.ring = { ...keepOut };
+    this.ringAmount += ((keepOut ? 1 : 0) - this.ringAmount) * (1 - Math.exp(-dt * STIR.RING_PUSH_RATE));
 
-    this.renderer.render(this.physics.blobs, { time: this.time, freeze: this.freeze, glow: this.glow, dim: this.dim });
+    this.renderer.render(this.physics.blobs, {
+      time: this.time, freeze: this.freeze, glow: this.glow, dim: this.dim, ring: this.ring, ringAmount: this.ringAmount,
+    });
     this.onFrame?.();
     this.adapt(frameMs, now);
     this.raf = requestAnimationFrame(this.frame);

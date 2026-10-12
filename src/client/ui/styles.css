@@ -493,6 +493,14 @@ input[type="range"]::-moz-range-thumb {
   .choose-copy {
     padding-bottom: calc(var(--lava-controls-height, 220px) + 8px);
   }
+  /* The stir ring and its copy centre in the space above the controls. */
+  .screen-stir {
+    bottom: calc(var(--lava-controls-height, 220px) + 16px);
+  }
+  .ring {
+    width: min(72vmin, 640px, calc(100vh - var(--lava-controls-height, 220px) - 48px));
+    height: min(72vmin, 640px, calc(100vh - var(--lava-controls-height, 220px) - 48px));
+  }
 }
 
 /* ------------------------------------------------------------- reduced motion */

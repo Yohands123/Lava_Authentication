@@ -6,7 +6,7 @@
 
 Passkeys on Cloudflare Workers · an entropy pool you can stir with your finger · a lamp you can freeze to prove it never mattered.
 
-[Live demo](https://lavaauth.example.com) · [60-second video](#demo) · [How it works](#how-it-works) · [Security model](#security-model)
+[Live demo](https://lavaauth.yohance611.workers.dev) · [60-second video](#demo) · [How it works](#how-it-works) · [Security model](#security-model)
 
 </div>
 
@@ -807,16 +807,24 @@ Playwright uses Chrome's virtual authenticator to test:
 
 ## Deployment
 
-1. **Choose your domain** and set `RP_ID` and `ORIGIN` in `[env.production.vars]`.
-2. **Deploy:**
+The live demo runs on Cloudflare's free `workers.dev` address: https://lavaauth.yohance611.workers.dev
 
-   ```bash
-   npm run build
-   npx wrangler deploy --env production
+To deploy your own copy:
+
+1. **Log in:** `npx wrangler login`, and approve it in the browser.
+2. **Get a workers.dev subdomain:** open Workers & Pages in the Cloudflare dashboard once; your subdomain is shown under **Account details**.
+3. **Set the address** in `[env.production.vars]` of `wrangler.toml`, with no trailing slash on `ORIGIN`:
+
+   ```toml
+   RP_ID = "lavaauth.<your-subdomain>.workers.dev"
+   ORIGIN = "https://lavaauth.<your-subdomain>.workers.dev"
    ```
 
-3. **Attach a custom domain** in the Cloudflare dashboard (Workers → your Worker → Settings → Domains & Routes). Passkeys require HTTPS in production.
-4. **Verify** by registering a passkey on the live site and running through the demo script below.
+4. **Deploy:** `npm run deploy` (builds the client, then `wrangler deploy --env production`). The Durable Object migration applies on the first deploy.
+5. **Wait a minute or two** if the site won't connect at first: a new workers.dev subdomain needs a few minutes for its certificate.
+6. **Verify** by creating a passkey on the live site, then signing in. Passkeys are bound to the address, so a passkey made on `localhost` won't work there.
+
+A custom domain works too (Workers → your Worker → Settings → Domains & Routes), but pick it before anyone registers: changing `RP_ID` later invalidates every passkey.
 
 ---
 

@@ -25,6 +25,8 @@ The actual public GitHub branch page was opened in Chromium at 1440px and 390px 
 
 All eight embedded PNG URLs returned HTTP 200 with `image/png`; downloaded bytes matched the inspected local files by SHA-256. GitHub's GFM API also rendered the README successfully. Local Markdown file/heading/image checks found no missing screenshots or broken local links. The old top fragment was corrected as described above. Browser verification screenshots and its JSON log remain local under ignored `.cache/`.
 
+A further check covered all 20 distinct README file/image/external targets: 19 returned HTTP 200 directly. The external [Cloudflare inspiration article](https://www.cloudflare.com/learning/ssl/lava-lamp-encryption/) returned 403 to the Node fetch client but was successfully retrieved by the web browsing tool at the same URL. It is retained as a valid reference; direct automated availability is the check limitation. No missing repository target was found.
+
 ## Actual verification in this follow-up
 
 | Command | Result |

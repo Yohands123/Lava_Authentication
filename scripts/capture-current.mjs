@@ -1,5 +1,10 @@
 import { chromium } from '@playwright/test';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
+const origin = process.env.LAVAGUARD_LOCAL_ORIGIN ?? 'http://localhost:8787';
+const target = new URL(origin);
+if (target.hostname !== 'localhost' || target.protocol !== 'http:') throw new Error('Capture only the project-owned local Worker.');
+const configuration = await (await fetch(origin + '/api/lavaguard/config')).json();
+const captures = [];
 const browser = await chromium.launch();
 await mkdir('docs/media/lavaguard', { recursive: true });
 try {
@@ -8,7 +13,11 @@ for (const [name, viewport] of [['desktop', { width: 1440, height: 1000 }], ['mo
   const failures = [];
   page.on('pageerror', error => failures.push(error.message));
   page.on('console', message => { if (message.type() === 'warning' || message.type() === 'error') failures.push(message.text()); });
-  await page.goto('http://localhost:8787');
+  let evaluated = null;
+  page.on('response', response => {
+    if (response.url().endsWith('/api/lavaguard/evaluate')) evaluated = response.json().then(decision => ({ status: response.status(), verdict: decision.verdict, assessment: decision.assessment, clearanceIssued: Boolean(decision.clearance) }));
+  });
+  await page.goto(origin);
   await page.waitForTimeout(1000);
   await page.screenshot({ path: `docs/media/lavaguard/after-landing-${name}.png` });
   await page.getByRole('button', { name: 'Enter', exact: true }).click();
@@ -40,7 +49,11 @@ for (const [name, viewport] of [['desktop', { width: 1440, height: 1000 }], ['mo
   })));
   if (!luminance) throw new Error(`The lamp rendered black during ${name} capture: ${failures.join('; ')}`);
   await page.screenshot({ path: `docs/media/lavaguard/real-${verdict.toLowerCase()}-${name}.png` });
+  if (!evaluated) throw new Error('Screenshot has no real Worker evaluation.');
+  captures.push({ viewport, screenshot: `docs/media/lavaguard/real-${verdict.toLowerCase()}-${name}.png`, ...await evaluated });
   await page.close();
 }
 } finally { await browser.close(); }
+await mkdir('ml/artifacts', { recursive: true });
+await writeFile('ml/artifacts/capture-current.json', JSON.stringify({ capturedAt: new Date().toISOString(), origin, configuration, syntheticAutomation: true, mockedResponses: false, captures }, null, 2) + '\n');
 console.log('Current landing, stirring and actual server-decision screenshots captured at both widths.');

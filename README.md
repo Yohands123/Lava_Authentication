@@ -1,3 +1,5 @@
+<a name="top"></a>
+
 <div align="center">
 
 # 🌋 LavaAuth + LavaGuard
@@ -13,7 +15,7 @@ An interactive WebGL lava lamp meets passkey authentication, Cloudflare's edge p
 </div>
 
 > [!IMPORTANT]
-> **Two release states:** The linked public demo currently runs the original **LavaAuth** experience. **LavaGuard is implemented and tested locally on `feature/lavaguard`, but has not been deployed.** Once that branch is published, this README and its new screenshots describe the *repository implementation*, not a claim that ML bot detection is already protecting the live site. Production ML enforcement remains **off**.
+> **Two release states:** The linked public demo currently runs the original **LavaAuth** experience. **LavaGuard is implemented and tested locally on `feature/lavaguard`, but has not been deployed.** This README and its new screenshots describe the *repository implementation*, not a claim that ML bot detection is already protecting the live site. Production ML enforcement remains **off**.
 
 ## Take a look
 
@@ -35,9 +37,9 @@ After clearing the circle, the **same ring** becomes the result display. No new 
     <th align="center">BLOCK</th>
   </tr>
   <tr>
-    <td><img src="docs/media/lavaguard/clear-390.png" alt="CLEAR: Ready to sign in, displayed within the glowing ring" /></td>
-    <td><img src="docs/media/lavaguard/flag-390.png" alt="FLAG: In-circle request to try again or choose an accessible alternative" /></td>
-    <td><img src="docs/media/lavaguard/block-390.png" alt="BLOCK: In-circle restricted-attempt state with neutral wording" /></td>
+    <td width="33%"><img src="docs/media/lavaguard/clear-390.png" width="260" alt="CLEAR: Ready to sign in, displayed within the glowing ring" /></td>
+    <td width="33%"><img src="docs/media/lavaguard/flag-390.png" width="260" alt="FLAG: In-circle request to try again or choose an accessible alternative" /></td>
+    <td width="33%"><img src="docs/media/lavaguard/block-390.png" width="260" alt="BLOCK: In-circle restricted-attempt state with neutral wording" /></td>
   </tr>
   <tr>
     <td align="center">Ready to sign in</td>
@@ -46,7 +48,7 @@ After clearing the circle, the **same ring** becomes the result display. No new 
   </tr>
 </table>
 
-> These three images are **visual regression fixtures**: presentation states may use mocked verdict responses. They demonstrate the UI, **not proof that an ML model recognized a human or bot**. See the real-Worker test reports for security behavior.
+> These three images are **visual regression fixtures** with mocked verdict responses and real local rendering/stirring. They demonstrate the UI, **not proof that an ML model recognized a human or bot**. See the real-Worker test reports for security behavior.
 
 <details>
 <summary><strong>More screenshots: desktop, mobile, and the developer Lab</strong></summary>
@@ -56,6 +58,8 @@ After clearing the circle, the **same ring** becomes the result display. No new 
 | ![Landing](docs/media/lavaguard/after-landing-desktop.png) | ![Stir interaction](docs/media/lavaguard/after-stir-desktop.png) | ![Real server shadow response](docs/media/lavaguard/real-clear-desktop.png) |
 
 The Lab includes local research views of trajectory, speed, acceleration, model evidence and consent-based data export. It is not a public production analytics dashboard.
+
+The real Worker shadow image shows **Interaction recorded** after automated input. Shadow CLEAR permits continuation; it does not identify a human. Screenshot provenance and the publication checks are recorded in [the publication report](docs/LAVAGUARD_PUBLISH_RESULTS.md).
 
 </details>
 
@@ -73,7 +77,7 @@ The inspiration: [Cloudflare's physical lava lamps](https://www.cloudflare.com/l
 | --- | --- | --- |
 | You open the application | Animated lava lamp and existing controls | Serves the app and applies applicable request limits |
 | You choose sign-in | Wax gathers inside the ring | Prepares a time-limited LavaGuard attempt when enabled |
-| You stir | Bubbles move out of the ring | Extracts bounded behavioral features; client claims remain untrusted |
+| You stir | Bubbles move out of the ring | Client extracts bounded features; Worker validates the untrusted summary |
 | **CLEAR** | **Ready to sign in**, inside the original ring | Issues a scoped, expiring, single-use clearance for passkey options |
 | **FLAG** | Calm **try again** state or accessible alternative | Withholds this attempt's clearance or requests an approved additional check |
 | **BLOCK / restricted** | **Attempt restricted**, in the ring | Applies protocol/rate restrictions; not a permanent movement-based ban |
@@ -81,7 +85,7 @@ The inspiration: [Cloudflare's physical lava lamps](https://www.cloudflare.com/l
 | Valid passkey | Signed-in experience | Creates a revocable secure session |
 | No valid passkey | No authenticated session | A successful lava interaction **cannot** authenticate by itself |
 
-A low-risk participant normally sees the original experience with **no extra CAPTCHA screen**. Keyboard/no-WebGL accessible sign-in is available with independent abuse limits and still requires a passkey.
+When protocol checks permit continuation, the ordinary profile has **no extra CAPTCHA screen**; genuine-user acceptance has not yet been measured. Keyboard/no-WebGL accessible sign-in is available with independent abuse limits and still requires a passkey.
 
 ## How it works
 
@@ -125,7 +129,7 @@ The system includes five modules:
 
 ## The ML experiment, without the hype
 
-LavaGuard includes a reproducible offline Python pipeline, pinned permitted research data, and a compact Worker-compatible logistic inference candidate. It compares logistic regression, Random Forest and human anomaly detection, with held-out generator tests, preprocessing perturbations, calibration and feature ablations.
+LavaGuard includes a reproducible offline Python pipeline, pinned research-source metadata and integrity checks, and a compact Worker-compatible logistic inference candidate. Raw research data is obtained separately under the [documented license constraints](docs/LAVAGUARD_DATASETS.md), and is excluded from Git. The pipeline compares logistic regression, Random Forest and human anomaly detection, with held-out generator tests, preprocessing perturbations, calibration and feature ablations.
 
 | Phase 4 experimental held-out corpus metric | Robust logistic | Robust Random Forest |
 | --- | ---: | ---: |
@@ -137,6 +141,8 @@ LavaGuard includes a reproducible offline Python pipeline, pinned permitted rese
 **These are not production human/bot detection rates.** The research rows are not independent LavaGuard participants; source conventions, generator differences, sampling and device conditions limit transfer. As of the Phase 4 report, **zero consenting human LavaGuard study rows** were available. Known synthetic families and real Playwright/Ghost Cursor captures expose substantial remaining false negatives. No model has been promoted for production blocking.
 
 Read [Behavioral ML: Phase 4 results](docs/LAVAGUARD_ML_PHASE4_RESULTS.md) for the fixed-model sampling sensitivity, generator-family holdouts, evaluation splits, calibration and caveats.
+
+The [Phase 5 offline starter](docs/LAVAGUARD_PHASE5_IMPLEMENTATION.md) adds grouped data-readiness evaluation. Its six synthetic integrity tests pass; the real local run reports **`NOT_READY_NO_OPT_IN_DATA`**, with zero human study codes and zero bot families. It does not collect participants, export a Worker model or enable enforcement; its report stays in ignored `ml/private/`.
 
 ## Testing and actual results
 
@@ -161,7 +167,7 @@ The 503 overload responses represent real availability limitations, not successf
 
 | What's protected / mitigated | What is **not** guaranteed |
 | --- | --- |
-| Origin-bound, user-verified passkeys; only public credential keys stored | A browser or device compromised by malware is not made trustworthy |
+| Origin-bound, user-verified passkeys; public credential keys stored, never private passkey keys | A browser or device compromised by malware is not made trustworthy |
 | Independent server-side challenge randomness and one-time WebAuthn verification | The simulated wax does **not** generate cryptographic entropy |
 | Atomic challenge and clearance redemption, scoped expiry, replay controls | Clearance is **not** proof of a human gesture |
 | Limits on issuance, evaluation, payload size and in-flight work | Distributed attackers and resource exhaustion are only mitigated |
@@ -169,7 +175,7 @@ The 503 overload responses represent real availability limitations, not successf
 | Expiring history and aggregate-only operational metrics | Public mouse datasets do not establish application-specific model accuracy |
 | Optional, server-verified Turnstile step-up in local tests | Turnstile is **off by default** and not yet live-validated with production credentials |
 
-**Data handling:** The usual feature pipeline uses bounded summaries; the original entropy system keeps raw camera frames and snapshots local. Raw behavioral trajectories are retained only through a separate **opt-in, local research export** with deletion controls. Human behavioural features can still be sensitive; production collection and ML enforcement are **off**. See [study protocol](docs/LAVAGUARD_HUMAN_STUDY.md).
+**Data handling:** The usual feature pipeline uses bounded summaries; the original entropy system keeps raw camera frames and snapshots local. Bounded pointer samples live in browser memory during an attempt; retaining/exporting a research trace requires separate **opt-in, local research consent**, with deletion controls. No raw upload endpoint exists. Human behavioural features can still be sensitive; production collection and ML enforcement are **off**. See [study protocol](docs/LAVAGUARD_HUMAN_STUDY.md).
 
 **No automatic permanent behavioral bans.** Unusual movement, `navigator.webdriver`, an ML score or a suspected bot is not sufficient evidence of malicious identity. CLEAR means *permitted to continue*, not *certified human*.
 
@@ -189,12 +195,11 @@ The 503 overload responses represent real availability limitations, not successf
 
 ## Run locally
 
-Requires a current compatible Node.js runtime and npm. The Phase 4 research workflow was reproduced with Node 24 and its pinned Python environment. A local Cloudflare account is **not required just to run the development Worker**.
+Requires **Node.js 24** and npm (the SQLite tests use `node:sqlite`). The Phase 4 research workflow used the pinned Python environment. A Cloudflare account is **not required just to run the local development Worker**.
 
 ```bash
 git clone https://github.com/Yohands123/Lava_Authentication.git
 cd Lava_Authentication
-# After the feature branch is published:
 git switch feature/lavaguard
 npm ci
 npx playwright install chromium
@@ -210,6 +215,8 @@ npm run check           # TypeScript + ESLint + unit tests on the feature branch
 npm run build
 npm run test:e2e        # Chromium / local Worker tests
 npm run test:enforce    # protocol enforcement
+# Windows PowerShell: $env:LAVAGUARD_RESEARCH='1'; npm run test:enforce; Remove-Item Env:LAVAGUARD_RESEARCH
+# Unix research profile: LAVAGUARD_RESEARCH=1 npm run test:enforce
 npm run test:hardening  # rate limits, Turnstile test path and recovery
 npm run test:adversarial
 npm run test:load       # local workerd only; intentional 429/503 may occur
@@ -243,7 +250,7 @@ docs/media/lavaguard/    # Captured UI screenshots (publish safe images only)
 
 ## What's next?
 
-The working implementation is at the **end of Phase 4**. Before moving beyond the research stage:
+The runtime implementation is at the **end of Phase 4**, with the Phase 5 offline readiness starter added. No genuine-user study has begun. Before moving beyond the research stage:
 
 1. **Phase 5 — Consenting real-user study:** collect genuine bubble-interaction sessions across devices and independent participants, measure acceptance, retries, and accessibility.
 2. **Improve ML generalization:** use matched human and bot instrumentation, independent generator families, calibrated operating points, and meaningful false-positive constraints.
@@ -270,6 +277,6 @@ Released under the [MIT License](LICENSE). Built as a tribute to the creativity 
 
 **The lava is simulated. The security questions are real.**
 
-[Live original demo](https://lavaauth.yohance611.workers.dev/) · [Back to top](#-lavaauth--lavaguard)
+[Live original demo](https://lavaauth.yohance611.workers.dev/) · [Back to top](#top)
 
 </div>

@@ -2,6 +2,14 @@
 
 Current phase: LavaGuard Phase 4 security hardening and Phase 4B ML engineering, authorized 2026-10-17
 
+## GitHub publication and Phase 5 offline starter, 2026-10-18
+
+- The owner separately authorized README fact-checking, safe screenshots, commit/push to `feature/lavaguard` and a PR into `main`; no deployment, production activation or automatic merge.
+- Preserved the existing Phase 4 commit and merged PR #1; this publication follow-up keeps that history.
+- Replaced stale human-claim screenshots with fresh actual Worker shadow captures, retained the original screenshots and explicitly mocked CLEAR/FLAG/BLOCK fixtures, and excluded pointer-debug captures from the published tree.
+- Installed the subsequently owner-requested Phase 5 starter: six synthetic tests passed; actual readiness is `NOT_READY_NO_OPT_IN_DATA` (zero human codes/bot families). The generated report remains ignored/private. No recruitment, production collection or model promotion occurred.
+- Current publication verification and media inventory: [publication results](docs/LAVAGUARD_PUBLISH_RESULTS.md).
+
 ## LavaGuard Phase 4 / 4B
 
 - [x] Global/per-context storage and rate bounds, atomic expiring rate counters, request byte/time caps and per-isolate overload admission.

@@ -14,3 +14,7 @@ ml/private/
 ml/datasets/raw/
 ml/datasets/normalized/
 __pycache__/
+/README_BACKUP.md
+# Local pointer-debug captures are not publication screenshots.
+/docs/media/lavaguard/erratic-motion-*.png
+/docs/media/lavaguard/preview-live.png

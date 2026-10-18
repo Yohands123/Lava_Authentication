@@ -26,14 +26,10 @@ export class EntropyRing {
 
   private stallTimer = 0;
   private readonly screen = $("[data-screen=stir]");
-  private readonly passkey = $("[data-action=passkey]");
 
   /** Ring clear: Sign in fades in and takes focus. Until then it can't be reached. */
   showClear(clear: boolean): void {
     this.screen.classList.toggle("is-clear", clear);
-    this.passkey.inert = !clear;
-    this.passkey.setAttribute("aria-hidden", String(!clear));
-    if (clear) window.setTimeout(() => this.passkey.focus({ preventScroll: true }), 650);
   }
 
   set(bits: number, progress: number): void {

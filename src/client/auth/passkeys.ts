@@ -49,9 +49,10 @@ export async function register(username: string, digests: Digests): Promise<User
   return result.user;
 }
 
-export async function login(digests: Digests): Promise<User> {
+export async function login(digests: Digests, clearance?: string): Promise<User> {
   const optionsJSON = await api<PublicKeyCredentialRequestOptionsJSON>("/api/login/options", {
     digests: encode(digests),
+    clearance,
   });
   const response = await withAuthenticator(() => startAuthentication({ optionsJSON }));
   const result = await api<{ user: User }>("/api/login/verify", { response });

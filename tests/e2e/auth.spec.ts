@@ -27,7 +27,9 @@ test("register → log in (clear the ring) → log out", async ({ page }) => {
   await page.getByRole("button", { name: "Sign in" }).click();
   // Sign in isn't reachable until the ring is clear.
   await expect(passkeyButton(page)).toHaveAttribute("aria-hidden", "true");
+  const guardResponse = page.waitForResponse(r => r.url().endsWith("/api/lavaguard/evaluate"));
   await stirAndSignIn(page);
+  expect((await (await guardResponse).json()).assessment).toBe("shadow");
 
   const me = await session(page);
   expect(me.status()).toBe(200);

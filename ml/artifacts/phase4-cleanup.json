@@ -1,0 +1,9 @@
+{
+  "scope": "Production SQL cleanup functions on local in-memory SQLite, not end-to-end DO alarms",
+  "expiredAttemptsSeeded": 8192,
+  "expiredHistorySeeded": 8192,
+  "cleanupMs": 19.52520000000004,
+  "remainingAttempts": 0,
+  "remainingHistory": 0,
+  "nodeRssBytes": 103645184
+}

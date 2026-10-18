@@ -31,6 +31,7 @@ export class StirController {
   /** performance.now() of the last sample the meter accepted as human-like. */
   private lastHuman = -Infinity;
   private resolve: ((r: StirResult) => void) | null = null;
+  private generation = 0;
 
   constructor(
     private readonly renderer: LampRenderer,
@@ -39,6 +40,7 @@ export class StirController {
   ) {}
 
   run(): Promise<StirResult> {
+    this.cancel();
     this.meter = new StirMeter();
     this.pool.reset();
     this.active = true;
@@ -110,10 +112,13 @@ export class StirController {
   private async complete(): Promise<void> {
     if (!this.active) return;
     this.active = false;
-    this.finish(await this.pool.digest());
+    const generation = this.generation;
+    const digest = await this.pool.digest();
+    if (generation === this.generation) this.finish(digest);
   }
 
   private finish(digest: Uint8Array | null): void {
+    this.generation++;
     this.active = false;
     this.pointerWorld = null;
     document.body.classList.remove("is-stirring");

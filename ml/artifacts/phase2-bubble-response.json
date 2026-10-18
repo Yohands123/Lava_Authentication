@@ -1,0 +1,295 @@
+{
+  "seed": 42,
+  "humanN": 0,
+  "interpretation": "Deterministic synthetic responsiveness benchmark. A reactive bot can score well. Correlation and nearest-target switches cannot establish human presence.",
+  "cases": [
+    {
+      "seed": 42,
+      "family": "reactive-160ms",
+      "pathHash": "ac0f8bb4f484bebcf9c9bedc988671092d684d9f817f35b1743c5b894b62fd56",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 12,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 12,
+        "responseN": 12,
+        "responseMedianMs": 160,
+        "trackingErrorMean": 0.108886087115598,
+        "trackingErrorP95": 0.5459703902692553
+      }
+    },
+    {
+      "seed": 42,
+      "family": "reactive-0ms",
+      "pathHash": "c835a7529b1d316dd0fc4dcdbb74e13f3b6d4ef8fc92cabe20ca747798cdd1ea",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 12,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 12,
+        "responseN": 12,
+        "responseMedianMs": 32,
+        "trackingErrorMean": 0.05032873281345768,
+        "trackingErrorP95": 0.2695080207724026
+      }
+    },
+    {
+      "seed": 42,
+      "family": "moving-target-reactive",
+      "pathHash": "a1d294473344ef7d40589e072542b566609efbbdd23544115e5b17c609ecd03f",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 0,
+        "movingTargetTurns": 6,
+        "postEventCorrections": 6,
+        "responseN": 6,
+        "responseMedianMs": 256,
+        "trackingErrorMean": 0.07166253569253418,
+        "trackingErrorP95": 0.0842130578084223
+      }
+    },
+    {
+      "seed": 42,
+      "family": "moving-target-independent",
+      "pathHash": "00790fd3e7f43299227df450875469617423250d58cc56467ab342d533db2d57",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 0,
+        "movingTargetTurns": 6,
+        "postEventCorrections": 0,
+        "responseN": 0,
+        "responseMedianMs": null,
+        "trackingErrorMean": 0.415646548967528,
+        "trackingErrorP95": 0.6534315912251901
+      }
+    },
+    {
+      "seed": 42,
+      "family": "same-path-other-arrangement",
+      "pathHash": "ac0f8bb4f484bebcf9c9bedc988671092d684d9f817f35b1743c5b894b62fd56",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 11,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 5,
+        "responseN": 5,
+        "responseMedianMs": 160,
+        "trackingErrorMean": 0.32924642402983295,
+        "trackingErrorP95": 0.691116909915212
+      }
+    },
+    {
+      "seed": 42,
+      "family": "target-independent",
+      "pathHash": "00790fd3e7f43299227df450875469617423250d58cc56467ab342d533db2d57",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 12,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 10,
+        "responseN": 10,
+        "responseMedianMs": 64,
+        "trackingErrorMean": 0.39218949143704657,
+        "trackingErrorP95": 0.6339373436600872
+      }
+    },
+    {
+      "seed": 812,
+      "family": "reactive-160ms",
+      "pathHash": "2fe07c6d23144bddd8d3073d6c4eb254100501d496e399e289feed42bcfd9289",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 12,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 10,
+        "responseN": 10,
+        "responseMedianMs": 160,
+        "trackingErrorMean": 0.08335625800650927,
+        "trackingErrorP95": 0.38019363525212035
+      }
+    },
+    {
+      "seed": 812,
+      "family": "reactive-0ms",
+      "pathHash": "7c6754e5d2e4b1e17df7b17902ac37ff0cdc3eca36283a2cc78e3809781c85bd",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 12,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 10,
+        "responseN": 10,
+        "responseMedianMs": 32,
+        "trackingErrorMean": 0.03878009661099778,
+        "trackingErrorP95": 0.1940215323162554
+      }
+    },
+    {
+      "seed": 812,
+      "family": "moving-target-reactive",
+      "pathHash": "cd87d860f50ff9a7d0d305b0e128d14f7cdbb8cf9861a14e24e8e078ddabb4c6",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 0,
+        "movingTargetTurns": 6,
+        "postEventCorrections": 6,
+        "responseN": 6,
+        "responseMedianMs": 256,
+        "trackingErrorMean": 0.0708363353707474,
+        "trackingErrorP95": 0.08414036644329911
+      }
+    },
+    {
+      "seed": 812,
+      "family": "moving-target-independent",
+      "pathHash": "00790fd3e7f43299227df450875469617423250d58cc56467ab342d533db2d57",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 0,
+        "movingTargetTurns": 6,
+        "postEventCorrections": 0,
+        "responseN": 0,
+        "responseMedianMs": null,
+        "trackingErrorMean": 0.43937829279382995,
+        "trackingErrorP95": 0.6098599850113124
+      }
+    },
+    {
+      "seed": 812,
+      "family": "same-path-other-arrangement",
+      "pathHash": "2fe07c6d23144bddd8d3073d6c4eb254100501d496e399e289feed42bcfd9289",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 12,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 6,
+        "responseN": 6,
+        "responseMedianMs": 160,
+        "trackingErrorMean": 0.3000441232440467,
+        "trackingErrorP95": 0.6160343710721109
+      }
+    },
+    {
+      "seed": 812,
+      "family": "target-independent",
+      "pathHash": "00790fd3e7f43299227df450875469617423250d58cc56467ab342d533db2d57",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 12,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 3,
+        "responseN": 3,
+        "responseMedianMs": 224,
+        "trackingErrorMean": 0.37186108474161855,
+        "trackingErrorP95": 0.6466217460802409
+      }
+    },
+    {
+      "seed": 20261017,
+      "family": "reactive-160ms",
+      "pathHash": "9c2277577deef911dcd7ec86660e957aa67551204db9d488f2e91934ac678b2c",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 12,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 12,
+        "responseN": 12,
+        "responseMedianMs": 160,
+        "trackingErrorMean": 0.09983322537238248,
+        "trackingErrorP95": 0.47096149352398853
+      }
+    },
+    {
+      "seed": 20261017,
+      "family": "reactive-0ms",
+      "pathHash": "170a5206a39f58de05231d92cb92fa8f28b6a834a4c8e94d67f3d06990762f94",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 12,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 12,
+        "responseN": 12,
+        "responseMedianMs": 32,
+        "trackingErrorMean": 0.045652437170801974,
+        "trackingErrorP95": 0.22106206017854
+      }
+    },
+    {
+      "seed": 20261017,
+      "family": "moving-target-reactive",
+      "pathHash": "499bc98a65fb24dbceea609dae54be3dbe759434d3009a0add3d74620fbf41ed",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 0,
+        "movingTargetTurns": 6,
+        "postEventCorrections": 6,
+        "responseN": 6,
+        "responseMedianMs": 224,
+        "trackingErrorMean": 0.07276006433736129,
+        "trackingErrorP95": 0.08406255493606331
+      }
+    },
+    {
+      "seed": 20261017,
+      "family": "moving-target-independent",
+      "pathHash": "00790fd3e7f43299227df450875469617423250d58cc56467ab342d533db2d57",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 0,
+        "movingTargetTurns": 6,
+        "postEventCorrections": 2,
+        "responseN": 2,
+        "responseMedianMs": 784,
+        "trackingErrorMean": 0.41102676675905975,
+        "trackingErrorP95": 0.6189203917061381
+      }
+    },
+    {
+      "seed": 20261017,
+      "family": "same-path-other-arrangement",
+      "pathHash": "9c2277577deef911dcd7ec86660e957aa67551204db9d488f2e91934ac678b2c",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 11,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 4,
+        "responseN": 4,
+        "responseMedianMs": 160,
+        "trackingErrorMean": 0.3359116216418119,
+        "trackingErrorP95": 0.6540587370792391
+      }
+    },
+    {
+      "seed": 20261017,
+      "family": "target-independent",
+      "pathHash": "00790fd3e7f43299227df450875469617423250d58cc56467ab342d533db2d57",
+      "features": {
+        "version": "lava-bubble-response-v1",
+        "samplesWithTargets": 400,
+        "displacementEvents": 12,
+        "movingTargetTurns": 0,
+        "postEventCorrections": 7,
+        "responseN": 7,
+        "responseMedianMs": 416,
+        "trackingErrorMean": 0.44940363697073543,
+        "trackingErrorP95": 0.6793133992386674
+      }
+    }
+  ]
+}

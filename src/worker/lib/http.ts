@@ -1,10 +1,12 @@
 import { securityHeaders } from "./csp";
+import { boundedBody } from "./body";
 
 export type ErrorCode =
   | "bad_request"
   | "bad_digest"
   | "bad_response"
   | "bad_origin"
+  | "guard_required"
   | "username_invalid"
   | "username_taken"
   | "verification_failed"
@@ -29,17 +31,7 @@ export function fail(code: ErrorCode, status: number, message: string, extra: He
 
 /** Parse a JSON object body and reject unknown fields. */
 export async function readBody(request: Request, allowed: readonly string[]): Promise<Record<string, unknown> | null> {
-  let body: unknown;
-  try {
-    body = await request.json();
-  } catch {
-    return null;
-  }
-  if (typeof body !== "object" || body === null || Array.isArray(body)) return null;
-  for (const key of Object.keys(body)) {
-    if (!allowed.includes(key)) return null;
-  }
-  return body as Record<string, unknown>;
+  return boundedBody(request, allowed);
 }
 
 export function clientIp(request: Request): string {

@@ -1,0 +1,613 @@
+{
+  "version": "lava-attacks-v2",
+  "seed": 42,
+  "origin": "http://localhost:8782",
+  "configuration": {
+    "mode": "enforce",
+    "lab": true,
+    "experimentalModel": false,
+    "featureVersion": "lava-features-v1",
+    "retentionSeconds": 600
+  },
+  "classificationIsExperimental": true,
+  "realHumanSamples": 0,
+  "cases": [
+    {
+      "family": "linear",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerStatus": null,
+      "actualServerVerdict": null,
+      "clearanceIssued": false,
+      "protectedOptionsStatus": 403,
+      "capturedFeatures": null,
+      "experimentalModel": null,
+      "actualEvidence": [],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported",
+        "joint_regular_path"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 17907.436700000002
+    },
+    {
+      "family": "circle",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerStatus": null,
+      "actualServerVerdict": null,
+      "clearanceIssued": false,
+      "protectedOptionsStatus": 403,
+      "capturedFeatures": null,
+      "experimentalModel": null,
+      "actualEvidence": [],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 17237.475199999997
+    },
+    {
+      "family": "random",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "CLEAR",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "protectedOptionsStatus": 200,
+      "capturedFeatures": {
+        "features": {
+          "samples": 25,
+          "durationMs": 2177.8,
+          "pathLength": 12.681843,
+          "efficiency": 0.065182,
+          "speedP50": 5.176811,
+          "speedP95": 10.932317,
+          "speedCv": 0.59036,
+          "accelP95": 105.002375,
+          "decelP95": 93.982075,
+          "jerkP95": 1937.486154,
+          "angularP95": 40.101423,
+          "curvatureP95": 8.349427,
+          "headingChangeMean": 1.932352,
+          "dtP50": 82.35,
+          "dtP95": 119.785,
+          "dtCv": 0.243897,
+          "pauseRatio": 0,
+          "bursts": 1,
+          "reversals": 14,
+          "corrections": 8,
+          "overshoots": 13,
+          "reactionMs": 329.7,
+          "coalescedRatio": 0,
+          "clockQuantumMs": 65.6,
+          "pressureRange": 0,
+          "pressurePresent": 1,
+          "touchRatio": 0,
+          "penRatio": 0,
+          "untrustedRatio": 0,
+          "invalidTiming": 0,
+          "bubbleEncounters": 2,
+          "bubbleChases": 8,
+          "bubbleMisses": 1,
+          "bubbleDisplacements": 12,
+          "strategyChanges": 12,
+          "firstEncounterMs": 329.7
+        },
+        "robust": {
+          "version": "lava-robust-v2",
+          "features": {
+            "efficiency": 0.09386,
+            "pathLength": 6.717548,
+            "speedCv": 0.517664,
+            "speedP95": 12.517049,
+            "accelP95": 447.338842,
+            "jerkP95": 46166.617497,
+            "turnMean": 0.698164,
+            "turnP95": 2.504276,
+            "curvatureP95": 50.350862,
+            "reversalRate": 0.064516,
+            "correctionRate": 0.064516,
+            "pauseShare": 0
+          }
+        }
+      },
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.8601515164046726,
+        "enabled": false
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 2745.6119000000035
+    },
+    {
+      "family": "bezier",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "CLEAR",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "protectedOptionsStatus": 200,
+      "capturedFeatures": {
+        "features": {
+          "samples": 208,
+          "durationMs": 14306.6,
+          "pathLength": 0.94981,
+          "efficiency": 0.920898,
+          "speedP50": 0.063011,
+          "speedP95": 0.122607,
+          "speedCv": 0.368365,
+          "accelP95": 1.307861,
+          "decelP95": 0.620981,
+          "jerkP95": 28.624467,
+          "angularP95": 0.271302,
+          "curvatureP95": 4.079398,
+          "headingChangeMean": 0.010648,
+          "dtP50": 63.3,
+          "dtP95": 117.61,
+          "dtCv": 0.356253,
+          "pauseRatio": 0,
+          "bursts": 1,
+          "reversals": 0,
+          "corrections": 0,
+          "overshoots": 0,
+          "reactionMs": 299.6,
+          "coalescedRatio": 0,
+          "clockQuantumMs": 35.6,
+          "pressureRange": 0,
+          "pressurePresent": 1,
+          "touchRatio": 0,
+          "penRatio": 0,
+          "untrustedRatio": 0,
+          "invalidTiming": 0,
+          "bubbleEncounters": 1,
+          "bubbleChases": 20,
+          "bubbleMisses": 0,
+          "bubbleDisplacements": 12,
+          "strategyChanges": 0,
+          "firstEncounterMs": 1789.6
+        },
+        "robust": {
+          "version": "lava-robust-v2",
+          "features": {
+            "efficiency": 0.921253,
+            "pathLength": 1.085478,
+            "speedCv": 0.27166,
+            "speedP95": 1.632008,
+            "accelP95": 17.317838,
+            "jerkP95": 740.576937,
+            "turnMean": 0.034607,
+            "turnP95": 0.054238,
+            "curvatureP95": 3.617033,
+            "reversalRate": 0,
+            "correctionRate": 0,
+            "pauseShare": 0
+          }
+        }
+      },
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.045849022088119466,
+        "enabled": false
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 14792.786799999994
+    },
+    {
+      "family": "variable-speed",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "CLEAR",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "protectedOptionsStatus": 200,
+      "capturedFeatures": {
+        "features": {
+          "samples": 79,
+          "durationMs": 7524.1,
+          "pathLength": 0.684602,
+          "efficiency": 0.850095,
+          "speedP50": 0.094623,
+          "speedP95": 0.200691,
+          "speedCv": 0.694678,
+          "accelP95": 0.470668,
+          "decelP95": 0.972339,
+          "jerkP95": 11.627708,
+          "angularP95": 0.530599,
+          "curvatureP95": 3.733929,
+          "headingChangeMean": 0.025648,
+          "dtP50": 96.3,
+          "dtP95": 124.46,
+          "dtCv": 0.197917,
+          "pauseRatio": 0.115385,
+          "bursts": 1,
+          "reversals": 0,
+          "corrections": 0,
+          "overshoots": 0,
+          "reactionMs": 252.1,
+          "coalescedRatio": 0,
+          "clockQuantumMs": 59.4,
+          "pressureRange": 0,
+          "pressurePresent": 1,
+          "touchRatio": 0,
+          "penRatio": 0,
+          "untrustedRatio": 0,
+          "invalidTiming": 0,
+          "bubbleEncounters": 1,
+          "bubbleChases": 19,
+          "bubbleMisses": 1,
+          "bubbleDisplacements": 12,
+          "strategyChanges": 0,
+          "firstEncounterMs": 252.1
+        },
+        "robust": {
+          "version": "lava-robust-v2",
+          "features": {
+            "efficiency": 0.850669,
+            "pathLength": 1.142185,
+            "speedCv": 0.712081,
+            "speedP95": 2.276004,
+            "accelP95": 17.51798,
+            "jerkP95": 663.21304,
+            "turnMean": 0.031482,
+            "turnP95": 0.055211,
+            "curvatureP95": 2.288676,
+            "reversalRate": 0,
+            "correctionRate": 0,
+            "pauseShare": 0.079365
+          }
+        }
+      },
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.5679015487237583,
+        "enabled": false
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 8058.446599999996
+    },
+    {
+      "family": "corrections",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "CLEAR",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "protectedOptionsStatus": 200,
+      "capturedFeatures": {
+        "features": {
+          "samples": 52,
+          "durationMs": 5142.8,
+          "pathLength": 1.250413,
+          "efficiency": 0.407864,
+          "speedP50": 0.255905,
+          "speedP95": 0.418401,
+          "speedCv": 0.397171,
+          "accelP95": 2.601223,
+          "decelP95": 1.841173,
+          "jerkP95": 41.022877,
+          "angularP95": 15.531334,
+          "curvatureP95": 60.431594,
+          "headingChangeMean": 0.539855,
+          "dtP50": 99.8,
+          "dtP95": 128.9,
+          "dtCv": 0.195703,
+          "pauseRatio": 0,
+          "bursts": 1,
+          "reversals": 0,
+          "corrections": 29,
+          "overshoots": 0,
+          "reactionMs": 191.4,
+          "coalescedRatio": 0,
+          "clockQuantumMs": 63.8,
+          "pressureRange": 0,
+          "pressurePresent": 1,
+          "touchRatio": 0,
+          "penRatio": 0,
+          "untrustedRatio": 0,
+          "invalidTiming": 0,
+          "bubbleEncounters": 1,
+          "bubbleChases": 1,
+          "bubbleMisses": 1,
+          "bubbleDisplacements": 12,
+          "strategyChanges": 12,
+          "firstEncounterMs": 191.4
+        },
+        "robust": {
+          "version": "lava-robust-v2",
+          "features": {
+            "efficiency": 0.435396,
+            "pathLength": 1.482448,
+            "speedCv": 0.364105,
+            "speedP95": 2.346816,
+            "accelP95": 26.952442,
+            "jerkP95": 1672.62769,
+            "turnMean": 0.189253,
+            "turnP95": 0.487939,
+            "curvatureP95": 29.477716,
+            "reversalRate": 0,
+            "correctionRate": 0.177419,
+            "pauseShare": 0
+          }
+        }
+      },
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.5828631936902271,
+        "enabled": false
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 5698.6043999999965
+    },
+    {
+      "family": "lognormal",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "CLEAR",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "protectedOptionsStatus": 200,
+      "capturedFeatures": {
+        "features": {
+          "samples": 61,
+          "durationMs": 6146.6,
+          "pathLength": 0.477789,
+          "efficiency": 0.942377,
+          "speedP50": 0.078412,
+          "speedP95": 0.141614,
+          "speedCv": 0.528612,
+          "accelP95": 0.421231,
+          "decelP95": 0.313006,
+          "jerkP95": 9.009721,
+          "angularP95": 1.276111,
+          "curvatureP95": 32.715216,
+          "headingChangeMean": 0.044647,
+          "dtP50": 98.9,
+          "dtP95": 130.66,
+          "dtCv": 0.187266,
+          "pauseRatio": 0,
+          "bursts": 1,
+          "reversals": 0,
+          "corrections": 0,
+          "overshoots": 0,
+          "reactionMs": 114.7,
+          "coalescedRatio": 0,
+          "clockQuantumMs": 58.1,
+          "pressureRange": 0,
+          "pressurePresent": 1,
+          "touchRatio": 0,
+          "penRatio": 0,
+          "untrustedRatio": 0,
+          "invalidTiming": 0,
+          "bubbleEncounters": 1,
+          "bubbleChases": 10,
+          "bubbleMisses": 1,
+          "bubbleDisplacements": 11,
+          "strategyChanges": 0,
+          "firstEncounterMs": 114.7
+        },
+        "robust": {
+          "version": "lava-robust-v2",
+          "features": {
+            "efficiency": 0.942961,
+            "pathLength": 1.060489,
+            "speedCv": 0.483922,
+            "speedP95": 1.888353,
+            "accelP95": 10.491578,
+            "jerkP95": 566.001888,
+            "turnMean": 0.042179,
+            "turnP95": 0.129118,
+            "curvatureP95": 15.990528,
+            "reversalRate": 0,
+            "correctionRate": 0,
+            "pauseShare": 0
+          }
+        }
+      },
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.14872081561864653,
+        "enabled": false
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 6627.834099999993
+    },
+    {
+      "family": "dom-synthetic",
+      "driver": "dom",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerStatus": null,
+      "actualServerVerdict": null,
+      "clearanceIssued": false,
+      "protectedOptionsStatus": 403,
+      "capturedFeatures": null,
+      "experimentalModel": null,
+      "actualEvidence": [],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "synthetic_event_hint",
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 16439.103799999997
+    },
+    {
+      "family": "ghost-cursor",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "CLEAR",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "protectedOptionsStatus": 200,
+      "capturedFeatures": {
+        "features": {
+          "samples": 30,
+          "durationMs": 4357.1,
+          "pathLength": 1.784422,
+          "efficiency": 0.150899,
+          "speedP50": 0.104784,
+          "speedP95": 3.090461,
+          "speedCv": 2.019929,
+          "accelP95": 35.128227,
+          "decelP95": 5.318421,
+          "jerkP95": 293.525272,
+          "angularP95": 12.132927,
+          "curvatureP95": 127.147358,
+          "headingChangeMean": 0.23025,
+          "dtP50": 156.6,
+          "dtP95": 178.9,
+          "dtCv": 0.174438,
+          "pauseRatio": 0.344828,
+          "bursts": 6,
+          "reversals": 2,
+          "corrections": 0,
+          "overshoots": 2,
+          "reactionMs": 283.4,
+          "coalescedRatio": 0,
+          "clockQuantumMs": 57.6,
+          "pressureRange": 0,
+          "pressurePresent": 1,
+          "touchRatio": 0,
+          "penRatio": 0,
+          "untrustedRatio": 0,
+          "invalidTiming": 0,
+          "bubbleEncounters": 1,
+          "bubbleChases": 3,
+          "bubbleMisses": 1,
+          "bubbleDisplacements": 12,
+          "strategyChanges": 3,
+          "firstEncounterMs": 382.2
+        },
+        "robust": {
+          "version": "lava-robust-v2",
+          "features": {
+            "efficiency": 0.175888,
+            "pathLength": 1.948467,
+            "speedCv": 1.959433,
+            "speedP95": 13.031889,
+            "accelP95": 312.94894,
+            "jerkP95": 26547.113653,
+            "turnMean": 0.099997,
+            "turnP95": 0.600327,
+            "curvatureP95": 126.800085,
+            "reversalRate": 0,
+            "correctionRate": 0,
+            "pauseShare": 0.269841
+          }
+        }
+      },
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.9999563383060053,
+        "enabled": false
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 5115.2427000000025
+    },
+    {
+      "family": "puppeteer-corrections",
+      "driver": "puppeteer-core",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerVerdict": null,
+      "experimentalModel": null,
+      "clearanceIssued": false,
+      "protectedOptionsStatus": 403,
+      "sessionStatus": 401,
+      "bypassesAuthentication": false
+    },
+    {
+      "family": "direct-api",
+      "status": 403,
+      "protectedEndpointBypass": false,
+      "sessionStatus": 401
+    },
+    {
+      "family": "forged-verdict",
+      "status": 400,
+      "protectedEndpointBypass": false,
+      "sessionStatus": 401
+    }
+  ]
+}

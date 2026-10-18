@@ -1,0 +1,18 @@
+import { build } from 'vite';
+import { DatabaseSync } from 'node:sqlite';
+import { writeFile } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
+import { resolve } from 'node:path';
+await build({ configFile:false,logLevel:'error',build:{outDir:'.cache/guard',emptyOutDir:false,lib:{entry:'scripts/storage-runtime.ts',formats:['es'],fileName:()=> 'storage-bench.mjs'}}});
+const { LavaEnforcer, StepUpStore, GuardMetrics } = await import(pathToFileURL(resolve('.cache/guard/storage-bench.mjs')).href);
+const db = new DatabaseSync(':memory:');
+const sql = { exec(query,...args) { if(!args.length && query.includes(';')) { db.exec(query); return {toArray:()=>[]}; } const s=db.prepare(query), rows=s.columns().length?s.all(...args):(s.run(...args),[]); return {toArray:()=>rows,[Symbol.iterator]:()=>rows[Symbol.iterator]()}; } };
+const guard=new LavaEnforcer(sql), step=new StepUpStore(sql), metrics=new GuardMetrics(sql), now=Date.now();
+const insert=db.prepare('INSERT INTO guard_attempts VALUES (?,?,?,?,?,?,?,?)');
+for(let i=0;i<8192;i++) insert.run(String(i),'test-nonce','test-seed','accessible','test-context','http://localhost',now-1000000,now-900000);
+const insertHistory=db.prepare('INSERT INTO guard_history VALUES (?,?,?,?,?,?)');
+for(let i=0;i<8192;i++) insertHistory.run('test-context',now-900000,'CLEAR',0,'','');
+metrics.record('CLEAR','fixture-model',now-90000000);
+const started=performance.now(); guard.sweep(now); step.sweep(now); metrics.sweep(now); const ms=performance.now()-started;
+const result={scope:'Production SQL cleanup functions on local in-memory SQLite, not end-to-end DO alarms',expiredAttemptsSeeded:8192,expiredHistorySeeded:8192,cleanupMs:ms,remainingAttempts:db.prepare('SELECT COUNT(*) AS n FROM guard_attempts').get().n,remainingHistory:db.prepare('SELECT COUNT(*) AS n FROM guard_history').get().n,nodeRssBytes:process.memoryUsage().rss};
+await writeFile('ml/artifacts/phase4-cleanup.json',JSON.stringify(result,null,2)+'\n'); console.log(JSON.stringify(result));

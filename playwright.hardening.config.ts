@@ -1,0 +1,4 @@
+import { defineConfig } from "@playwright/test";
+const origin = "http://localhost:8784";
+export default defineConfig({ testDir: "tests/hardening", workers: 1, timeout: 45000, reporter: "list", use: { baseURL: origin },
+  webServer: { command: `npx vite build --outDir .cache/e2e-assets-hardening && npx wrangler dev --port 8784 --assets .cache/e2e-assets-hardening --persist-to .wrangler/hardening-${Date.now()} --var ORIGIN:${origin} --var LAVAGUARD_MODE:enforce --var LAVAGUARD_EXPERIMENTAL_MODEL:0 --var LAVAGUARD_STEP_UP:turnstile --var LAVAGUARD_TURNSTILE_TEST:1 --var TURNSTILE_SITE_KEY:1x00000000000000000000AA --var TURNSTILE_SECRET_KEY:1x0000000000000000000000000000000AA --var LAVAGUARD_ADMIN_TOKEN:local-only-fixture-admin-key-00000000000000`, url: `${origin}/api/lavaguard/config`, timeout: 120000, reuseExistingServer: false, stdout: "pipe" } });

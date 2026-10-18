@@ -1,0 +1,25 @@
+import { chromium } from '@playwright/test';
+import assert from 'node:assert/strict';
+import { writeFile } from 'node:fs/promises';
+const origin = 'http://localhost:8789';
+const browser = await chromium.launch();
+const context = await browser.newContext();
+const page = await context.newPage();
+const requests = [];
+page.on('request', r => { if (r.url().includes('/api/lavaguard/evaluate')) requests.push(r.postDataJSON()); });
+await page.goto(origin);
+const config = await (await page.request.get(origin + '/api/lavaguard/config')).json();
+assert.equal(config.mode, 'off'); assert.equal(config.lab, false);
+const lab = await page.request.get(origin + '/api/lavaguard/lab'); assert.equal(lab.status(), 403);
+const options = await page.request.post(origin + '/api/login/options', { data: { digests: {} }, headers: { Origin: origin } });
+assert.equal(options.status(), 200); // Explicit off mode preserves the original API.
+await page.getByRole('button', { name: 'Enter', exact: true }).click();
+await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+const loginRequest = page.waitForRequest(r => r.url().endsWith('/api/login/options'));
+await page.getByRole('button', { name: 'Use a passkey without stirring' }).click();
+await loginRequest;
+assert.ok(requests.length > 0); assert.ok(requests.every(r => r.summary === null));
+const session = await page.request.get(origin + '/api/session'); assert.equal(session.status(), 401);
+await writeFile('ml/artifacts/off-mode-smoke.json', JSON.stringify({ mode: config.mode, labStatus: lab.status(), originalLoginOptionsStatus: options.status(), evaluationPayloadsContainNoFeatures: requests.every(r => r.summary === null), unauthenticatedSessionStatus: session.status() }, null, 2) + '\n');
+await browser.close();
+console.log('Off-mode privacy and authentication smoke passed.');

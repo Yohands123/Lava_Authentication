@@ -1,0 +1,30 @@
+import { readFile } from "node:fs/promises";
+import { test, expect } from "@playwright/test";
+import { enter, clearRing } from "./helpers";
+
+test("local research requires consent before the attempt, exports provenance and deletes", async ({ page }) => {
+  await page.goto("/");
+  await page.locator("[data-action=lab]").click();
+  await expect(page.locator("[data-research-consent]")).toBeVisible();
+  await expect(page.locator("[data-export-research]")).toBeDisabled();
+  await page.locator("[data-research-consent]").check();
+  await expect(page.locator("[data-study-participant]")).not.toHaveValue("");
+  await page.locator("[data-study-device]").selectOption("trackpad");
+  await page.locator("[data-study-label]").selectOption("automation-declared");
+  await page.locator("[data-action=lab]").click();
+  await enter(page); await page.getByRole("button", { name: "Sign in", exact: true }).click();
+  await clearRing(page);
+  await page.locator("[data-action=lab]").click();
+  await expect(page.locator("[data-export-research]")).toBeEnabled();
+  const downloaded = page.waitForEvent("download");
+  await page.locator("[data-export-research]").click();
+  const data = JSON.parse(await readFile((await (await downloaded).path())!, "utf8"));
+  expect(data.schema).toBe("lava-consent-v2"); expect(data.device).toBe("trackpad");
+  expect(data.label).toBe("automation-declared"); expect(data.participant).toBeTruthy();
+  expect(data.samples.length).toBeGreaterThan(0); expect(data.decision.clearance).toBeUndefined();
+  const deletion = page.waitForResponse(r => r.url().endsWith("/api/lavaguard/forget"));
+  await page.locator("[data-forget-guard]").click(); expect((await deletion).status()).toBe(200);
+  await expect(page.locator("[data-study-participant]")).toHaveValue("");
+  await expect(page.locator("[data-export-research]")).toBeDisabled();
+  await expect(page.locator("[data-research-consent]")).not.toBeChecked();
+});

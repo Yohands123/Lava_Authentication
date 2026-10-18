@@ -11,9 +11,21 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:enforce": "playwright test --config playwright.enforce.config.ts",
+    "test:hardening": "playwright test --config playwright.hardening.config.ts",
+    "test:load": "node scripts/load-local.mjs",
+    "ml:phase4": "node scripts/extract-phase4.mjs && .venv/Scripts/python ml/phase4.py && .venv/Scripts/python ml/train_application.py && node scripts/benchmark-inference.mjs",
+    "test:automation": "node scripts/verify-automation.mjs",
+    "preview": "node scripts/preview.mjs",
+    "test:adversarial": "node scripts/adversarial.mjs",
+    "ml:ingest": "python ml/ingest.py --download-delbot",
+    "ml:features": "node scripts/extract-features.mjs",
+    "ml:train": ".venv/Scripts/python ml/train.py",
+    "ml:validate": "node scripts/research-benchmarks.mjs && .venv/Scripts/python ml/validate.py",
+    "ml:import-consenting": "node scripts/import-consenting.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.worker.json",
-    "lint": "npm run typecheck",
-    "check": "npm run typecheck && npm test",
+    "lint": "eslint src tests scripts *.ts *.mjs --max-warnings 0",
+    "check": "npm run typecheck && npm run lint && npm test",
     "deploy": "vite build && wrangler deploy --env production"
   },
   "dependencies": {
@@ -25,10 +37,17 @@
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^5.20261006.1",
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.64.0",
+    "@types/node": "^24.19.2",
+    "eslint": "^10.13.0",
+    "ghost-cursor": "^1.4.2",
+    "globals": "^17.13.0",
+    "puppeteer-core": "^25.14.0",
     "typescript": "^5.6.0",
+    "typescript-eslint": "^8.71.2",
     "vite": "^6.0.0",
-    "vitest": "^3.0.0",
+    "vitest": "^5.0.5",
     "wrangler": "^4.0.0"
   }
 }

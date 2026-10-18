@@ -1,6 +1,55 @@
 # Progress
 
-Current phase: 7. Lab mode and Freeze
+Current phase: LavaGuard Phase 4 security hardening and Phase 4B ML engineering, authorized 2026-10-17
+
+## LavaGuard Phase 4 / 4B
+
+- [x] Global/per-context storage and rate bounds, atomic expiring rate counters, request byte/time caps and per-isolate overload admission.
+- [x] Optional default-off Turnstile with real Siteverify test-key validation, context/attempt binding, one-use token hashes and in-circle retry/cancellation/failure handling.
+- [x] Expiring aggregate metrics with admin-only access, policy/model version separation and disabled production collection.
+- [x] Shared robust v2 features, fixed-model timing-drift diagnosis, calibrated candidate comparisons, perturbations, ablations, generator-family holdout and independent browser scoring.
+- [x] Private consent importer and three-cohort participant-disjoint application training infrastructure; no real study rows invented or auto-promoted.
+- [x] Frozen local load snapshots, cleanup measurement, isolated browser assets and actual ESLint.
+- [x] Staging drafts, smoke checklist, rollback and decision-ready security/ML reports.
+- [ ] Owner-approved deployment, real-host provider configuration and real participant application validation. Production remains off; model promotion prohibited by current evidence.
+
+Current reports: docs/LAVAGUARD_PHASE4_RESULTS.md and docs/LAVAGUARD_ML_PHASE4_RESULTS.md. Historical milestones below retain previous configurations.
+
+## LavaGuard Phase 2
+
+- [x] Correct WebDriver takeover false-positive policy; normal local model disabled, browser/movement hints advisory; honest CLEAR wording.
+- [x] Real Worker enforcement tests in normal and strict research profiles; demonstrate fabricated summaries can request options but cannot authenticate without a passkey.
+- [x] Audit historical 12-case evidence; revised fixed-seed harness records real evaluations, token issuance, actual protected-options status and session status.
+- [x] Eleven leave-one-generator-family-out experiments; three model baselines; six ablations, calibration checks and matched-cadence control; no model promotion.
+- [x] Local raw target-response capture and 18-case synthetic responsiveness benchmark; original renderer/physics/interaction preserved.
+- [x] Consent-before-attempt research workflow, device selection, ephemeral study IDs, local export/import/delete and optional participant-disjoint evaluation.
+- [ ] Consenting real participant/device measurements; full independent human cross-dataset evaluation (no samples invented).
+- [ ] Production promotion: prohibited in this task. No deploy or merge.
+
+Current evidence and limits: docs/LAVAGUARD_PHASE2_RESULTS.md. Earlier milestones below describe historical configurations.
+
+## LavaGuard implementation
+
+- [x] Owner correction: automated preview must not receive human clearance. Local enforcement now FLAGS the real script with no token; browser automation hints and locally opted-in model evidence are evaluated on the server.
+- [x] Actual automated cursor tested with the automation hint hidden and a different seed; model evidence still withholds clearance. Shadow observation no longer displays a human verdict.
+- [x] Production model activation remains disabled and rejected outside localhost; mouse model does not classify touch/pen samples.
+
+- [x] New branch `feature/lavaguard`; original 46 unit tests passed before changes.
+- [x] Supplied original/result/detail images visually inspected; unchanged copies in `design/lavaguard/`.
+- [x] Desktop/mobile baseline screenshots, one-state in-ring CLEAR/FLAG/BLOCK UI and screenshot containment tests.
+- [x] Bounded observer, shared deterministic feature engine, replay summaries and disclosed privacy behavior.
+- [x] Five composable detection/reputation/policy/enforcement modules in the existing ChallengeStore binding; no new DO migration.
+- [x] Cryptographic challenge nonce/seed, expiry, bounded attempts, scope/origin/context binding, one-use evaluation/redemption.
+- [x] Real login-options enforcement in local shadow mode; independent, unchanged passkey verification.
+- [x] Accessible keyboard/no-WebGL route; cancellation, retry, network error and duplicate-submission handling.
+- [x] Pinned permitted local dataset ingestion, source hashes/license notes, group-split logistic calibration/forest/anomaly experiments, disabled compact Worker model and parity test.
+- [x] Local Playwright/Puppeteer/Ghost Cursor/DOM attack suite; direct API, forgery, replay and concurrency tests.
+- [x] Restricted developer Lab extends original Lab with plots, features, runtime/evaluation results, provenance and consent-based local export/delete.
+- [x] Architecture/research/datasets/results documents and raw-dataset Git exclusions.
+- [ ] Owner visual approval and real mouse/trackpad/touch/assistive participant evaluation.
+- [ ] Production rollout/collection/enforcement approval. Production remains off; no deploy or merge.
+
+Historical phases below describe the original application. Current measured results, limitations and commands are in `docs/LAVAGUARD_RESULTS.md`.
 
 The base code already includes a first pass at several phases. Treat each item
 below as "built, needs review" until the user has watched it and confirmed.

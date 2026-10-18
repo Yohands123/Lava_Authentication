@@ -1,0 +1,50 @@
+{
+  "origin": "http://localhost:8785",
+  "configuration": {
+    "mode": "enforce",
+    "lab": true,
+    "experimentalModel": true,
+    "featureVersion": "lava-features-v1",
+    "retentionSeconds": 600,
+    "modelMode": "research_enforce",
+    "modelVersion": "lava-logistic-experimental-v1",
+    "policyVersion": "lava-policy-v4"
+  },
+  "actualServerDecisions": true,
+  "clickedTryAgain": true,
+  "freshChallengeOnRetry": true,
+  "attempts": [
+    {
+      "status": 200,
+      "verdict": "FLAG",
+      "clearanceIssued": false,
+      "reasons": [
+        "browser_automation_reported",
+        "experimental_model_anomaly"
+      ],
+      "experimental": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.9996651787859278,
+        "enabled": true
+      },
+      "optionsStatus": 403,
+      "sessionStatus": 401
+    },
+    {
+      "status": 200,
+      "verdict": "FLAG",
+      "clearanceIssued": false,
+      "reasons": [
+        "browser_automation_reported",
+        "experimental_model_anomaly"
+      ],
+      "experimental": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.9996881819116529,
+        "enabled": true
+      },
+      "optionsStatus": 403,
+      "sessionStatus": 401
+    }
+  ]
+}

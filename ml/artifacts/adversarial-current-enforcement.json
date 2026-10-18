@@ -1,0 +1,261 @@
+{
+  "version": "lava-attacks-v2",
+  "seed": 42,
+  "origin": "http://localhost:8787",
+  "configuration": {
+    "mode": "enforce",
+    "lab": true,
+    "experimentalModel": true,
+    "featureVersion": "lava-features-v1",
+    "retentionSeconds": 600
+  },
+  "classificationIsExperimental": true,
+  "realHumanSamples": 0,
+  "cases": [
+    {
+      "family": "linear",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerStatus": null,
+      "actualServerVerdict": null,
+      "clearanceIssued": false,
+      "experimentalModel": null,
+      "actualEvidence": [],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "FLAG",
+      "offlineEvidence": [
+        "browser_automation_reported",
+        "joint_regular_path"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 17713.0852
+    },
+    {
+      "family": "circle",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerStatus": null,
+      "actualServerVerdict": null,
+      "clearanceIssued": false,
+      "experimentalModel": null,
+      "actualEvidence": [],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "FLAG",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 17617.580400000003
+    },
+    {
+      "family": "random",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "FLAG",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "FLAG",
+      "clearanceIssued": false,
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.7381561438486788,
+        "enabled": true
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "FLAG",
+      "offlineEvidence": [
+        "browser_automation_reported",
+        "experimental_model_anomaly"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 3408.7422000000006
+    },
+    {
+      "family": "bezier",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "FLAG",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "FLAG",
+      "clearanceIssued": false,
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.051568503558795394,
+        "enabled": true
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "FLAG",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 15095.0294
+    },
+    {
+      "family": "variable-speed",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "FLAG",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "FLAG",
+      "clearanceIssued": false,
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.5083208503197101,
+        "enabled": true
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "FLAG",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 8187.690899999994
+    },
+    {
+      "family": "corrections",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "FLAG",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "FLAG",
+      "clearanceIssued": false,
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.5383737396001739,
+        "enabled": true
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "FLAG",
+      "offlineEvidence": [
+        "browser_automation_reported",
+        "experimental_model_anomaly"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 5243.99530000001
+    },
+    {
+      "family": "lognormal",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "FLAG",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "FLAG",
+      "clearanceIssued": false,
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.16793760412756087,
+        "enabled": true
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "FLAG",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 7506.419500000004
+    },
+    {
+      "family": "dom-synthetic",
+      "driver": "dom",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerStatus": null,
+      "actualServerVerdict": null,
+      "clearanceIssued": false,
+      "experimentalModel": null,
+      "actualEvidence": [],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "FLAG",
+      "offlineEvidence": [
+        "synthetic_event_hint",
+        "browser_automation_reported",
+        "experimental_model_anomaly"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 16721.8275
+    },
+    {
+      "family": "ghost-cursor",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "FLAG",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "FLAG",
+      "clearanceIssued": false,
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.9915919765799139,
+        "enabled": true
+      },
+      "actualEvidence": [
+        "browser_automation_reported",
+        "experimental_model_anomaly"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "FLAG",
+      "offlineEvidence": [
+        "browser_automation_reported",
+        "experimental_model_anomaly"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 4848.564200000008
+    },
+    {
+      "family": "puppeteer-corrections",
+      "driver": "puppeteer-core",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "actualServerVerdict": null,
+      "clearanceIssued": false,
+      "sessionStatus": 401,
+      "bypassesAuthentication": false
+    },
+    {
+      "family": "direct-api",
+      "status": 403,
+      "protectedEndpointBypass": false,
+      "sessionStatus": 401
+    },
+    {
+      "family": "forged-verdict",
+      "status": 400,
+      "protectedEndpointBypass": false,
+      "sessionStatus": 401
+    }
+  ]
+}

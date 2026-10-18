@@ -6,7 +6,7 @@ compatibility_flags = ["nodejs_compat"]
 [assets]
 directory = "./dist"
 binding = "ASSETS"
-run_worker_first = ["/api/*"]
+run_worker_first = true
 
 [vars]
 RP_NAME = "LavaAuth"
@@ -14,6 +14,11 @@ RP_ID = "localhost"
 ORIGIN = "http://localhost:8787"
 CHALLENGE_TTL_SECONDS = "60"
 SESSION_TTL_SECONDS = "604800"
+LAVAGUARD_MODE = "enforce"
+LAVAGUARD_LAB = "1"
+LAVAGUARD_EXPERIMENTAL_MODEL = "0"
+LAVAGUARD_STEP_UP = "off"
+LAVAGUARD_METRICS = "1"
 
 [[durable_objects.bindings]]
 name = "CHALLENGES"
@@ -39,6 +44,12 @@ new_sqlite_classes = ["ChallengeStore", "RateLimiter", "SessionStore", "UserStor
 name = "lavaauth"
 
 [env.production.vars]
+LAVAGUARD_MODE = "off"
+LAVAGUARD_LAB = "0"
+LAVAGUARD_EXPERIMENTAL_MODEL = "0"
+LAVAGUARD_ML_MODE = "off"
+LAVAGUARD_STEP_UP = "off"
+LAVAGUARD_METRICS = "0"
 RP_NAME = "LavaAuth"
 RP_ID = "lavaauth.yohance611.workers.dev"
 ORIGIN = "https://lavaauth.yohance611.workers.dev"
@@ -58,5 +69,64 @@ name = "SESSIONS"
 class_name = "SessionStore"
 
 [[env.production.durable_objects.bindings]]
+name = "USERS"
+class_name = "UserStore"
+
+# Draft staging targets. Replace .invalid placeholders only as part of an
+# owner-reviewed deployment. These declarations create no remote resources.
+[env.staging_protocol]
+name = "lavaauth-staging-protocol"
+[env.staging_protocol.vars]
+RP_NAME = "LavaAuth Staging"
+RP_ID = "staging.lavaauth.invalid"
+ORIGIN = "https://staging.lavaauth.invalid"
+CHALLENGE_TTL_SECONDS = "60"
+SESSION_TTL_SECONDS = "3600"
+LAVAGUARD_ENVIRONMENT = "staging"
+LAVAGUARD_MODE = "enforce"
+LAVAGUARD_ML_MODE = "off"
+LAVAGUARD_EXPERIMENTAL_MODEL = "0"
+LAVAGUARD_STEP_UP = "off"
+LAVAGUARD_METRICS = "1"
+LAVAGUARD_LAB = "0"
+[[env.staging_protocol.durable_objects.bindings]]
+name = "CHALLENGES"
+class_name = "ChallengeStore"
+[[env.staging_protocol.durable_objects.bindings]]
+name = "RATE_LIMITER"
+class_name = "RateLimiter"
+[[env.staging_protocol.durable_objects.bindings]]
+name = "SESSIONS"
+class_name = "SessionStore"
+[[env.staging_protocol.durable_objects.bindings]]
+name = "USERS"
+class_name = "UserStore"
+
+[env.staging_shadow]
+name = "lavaauth-staging-shadow"
+[env.staging_shadow.vars]
+RP_NAME = "LavaAuth Shadow Staging"
+RP_ID = "shadow.lavaauth.invalid"
+ORIGIN = "https://shadow.lavaauth.invalid"
+CHALLENGE_TTL_SECONDS = "60"
+SESSION_TTL_SECONDS = "3600"
+LAVAGUARD_ENVIRONMENT = "staging"
+LAVAGUARD_MODE = "enforce"
+LAVAGUARD_ML_MODE = "shadow"
+LAVAGUARD_MODEL_VERSION = "lava-logistic-experimental-v1"
+LAVAGUARD_EXPERIMENTAL_MODEL = "0"
+LAVAGUARD_STEP_UP = "off"
+LAVAGUARD_METRICS = "1"
+LAVAGUARD_LAB = "0"
+[[env.staging_shadow.durable_objects.bindings]]
+name = "CHALLENGES"
+class_name = "ChallengeStore"
+[[env.staging_shadow.durable_objects.bindings]]
+name = "RATE_LIMITER"
+class_name = "RateLimiter"
+[[env.staging_shadow.durable_objects.bindings]]
+name = "SESSIONS"
+class_name = "SessionStore"
+[[env.staging_shadow.durable_objects.bindings]]
 name = "USERS"
 class_name = "UserStore"

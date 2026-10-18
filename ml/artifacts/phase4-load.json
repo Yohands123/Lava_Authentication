@@ -1,0 +1,537 @@
+{
+  "origin": "http://localhost:8783",
+  "localOnly": true,
+  "requestsPerOperation": "max(64,concurrency)",
+  "notes": [
+    "Development workerd/DO SQLite only, not edge capacity",
+    "Reserved synthetic client headers simulate multiple local clients; IP is not identity",
+    "No requests to public Cloudflare infrastructure",
+    "Host CPU/RSS includes the isolated workerd process; no per-request CPU attribution"
+  ],
+  "phases": [
+    {
+      "concurrency": 1,
+      "requestsPerOperation": 64,
+      "measuredAt": "2026-10-18T02:35:42.358Z",
+      "issuance": {
+        "durationMs": 3308.1218999999996,
+        "actualRequestN": 64,
+        "requestsPerSecond": 19.346324571654996,
+        "successfulPerSecond": 19.346324571654996,
+        "transportErrors": [],
+        "p50Ms": 55.20190000000002,
+        "p95Ms": 61.449900000000525,
+        "p99Ms": 64.17959999999948,
+        "successfulP95Ms": 61.449900000000525,
+        "statuses": {
+          "200": 64
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "evaluation": {
+        "durationMs": 2610.7226,
+        "actualRequestN": 64,
+        "requestsPerSecond": 24.514285814969387,
+        "successfulPerSecond": 24.514285814969387,
+        "transportErrors": [],
+        "p50Ms": 39.46259999999893,
+        "p95Ms": 45.89680000000044,
+        "p99Ms": 61.35180000000037,
+        "successfulP95Ms": 45.89680000000044,
+        "statuses": {
+          "200": 64
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "parallelRedemption": {
+        "durationMs": 89.60570000000007,
+        "actualRequestN": 8,
+        "requestsPerSecond": 89.28003464065337,
+        "successfulPerSecond": 11.160004330081671,
+        "transportErrors": [],
+        "p50Ms": 83.98420000000078,
+        "p95Ms": 86.28729999999996,
+        "p99Ms": 86.28729999999996,
+        "successfulP95Ms": 38.53520000000026,
+        "statuses": {
+          "200": 1,
+          "403": 7
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "abusiveCookieResetsSameNetwork": {
+        "durationMs": 1576.2037,
+        "actualRequestN": 40,
+        "requestsPerSecond": 25.37743059478924,
+        "successfulPerSecond": 19.03307294609193,
+        "transportErrors": [],
+        "p50Ms": 41.916699999999764,
+        "p95Ms": 51.737700000001496,
+        "p99Ms": 51.942300000000614,
+        "successfulP95Ms": 51.737700000001496,
+        "statuses": {
+          "200": 30,
+          "429": 10
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "unauthenticatedSession": 401,
+      "workerBefore": {
+        "CPU": 0.125,
+        "WorkingSet64": 68628480,
+        "PeakWorkingSet64": 68628480,
+        "PrivateMemorySize64": 51884032
+      },
+      "workerAfter": {
+        "CPU": 0.75,
+        "WorkingSet64": 84410368,
+        "PeakWorkingSet64": 84410368,
+        "PrivateMemorySize64": 67469312
+      },
+      "workerCpuSeconds": 0.625,
+      "storedRows": {
+        "guard_attempts": 30,
+        "guard_clearances": 63,
+        "guard_history": 64,
+        "guard_metrics": 6,
+        "guard_stepups": 0
+      }
+    },
+    {
+      "concurrency": 4,
+      "requestsPerOperation": 64,
+      "measuredAt": "2026-10-18T02:35:54.340Z",
+      "issuance": {
+        "durationMs": 2397.3745000000017,
+        "actualRequestN": 64,
+        "requestsPerSecond": 26.695870837034413,
+        "successfulPerSecond": 26.695870837034413,
+        "transportErrors": [],
+        "p50Ms": 149.91790000000037,
+        "p95Ms": 193.0625,
+        "p99Ms": 288.70780000000013,
+        "successfulP95Ms": 193.0625,
+        "statuses": {
+          "200": 64
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "evaluation": {
+        "durationMs": 2034.5656000000017,
+        "actualRequestN": 64,
+        "requestsPerSecond": 31.45634625887705,
+        "successfulPerSecond": 31.45634625887705,
+        "transportErrors": [],
+        "p50Ms": 123.72980000000098,
+        "p95Ms": 148.0584000000017,
+        "p99Ms": 185.46930000000066,
+        "successfulP95Ms": 148.0584000000017,
+        "statuses": {
+          "200": 64
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "parallelRedemption": {
+        "durationMs": 137.47030000000086,
+        "actualRequestN": 8,
+        "requestsPerSecond": 58.19438816966247,
+        "successfulPerSecond": 7.274298521207808,
+        "transportErrors": [],
+        "p50Ms": 94.27809999999954,
+        "p95Ms": 135.69730000000345,
+        "p99Ms": 135.69730000000345,
+        "successfulP95Ms": 94.27809999999954,
+        "statuses": {
+          "200": 1,
+          "403": 7
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "abusiveCookieResetsSameNetwork": {
+        "durationMs": 1248.0793000000012,
+        "actualRequestN": 40,
+        "requestsPerSecond": 32.049245588801895,
+        "successfulPerSecond": 24.036934191601425,
+        "transportErrors": [],
+        "p50Ms": 138.14280000000144,
+        "p95Ms": 195.47829999999885,
+        "p99Ms": 196.56560000000172,
+        "successfulP95Ms": 195.47829999999885,
+        "statuses": {
+          "200": 30,
+          "429": 10
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "unauthenticatedSession": 401,
+      "workerBefore": {
+        "CPU": 0.171875,
+        "WorkingSet64": 68767744,
+        "PeakWorkingSet64": 68767744,
+        "PrivateMemorySize64": 52133888
+      },
+      "workerAfter": {
+        "CPU": 0.90625,
+        "WorkingSet64": 85061632,
+        "PeakWorkingSet64": 85061632,
+        "PrivateMemorySize64": 68710400
+      },
+      "workerCpuSeconds": 0.734375,
+      "storedRows": {
+        "guard_attempts": 30,
+        "guard_clearances": 63,
+        "guard_history": 64,
+        "guard_metrics": 5,
+        "guard_stepups": 0
+      }
+    },
+    {
+      "concurrency": 16,
+      "requestsPerOperation": 64,
+      "measuredAt": "2026-10-18T02:36:06.290Z",
+      "issuance": {
+        "durationMs": 2344.3460000000014,
+        "actualRequestN": 64,
+        "requestsPerSecond": 27.29972452871716,
+        "successfulPerSecond": 27.29972452871716,
+        "transportErrors": [],
+        "p50Ms": 515.1111000000019,
+        "p95Ms": 764.737000000001,
+        "p99Ms": 1334.7195000000029,
+        "successfulP95Ms": 764.737000000001,
+        "statuses": {
+          "200": 64
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "evaluation": {
+        "durationMs": 2043.9062999999987,
+        "actualRequestN": 64,
+        "requestsPerSecond": 31.3125900145227,
+        "successfulPerSecond": 31.3125900145227,
+        "transportErrors": [],
+        "p50Ms": 507.58090000000084,
+        "p95Ms": 545.0811000000031,
+        "p99Ms": 552.7430999999997,
+        "successfulP95Ms": 545.0811000000031,
+        "statuses": {
+          "200": 64
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "parallelRedemption": {
+        "durationMs": 103.0031999999992,
+        "actualRequestN": 8,
+        "requestsPerSecond": 77.66748994206066,
+        "successfulPerSecond": 9.708436242757582,
+        "transportErrors": [],
+        "p50Ms": 100.28390000000218,
+        "p95Ms": 101.01840000000084,
+        "p99Ms": 101.01840000000084,
+        "successfulP95Ms": 102.99399999999878,
+        "statuses": {
+          "200": 1,
+          "403": 7
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "abusiveCookieResetsSameNetwork": {
+        "durationMs": 1220.2459999999992,
+        "actualRequestN": 40,
+        "requestsPerSecond": 32.78027545265465,
+        "successfulPerSecond": 24.585206589490987,
+        "transportErrors": [],
+        "p50Ms": 514.352899999998,
+        "p95Ms": 591.6362999999983,
+        "p99Ms": 592.2272999999986,
+        "successfulP95Ms": 591.6362999999983,
+        "statuses": {
+          "200": 30,
+          "429": 10
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "unauthenticatedSession": 401,
+      "workerBefore": {
+        "CPU": 0.15625,
+        "WorkingSet64": 69148672,
+        "PeakWorkingSet64": 69148672,
+        "PrivateMemorySize64": 52568064
+      },
+      "workerAfter": {
+        "CPU": 0.71875,
+        "WorkingSet64": 90587136,
+        "PeakWorkingSet64": 90587136,
+        "PrivateMemorySize64": 75153408
+      },
+      "workerCpuSeconds": 0.5625,
+      "storedRows": {
+        "guard_attempts": 30,
+        "guard_clearances": 63,
+        "guard_history": 64,
+        "guard_metrics": 6,
+        "guard_stepups": 0
+      }
+    },
+    {
+      "concurrency": 64,
+      "requestsPerOperation": 64,
+      "measuredAt": "2026-10-18T02:36:16.225Z",
+      "issuance": {
+        "durationMs": 1405.7324000000008,
+        "actualRequestN": 64,
+        "requestsPerSecond": 45.52786860429479,
+        "successfulPerSecond": 23.4753072490895,
+        "transportErrors": [],
+        "p50Ms": 717.7292000000016,
+        "p95Ms": 1396.835500000001,
+        "p99Ms": 1400.2936000000045,
+        "successfulP95Ms": 1400.2829999999958,
+        "statuses": {
+          "200": 33,
+          "503": 31
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 31,
+        "unexpectedErrorN": 0,
+        "errorRate": 0.484375
+      },
+      "evaluation": {
+        "durationMs": 653.5429000000004,
+        "actualRequestN": 33,
+        "requestsPerSecond": 50.49400735590576,
+        "successfulPerSecond": 26.012064395466602,
+        "transportErrors": [],
+        "p50Ms": 647.0063000000009,
+        "p95Ms": 649.9257999999973,
+        "p99Ms": 650.1564999999973,
+        "successfulP95Ms": 647.600099999996,
+        "statuses": {
+          "200": 17,
+          "503": 16
+        },
+        "skippedN": 31,
+        "deliberateOverloadN": 16,
+        "unexpectedErrorN": 0,
+        "errorRate": 0.48484848484848486
+      },
+      "parallelRedemption": {
+        "durationMs": 110.60729999999603,
+        "actualRequestN": 8,
+        "requestsPerSecond": 72.32795665385817,
+        "successfulPerSecond": 9.04099458173227,
+        "transportErrors": [],
+        "p50Ms": 107.25099999999657,
+        "p95Ms": 107.98440000000119,
+        "p99Ms": 107.98440000000119,
+        "successfulP95Ms": 57.4406999999992,
+        "statuses": {
+          "200": 1,
+          "403": 7
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "abusiveCookieResetsSameNetwork": {
+        "durationMs": 798.5573999999979,
+        "actualRequestN": 40,
+        "requestsPerSecond": 50.09032537924025,
+        "successfulPerSecond": 27.549678958582138,
+        "transportErrors": [],
+        "p50Ms": 631.247000000003,
+        "p95Ms": 791.7858999999953,
+        "p99Ms": 791.8410000000003,
+        "successfulP95Ms": 791.7858999999953,
+        "statuses": {
+          "200": 22,
+          "503": 18
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 18,
+        "unexpectedErrorN": 0,
+        "errorRate": 0.45
+      },
+      "unauthenticatedSession": 401,
+      "workerBefore": {
+        "CPU": 0.15625,
+        "WorkingSet64": 68771840,
+        "PeakWorkingSet64": 68771840,
+        "PrivateMemorySize64": 52019200
+      },
+      "workerAfter": {
+        "CPU": 0.640625,
+        "WorkingSet64": 95363072,
+        "PeakWorkingSet64": 95363072,
+        "PrivateMemorySize64": 80158720
+      },
+      "workerCpuSeconds": 0.484375,
+      "storedRows": {
+        "guard_attempts": 38,
+        "guard_clearances": 16,
+        "guard_history": 17,
+        "guard_metrics": 6,
+        "guard_stepups": 0
+      }
+    },
+    {
+      "concurrency": 128,
+      "requestsPerOperation": 128,
+      "measuredAt": "2026-10-18T02:36:37.731Z",
+      "issuance": {
+        "durationMs": 1356.2612999999983,
+        "actualRequestN": 128,
+        "requestsPerSecond": 94.3770938535223,
+        "successfulPerSecond": 24.331594509111216,
+        "transportErrors": [],
+        "p50Ms": 1326.7883000000002,
+        "p95Ms": 1347.6146000000008,
+        "p99Ms": 1348.0167999999976,
+        "successfulP95Ms": 1337.4684999999954,
+        "statuses": {
+          "200": 33,
+          "503": 95
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 95,
+        "unexpectedErrorN": 0,
+        "errorRate": 0.7421875
+      },
+      "evaluation": {
+        "durationMs": 609.0979000000007,
+        "actualRequestN": 33,
+        "requestsPerSecond": 54.178482638012646,
+        "successfulPerSecond": 27.910127419582274,
+        "transportErrors": [],
+        "p50Ms": 603.3603999999978,
+        "p95Ms": 605.1604000000007,
+        "p99Ms": 605.2097999999969,
+        "successfulP95Ms": 603.5326999999961,
+        "statuses": {
+          "200": 17,
+          "503": 16
+        },
+        "skippedN": 95,
+        "deliberateOverloadN": 16,
+        "unexpectedErrorN": 0,
+        "errorRate": 0.48484848484848486
+      },
+      "parallelRedemption": {
+        "durationMs": 112.26910000000498,
+        "actualRequestN": 8,
+        "requestsPerSecond": 71.25736288969668,
+        "successfulPerSecond": 8.907170361212085,
+        "transportErrors": [],
+        "p50Ms": 108.44159999999829,
+        "p95Ms": 109.52799999999843,
+        "p99Ms": 109.52799999999843,
+        "successfulP95Ms": 56.32459999999992,
+        "statuses": {
+          "200": 1,
+          "403": 7
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "distributedIssuance": {
+        "durationMs": 12129.504400000005,
+        "actualRequestN": 320,
+        "requestsPerSecond": 26.381951763832976,
+        "successfulPerSecond": 19.786463822874733,
+        "transportErrors": [],
+        "p50Ms": 348.3683999999994,
+        "p95Ms": 447.50590000000375,
+        "p99Ms": 474.23859999999695,
+        "successfulP95Ms": 455.68710000000283,
+        "statuses": {
+          "200": 240,
+          "429": 80
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 0,
+        "unexpectedErrorN": 0,
+        "errorRate": 0
+      },
+      "abusiveCookieResetsSameNetwork": {
+        "durationMs": 935.1016000000018,
+        "actualRequestN": 40,
+        "requestsPerSecond": 42.7761004793489,
+        "successfulPerSecond": 28.87386782356051,
+        "transportErrors": [],
+        "p50Ms": 608.8127999999997,
+        "p95Ms": 928.5292000000045,
+        "p99Ms": 928.5719000000026,
+        "successfulP95Ms": 928.5292000000045,
+        "statuses": {
+          "200": 27,
+          "503": 13
+        },
+        "skippedN": 0,
+        "deliberateOverloadN": 13,
+        "unexpectedErrorN": 0,
+        "errorRate": 0.325
+      },
+      "unauthenticatedSession": 401,
+      "workerBefore": {
+        "CPU": 0.171875,
+        "WorkingSet64": 68919296,
+        "PeakWorkingSet64": 68919296,
+        "PrivateMemorySize64": 52334592
+      },
+      "workerAfter": {
+        "CPU": 1.828125,
+        "WorkingSet64": 112590848,
+        "PeakWorkingSet64": 112590848,
+        "PrivateMemorySize64": 96374784
+      },
+      "workerCpuSeconds": 1.65625,
+      "storedRows": {
+        "guard_attempts": 283,
+        "guard_clearances": 16,
+        "guard_history": 17,
+        "guard_metrics": 8,
+        "guard_stepups": 0
+      }
+    }
+  ],
+  "workerBundleSha256": "b257ade0bd4b018f0d5d41e6af18f9d4840830440135903438270d62f0d447aa"
+}

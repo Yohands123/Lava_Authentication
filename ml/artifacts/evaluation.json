@@ -1,0 +1,182 @@
+{
+  "seed": 20261017,
+  "featureVersion": "lava-features-v1",
+  "experimentalOnly": true,
+  "productionPromotion": "blocked_pending_consenting_lavaguard_validation",
+  "python": "3.14.2",
+  "numpy": "2.4.1",
+  "sklearn": "1.9.1",
+  "limitations": [
+    "No consenting LavaGuard human sessions",
+    "Only small DELBOT task corpus",
+    "Participant IDs unavailable; folder/device holdout cannot prove user-disjointness",
+    "No calibrated probability; high domain uncertainty",
+    "No bubble-response validation",
+    "No touchscreen/trackpad labels",
+    "Single-corpus source artifacts may inflate scores",
+    "Test set not used for selection/calibration"
+  ],
+  "trainGroups": [
+    "circles_bot_naturalmousemotion",
+    "circles_bot_pynput",
+    "circles_human_fast",
+    "circles_human_pc1",
+    "circles_human_tel",
+    "local-circle",
+    "local-corrections",
+    "local-linear",
+    "local-random",
+    "local-variable-speed"
+  ],
+  "heldOutGroups": [
+    "circles_bot_gan",
+    "circles_human_pc2",
+    "circles_human_pc2_pad",
+    "local-bezier",
+    "local-lognormal"
+  ],
+  "calibrationGroups": [
+    "circles_bot_pyhm",
+    "circles_human_vm"
+  ],
+  "calibrationN": 195,
+  "trainN": 1028,
+  "testN": 1290,
+  "removedDuplicateVectors": 78,
+  "models": {
+    "logistic": {
+      "precision": 0.9857954545454546,
+      "recall": 0.8931788931788932,
+      "f1": 0.937204591492235,
+      "rocAuc": 0.9833743517954044,
+      "prAuc": 0.9717582945910554,
+      "brier": 0.048857683537677304,
+      "humanAcceptance": 0.9805068226120858,
+      "humanAcceptanceWilson95": [
+        0.9644925805095927,
+        0.9893780057590047
+      ],
+      "confusion": {
+        "tn": 503,
+        "fp": 10,
+        "fn": 83,
+        "tp": 694
+      },
+      "trainingSeconds": 0.024628400016808882,
+      "inferenceMsPerRow": 0.00044124030829371176,
+      "byFamily": {
+        "circles_bot_gan": {
+          "n": 697,
+          "humanN": 0,
+          "botN": 697,
+          "flaggedN": 694,
+          "falsePositiveN": 0,
+          "falseNegativeN": 3
+        },
+        "circles_human_pc2": {
+          "n": 451,
+          "humanN": 451,
+          "botN": 0,
+          "flaggedN": 10,
+          "falsePositiveN": 10,
+          "falseNegativeN": 0
+        },
+        "circles_human_pc2_pad": {
+          "n": 62,
+          "humanN": 62,
+          "botN": 0,
+          "flaggedN": 0,
+          "falsePositiveN": 0,
+          "falseNegativeN": 0
+        },
+        "local-bezier": {
+          "n": 40,
+          "humanN": 0,
+          "botN": 40,
+          "flaggedN": 0,
+          "falsePositiveN": 0,
+          "falseNegativeN": 40
+        },
+        "local-lognormal": {
+          "n": 40,
+          "humanN": 0,
+          "botN": 40,
+          "flaggedN": 0,
+          "falsePositiveN": 0,
+          "falseNegativeN": 40
+        }
+      }
+    },
+    "random_forest": {
+      "precision": 0.9761306532663316,
+      "recall": 1.0,
+      "f1": 0.9879211697393515,
+      "rocAuc": 0.9821575961926838,
+      "prAuc": 0.9546898746594351,
+      "brier": 0.03180240767701671,
+      "humanAcceptance": 0.9629629629629629,
+      "humanAcceptanceWilson95": [
+        0.9428804479503701,
+        0.9761632203611588
+      ],
+      "confusion": {
+        "tn": 494,
+        "fp": 19,
+        "fn": 0,
+        "tp": 777
+      },
+      "trainingSeconds": 0.3226411000068765,
+      "inferenceMsPerRow": 0.012033875980197863,
+      "byFamily": {
+        "circles_bot_gan": {
+          "n": 697,
+          "humanN": 0,
+          "botN": 697,
+          "flaggedN": 697,
+          "falsePositiveN": 0,
+          "falseNegativeN": 0
+        },
+        "circles_human_pc2": {
+          "n": 451,
+          "humanN": 451,
+          "botN": 0,
+          "flaggedN": 17,
+          "falsePositiveN": 17,
+          "falseNegativeN": 0
+        },
+        "circles_human_pc2_pad": {
+          "n": 62,
+          "humanN": 62,
+          "botN": 0,
+          "flaggedN": 2,
+          "falsePositiveN": 2,
+          "falseNegativeN": 0
+        },
+        "local-bezier": {
+          "n": 40,
+          "humanN": 0,
+          "botN": 40,
+          "flaggedN": 40,
+          "falsePositiveN": 0,
+          "falseNegativeN": 0
+        },
+        "local-lognormal": {
+          "n": 40,
+          "humanN": 0,
+          "botN": 40,
+          "flaggedN": 40,
+          "falsePositiveN": 0,
+          "falseNegativeN": 0
+        }
+      }
+    },
+    "human_isolation_forest": {
+      "interpretation": "anomaly only; not bot classification",
+      "humanOutlierN": 74,
+      "humanN": 513,
+      "generatedOutlierN": 776,
+      "generatedN": 777
+    }
+  },
+  "lightgbm": "Not run: no demonstrated benefit justifying another model/dependency on this limited corpus"
+}

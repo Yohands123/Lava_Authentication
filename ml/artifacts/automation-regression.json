@@ -1,0 +1,102 @@
+{
+  "configuration": {
+    "mode": "enforce",
+    "lab": true,
+    "experimentalModel": true,
+    "featureVersion": "lava-features-v1",
+    "retentionSeconds": 600
+  },
+  "cases": [
+    {
+      "seed": 42,
+      "maskWebdriver": false,
+      "reportedWebdriver": true,
+      "decision": {
+        "verdict": "FLAG",
+        "retryAfter": 0,
+        "alternative": true,
+        "assessment": "evaluated",
+        "lab": {
+          "risk": 1,
+          "uncertainty": 0.8,
+          "reasons": [
+            "browser_automation_reported",
+            "experimental_model_anomaly"
+          ],
+          "modelVersion": "lava-heuristic-v2",
+          "fingerprint": "a04CCE5FQFM2BSqy4A_Cc87Y2YKPaNGYaoe-Xbw65Es",
+          "geometryHash": "L_KjWc3Vm7TvMZ2gpAmyFFSpFsWyrXQARdLjRPY65W8",
+          "experimental": {
+            "version": "lava-logistic-experimental-v1",
+            "experimentalRisk": 0.9769627919265531,
+            "enabled": true
+          },
+          "elapsedMs": 2591
+        }
+      },
+      "clearanceIssued": false,
+      "loginOptionsStatus": 403,
+      "sessionStatus": 401
+    },
+    {
+      "seed": 42,
+      "maskWebdriver": true,
+      "reportedWebdriver": false,
+      "decision": {
+        "verdict": "FLAG",
+        "retryAfter": 0,
+        "alternative": true,
+        "assessment": "evaluated",
+        "lab": {
+          "risk": 0.65,
+          "uncertainty": 0.8,
+          "reasons": [
+            "experimental_model_anomaly"
+          ],
+          "modelVersion": "lava-heuristic-v2",
+          "fingerprint": "9_HZMiKsGAL0oAw8K7qIYQv6z2C-0wXkLrbF0wAAySY",
+          "geometryHash": "rea8t0oG__A-nhYuKQ3ZNt8rLubCk4_rtxk9l5dpyrI",
+          "experimental": {
+            "version": "lava-logistic-experimental-v1",
+            "experimentalRisk": 0.9206125068754482,
+            "enabled": true
+          },
+          "elapsedMs": 3375
+        }
+      },
+      "clearanceIssued": false,
+      "loginOptionsStatus": 403,
+      "sessionStatus": 401
+    },
+    {
+      "seed": 812,
+      "maskWebdriver": true,
+      "reportedWebdriver": false,
+      "decision": {
+        "verdict": "FLAG",
+        "retryAfter": 0,
+        "alternative": true,
+        "assessment": "evaluated",
+        "lab": {
+          "risk": 0.65,
+          "uncertainty": 0.8,
+          "reasons": [
+            "experimental_model_anomaly"
+          ],
+          "modelVersion": "lava-heuristic-v2",
+          "fingerprint": "U3WwGhfGml1ER8o3BzSw9yntoIeWLPSwp8CsaQL9vFg",
+          "geometryHash": "dxyZTvT4FkEfW3fRIvLsARMIoAfgzPEhMBRulragSGU",
+          "experimental": {
+            "version": "lava-logistic-experimental-v1",
+            "experimentalRisk": 0.9259686899841759,
+            "enabled": true
+          },
+          "elapsedMs": 3666
+        }
+      },
+      "clearanceIssued": false,
+      "loginOptionsStatus": 403,
+      "sessionStatus": 401
+    }
+  ]
+}

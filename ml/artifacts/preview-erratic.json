@@ -1,0 +1,52 @@
+{
+  "recordedAt": "2026-10-18T02:59:04.743Z",
+  "origin": "http://localhost:8785",
+  "configuration": {
+    "mode": "enforce",
+    "lab": true,
+    "experimentalModel": true,
+    "featureVersion": "lava-features-v1",
+    "retentionSeconds": 600,
+    "modelMode": "research_enforce",
+    "modelVersion": "lava-logistic-experimental-v1",
+    "policyVersion": "lava-policy-v4"
+  },
+  "syntheticAutomation": true,
+  "realServerDecisions": true,
+  "clickedTryAgain": true,
+  "attempts": [
+    {
+      "number": 1,
+      "movementCount": 47,
+      "elapsedMs": 4761,
+      "challengeId": "DTpwRw9hRU1kvs40o8U-S8EX-h1GqT-ikZeGXXvgDIg",
+      "status": 200,
+      "verdict": "FLAG",
+      "clearanceIssued": false,
+      "reasons": [
+        "browser_automation_reported",
+        "experimental_model_anomaly"
+      ],
+      "optionsStatus": 403,
+      "sessionStatus": 401,
+      "screenshot": "docs/media/lavaguard/erratic-result-1.png"
+    },
+    {
+      "number": 2,
+      "movementCount": 35,
+      "elapsedMs": 4022,
+      "challengeId": "IJWok1XYuGmUGg5lGRcJHlW3DKZcTj3xPJG4wHZWkRY",
+      "status": 200,
+      "verdict": "FLAG",
+      "clearanceIssued": false,
+      "reasons": [
+        "browser_automation_reported",
+        "experimental_model_anomaly"
+      ],
+      "optionsStatus": 403,
+      "sessionStatus": 401,
+      "screenshot": "docs/media/lavaguard/erratic-result-2.png"
+    }
+  ],
+  "freshChallengeOnRetry": true
+}

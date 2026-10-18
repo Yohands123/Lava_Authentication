@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "inspectedOn": "2026-10-17",
+  "rawDataRedistributed": false,
+  "sources": [
+    {
+      "id": "balabit",
+      "url": "https://github.com/balabit/Mouse-Dynamics-Challenge",
+      "labels": "human-only; impostors are other humans",
+      "licenseNotes": "No explicit repository license found; metadata inspection only",
+      "permittedLocalLoader": false
+    },
+    {
+      "id": "sapimouse",
+      "url": "https://github.com/margitantal68/sapimouse",
+      "labels": "human authentication, not bot labels",
+      "licenseNotes": "Raw source linked by authors; no clear raw-data reuse license verified",
+      "permittedLocalLoader": false
+    },
+    {
+      "id": "becaptcha",
+      "url": "https://github.com/BiDAlab/BeCAPTCHA-Mouse",
+      "labels": "synthetic benchmark",
+      "licenseNotes": "Signed institutional agreement required; not downloaded",
+      "permittedLocalLoader": false
+    },
+    {
+      "id": "delbot",
+      "url": "https://github.com/chrisgdt/DELBOT-Mouse",
+      "labels": "human/bot labels from upstream sessions.json",
+      "licenseNotes": "Repository MIT; raw corpus excluded from Git; no separate corpus license located",
+      "permittedLocalLoader": true
+    },
+    {
+      "id": "ghost-cursor",
+      "url": "https://github.com/Xetera/ghost-cursor",
+      "labels": "synthetic generator, not human data",
+      "licenseNotes": "MIT code; local adversarial use only",
+      "permittedLocalLoader": false
+    }
+  ],
+  "integrity": [
+    {
+      "id": "balabit",
+      "url": "https://raw.githubusercontent.com/balabit/Mouse-Dynamics-Challenge/master/README.md",
+      "sha256": "68736371d2ed76a310cd246dcd8509171ef8f2cf161dccb0d2cdce2be0684f41",
+      "bytes": 4945
+    },
+    {
+      "id": "sapimouse",
+      "url": "https://raw.githubusercontent.com/margitantal68/sapimouse/master/README.md",
+      "sha256": "d402cb441e077805d48736b885fa6b2d8c7bac462342c69527b04faa2300e640",
+      "bytes": 1535
+    },
+    {
+      "id": "becaptcha",
+      "url": "https://raw.githubusercontent.com/BiDAlab/BeCAPTCHA-Mouse/master/README.md",
+      "sha256": "a2592c1b7706a1d597788aec8ee395287d5d431480bdafa629453534b7e06315",
+      "bytes": 8597
+    },
+    {
+      "id": "delbot",
+      "url": "https://raw.githubusercontent.com/chrisgdt/DELBOT-Mouse/master/README.md",
+      "sha256": "9d78c8d3327fb8d86b0441dab90f86b9ddef44cdc6ba5dbe92464a7041543b45",
+      "bytes": 8998
+    },
+    {
+      "id": "ghost-cursor",
+      "url": "https://raw.githubusercontent.com/Xetera/ghost-cursor/master/README.md",
+      "sha256": "ec82b7279b61cb88983d87bb6dbbb4eb02f5dd03b63504a0b61f6ec9ba205edc",
+      "bytes": 11676
+    },
+    {
+      "id": "delbot-license",
+      "url": "https://raw.githubusercontent.com/chrisgdt/DELBOT-Mouse/712a00ea994738b680b0b11bb4b518979385d07b/LICENSE.md",
+      "sha256": "883ee7c97966cc2901adfaa012cdb62c0ba777228b3c5861c57b1f58c620b132",
+      "bytes": 1065
+    },
+    {
+      "id": "delbot-sessions",
+      "url": "https://raw.githubusercontent.com/chrisgdt/DELBOT-Mouse/712a00ea994738b680b0b11bb4b518979385d07b/python/sessions.json",
+      "sha256": "315b857c526ab5572f693cabdf6c3fbc28eef064f152c6ad847875b6d05ce580",
+      "bytes": 222583
+    },
+    {
+      "id": "sapimouse-raw-source-page",
+      "url": "https://ms.sapientia.ro/~manyi/sapimouse/sapimouse.html",
+      "sha256": "0c6b1d770e4553f5aa85ca16573ead5dac782f9b6bd6cb80597b77bdd70668f0",
+      "bytes": 3532
+    },
+    {
+      "id": "delbot-corpus",
+      "revision": "712a00ea994738b680b0b11bb4b518979385d07b",
+      "url": "https://raw.githubusercontent.com/chrisgdt/DELBOT-Mouse/712a00ea994738b680b0b11bb4b518979385d07b/python/dataset.tar.gz",
+      "sha256": "cc6d763704b3abde1b46d848c56754cd0eae7a76619c53946e25b9cbec5d93fc",
+      "bytes": 4623382
+    }
+  ],
+  "delbotNormalizedCounts": {
+    "bot": 2596,
+    "human": 955
+  }
+}

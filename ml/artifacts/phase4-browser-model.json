@@ -1,0 +1,98 @@
+{
+  "modelVersion": "lava-robust-logistic-v2",
+  "trainingUsedTheseCaptures": false,
+  "sameSharedCaptureExtractor": true,
+  "realHumanN": 0,
+  "cases": [
+    {
+      "family": "linear",
+      "status": "no_evaluated_capture_not_a_detector_success"
+    },
+    {
+      "family": "circle",
+      "status": "no_evaluated_capture_not_a_detector_success"
+    },
+    {
+      "family": "random",
+      "automationDeclared": true,
+      "riskScore": 0.34649197442493096,
+      "overResearchThreshold": false,
+      "outOfDistribution": false,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "optionsStatus": 200,
+      "sessionStatus": 401
+    },
+    {
+      "family": "bezier",
+      "automationDeclared": true,
+      "riskScore": 0.05591368472203028,
+      "overResearchThreshold": false,
+      "outOfDistribution": false,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "optionsStatus": 200,
+      "sessionStatus": 401
+    },
+    {
+      "family": "variable-speed",
+      "automationDeclared": true,
+      "riskScore": 0.10311172715278505,
+      "overResearchThreshold": false,
+      "outOfDistribution": false,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "optionsStatus": 200,
+      "sessionStatus": 401
+    },
+    {
+      "family": "corrections",
+      "automationDeclared": true,
+      "riskScore": 0.16689800679896075,
+      "overResearchThreshold": false,
+      "outOfDistribution": false,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "optionsStatus": 200,
+      "sessionStatus": 401
+    },
+    {
+      "family": "lognormal",
+      "automationDeclared": true,
+      "riskScore": 0.07287467293782192,
+      "overResearchThreshold": false,
+      "outOfDistribution": false,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "optionsStatus": 200,
+      "sessionStatus": 401
+    },
+    {
+      "family": "dom-synthetic",
+      "status": "no_evaluated_capture_not_a_detector_success"
+    },
+    {
+      "family": "ghost-cursor",
+      "automationDeclared": true,
+      "riskScore": 0.5746274049720317,
+      "overResearchThreshold": true,
+      "outOfDistribution": false,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "optionsStatus": 200,
+      "sessionStatus": 401
+    },
+    {
+      "family": "puppeteer-corrections",
+      "status": "no_evaluated_capture_not_a_detector_success"
+    },
+    {
+      "family": "direct-api",
+      "status": "no_evaluated_capture_not_a_detector_success"
+    },
+    {
+      "family": "forged-verdict",
+      "status": "no_evaluated_capture_not_a_detector_success"
+    }
+  ]
+}

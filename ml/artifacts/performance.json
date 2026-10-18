@@ -1,0 +1,66 @@
+{
+  "environment": "Local headless Chromium; not a physical mobile benchmark",
+  "comparison": "Same original renderer/physics, observer disabled vs enabled; not a historical binary benchmark",
+  "samples": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "observer": false,
+      "preparationMs": 530.6924999999999,
+      "frameN": 153,
+      "frameP50Ms": 50,
+      "frameP95Ms": 83.40000000000009,
+      "approximateFps": 19.004558609768115,
+      "mainThreadTaskSeconds": 6.935308000000001,
+      "jsHeapBytes": 3629952,
+      "gestureExtraClicks": 0
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "observer": true,
+      "preparationMs": 428.91879999999946,
+      "frameN": 149,
+      "frameP50Ms": 50,
+      "frameP95Ms": 83.40000000000009,
+      "approximateFps": 19.386905381462594,
+      "mainThreadTaskSeconds": 6.558694,
+      "jsHeapBytes": 3529996,
+      "gestureExtraClicks": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "observer": false,
+      "preparationMs": 125.35979999999836,
+      "frameN": 181,
+      "frameP50Ms": 16.699999999999818,
+      "frameP95Ms": 16.799999999999727,
+      "approximateFps": 60.19688705588706,
+      "mainThreadTaskSeconds": 1.237659,
+      "jsHeapBytes": 3819576,
+      "gestureExtraClicks": 0
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "observer": true,
+      "preparationMs": 120.43970000000263,
+      "frameN": 182,
+      "frameP50Ms": 16.699999999999818,
+      "frameP95Ms": 16.700000000000273,
+      "approximateFps": 60.15136993139905,
+      "mainThreadTaskSeconds": 1.247542,
+      "jsHeapBytes": 3995328,
+      "gestureExtraClicks": 0
+    }
+  ]
+}

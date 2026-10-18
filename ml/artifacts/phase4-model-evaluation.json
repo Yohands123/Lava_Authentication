@@ -1,0 +1,4397 @@
+{
+  "seed": 20261017,
+  "noPromotion": true,
+  "schema": "lava-robust-v2",
+  "rawRows": 2681,
+  "uniqueVectors": 2603,
+  "trainN": 1028,
+  "calibrationN": 195,
+  "heldOutN": 1290,
+  "independentBotN": 90,
+  "consentingApplicationHumanN": 0,
+  "selection": "Fixed C=.1, fixed RF defaults. Threshold uses calibration humans only, target <=1% empirical FPR. No held-out selection.",
+  "models": {
+    "regularizedLogistic": {
+      "threshold05": {
+        "humanN": 513,
+        "falsePositiveN": 1,
+        "falsePositiveRate": 0.001949317738791423,
+        "botN": 777,
+        "detectedN": 15,
+        "botDetectionRate": 0.019305019305019305
+      },
+      "threshold09": {
+        "humanN": 513,
+        "falsePositiveN": 0,
+        "falsePositiveRate": 0.0,
+        "botN": 777,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": 0.6025724973093394,
+      "prAuc": 0.7699562078340131,
+      "brier": 0.35279421378929504,
+      "ece10": 0.351007510310464,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 79,
+          "meanScore": 0.07372439881924923,
+          "observedBotFraction": 0.9620253164556962
+        },
+        {
+          "lower": 0.1,
+          "n": 394,
+          "meanScore": 0.15841344977047891,
+          "observedBotFraction": 0.5025380710659898
+        },
+        {
+          "lower": 0.2,
+          "n": 405,
+          "meanScore": 0.24343539900928388,
+          "observedBotFraction": 0.35555555555555557
+        },
+        {
+          "lower": 0.3,
+          "n": 279,
+          "meanScore": 0.3499590827801229,
+          "observedBotFraction": 0.8315412186379928
+        },
+        {
+          "lower": 0.4,
+          "n": 117,
+          "meanScore": 0.43604840440156395,
+          "observedBotFraction": 0.9572649572649573
+        },
+        {
+          "lower": 0.5,
+          "n": 16,
+          "meanScore": 0.544600060863422,
+          "observedBotFraction": 0.9375
+        }
+      ],
+      "calibrationSelectedThreshold": 0.46526302138742254,
+      "operatingPoint": {
+        "humanN": 513,
+        "falsePositiveN": 2,
+        "humanFalsePositiveRate": 0.003898635477582846,
+        "humanAcceptance": 0.9961013645224172,
+        "falsePositiveWilson95": [
+          0.0010697759545932085,
+          0.01410237737052613
+        ],
+        "botN": 777,
+        "detectedN": 34,
+        "botDetectionRate": 0.043758043758043756,
+        "botFalseNegativeRate": 0.9562419562419563,
+        "detectionWilson95": [
+          0.031480284365541636,
+          0.060525059612033305
+        ]
+      },
+      "calibrationFprConstraint": 0.01,
+      "trainingSeconds": 0.15584630001103505,
+      "pythonPeakTrackedBytes": 400852,
+      "pythonInferenceMsPerRow": 0.001487054261054064,
+      "serializedPythonBytes": 1704
+    },
+    "randomForest": {
+      "threshold05": {
+        "humanN": 513,
+        "falsePositiveN": 3,
+        "falsePositiveRate": 0.005847953216374269,
+        "botN": 777,
+        "detectedN": 233,
+        "botDetectionRate": 0.29987129987129985
+      },
+      "threshold09": {
+        "humanN": 513,
+        "falsePositiveN": 0,
+        "falsePositiveRate": 0.0,
+        "botN": 777,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": 0.9420698894383105,
+      "prAuc": 0.954783242732287,
+      "brier": 0.20810824435829384,
+      "ece10": 0.2999600285093201,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 154,
+          "meanScore": 0.07089267268788774,
+          "observedBotFraction": 0.0
+        },
+        {
+          "lower": 0.1,
+          "n": 155,
+          "meanScore": 0.1512989123526161,
+          "observedBotFraction": 0.03870967741935484
+        },
+        {
+          "lower": 0.2,
+          "n": 208,
+          "meanScore": 0.25420278908188104,
+          "observedBotFraction": 0.3701923076923077
+        },
+        {
+          "lower": 0.3,
+          "n": 184,
+          "meanScore": 0.345041076705923,
+          "observedBotFraction": 0.7282608695652174
+        },
+        {
+          "lower": 0.4,
+          "n": 353,
+          "meanScore": 0.44631028413481244,
+          "observedBotFraction": 0.9263456090651558
+        },
+        {
+          "lower": 0.5,
+          "n": 143,
+          "meanScore": 0.5423304003857297,
+          "observedBotFraction": 0.9790209790209791
+        },
+        {
+          "lower": 0.6,
+          "n": 80,
+          "meanScore": 0.6441782552111128,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.7,
+          "n": 13,
+          "meanScore": 0.724891539769923,
+          "observedBotFraction": 1.0
+        }
+      ],
+      "calibrationSelectedThreshold": 0.5122739377382387,
+      "operatingPoint": {
+        "humanN": 513,
+        "falsePositiveN": 2,
+        "humanFalsePositiveRate": 0.003898635477582846,
+        "humanAcceptance": 0.9961013645224172,
+        "falsePositiveWilson95": [
+          0.0010697759545932085,
+          0.01410237737052613
+        ],
+        "botN": 777,
+        "detectedN": 211,
+        "botDetectionRate": 0.27155727155727155,
+        "botFalseNegativeRate": 0.7284427284427284,
+        "detectionWilson95": [
+          0.24146463465612372,
+          0.30389770259639964
+        ]
+      },
+      "calibrationFprConstraint": 0.01,
+      "trainingSeconds": 3.6651449999772012,
+      "pythonPeakTrackedBytes": 2106735,
+      "pythonInferenceMsPerRow": 0.041082015512836016,
+      "serializedPythonBytes": 856669
+    },
+    "humanAnomaly": {
+      "humanN": 513,
+      "humanOutlierN": 81,
+      "botN": 777,
+      "botOutlierN": 743,
+      "interpretation": "Not an automation probability"
+    }
+  },
+  "perturbations": {
+    "cadence16": {
+      "threshold05": {
+        "humanN": 513,
+        "falsePositiveN": 2,
+        "falsePositiveRate": 0.003898635477582846,
+        "botN": 777,
+        "detectedN": 18,
+        "botDetectionRate": 0.023166023166023165
+      },
+      "threshold09": {
+        "humanN": 513,
+        "falsePositiveN": 0,
+        "falsePositiveRate": 0.0,
+        "botN": 777,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": 0.5973040709882815,
+      "prAuc": 0.7662206698513323,
+      "brier": 0.3550565961058666,
+      "ece10": 0.3527131758570913,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 78,
+          "meanScore": 0.07315785107995103,
+          "observedBotFraction": 0.9743589743589743
+        },
+        {
+          "lower": 0.1,
+          "n": 395,
+          "meanScore": 0.15802577781453225,
+          "observedBotFraction": 0.5088607594936709
+        },
+        {
+          "lower": 0.2,
+          "n": 408,
+          "meanScore": 0.242589995357392,
+          "observedBotFraction": 0.35049019607843135
+        },
+        {
+          "lower": 0.3,
+          "n": 286,
+          "meanScore": 0.3478021630549873,
+          "observedBotFraction": 0.8426573426573427
+        },
+        {
+          "lower": 0.4,
+          "n": 103,
+          "meanScore": 0.43256550101439467,
+          "observedBotFraction": 0.9514563106796117
+        },
+        {
+          "lower": 0.5,
+          "n": 19,
+          "meanScore": 0.5390574111088745,
+          "observedBotFraction": 0.8947368421052632
+        },
+        {
+          "lower": 0.6,
+          "n": 1,
+          "meanScore": 0.6290343682823376,
+          "observedBotFraction": 1.0
+        }
+      ],
+      "calibrationSelectedThreshold": 0.46526302138742254,
+      "operatingPoint": {
+        "humanN": 513,
+        "falsePositiveN": 2,
+        "humanFalsePositiveRate": 0.003898635477582846,
+        "humanAcceptance": 0.9961013645224172,
+        "falsePositiveWilson95": [
+          0.0010697759545932085,
+          0.01410237737052613
+        ],
+        "botN": 777,
+        "detectedN": 28,
+        "botDetectionRate": 0.036036036036036036,
+        "botFalseNegativeRate": 0.963963963963964,
+        "detectionWilson95": [
+          0.025047924298150122,
+          0.0515893860090876
+        ]
+      },
+      "medianAbsoluteFeatureChange": [
+        0.0021630919022099376,
+        0.0027026431835391884,
+        0.0019488872705387683,
+        0.008015689354111566,
+        0.05018723387425572,
+        0.08624088795116247,
+        0.000364598382850731,
+        0.016394571998385343,
+        0.09170654244088228,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "medianRiskChange": 0.001719272131628799,
+      "decisionFlipN": 10
+    },
+    "cadence32": {
+      "threshold05": {
+        "humanN": 513,
+        "falsePositiveN": 2,
+        "falsePositiveRate": 0.003898635477582846,
+        "botN": 777,
+        "detectedN": 15,
+        "botDetectionRate": 0.019305019305019305
+      },
+      "threshold09": {
+        "humanN": 513,
+        "falsePositiveN": 0,
+        "falsePositiveRate": 0.0,
+        "botN": 777,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": 0.5788796315112104,
+      "prAuc": 0.7478846139894869,
+      "brier": 0.3616279186451553,
+      "ece10": 0.35682659224842844,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 82,
+          "meanScore": 0.0737084238191622,
+          "observedBotFraction": 0.975609756097561
+        },
+        {
+          "lower": 0.1,
+          "n": 391,
+          "meanScore": 0.15778287718836864,
+          "observedBotFraction": 0.5242966751918159
+        },
+        {
+          "lower": 0.2,
+          "n": 434,
+          "meanScore": 0.24366152589646595,
+          "observedBotFraction": 0.37557603686635943
+        },
+        {
+          "lower": 0.3,
+          "n": 284,
+          "meanScore": 0.3471044116024837,
+          "observedBotFraction": 0.8345070422535211
+        },
+        {
+          "lower": 0.4,
+          "n": 82,
+          "meanScore": 0.4335627274017942,
+          "observedBotFraction": 0.9390243902439024
+        },
+        {
+          "lower": 0.5,
+          "n": 16,
+          "meanScore": 0.5286204131807193,
+          "observedBotFraction": 0.875
+        },
+        {
+          "lower": 0.6,
+          "n": 1,
+          "meanScore": 0.6196748736935839,
+          "observedBotFraction": 1.0
+        }
+      ],
+      "calibrationSelectedThreshold": 0.46526302138742254,
+      "operatingPoint": {
+        "humanN": 513,
+        "falsePositiveN": 2,
+        "humanFalsePositiveRate": 0.003898635477582846,
+        "humanAcceptance": 0.9961013645224172,
+        "falsePositiveWilson95": [
+          0.0010697759545932085,
+          0.01410237737052613
+        ],
+        "botN": 777,
+        "detectedN": 26,
+        "botDetectionRate": 0.03346203346203346,
+        "botFalseNegativeRate": 0.9665379665379665,
+        "detectionWilson95": [
+          0.022935976999763342,
+          0.04857865541736196
+        ]
+      },
+      "medianAbsoluteFeatureChange": [
+        0.005052088434879018,
+        0.0070202259408636,
+        0.005810215320554674,
+        0.017863051048480627,
+        0.11896295615229269,
+        0.1760209740900467,
+        0.0012614614700138735,
+        0.023901885167957434,
+        0.13346267201414763,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "medianRiskChange": 0.0033477803314429927,
+      "decisionFlipN": 12
+    },
+    "cadence64": {
+      "threshold05": {
+        "humanN": 513,
+        "falsePositiveN": 1,
+        "falsePositiveRate": 0.001949317738791423,
+        "botN": 777,
+        "detectedN": 1,
+        "botDetectionRate": 0.001287001287001287
+      },
+      "threshold09": {
+        "humanN": 513,
+        "falsePositiveN": 0,
+        "falsePositiveRate": 0.0,
+        "botN": 777,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": 0.522088504544645,
+      "prAuc": 0.6876072461469127,
+      "brier": 0.38251663560102306,
+      "ece10": 0.37221257266832136,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 88,
+          "meanScore": 0.07306644423723081,
+          "observedBotFraction": 0.9545454545454546
+        },
+        {
+          "lower": 0.1,
+          "n": 416,
+          "meanScore": 0.1573781509481637,
+          "observedBotFraction": 0.5649038461538461
+        },
+        {
+          "lower": 0.2,
+          "n": 514,
+          "meanScore": 0.24711409275356847,
+          "observedBotFraction": 0.4649805447470817
+        },
+        {
+          "lower": 0.3,
+          "n": 218,
+          "meanScore": 0.3415667448543141,
+          "observedBotFraction": 0.7844036697247706
+        },
+        {
+          "lower": 0.4,
+          "n": 52,
+          "meanScore": 0.43304630525805954,
+          "observedBotFraction": 0.9038461538461539
+        },
+        {
+          "lower": 0.5,
+          "n": 2,
+          "meanScore": 0.524989278220364,
+          "observedBotFraction": 0.5
+        }
+      ],
+      "calibrationSelectedThreshold": 0.46526302138742254,
+      "operatingPoint": {
+        "humanN": 513,
+        "falsePositiveN": 2,
+        "humanFalsePositiveRate": 0.003898635477582846,
+        "humanAcceptance": 0.9961013645224172,
+        "falsePositiveWilson95": [
+          0.0010697759545932085,
+          0.01410237737052613
+        ],
+        "botN": 777,
+        "detectedN": 7,
+        "botDetectionRate": 0.009009009009009009,
+        "botFalseNegativeRate": 0.990990990990991,
+        "detectionWilson95": [
+          0.004370628600773716,
+          0.01847856386028368
+        ]
+      },
+      "medianAbsoluteFeatureChange": [
+        0.012507679495181112,
+        0.015441463572611724,
+        0.016224561879622013,
+        0.03954238073030725,
+        0.2056846768158942,
+        0.2806623643564192,
+        0.00945022929255131,
+        0.04279579106948363,
+        0.214744115223512,
+        0.0,
+        0.0,
+        0.01438872440862013
+      ],
+      "medianRiskChange": 0.007886816074799859,
+      "decisionFlipN": 27
+    },
+    "scaled2": {
+      "threshold05": {
+        "humanN": 513,
+        "falsePositiveN": 2,
+        "falsePositiveRate": 0.003898635477582846,
+        "botN": 777,
+        "detectedN": 15,
+        "botDetectionRate": 0.019305019305019305
+      },
+      "threshold09": {
+        "humanN": 513,
+        "falsePositiveN": 0,
+        "falsePositiveRate": 0.0,
+        "botN": 777,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": 0.6026778658357606,
+      "prAuc": 0.7700041291060102,
+      "brier": 0.3527673304532106,
+      "ece10": 0.35097594497742646,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 79,
+          "meanScore": 0.07373339381279483,
+          "observedBotFraction": 0.9620253164556962
+        },
+        {
+          "lower": 0.1,
+          "n": 394,
+          "meanScore": 0.1584291202589365,
+          "observedBotFraction": 0.5025380710659898
+        },
+        {
+          "lower": 0.2,
+          "n": 404,
+          "meanScore": 0.2433307389798587,
+          "observedBotFraction": 0.35396039603960394
+        },
+        {
+          "lower": 0.3,
+          "n": 282,
+          "meanScore": 0.35013738912043313,
+          "observedBotFraction": 0.8333333333333334
+        },
+        {
+          "lower": 0.4,
+          "n": 114,
+          "meanScore": 0.43633730511570074,
+          "observedBotFraction": 0.9649122807017544
+        },
+        {
+          "lower": 0.5,
+          "n": 17,
+          "meanScore": 0.5416590836984208,
+          "observedBotFraction": 0.8823529411764706
+        }
+      ],
+      "calibrationSelectedThreshold": 0.46526302138742254,
+      "operatingPoint": {
+        "humanN": 513,
+        "falsePositiveN": 2,
+        "humanFalsePositiveRate": 0.003898635477582846,
+        "humanAcceptance": 0.9961013645224172,
+        "falsePositiveWilson95": [
+          0.0010697759545932085,
+          0.01410237737052613
+        ],
+        "botN": 777,
+        "detectedN": 34,
+        "botDetectionRate": 0.043758043758043756,
+        "botFalseNegativeRate": 0.9562419562419563,
+        "detectionWilson95": [
+          0.031480284365541636,
+          0.060525059612033305
+        ]
+      },
+      "medianAbsoluteFeatureChange": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "medianRiskChange": 0.0,
+      "decisionFlipN": 0
+    },
+    "jitter": {
+      "threshold05": {
+        "humanN": 513,
+        "falsePositiveN": 1,
+        "falsePositiveRate": 0.001949317738791423,
+        "botN": 777,
+        "detectedN": 14,
+        "botDetectionRate": 0.018018018018018018
+      },
+      "threshold09": {
+        "humanN": 513,
+        "falsePositiveN": 0,
+        "falsePositiveRate": 0.0,
+        "botN": 777,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": 0.6002443546303196,
+      "prAuc": 0.7680707413855996,
+      "brier": 0.3534153401458179,
+      "ece10": 0.35120687386188487,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 79,
+          "meanScore": 0.07271424675722744,
+          "observedBotFraction": 0.9746835443037974
+        },
+        {
+          "lower": 0.1,
+          "n": 394,
+          "meanScore": 0.15762607466626563,
+          "observedBotFraction": 0.5025380710659898
+        },
+        {
+          "lower": 0.2,
+          "n": 402,
+          "meanScore": 0.2432302703807864,
+          "observedBotFraction": 0.35074626865671643
+        },
+        {
+          "lower": 0.3,
+          "n": 280,
+          "meanScore": 0.349715876170678,
+          "observedBotFraction": 0.8357142857142857
+        },
+        {
+          "lower": 0.4,
+          "n": 120,
+          "meanScore": 0.4357630673215222,
+          "observedBotFraction": 0.9416666666666667
+        },
+        {
+          "lower": 0.5,
+          "n": 15,
+          "meanScore": 0.5402301137593487,
+          "observedBotFraction": 0.9333333333333333
+        }
+      ],
+      "calibrationSelectedThreshold": 0.46526302138742254,
+      "operatingPoint": {
+        "humanN": 513,
+        "falsePositiveN": 2,
+        "humanFalsePositiveRate": 0.003898635477582846,
+        "humanAcceptance": 0.9961013645224172,
+        "falsePositiveWilson95": [
+          0.0010697759545932085,
+          0.01410237737052613
+        ],
+        "botN": 777,
+        "detectedN": 32,
+        "botDetectionRate": 0.04118404118404118,
+        "botFalseNegativeRate": 0.9588159588159588,
+        "detectionWilson95": [
+          0.029321531379945594,
+          0.05756113470751694
+        ]
+      },
+      "medianAbsoluteFeatureChange": [
+        0.00034804609615751714,
+        0.0005825963666961642,
+        0.0007546764408348228,
+        0.0012247892809479355,
+        0.006710203712811058,
+        0.008530962708440892,
+        0.0015148696953872637,
+        0.010327072811383647,
+        0.05109493044239932,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "medianRiskChange": 0.0007067935484678586,
+      "decisionFlipN": 2
+    }
+  },
+  "independentGenerators": {
+    "held-ghost": {
+      "threshold05": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "falsePositiveRate": null,
+        "botN": 30,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "threshold09": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "falsePositiveRate": null,
+        "botN": 30,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": null,
+      "prAuc": null,
+      "brier": 0.8746667837647505,
+      "ece10": 0.9351451036823946,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 29,
+          "meanScore": 0.06349791414978911,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.1,
+          "n": 1,
+          "meanScore": 0.10420737918428062,
+          "observedBotFraction": 1.0
+        }
+      ],
+      "calibrationSelectedThreshold": 0.46526302138742254,
+      "operatingPoint": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "humanFalsePositiveRate": null,
+        "humanAcceptance": null,
+        "falsePositiveWilson95": null,
+        "botN": 30,
+        "detectedN": 0,
+        "botDetectionRate": 0.0,
+        "botFalseNegativeRate": 1.0,
+        "detectionWilson95": [
+          -1.3877787807814457e-17,
+          0.113517091390478
+        ]
+      }
+    },
+    "held-reactive": {
+      "threshold05": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "falsePositiveRate": null,
+        "botN": 30,
+        "detectedN": 14,
+        "botDetectionRate": 0.4666666666666667
+      },
+      "threshold09": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "falsePositiveRate": null,
+        "botN": 30,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": null,
+      "prAuc": null,
+      "brier": 0.2508686108699097,
+      "ece10": 0.5004378305325351,
+      "calibrationBins": [
+        {
+          "lower": 0.4,
+          "n": 16,
+          "meanScore": 0.4820816574117032,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.5,
+          "n": 14,
+          "meanScore": 0.5195398975311926,
+          "observedBotFraction": 1.0
+        }
+      ],
+      "calibrationSelectedThreshold": 0.46526302138742254,
+      "operatingPoint": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "humanFalsePositiveRate": null,
+        "humanAcceptance": null,
+        "falsePositiveWilson95": null,
+        "botN": 30,
+        "detectedN": 30,
+        "botDetectionRate": 1.0,
+        "botFalseNegativeRate": 0.0,
+        "detectionWilson95": [
+          0.8864829086095221,
+          1.0
+        ]
+      }
+    },
+    "held-replayed": {
+      "threshold05": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "falsePositiveRate": null,
+        "botN": 30,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "threshold09": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "falsePositiveRate": null,
+        "botN": 30,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": null,
+      "prAuc": null,
+      "brier": 0.25883112677825043,
+      "ece10": 0.5087255376270123,
+      "calibrationBins": [
+        {
+          "lower": 0.4,
+          "n": 30,
+          "meanScore": 0.4912744623729877,
+          "observedBotFraction": 1.0
+        }
+      ],
+      "calibrationSelectedThreshold": 0.46526302138742254,
+      "operatingPoint": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "humanFalsePositiveRate": null,
+        "humanAcceptance": null,
+        "falsePositiveWilson95": null,
+        "botN": 30,
+        "detectedN": 30,
+        "botDetectionRate": 1.0,
+        "botFalseNegativeRate": 0.0,
+        "detectionWilson95": [
+          0.8864829086095221,
+          1.0
+        ]
+      }
+    }
+  },
+  "leaveOneGeneratorFamilyOut": {
+    "circles_bot_gan": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 32,
+          "falsePositiveRate": 0.06237816764132553,
+          "botN": 697,
+          "detectedN": 497,
+          "botDetectionRate": 0.7130559540889526
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "falsePositiveRate": 0.017543859649122806,
+          "botN": 697,
+          "detectedN": 108,
+          "botDetectionRate": 0.15494978479196556
+        },
+        "rocAuc": 0.8975391611501254,
+        "prAuc": 0.906606922801175,
+        "brier": 0.14118286893226806,
+        "ece10": 0.15212568634601709,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 273,
+            "meanScore": 0.053819785157739955,
+            "observedBotFraction": 0.15384615384615385
+          },
+          {
+            "lower": 0.1,
+            "n": 162,
+            "meanScore": 0.14358621606884622,
+            "observedBotFraction": 0.08641975308641975
+          },
+          {
+            "lower": 0.2,
+            "n": 75,
+            "meanScore": 0.25367929002082024,
+            "observedBotFraction": 0.36
+          },
+          {
+            "lower": 0.3,
+            "n": 86,
+            "meanScore": 0.35846265210418266,
+            "observedBotFraction": 0.5581395348837209
+          },
+          {
+            "lower": 0.4,
+            "n": 85,
+            "meanScore": 0.4514091355621712,
+            "observedBotFraction": 0.8117647058823529
+          },
+          {
+            "lower": 0.5,
+            "n": 77,
+            "meanScore": 0.5523727762164071,
+            "observedBotFraction": 0.8831168831168831
+          },
+          {
+            "lower": 0.6,
+            "n": 86,
+            "meanScore": 0.6520703386161519,
+            "observedBotFraction": 0.9418604651162791
+          },
+          {
+            "lower": 0.7,
+            "n": 110,
+            "meanScore": 0.7523815743659416,
+            "observedBotFraction": 0.9545454545454546
+          },
+          {
+            "lower": 0.8,
+            "n": 139,
+            "meanScore": 0.8521648791919605,
+            "observedBotFraction": 0.9712230215827338
+          },
+          {
+            "lower": 0.9,
+            "n": 117,
+            "meanScore": 0.9448809440725203,
+            "observedBotFraction": 0.9230769230769231
+          }
+        ],
+        "calibrationSelectedThreshold": 0.8951737494732706,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "humanFalsePositiveRate": 0.017543859649122806,
+          "humanAcceptance": 0.9824561403508771,
+          "falsePositiveWilson95": [
+            0.009256695375208998,
+            0.03300306080540803
+          ],
+          "botN": 697,
+          "detectedN": 113,
+          "botDetectionRate": 0.16212338593974174,
+          "botFalseNegativeRate": 0.8378766140602583,
+          "detectionWilson95": [
+            0.13662544560981849,
+            0.19132540662269742
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.027555900014704093,
+        "pythonPeakTrackedBytes": 198884,
+        "pythonInferenceMsPerRow": 0.0010168595020158971,
+        "serializedPythonBytes": 1704
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 0,
+          "falsePositiveRate": 0.0,
+          "botN": 697,
+          "detectedN": 133,
+          "botDetectionRate": 0.1908177905308465
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 0,
+          "falsePositiveRate": 0.0,
+          "botN": 697,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.9516641915645163,
+        "prAuc": 0.958776361411457,
+        "brier": 0.2147525749782206,
+        "ece10": 0.30046523620366467,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 102,
+            "meanScore": 0.08930027181540612,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 174,
+            "meanScore": 0.1457803442023817,
+            "observedBotFraction": 0.005747126436781609
+          },
+          {
+            "lower": 0.2,
+            "n": 195,
+            "meanScore": 0.2511081734157805,
+            "observedBotFraction": 0.2564102564102564
+          },
+          {
+            "lower": 0.3,
+            "n": 302,
+            "meanScore": 0.35894037753514846,
+            "observedBotFraction": 0.7450331125827815
+          },
+          {
+            "lower": 0.4,
+            "n": 304,
+            "meanScore": 0.44105044813081945,
+            "observedBotFraction": 0.9473684210526315
+          },
+          {
+            "lower": 0.5,
+            "n": 106,
+            "meanScore": 0.5392311026720209,
+            "observedBotFraction": 1.0
+          },
+          {
+            "lower": 0.6,
+            "n": 25,
+            "meanScore": 0.6357515468133361,
+            "observedBotFraction": 1.0
+          },
+          {
+            "lower": 0.7,
+            "n": 2,
+            "meanScore": 0.7068810964614093,
+            "observedBotFraction": 1.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.47053657370094626,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 2,
+          "humanFalsePositiveRate": 0.003898635477582846,
+          "humanAcceptance": 0.9961013645224172,
+          "falsePositiveWilson95": [
+            0.0010697759545932085,
+            0.01410237737052613
+          ],
+          "botN": 697,
+          "detectedN": 185,
+          "botDetectionRate": 0.2654232424677188,
+          "botFalseNegativeRate": 0.7345767575322812,
+          "detectionWilson95": [
+            0.2339923256268949,
+            0.2994257819740239
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.2785684000118636,
+        "pythonPeakTrackedBytes": 2241748,
+        "pythonInferenceMsPerRow": 0.02859595043138285,
+        "serializedPythonBytes": 852829
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 81,
+        "botN": 697,
+        "botOutlierN": 697,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "circles_bot_naturalmousemotion": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 59,
+          "falsePositiveRate": 0.11500974658869395,
+          "botN": 234,
+          "detectedN": 149,
+          "botDetectionRate": 0.6367521367521367
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 8,
+          "falsePositiveRate": 0.015594541910331383,
+          "botN": 234,
+          "detectedN": 23,
+          "botDetectionRate": 0.09829059829059829
+        },
+        "rocAuc": 0.8847903233868146,
+        "prAuc": 0.7144472668783532,
+        "brier": 0.1370026889151336,
+        "ece10": 0.09257965282397285,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 41,
+            "meanScore": 0.08346316500808741,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 208,
+            "meanScore": 0.14571776210928913,
+            "observedBotFraction": 0.004807692307692308
+          },
+          {
+            "lower": 0.2,
+            "n": 136,
+            "meanScore": 0.2485838874734928,
+            "observedBotFraction": 0.16911764705882354
+          },
+          {
+            "lower": 0.3,
+            "n": 84,
+            "meanScore": 0.34637350486926316,
+            "observedBotFraction": 0.2857142857142857
+          },
+          {
+            "lower": 0.4,
+            "n": 70,
+            "meanScore": 0.4414870633201473,
+            "observedBotFraction": 0.5285714285714286
+          },
+          {
+            "lower": 0.5,
+            "n": 56,
+            "meanScore": 0.5477778578479032,
+            "observedBotFraction": 0.6071428571428571
+          },
+          {
+            "lower": 0.6,
+            "n": 58,
+            "meanScore": 0.6478382535379241,
+            "observedBotFraction": 0.6896551724137931
+          },
+          {
+            "lower": 0.7,
+            "n": 33,
+            "meanScore": 0.7488559227950998,
+            "observedBotFraction": 0.8181818181818182
+          },
+          {
+            "lower": 0.8,
+            "n": 30,
+            "meanScore": 0.8421661832034538,
+            "observedBotFraction": 0.8333333333333334
+          },
+          {
+            "lower": 0.9,
+            "n": 31,
+            "meanScore": 0.9394989162341306,
+            "observedBotFraction": 0.7419354838709677
+          }
+        ],
+        "calibrationSelectedThreshold": 0.9393828390503964,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 5,
+          "humanFalsePositiveRate": 0.009746588693957114,
+          "humanAcceptance": 0.9902534113060428,
+          "falsePositiveWilson95": [
+            0.004170081666137139,
+            0.022611044311338355
+          ],
+          "botN": 234,
+          "detectedN": 10,
+          "botDetectionRate": 0.042735042735042736,
+          "botFalseNegativeRate": 0.9572649572649573,
+          "detectionWilson95": [
+            0.023375585411978244,
+            0.07686591985875656
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.028965700010303408,
+        "pythonPeakTrackedBytes": 265828,
+        "pythonInferenceMsPerRow": 0.0013052208870873753,
+        "serializedPythonBytes": 1704
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 38,
+          "falsePositiveRate": 0.07407407407407407,
+          "botN": 234,
+          "detectedN": 183,
+          "botDetectionRate": 0.782051282051282
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "falsePositiveRate": 0.001949317738791423,
+          "botN": 234,
+          "detectedN": 15,
+          "botDetectionRate": 0.0641025641025641
+        },
+        "rocAuc": 0.9480515153029774,
+        "prAuc": 0.8582553727462546,
+        "brier": 0.10224645196157611,
+        "ece10": 0.12539878406642074,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 216,
+            "meanScore": 0.04704293686787232,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 120,
+            "meanScore": 0.15035934980262244,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 55,
+            "meanScore": 0.24571714835961864,
+            "observedBotFraction": 0.03636363636363636
+          },
+          {
+            "lower": 0.3,
+            "n": 48,
+            "meanScore": 0.3446591018122121,
+            "observedBotFraction": 0.14583333333333334
+          },
+          {
+            "lower": 0.4,
+            "n": 87,
+            "meanScore": 0.44194454656341436,
+            "observedBotFraction": 0.4827586206896552
+          },
+          {
+            "lower": 0.5,
+            "n": 118,
+            "meanScore": 0.5538782163081247,
+            "observedBotFraction": 0.8050847457627118
+          },
+          {
+            "lower": 0.6,
+            "n": 49,
+            "meanScore": 0.6453955163544494,
+            "observedBotFraction": 0.7346938775510204
+          },
+          {
+            "lower": 0.7,
+            "n": 21,
+            "meanScore": 0.7493129637895711,
+            "observedBotFraction": 0.9523809523809523
+          },
+          {
+            "lower": 0.8,
+            "n": 17,
+            "meanScore": 0.8574594164397642,
+            "observedBotFraction": 1.0
+          },
+          {
+            "lower": 0.9,
+            "n": 16,
+            "meanScore": 0.9278760620702022,
+            "observedBotFraction": 0.9375
+          }
+        ],
+        "calibrationSelectedThreshold": 0.633117117506106,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 14,
+          "humanFalsePositiveRate": 0.02729044834307992,
+          "humanAcceptance": 0.9727095516569201,
+          "falsePositiveWilson95": [
+            0.01632455571694525,
+            0.04528348821759871
+          ],
+          "botN": 234,
+          "detectedN": 71,
+          "botDetectionRate": 0.3034188034188034,
+          "botFalseNegativeRate": 0.6965811965811965,
+          "detectionWilson95": [
+            0.24807999130596647,
+            0.3651079455393961
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.3261090999876615,
+        "pythonPeakTrackedBytes": 3041673,
+        "pythonInferenceMsPerRow": 0.04024176706106139,
+        "serializedPythonBytes": 871102
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 81,
+        "botN": 234,
+        "botOutlierN": 227,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "circles_bot_pyhm": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 264,
+          "falsePositiveRate": 0.5146198830409356,
+          "botN": 55,
+          "detectedN": 45,
+          "botDetectionRate": 0.8181818181818182
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 21,
+          "falsePositiveRate": 0.04093567251461988,
+          "botN": 55,
+          "detectedN": 8,
+          "botDetectionRate": 0.14545454545454545
+        },
+        "rocAuc": 0.7060074428495482,
+        "prAuc": 0.1839997313824002,
+        "brier": 0.31179126708703087,
+        "ece10": 0.46081414107631546,
+        "calibrationBins": [
+          {
+            "lower": 0.2,
+            "n": 30,
+            "meanScore": 0.264706735086657,
+            "observedBotFraction": 0.1
+          },
+          {
+            "lower": 0.3,
+            "n": 111,
+            "meanScore": 0.3561217165492348,
+            "observedBotFraction": 0.018018018018018018
+          },
+          {
+            "lower": 0.4,
+            "n": 118,
+            "meanScore": 0.4479595102013541,
+            "observedBotFraction": 0.0423728813559322
+          },
+          {
+            "lower": 0.5,
+            "n": 80,
+            "meanScore": 0.542224682926392,
+            "observedBotFraction": 0.075
+          },
+          {
+            "lower": 0.6,
+            "n": 88,
+            "meanScore": 0.6516285652448502,
+            "observedBotFraction": 0.13636363636363635
+          },
+          {
+            "lower": 0.7,
+            "n": 66,
+            "meanScore": 0.7481090996390078,
+            "observedBotFraction": 0.18181818181818182
+          },
+          {
+            "lower": 0.8,
+            "n": 46,
+            "meanScore": 0.8456714513378063,
+            "observedBotFraction": 0.15217391304347827
+          },
+          {
+            "lower": 0.9,
+            "n": 29,
+            "meanScore": 0.945349021539684,
+            "observedBotFraction": 0.27586206896551724
+          }
+        ],
+        "calibrationSelectedThreshold": 0.9748562662310519,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "humanFalsePositiveRate": 0.017543859649122806,
+          "humanAcceptance": 0.9824561403508771,
+          "falsePositiveWilson95": [
+            0.009256695375208998,
+            0.03300306080540803
+          ],
+          "botN": 55,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            0.0,
+            0.06528714378942788
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.03161330000148155,
+        "pythonPeakTrackedBytes": 243859,
+        "pythonInferenceMsPerRow": 0.0026112676083280798,
+        "serializedPythonBytes": 1704
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 95,
+          "falsePositiveRate": 0.18518518518518517,
+          "botN": 55,
+          "detectedN": 31,
+          "botDetectionRate": 0.5636363636363636
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 38,
+          "falsePositiveRate": 0.07407407407407407,
+          "botN": 55,
+          "detectedN": 11,
+          "botDetectionRate": 0.2
+        },
+        "rocAuc": 0.8127946127946128,
+        "prAuc": 0.23328307835663395,
+        "brier": 0.15508538965594,
+        "ece10": 0.15812458415443348,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 295,
+            "meanScore": 0.014202327334596265,
+            "observedBotFraction": 0.006779661016949152
+          },
+          {
+            "lower": 0.1,
+            "n": 48,
+            "meanScore": 0.13902304452292688,
+            "observedBotFraction": 0.08333333333333333
+          },
+          {
+            "lower": 0.2,
+            "n": 32,
+            "meanScore": 0.2490668439946,
+            "observedBotFraction": 0.125
+          },
+          {
+            "lower": 0.3,
+            "n": 35,
+            "meanScore": 0.36375759260066554,
+            "observedBotFraction": 0.2
+          },
+          {
+            "lower": 0.4,
+            "n": 32,
+            "meanScore": 0.44853418424370817,
+            "observedBotFraction": 0.21875
+          },
+          {
+            "lower": 0.5,
+            "n": 27,
+            "meanScore": 0.5489155130628719,
+            "observedBotFraction": 0.2962962962962963
+          },
+          {
+            "lower": 0.6,
+            "n": 21,
+            "meanScore": 0.6464730209128428,
+            "observedBotFraction": 0.19047619047619047
+          },
+          {
+            "lower": 0.7,
+            "n": 14,
+            "meanScore": 0.7444658525031836,
+            "observedBotFraction": 0.2857142857142857
+          },
+          {
+            "lower": 0.8,
+            "n": 15,
+            "meanScore": 0.8550297316584106,
+            "observedBotFraction": 0.26666666666666666
+          },
+          {
+            "lower": 0.9,
+            "n": 49,
+            "meanScore": 0.9643388214790755,
+            "observedBotFraction": 0.22448979591836735
+          }
+        ],
+        "calibrationSelectedThreshold": 0.9594962144311235,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 26,
+          "humanFalsePositiveRate": 0.050682261208576995,
+          "humanAcceptance": 0.949317738791423,
+          "falsePositiveWilson95": [
+            0.034818477593310554,
+            0.07322545695065803
+          ],
+          "botN": 55,
+          "detectedN": 6,
+          "botDetectionRate": 0.10909090909090909,
+          "botFalseNegativeRate": 0.8909090909090909,
+          "detectionWilson95": [
+            0.050966556283051315,
+            0.21825793795231957
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.3147402000031434,
+        "pythonPeakTrackedBytes": 2785179,
+        "pythonInferenceMsPerRow": 0.04920968309358011,
+        "serializedPythonBytes": 656290
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 81,
+        "botN": 55,
+        "botOutlierN": 30,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "circles_bot_pynput": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 53,
+          "falsePositiveRate": 0.10331384015594541,
+          "botN": 381,
+          "detectedN": 249,
+          "botDetectionRate": 0.6535433070866141
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 8,
+          "falsePositiveRate": 0.015594541910331383,
+          "botN": 381,
+          "detectedN": 53,
+          "botDetectionRate": 0.13910761154855644
+        },
+        "rocAuc": 0.8282144556491842,
+        "prAuc": 0.8109020269198259,
+        "brier": 0.15495846535703162,
+        "ece10": 0.0801643046291807,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 28,
+            "meanScore": 0.08154089581280535,
+            "observedBotFraction": 0.5
+          },
+          {
+            "lower": 0.1,
+            "n": 246,
+            "meanScore": 0.1517271369291825,
+            "observedBotFraction": 0.11788617886178862
+          },
+          {
+            "lower": 0.2,
+            "n": 137,
+            "meanScore": 0.24272027574926333,
+            "observedBotFraction": 0.15328467153284672
+          },
+          {
+            "lower": 0.3,
+            "n": 111,
+            "meanScore": 0.3499046997760256,
+            "observedBotFraction": 0.2882882882882883
+          },
+          {
+            "lower": 0.4,
+            "n": 70,
+            "meanScore": 0.4475675878996631,
+            "observedBotFraction": 0.5142857142857142
+          },
+          {
+            "lower": 0.5,
+            "n": 56,
+            "meanScore": 0.5464071546808137,
+            "observedBotFraction": 0.5714285714285714
+          },
+          {
+            "lower": 0.6,
+            "n": 47,
+            "meanScore": 0.645579578435262,
+            "observedBotFraction": 0.7021276595744681
+          },
+          {
+            "lower": 0.7,
+            "n": 59,
+            "meanScore": 0.7490398346909819,
+            "observedBotFraction": 0.9322033898305084
+          },
+          {
+            "lower": 0.8,
+            "n": 79,
+            "meanScore": 0.8530026148151489,
+            "observedBotFraction": 0.9620253164556962
+          },
+          {
+            "lower": 0.9,
+            "n": 61,
+            "meanScore": 0.9407276574197263,
+            "observedBotFraction": 0.8688524590163934
+          }
+        ],
+        "calibrationSelectedThreshold": 0.868121003470481,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "humanFalsePositiveRate": 0.017543859649122806,
+          "humanAcceptance": 0.9824561403508771,
+          "falsePositiveWilson95": [
+            0.009256695375208998,
+            0.03300306080540803
+          ],
+          "botN": 381,
+          "detectedN": 81,
+          "botDetectionRate": 0.2125984251968504,
+          "botFalseNegativeRate": 0.7874015748031495,
+          "detectionWilson95": [
+            0.17448846318662295,
+            0.25644623825937457
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.029502499994123355,
+        "pythonPeakTrackedBytes": 244219,
+        "pythonInferenceMsPerRow": 0.0011973154378984066,
+        "serializedPythonBytes": 1704
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 35,
+          "falsePositiveRate": 0.0682261208576998,
+          "botN": 381,
+          "detectedN": 187,
+          "botDetectionRate": 0.49081364829396323
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "falsePositiveRate": 0.001949317738791423,
+          "botN": 381,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.9176733025330899,
+        "prAuc": 0.7921150674633582,
+        "brier": 0.14803973335772413,
+        "ece10": 0.19265091826773528,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 235,
+            "meanScore": 0.02509781953319724,
+            "observedBotFraction": 0.02127659574468085
+          },
+          {
+            "lower": 0.1,
+            "n": 108,
+            "meanScore": 0.15218606171169108,
+            "observedBotFraction": 0.027777777777777776
+          },
+          {
+            "lower": 0.2,
+            "n": 97,
+            "meanScore": 0.25475156286013495,
+            "observedBotFraction": 0.12371134020618557
+          },
+          {
+            "lower": 0.3,
+            "n": 77,
+            "meanScore": 0.34629884342913725,
+            "observedBotFraction": 0.44155844155844154
+          },
+          {
+            "lower": 0.4,
+            "n": 155,
+            "meanScore": 0.4644907921106113,
+            "observedBotFraction": 0.9032258064516129
+          },
+          {
+            "lower": 0.5,
+            "n": 132,
+            "meanScore": 0.5400883102383442,
+            "observedBotFraction": 0.8939393939393939
+          },
+          {
+            "lower": 0.6,
+            "n": 81,
+            "meanScore": 0.6306158497051902,
+            "observedBotFraction": 0.8395061728395061
+          },
+          {
+            "lower": 0.7,
+            "n": 7,
+            "meanScore": 0.7314432924055536,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.8,
+            "n": 1,
+            "meanScore": 0.8448803835623042,
+            "observedBotFraction": 1.0
+          },
+          {
+            "lower": 0.9,
+            "n": 1,
+            "meanScore": 0.9423389142518543,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.5675450845471015,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 26,
+          "humanFalsePositiveRate": 0.050682261208576995,
+          "humanAcceptance": 0.949317738791423,
+          "falsePositiveWilson95": [
+            0.034818477593310554,
+            0.07322545695065803
+          ],
+          "botN": 381,
+          "detectedN": 94,
+          "botDetectionRate": 0.24671916010498687,
+          "botFalseNegativeRate": 0.7532808398950132,
+          "detectionWilson95": [
+            0.20610134750522235,
+            0.2923936176960449
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.3605694999860134,
+        "pythonPeakTrackedBytes": 2786628,
+        "pythonInferenceMsPerRow": 0.03662863535982592,
+        "serializedPythonBytes": 656290
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 81,
+        "botN": 381,
+        "botOutlierN": 255,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "local-bezier": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 31,
+          "falsePositiveRate": 0.06042884990253411,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "falsePositiveRate": 0.001949317738791423,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.0017543859649123306,
+        "prAuc": 0.03803275712519835,
+        "brier": 0.1332176337388817,
+        "ece10": 0.2659822708636265,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 84,
+            "meanScore": 0.07193247803250602,
+            "observedBotFraction": 0.47619047619047616
+          },
+          {
+            "lower": 0.1,
+            "n": 247,
+            "meanScore": 0.14493624145146428,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 116,
+            "meanScore": 0.24229537698690784,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "n": 51,
+            "meanScore": 0.34996130139270337,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 24,
+            "meanScore": 0.4424845956143623,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.5,
+            "n": 14,
+            "meanScore": 0.5419988102823534,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.6,
+            "n": 6,
+            "meanScore": 0.6473014318714494,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 2,
+            "meanScore": 0.7529816429974641,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.8,
+            "n": 8,
+            "meanScore": 0.8590362666804137,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.9,
+            "n": 1,
+            "meanScore": 0.9073065529305265,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.6870029211446236,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 11,
+          "humanFalsePositiveRate": 0.021442495126705652,
+          "humanAcceptance": 0.9785575048732944,
+          "falsePositiveWilson95": [
+            0.012014403381109793,
+            0.037984667901078004
+          ],
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            -6.938893903907228e-18,
+            0.08762453925039232
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.0331673999899067,
+        "pythonPeakTrackedBytes": 293480,
+        "pythonInferenceMsPerRow": 0.003568896944643037,
+        "serializedPythonBytes": 1704
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 40,
+          "falsePositiveRate": 0.07797270955165692,
+          "botN": 40,
+          "detectedN": 40,
+          "botDetectionRate": 1.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "falsePositiveRate": 0.001949317738791423,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.9980506822612086,
+        "prAuc": 0.9474796747967479,
+        "brier": 0.06403240018191418,
+        "ece10": 0.17848640623283923,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 233,
+            "meanScore": 0.03925131437165884,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 106,
+            "meanScore": 0.1451070705602293,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 58,
+            "meanScore": 0.24477525570778644,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "n": 37,
+            "meanScore": 0.348781213664935,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 39,
+            "meanScore": 0.45038336591475187,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.5,
+            "n": 20,
+            "meanScore": 0.5337013665889982,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.6,
+            "n": 17,
+            "meanScore": 0.6498004154353859,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 40,
+            "meanScore": 0.7893343888347001,
+            "observedBotFraction": 0.95
+          },
+          {
+            "lower": 0.8,
+            "n": 2,
+            "meanScore": 0.8188355798142283,
+            "observedBotFraction": 1.0
+          },
+          {
+            "lower": 0.9,
+            "n": 1,
+            "meanScore": 0.9996682302846899,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.6818872860672242,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 6,
+          "humanFalsePositiveRate": 0.011695906432748537,
+          "humanAcceptance": 0.9883040935672515,
+          "falsePositiveWilson95": [
+            0.005370986970182038,
+            0.02527979655807884
+          ],
+          "botN": 40,
+          "detectedN": 40,
+          "botDetectionRate": 1.0,
+          "botFalseNegativeRate": 0.0,
+          "detectionWilson95": [
+            0.9123754607496077,
+            1.0
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.4379879999905825,
+        "pythonPeakTrackedBytes": 3378068,
+        "pythonInferenceMsPerRow": 0.04989150092662539,
+        "serializedPythonBytes": 941143
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 81,
+        "botN": 40,
+        "botOutlierN": 40,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "local-circle": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 50,
+          "falsePositiveRate": 0.09746588693957114,
+          "botN": 1,
+          "detectedN": 1,
+          "botDetectionRate": 1.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "falsePositiveRate": 0.017543859649122806,
+          "botN": 1,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.9785575048732944,
+        "prAuc": 0.08333333333333333,
+        "brier": 0.08695782232004988,
+        "ece10": 0.22952265224290938,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 116,
+            "meanScore": 0.07950917176077851,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 191,
+            "meanScore": 0.14239215477827444,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 82,
+            "meanScore": 0.24263799669486127,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "n": 50,
+            "meanScore": 0.34777758183559626,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 24,
+            "meanScore": 0.44046958441091383,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.5,
+            "n": 20,
+            "meanScore": 0.5342751910552059,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.6,
+            "n": 14,
+            "meanScore": 0.6497672008180845,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 4,
+            "meanScore": 0.753141794262296,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.8,
+            "n": 4,
+            "meanScore": 0.8245044085559563,
+            "observedBotFraction": 0.25
+          },
+          {
+            "lower": 0.9,
+            "n": 9,
+            "meanScore": 0.9561537195004455,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.8638566192638546,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "humanFalsePositiveRate": 0.017543859649122806,
+          "humanAcceptance": 0.9824561403508771,
+          "falsePositiveWilson95": [
+            0.009256695375208998,
+            0.03300306080540803
+          ],
+          "botN": 1,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            0.0,
+            0.7934567085261071
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.03043079999042675,
+        "pythonPeakTrackedBytes": 299147,
+        "pythonInferenceMsPerRow": 0.0057900778574195,
+        "serializedPythonBytes": 1704
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 38,
+          "falsePositiveRate": 0.07407407407407407,
+          "botN": 1,
+          "detectedN": 1,
+          "botDetectionRate": 1.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "falsePositiveRate": 0.001949317738791423,
+          "botN": 1,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.9473684210526315,
+        "prAuc": 0.03571428571428571,
+        "brier": 0.06571270581641359,
+        "ece10": 0.18263725523144095,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 232,
+            "meanScore": 0.04306472202714451,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 110,
+            "meanScore": 0.14830974283379778,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 51,
+            "meanScore": 0.24295316159499353,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "n": 40,
+            "meanScore": 0.34550514629973395,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 42,
+            "meanScore": 0.4445265846049041,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.5,
+            "n": 20,
+            "meanScore": 0.540937156102532,
+            "observedBotFraction": 0.05
+          },
+          {
+            "lower": 0.6,
+            "n": 15,
+            "meanScore": 0.6557327816204093,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 3,
+            "meanScore": 0.7079064818057414,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.9,
+            "n": 1,
+            "meanScore": 0.9110740284313723,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.6671309851957452,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 10,
+          "humanFalsePositiveRate": 0.01949317738791423,
+          "humanAcceptance": 0.9805068226120858,
+          "falsePositiveWilson95": [
+            0.010621994240995195,
+            0.03550741949040723
+          ],
+          "botN": 1,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            0.0,
+            0.7934567085261071
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.385651800024789,
+        "pythonPeakTrackedBytes": 3441239,
+        "pythonInferenceMsPerRow": 0.05373540857592996,
+        "serializedPythonBytes": 935046
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 81,
+        "botN": 1,
+        "botOutlierN": 1,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "local-corrections": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 49,
+          "falsePositiveRate": 0.09551656920077972,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "falsePositiveRate": 0.017543859649122806,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.4529727095516569,
+        "prAuc": 0.06422253322023558,
+        "brier": 0.1350172157837745,
+        "ece10": 0.17055531281338904,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 179,
+            "meanScore": 0.07072188154113626,
+            "observedBotFraction": 0.01675977653631285
+          },
+          {
+            "lower": 0.1,
+            "n": 198,
+            "meanScore": 0.13937966527771758,
+            "observedBotFraction": 0.18686868686868688
+          },
+          {
+            "lower": 0.2,
+            "n": 65,
+            "meanScore": 0.25057354745171917,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "n": 40,
+            "meanScore": 0.35724724000228125,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 22,
+            "meanScore": 0.4464192122115115,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.5,
+            "n": 17,
+            "meanScore": 0.5567783568145046,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.6,
+            "n": 11,
+            "meanScore": 0.6627591271593681,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 7,
+            "meanScore": 0.7324058296275705,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.8,
+            "n": 5,
+            "meanScore": 0.8352260464085466,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.9,
+            "n": 9,
+            "meanScore": 0.9775665064208015,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.9053651336790385,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "humanFalsePositiveRate": 0.017543859649122806,
+          "humanAcceptance": 0.9824561403508771,
+          "falsePositiveWilson95": [
+            0.009256695375208998,
+            0.03300306080540803
+          ],
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            -6.938893903907228e-18,
+            0.08762453925039232
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.030451799975708127,
+        "pythonPeakTrackedBytes": 292875,
+        "pythonInferenceMsPerRow": 0.0018815551657115142,
+        "serializedPythonBytes": 1704
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 31,
+          "falsePositiveRate": 0.06042884990253411,
+          "botN": 40,
+          "detectedN": 22,
+          "botDetectionRate": 0.55
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "falsePositiveRate": 0.001949317738791423,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.9392300194931774,
+        "prAuc": 0.37293570350160343,
+        "brier": 0.07446379901909925,
+        "ece10": 0.134820563338276,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 239,
+            "meanScore": 0.04139332690694856,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 103,
+            "meanScore": 0.1464956568459506,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 61,
+            "meanScore": 0.24211037722897935,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "n": 36,
+            "meanScore": 0.35266523476467715,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 61,
+            "meanScore": 0.45902597705576115,
+            "observedBotFraction": 0.29508196721311475
+          },
+          {
+            "lower": 0.5,
+            "n": 38,
+            "meanScore": 0.5281118220147213,
+            "observedBotFraction": 0.5789473684210527
+          },
+          {
+            "lower": 0.6,
+            "n": 13,
+            "meanScore": 0.6535825794479825,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 1,
+            "meanScore": 0.7212002435644489,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.9,
+            "n": 1,
+            "meanScore": 0.9589231374466409,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.6611500725666425,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 7,
+          "humanFalsePositiveRate": 0.01364522417153996,
+          "humanAcceptance": 0.9863547758284601,
+          "falsePositiveWilson95": [
+            0.006625042757439739,
+            0.02789539832160652
+          ],
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            -6.938893903907228e-18,
+            0.08762453925039232
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.3902723000210244,
+        "pythonPeakTrackedBytes": 3377572,
+        "pythonInferenceMsPerRow": 0.0547553345461664,
+        "serializedPythonBytes": 925454
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 81,
+        "botN": 40,
+        "botOutlierN": 40,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "local-linear": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 48,
+          "falsePositiveRate": 0.0935672514619883,
+          "botN": 1,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "falsePositiveRate": 0.017543859649122806,
+          "botN": 1,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.8888888888888888,
+        "prAuc": 0.017241379310344827,
+        "brier": 0.08693328204706716,
+        "ece10": 0.22863230048727357,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 113,
+            "meanScore": 0.07974252025923234,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 193,
+            "meanScore": 0.14202983465911434,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 85,
+            "meanScore": 0.24313404935940158,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "n": 48,
+            "meanScore": 0.3484980983791395,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 27,
+            "meanScore": 0.4439232346766598,
+            "observedBotFraction": 0.037037037037037035
+          },
+          {
+            "lower": 0.5,
+            "n": 19,
+            "meanScore": 0.5377708005303337,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.6,
+            "n": 13,
+            "meanScore": 0.6490125794156364,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 4,
+            "meanScore": 0.7489394398624586,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.8,
+            "n": 3,
+            "meanScore": 0.8241216888044421,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.9,
+            "n": 9,
+            "meanScore": 0.9545753055106536,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.858966691880055,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "humanFalsePositiveRate": 0.017543859649122806,
+          "humanAcceptance": 0.9824561403508771,
+          "falsePositiveWilson95": [
+            0.009256695375208998,
+            0.03300306080540803
+          ],
+          "botN": 1,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            0.0,
+            0.7934567085261071
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.030040700017707422,
+        "pythonPeakTrackedBytes": 298020,
+        "pythonInferenceMsPerRow": 0.001752723718663598,
+        "serializedPythonBytes": 1704
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 37,
+          "falsePositiveRate": 0.07212475633528265,
+          "botN": 1,
+          "detectedN": 1,
+          "botDetectionRate": 1.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "falsePositiveRate": 0.001949317738791423,
+          "botN": 1,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.9980506822612085,
+        "prAuc": 0.5,
+        "brier": 0.06489987896196979,
+        "ece10": 0.18468682692145277,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 226,
+            "meanScore": 0.04360478510543406,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 114,
+            "meanScore": 0.14781718571256577,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 53,
+            "meanScore": 0.24400183694898958,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "n": 41,
+            "meanScore": 0.3444796494063638,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 42,
+            "meanScore": 0.44139744833614164,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.5,
+            "n": 19,
+            "meanScore": 0.5416043660168551,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.6,
+            "n": 14,
+            "meanScore": 0.6569328705093422,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 3,
+            "meanScore": 0.7047229765620721,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.8,
+            "n": 1,
+            "meanScore": 0.8772299935782738,
+            "observedBotFraction": 1.0
+          },
+          {
+            "lower": 0.9,
+            "n": 1,
+            "meanScore": 0.9042505409318561,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.6750073156995241,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 8,
+          "humanFalsePositiveRate": 0.015594541910331383,
+          "humanAcceptance": 0.9844054580896686,
+          "falsePositiveWilson95": [
+            0.00792261520401331,
+            0.03046748342581834
+          ],
+          "botN": 1,
+          "detectedN": 1,
+          "botDetectionRate": 1.0,
+          "botFalseNegativeRate": 0.0,
+          "detectionWilson95": [
+            0.20654329147389294,
+            1.0
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.3267460000060964,
+        "pythonPeakTrackedBytes": 3442633,
+        "pythonInferenceMsPerRow": 0.052867315148804266,
+        "serializedPythonBytes": 932166
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 81,
+        "botN": 1,
+        "botOutlierN": 1,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "local-lognormal": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 41,
+          "falsePositiveRate": 0.07992202729044834,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 8,
+          "falsePositiveRate": 0.015594541910331383,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.4266081871345029,
+        "prAuc": 0.06102905206236622,
+        "brier": 0.12966610040250084,
+        "ece10": 0.16885096455403123,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 85,
+            "meanScore": 0.0814300610772206,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 250,
+            "meanScore": 0.14165314039584126,
+            "observedBotFraction": 0.16
+          },
+          {
+            "lower": 0.2,
+            "n": 101,
+            "meanScore": 0.23884218371671553,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "n": 47,
+            "meanScore": 0.34714303275756275,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 29,
+            "meanScore": 0.4494098176350848,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.5,
+            "n": 14,
+            "meanScore": 0.5482859012491722,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.6,
+            "n": 13,
+            "meanScore": 0.6493831628427583,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 4,
+            "meanScore": 0.779632987072741,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.8,
+            "n": 2,
+            "meanScore": 0.8410217403338589,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.9,
+            "n": 8,
+            "meanScore": 0.9345107919952119,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.8522551792973957,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "humanFalsePositiveRate": 0.017543859649122806,
+          "humanAcceptance": 0.9824561403508771,
+          "falsePositiveWilson95": [
+            0.009256695375208998,
+            0.03300306080540803
+          ],
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            -6.938893903907228e-18,
+            0.08762453925039232
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.03069159999722615,
+        "pythonPeakTrackedBytes": 292470,
+        "pythonInferenceMsPerRow": 0.0016880651117448997,
+        "serializedPythonBytes": 1704
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 27,
+          "falsePositiveRate": 0.05263157894736842,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "falsePositiveRate": 0.001949317738791423,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.9366959064327485,
+        "prAuc": 0.3566418255715299,
+        "brier": 0.07373918703638918,
+        "ece10": 0.15565679241269595,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 220,
+            "meanScore": 0.04484996602118643,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 116,
+            "meanScore": 0.15228049985718528,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 65,
+            "meanScore": 0.2454215029630542,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "n": 54,
+            "meanScore": 0.3544818362485692,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 71,
+            "meanScore": 0.4580051550723737,
+            "observedBotFraction": 0.5633802816901409
+          },
+          {
+            "lower": 0.5,
+            "n": 16,
+            "meanScore": 0.5493349874775788,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.6,
+            "n": 10,
+            "meanScore": 0.6275215684280661,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.9,
+            "n": 1,
+            "meanScore": 0.9060493723216841,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.6427634619009488,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 2,
+          "humanFalsePositiveRate": 0.003898635477582846,
+          "humanAcceptance": 0.9961013645224172,
+          "falsePositiveWilson95": [
+            0.0010697759545932085,
+            0.01410237737052613
+          ],
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            -6.938893903907228e-18,
+            0.08762453925039232
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.4017420999880414,
+        "pythonPeakTrackedBytes": 3381982,
+        "pythonInferenceMsPerRow": 0.05105009036615262,
+        "serializedPythonBytes": 933454
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 81,
+        "botN": 40,
+        "botOutlierN": 6,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "local-random": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 48,
+          "falsePositiveRate": 0.0935672514619883,
+          "botN": 40,
+          "detectedN": 24,
+          "botDetectionRate": 0.6
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "falsePositiveRate": 0.017543859649122806,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.9102826510721247,
+        "prAuc": 0.2972404481730934,
+        "brier": 0.09826114442248535,
+        "ece10": 0.18408907069525565,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 98,
+            "meanScore": 0.07983220038714921,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 203,
+            "meanScore": 0.14134495537751554,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 88,
+            "meanScore": 0.2446205402061374,
+            "observedBotFraction": 0.011363636363636364
+          },
+          {
+            "lower": 0.3,
+            "n": 53,
+            "meanScore": 0.3501027794799543,
+            "observedBotFraction": 0.05660377358490566
+          },
+          {
+            "lower": 0.4,
+            "n": 39,
+            "meanScore": 0.4502408887251421,
+            "observedBotFraction": 0.3076923076923077
+          },
+          {
+            "lower": 0.5,
+            "n": 33,
+            "meanScore": 0.548239786733255,
+            "observedBotFraction": 0.36363636363636365
+          },
+          {
+            "lower": 0.6,
+            "n": 17,
+            "meanScore": 0.6491487509260978,
+            "observedBotFraction": 0.35294117647058826
+          },
+          {
+            "lower": 0.7,
+            "n": 10,
+            "meanScore": 0.7438620921910077,
+            "observedBotFraction": 0.5
+          },
+          {
+            "lower": 0.8,
+            "n": 3,
+            "meanScore": 0.8351659729814811,
+            "observedBotFraction": 0.3333333333333333
+          },
+          {
+            "lower": 0.9,
+            "n": 9,
+            "meanScore": 0.9524071594718099,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.840806706679744,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 10,
+          "humanFalsePositiveRate": 0.01949317738791423,
+          "humanAcceptance": 0.9805068226120858,
+          "falsePositiveWilson95": [
+            0.010621994240995195,
+            0.03550741949040723
+          ],
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            -6.938893903907228e-18,
+            0.08762453925039232
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.03399550000904128,
+        "pythonPeakTrackedBytes": 293737,
+        "pythonInferenceMsPerRow": 0.0017276672675033483,
+        "serializedPythonBytes": 1704
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 34,
+          "falsePositiveRate": 0.06627680311890838,
+          "botN": 40,
+          "detectedN": 6,
+          "botDetectionRate": 0.15
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "falsePositiveRate": 0.001949317738791423,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.8489766081871345,
+        "prAuc": 0.19346394366916414,
+        "brier": 0.08518208973076252,
+        "ece10": 0.12494029881116615,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 229,
+            "meanScore": 0.044239544495800164,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 110,
+            "meanScore": 0.14903793536049123,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 67,
+            "meanScore": 0.24651235589487064,
+            "observedBotFraction": 0.07462686567164178
+          },
+          {
+            "lower": 0.3,
+            "n": 53,
+            "meanScore": 0.3509601276385239,
+            "observedBotFraction": 0.33962264150943394
+          },
+          {
+            "lower": 0.4,
+            "n": 54,
+            "meanScore": 0.44098148169975826,
+            "observedBotFraction": 0.2037037037037037
+          },
+          {
+            "lower": 0.5,
+            "n": 25,
+            "meanScore": 0.5367407023892082,
+            "observedBotFraction": 0.24
+          },
+          {
+            "lower": 0.6,
+            "n": 13,
+            "meanScore": 0.6613516882273872,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 1,
+            "meanScore": 0.7130960306636867,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.9,
+            "n": 1,
+            "meanScore": 0.9075565044476281,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.6759933775397731,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 7,
+          "humanFalsePositiveRate": 0.01364522417153996,
+          "humanAcceptance": 0.9863547758284601,
+          "falsePositiveWilson95": [
+            0.006625042757439739,
+            0.02789539832160652
+          ],
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            -6.938893903907228e-18,
+            0.08762453925039232
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.405894099996658,
+        "pythonPeakTrackedBytes": 3377280,
+        "pythonInferenceMsPerRow": 0.05949077753865482,
+        "serializedPythonBytes": 901934
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 81,
+        "botN": 40,
+        "botOutlierN": 40,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "local-variable-speed": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 41,
+          "falsePositiveRate": 0.07992202729044834,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 9,
+          "falsePositiveRate": 0.017543859649122806,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.6509259259259259,
+        "prAuc": 0.095155003904659,
+        "brier": 0.1200051049302062,
+        "ece10": 0.16004574407787325,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 126,
+            "meanScore": 0.07731331257900555,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 206,
+            "meanScore": 0.14378628455187664,
+            "observedBotFraction": 0.05339805825242718
+          },
+          {
+            "lower": 0.2,
+            "n": 107,
+            "meanScore": 0.23871804769855848,
+            "observedBotFraction": 0.27102803738317754
+          },
+          {
+            "lower": 0.3,
+            "n": 47,
+            "meanScore": 0.34302443831497287,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 26,
+            "meanScore": 0.4516268574677005,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.5,
+            "n": 16,
+            "meanScore": 0.5629053127443214,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.6,
+            "n": 9,
+            "meanScore": 0.6453148419219397,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 5,
+            "meanScore": 0.7368801878473611,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.8,
+            "n": 2,
+            "meanScore": 0.8332079583613602,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.9,
+            "n": 9,
+            "meanScore": 0.9618992493375917,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.8280294650952502,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 10,
+          "humanFalsePositiveRate": 0.01949317738791423,
+          "humanAcceptance": 0.9805068226120858,
+          "falsePositiveWilson95": [
+            0.010621994240995195,
+            0.03550741949040723
+          ],
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            -6.938893903907228e-18,
+            0.08762453925039232
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.027660499996272847,
+        "pythonPeakTrackedBytes": 293740,
+        "pythonInferenceMsPerRow": 0.001667088618043938,
+        "serializedPythonBytes": 1704
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 35,
+          "falsePositiveRate": 0.0682261208576998,
+          "botN": 40,
+          "detectedN": 5,
+          "botDetectionRate": 0.125
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "falsePositiveRate": 0.001949317738791423,
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.9035087719298245,
+        "prAuc": 0.26506631305733785,
+        "brier": 0.07918903126566086,
+        "ece10": 0.12659142745506505,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 238,
+            "meanScore": 0.03984423841329131,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 109,
+            "meanScore": 0.14675911989762364,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 57,
+            "meanScore": 0.2483911297127784,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.3,
+            "n": 32,
+            "meanScore": 0.3517033011417129,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.4,
+            "n": 77,
+            "meanScore": 0.45622698331204753,
+            "observedBotFraction": 0.45454545454545453
+          },
+          {
+            "lower": 0.5,
+            "n": 23,
+            "meanScore": 0.5395106117001552,
+            "observedBotFraction": 0.21739130434782608
+          },
+          {
+            "lower": 0.6,
+            "n": 13,
+            "meanScore": 0.6522428506265769,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.7,
+            "n": 3,
+            "meanScore": 0.7221298891352591,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.9,
+            "n": 1,
+            "meanScore": 0.9288180316009584,
+            "observedBotFraction": 0.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.6543590842015736,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 10,
+          "humanFalsePositiveRate": 0.01949317738791423,
+          "humanAcceptance": 0.9805068226120858,
+          "falsePositiveWilson95": [
+            0.010621994240995195,
+            0.03550741949040723
+          ],
+          "botN": 40,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            -6.938893903907228e-18,
+            0.08762453925039232
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.3238837999815587,
+        "pythonPeakTrackedBytes": 3379233,
+        "pythonInferenceMsPerRow": 0.05295262207819408,
+        "serializedPythonBytes": 938103
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 81,
+        "botN": 40,
+        "botOutlierN": 40,
+        "interpretation": "Not an automation probability"
+      }
+    }
+  },
+  "limitations": [
+    "No application-specific human corpus",
+    "Source folders cannot establish participant identity",
+    "Canonical shape loses physical time and may miss reactive bots",
+    "Python tracemalloc excludes some native allocations",
+    "No calibrated application probability",
+    "No independent second human corpus; bot-only source transfer is not human FPR",
+    "No human bubble-response training data"
+  ],
+  "lightgbmAndSequences": "Not added: no independent application training set or evidence justifying additional complexity",
+  "ablations": {
+    "withoutMagnitude": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 0,
+          "falsePositiveRate": 0.0,
+          "botN": 777,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 0,
+          "falsePositiveRate": 0.0,
+          "botN": 777,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.5789900175865088,
+        "prAuc": 0.7559415027850103,
+        "brier": 0.3488058290868911,
+        "ece10": 0.3341244994988737,
+        "calibrationBins": [
+          {
+            "lower": 0.1,
+            "n": 46,
+            "meanScore": 0.19376641310041307,
+            "observedBotFraction": 1.0
+          },
+          {
+            "lower": 0.2,
+            "n": 973,
+            "meanScore": 0.25865090275314956,
+            "observedBotFraction": 0.49537512846865367
+          },
+          {
+            "lower": 0.3,
+            "n": 271,
+            "meanScore": 0.3151247685056067,
+            "observedBotFraction": 0.9188191881918819
+          }
+        ],
+        "calibrationSelectedThreshold": 0.3295602943626069,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 2,
+          "humanFalsePositiveRate": 0.003898635477582846,
+          "humanAcceptance": 0.9961013645224172,
+          "falsePositiveWilson95": [
+            0.0010697759545932085,
+            0.01410237737052613
+          ],
+          "botN": 777,
+          "detectedN": 29,
+          "botDetectionRate": 0.03732303732303732,
+          "botFalseNegativeRate": 0.9626769626769627,
+          "detectionWilson95": [
+            0.026110412523261003,
+            0.053088236729032914
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.03595850002602674,
+        "pythonPeakTrackedBytes": 155282,
+        "pythonInferenceMsPerRow": 0.0014718604597169184,
+        "serializedPythonBytes": 1576
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 31,
+          "falsePositiveRate": 0.06042884990253411,
+          "botN": 777,
+          "detectedN": 479,
+          "botDetectionRate": 0.6164736164736164
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 0,
+          "falsePositiveRate": 0.0,
+          "botN": 777,
+          "detectedN": 15,
+          "botDetectionRate": 0.019305019305019305
+        },
+        "rocAuc": 0.9422931703633457,
+        "prAuc": 0.9524856135759394,
+        "brier": 0.15420656534791358,
+        "ece10": 0.22410966480160666,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 220,
+            "meanScore": 0.041523734656344194,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.1,
+            "n": 102,
+            "meanScore": 0.1447014654907214,
+            "observedBotFraction": 0.029411764705882353
+          },
+          {
+            "lower": 0.2,
+            "n": 123,
+            "meanScore": 0.25637930389363556,
+            "observedBotFraction": 0.25203252032520324
+          },
+          {
+            "lower": 0.3,
+            "n": 140,
+            "meanScore": 0.33364910801235964,
+            "observedBotFraction": 0.6214285714285714
+          },
+          {
+            "lower": 0.4,
+            "n": 195,
+            "meanScore": 0.4501798647887598,
+            "observedBotFraction": 0.9076923076923077
+          },
+          {
+            "lower": 0.5,
+            "n": 213,
+            "meanScore": 0.5469552179982983,
+            "observedBotFraction": 0.9014084507042254
+          },
+          {
+            "lower": 0.6,
+            "n": 112,
+            "meanScore": 0.6555759922263074,
+            "observedBotFraction": 0.9285714285714286
+          },
+          {
+            "lower": 0.7,
+            "n": 73,
+            "meanScore": 0.7494474815421172,
+            "observedBotFraction": 0.9726027397260274
+          },
+          {
+            "lower": 0.8,
+            "n": 97,
+            "meanScore": 0.8495873238132449,
+            "observedBotFraction": 1.0
+          },
+          {
+            "lower": 0.9,
+            "n": 15,
+            "meanScore": 0.9190933338874767,
+            "observedBotFraction": 1.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.7028591716886262,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 2,
+          "humanFalsePositiveRate": 0.003898635477582846,
+          "humanAcceptance": 0.9961013645224172,
+          "falsePositiveWilson95": [
+            0.0010697759545932085,
+            0.01410237737052613
+          ],
+          "botN": 777,
+          "detectedN": 178,
+          "botDetectionRate": 0.22908622908622908,
+          "botFalseNegativeRate": 0.7709137709137709,
+          "detectionWilson95": [
+            0.20091238441816262,
+            0.25992576764750597
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 3.7774382999923546,
+        "pythonPeakTrackedBytes": 2086692,
+        "pythonInferenceMsPerRow": 0.05231046511759158,
+        "serializedPythonBytes": 910438
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 106,
+        "botN": 777,
+        "botOutlierN": 736,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "directionAndEfficiency": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 0,
+          "falsePositiveRate": 0.0,
+          "botN": 777,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 0,
+          "falsePositiveRate": 0.0,
+          "botN": 777,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.36974317676072066,
+        "prAuc": 0.581846092761389,
+        "brier": 0.45121180063444744,
+        "ece10": 0.4249398884436511,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 372,
+            "meanScore": 0.05288126148536593,
+            "observedBotFraction": 0.9193548387096774
+          },
+          {
+            "lower": 0.1,
+            "n": 357,
+            "meanScore": 0.15868520817133694,
+            "observedBotFraction": 0.36694677871148457
+          },
+          {
+            "lower": 0.2,
+            "n": 413,
+            "meanScore": 0.2430487088623721,
+            "observedBotFraction": 0.46731234866828086
+          },
+          {
+            "lower": 0.3,
+            "n": 132,
+            "meanScore": 0.3437552699427977,
+            "observedBotFraction": 0.7727272727272727
+          },
+          {
+            "lower": 0.4,
+            "n": 16,
+            "meanScore": 0.42189268283485754,
+            "observedBotFraction": 0.5625
+          }
+        ],
+        "calibrationSelectedThreshold": 0.4660921890734138,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "humanFalsePositiveRate": 0.001949317738791423,
+          "humanAcceptance": 0.9980506822612085,
+          "falsePositiveWilson95": [
+            0.00034417650750642476,
+            0.01095831926682753
+          ],
+          "botN": 777,
+          "detectedN": 0,
+          "botDetectionRate": 0.0,
+          "botFalseNegativeRate": 1.0,
+          "detectionWilson95": [
+            0.0,
+            0.00491981984566396
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.054456899990327656,
+        "pythonPeakTrackedBytes": 127845,
+        "pythonInferenceMsPerRow": 0.0011482945636145827,
+        "serializedPythonBytes": 1480
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 36,
+          "falsePositiveRate": 0.07017543859649122,
+          "botN": 777,
+          "detectedN": 432,
+          "botDetectionRate": 0.555984555984556
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 2,
+          "falsePositiveRate": 0.003898635477582846,
+          "botN": 777,
+          "detectedN": 71,
+          "botDetectionRate": 0.09137709137709138
+        },
+        "rocAuc": 0.9016083752925859,
+        "prAuc": 0.9219125882163985,
+        "brier": 0.18000533768457147,
+        "ece10": 0.2083214761019882,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 297,
+            "meanScore": 0.03304140634578216,
+            "observedBotFraction": 0.016835016835016835
+          },
+          {
+            "lower": 0.1,
+            "n": 145,
+            "meanScore": 0.1647322965794272,
+            "observedBotFraction": 0.46206896551724136
+          },
+          {
+            "lower": 0.2,
+            "n": 171,
+            "meanScore": 0.25587218069354783,
+            "observedBotFraction": 0.7134502923976608
+          },
+          {
+            "lower": 0.3,
+            "n": 122,
+            "meanScore": 0.33728869608514794,
+            "observedBotFraction": 0.7049180327868853
+          },
+          {
+            "lower": 0.4,
+            "n": 87,
+            "meanScore": 0.44704188089571995,
+            "observedBotFraction": 0.7471264367816092
+          },
+          {
+            "lower": 0.5,
+            "n": 56,
+            "meanScore": 0.5469043968776338,
+            "observedBotFraction": 0.7678571428571429
+          },
+          {
+            "lower": 0.6,
+            "n": 102,
+            "meanScore": 0.6470716181651563,
+            "observedBotFraction": 0.8921568627450981
+          },
+          {
+            "lower": 0.7,
+            "n": 48,
+            "meanScore": 0.7600567096516425,
+            "observedBotFraction": 0.8958333333333334
+          },
+          {
+            "lower": 0.8,
+            "n": 189,
+            "meanScore": 0.8295638941261585,
+            "observedBotFraction": 0.9735449735449735
+          },
+          {
+            "lower": 0.9,
+            "n": 73,
+            "meanScore": 0.9657281331381773,
+            "observedBotFraction": 0.9726027397260274
+          }
+        ],
+        "calibrationSelectedThreshold": 0.7247359657171133,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 8,
+          "humanFalsePositiveRate": 0.015594541910331383,
+          "humanAcceptance": 0.9844054580896686,
+          "falsePositiveWilson95": [
+            0.00792261520401331,
+            0.03046748342581834
+          ],
+          "botN": 777,
+          "detectedN": 289,
+          "botDetectionRate": 0.37194337194337196,
+          "botFalseNegativeRate": 0.628056628056628,
+          "detectionWilson95": [
+            0.33866654134125723,
+            0.40648023362565017
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 4.360727499995846,
+        "pythonPeakTrackedBytes": 2067036,
+        "pythonInferenceMsPerRow": 0.044202403090497146,
+        "serializedPythonBytes": 1113505
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 134,
+        "botN": 777,
+        "botOutlierN": 777,
+        "interpretation": "Not an automation probability"
+      }
+    },
+    "withoutCorrections": {
+      "regularizedLogistic": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 0,
+          "falsePositiveRate": 0.0,
+          "botN": 777,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 0,
+          "falsePositiveRate": 0.0,
+          "botN": 777,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.6160947915333881,
+        "prAuc": 0.7822333713836406,
+        "brier": 0.34644866877434044,
+        "ece10": 0.3406677975287394,
+        "calibrationBins": [
+          {
+            "lower": 0.0,
+            "n": 1,
+            "meanScore": 0.09584779977522272,
+            "observedBotFraction": 1.0
+          },
+          {
+            "lower": 0.1,
+            "n": 285,
+            "meanScore": 0.1597205390314934,
+            "observedBotFraction": 0.7614035087719299
+          },
+          {
+            "lower": 0.2,
+            "n": 591,
+            "meanScore": 0.24523911388634684,
+            "observedBotFraction": 0.32825719120135366
+          },
+          {
+            "lower": 0.3,
+            "n": 360,
+            "meanScore": 0.3454642856710053,
+            "observedBotFraction": 0.8722222222222222
+          },
+          {
+            "lower": 0.4,
+            "n": 53,
+            "meanScore": 0.42677133237325476,
+            "observedBotFraction": 0.9622641509433962
+          }
+        ],
+        "calibrationSelectedThreshold": 0.3999185315524989,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 2,
+          "humanFalsePositiveRate": 0.003898635477582846,
+          "humanAcceptance": 0.9961013645224172,
+          "falsePositiveWilson95": [
+            0.0010697759545932085,
+            0.01410237737052613
+          ],
+          "botN": 777,
+          "detectedN": 52,
+          "botDetectionRate": 0.06692406692406692,
+          "botFalseNegativeRate": 0.9330759330759331,
+          "detectionWilson95": [
+            0.051398023894733774,
+            0.08671142109385291
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 0.042028000025311485,
+        "pythonPeakTrackedBytes": 170547,
+        "pythonInferenceMsPerRow": 0.0012875969121016043,
+        "serializedPythonBytes": 1640
+      },
+      "randomForest": {
+        "threshold05": {
+          "humanN": 513,
+          "falsePositiveN": 0,
+          "falsePositiveRate": 0.0,
+          "botN": 777,
+          "detectedN": 30,
+          "botDetectionRate": 0.03861003861003861
+        },
+        "threshold09": {
+          "humanN": 513,
+          "falsePositiveN": 0,
+          "falsePositiveRate": 0.0,
+          "botN": 777,
+          "detectedN": 0,
+          "botDetectionRate": 0.0
+        },
+        "rocAuc": 0.9257703819107329,
+        "prAuc": 0.940414328330555,
+        "brier": 0.26285328393420726,
+        "ece10": 0.3447834490618137,
+        "calibrationBins": [
+          {
+            "lower": 0.1,
+            "n": 230,
+            "meanScore": 0.1516037354404596,
+            "observedBotFraction": 0.0
+          },
+          {
+            "lower": 0.2,
+            "n": 319,
+            "meanScore": 0.2608817502709802,
+            "observedBotFraction": 0.36990595611285265
+          },
+          {
+            "lower": 0.3,
+            "n": 551,
+            "meanScore": 0.35580073394392503,
+            "observedBotFraction": 0.8584392014519057
+          },
+          {
+            "lower": 0.4,
+            "n": 160,
+            "meanScore": 0.4466875695131223,
+            "observedBotFraction": 0.975
+          },
+          {
+            "lower": 0.5,
+            "n": 29,
+            "meanScore": 0.533982774259662,
+            "observedBotFraction": 1.0
+          },
+          {
+            "lower": 0.8,
+            "n": 1,
+            "meanScore": 0.8752155463909778,
+            "observedBotFraction": 1.0
+          }
+        ],
+        "calibrationSelectedThreshold": 0.43077093463147903,
+        "operatingPoint": {
+          "humanN": 513,
+          "falsePositiveN": 1,
+          "humanFalsePositiveRate": 0.001949317738791423,
+          "humanAcceptance": 0.9980506822612085,
+          "falsePositiveWilson95": [
+            0.00034417650750642476,
+            0.01095831926682753
+          ],
+          "botN": 777,
+          "detectedN": 138,
+          "botDetectionRate": 0.1776061776061776,
+          "botFalseNegativeRate": 0.8223938223938224,
+          "detectionWilson95": [
+            0.15233870147013556,
+            0.20604589279328478
+          ]
+        },
+        "calibrationFprConstraint": 0.01,
+        "trainingSeconds": 2.70091750001302,
+        "pythonPeakTrackedBytes": 2086723,
+        "pythonInferenceMsPerRow": 0.02864558139613779,
+        "serializedPythonBytes": 822109
+      },
+      "humanAnomaly": {
+        "humanN": 513,
+        "humanOutlierN": 94,
+        "botN": 777,
+        "botOutlierN": 755,
+        "interpretation": "Not an automation probability"
+      }
+    }
+  },
+  "bubbleResponseContribution": {
+    "humanRowsWithTargets": 0,
+    "status": "Not estimable without consenting human bubble-response data; synthetic responsiveness is not human classification",
+    "benchmark": "phase2-bubble-response.json"
+  },
+  "crossSourceBotOnly": {
+    "regularizedLogistic": {
+      "threshold05": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "falsePositiveRate": null,
+        "botN": 90,
+        "detectedN": 9,
+        "botDetectionRate": 0.1
+      },
+      "threshold09": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "falsePositiveRate": null,
+        "botN": 90,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": null,
+      "prAuc": null,
+      "brier": 0.489190689655134,
+      "ece10": 0.6742028874405643,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 29,
+          "meanScore": 0.06349554534096051,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.1,
+          "n": 1,
+          "meanScore": 0.10363494630312552,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.4,
+          "n": 51,
+          "meanScore": 0.447436562600225,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.5,
+          "n": 9,
+          "meanScore": 0.5063855196163064,
+          "observedBotFraction": 1.0
+        }
+      ],
+      "calibrationSelectedThreshold": 0.4519648998093353,
+      "operatingPoint": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "humanFalsePositiveRate": null,
+        "humanAcceptance": null,
+        "falsePositiveWilson95": null,
+        "botN": 90,
+        "detectedN": 30,
+        "botDetectionRate": 0.3333333333333333,
+        "botFalseNegativeRate": 0.6666666666666667,
+        "detectionWilson95": [
+          0.2445335995323974,
+          0.4357787566081628
+        ]
+      },
+      "calibrationFprConstraint": 0.01,
+      "trainingSeconds": 0.025983400002587587,
+      "pythonPeakTrackedBytes": 175899,
+      "pythonInferenceMsPerRow": 0.008902222422572473,
+      "serializedPythonBytes": 1704
+    },
+    "randomForest": {
+      "threshold05": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "falsePositiveRate": null,
+        "botN": 90,
+        "detectedN": 30,
+        "botDetectionRate": 0.3333333333333333
+      },
+      "threshold09": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "falsePositiveRate": null,
+        "botN": 90,
+        "detectedN": 0,
+        "botDetectionRate": 0.0
+      },
+      "rocAuc": null,
+      "prAuc": null,
+      "brier": 0.2636438962845258,
+      "ece10": 0.4705564145406113,
+      "calibrationBins": [
+        {
+          "lower": 0.3,
+          "n": 30,
+          "meanScore": 0.33931781881423534,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.4,
+          "n": 30,
+          "meanScore": 0.43683558732513567,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.7,
+          "n": 11,
+          "meanScore": 0.7708599305376619,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.8,
+          "n": 19,
+          "meanScore": 0.836097961644714,
+          "observedBotFraction": 1.0
+        }
+      ],
+      "calibrationSelectedThreshold": 0.6068204312238451,
+      "operatingPoint": {
+        "humanN": 0,
+        "falsePositiveN": 0,
+        "humanFalsePositiveRate": null,
+        "humanAcceptance": null,
+        "falsePositiveWilson95": null,
+        "botN": 90,
+        "detectedN": 30,
+        "botDetectionRate": 0.3333333333333333,
+        "botFalseNegativeRate": 0.6666666666666667,
+        "detectionWilson95": [
+          0.2445335995323974,
+          0.4357787566081628
+        ]
+      },
+      "calibrationFprConstraint": 0.01,
+      "trainingSeconds": 2.2064154999970924,
+      "pythonPeakTrackedBytes": 1893145,
+      "pythonInferenceMsPerRow": 0.27481000029688907,
+      "serializedPythonBytes": 834413
+    },
+    "humanAnomaly": {
+      "humanN": 0,
+      "humanOutlierN": 0,
+      "botN": 90,
+      "botOutlierN": 90,
+      "interpretation": "Not an automation probability"
+    }
+  },
+  "crossDeviceProxy": {
+    "circles_human_pc2": {
+      "threshold05": {
+        "humanN": 451,
+        "falsePositiveN": 1,
+        "falsePositiveRate": 0.0022172949002217295,
+        "botN": 0,
+        "detectedN": 0,
+        "botDetectionRate": null
+      },
+      "threshold09": {
+        "humanN": 451,
+        "falsePositiveN": 0,
+        "falsePositiveRate": 0.0,
+        "botN": 0,
+        "detectedN": 0,
+        "botDetectionRate": null
+      },
+      "rocAuc": null,
+      "prAuc": null,
+      "brier": 0.05026643651950952,
+      "ece10": 0.2171175661435419,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 3,
+          "meanScore": 0.091471562836327,
+          "observedBotFraction": 0.0
+        },
+        {
+          "lower": 0.1,
+          "n": 186,
+          "meanScore": 0.17114316632437004,
+          "observedBotFraction": 0.0
+        },
+        {
+          "lower": 0.2,
+          "n": 230,
+          "meanScore": 0.23709932525564983,
+          "observedBotFraction": 0.0
+        },
+        {
+          "lower": 0.3,
+          "n": 31,
+          "meanScore": 0.3476265349053285,
+          "observedBotFraction": 0.0
+        },
+        {
+          "lower": 0.5,
+          "n": 1,
+          "meanScore": 0.5037113150309368,
+          "observedBotFraction": 0.0
+        }
+      ],
+      "calibrationSelectedThreshold": 0.46526302138742254,
+      "operatingPoint": {
+        "humanN": 451,
+        "falsePositiveN": 1,
+        "humanFalsePositiveRate": 0.0022172949002217295,
+        "humanAcceptance": 0.9977827050997783,
+        "falsePositiveWilson95": [
+          0.0003915042103414274,
+          0.012451648218987815
+        ],
+        "botN": 0,
+        "detectedN": 0,
+        "botDetectionRate": null,
+        "botFalseNegativeRate": null,
+        "detectionWilson95": null
+      }
+    },
+    "circles_human_pc2_pad": {
+      "threshold05": {
+        "humanN": 62,
+        "falsePositiveN": 0,
+        "falsePositiveRate": 0.0,
+        "botN": 0,
+        "detectedN": 0,
+        "botDetectionRate": null
+      },
+      "threshold09": {
+        "humanN": 62,
+        "falsePositiveN": 0,
+        "falsePositiveRate": 0.0,
+        "botN": 0,
+        "detectedN": 0,
+        "botDetectionRate": null
+      },
+      "rocAuc": null,
+      "prAuc": null,
+      "brier": 0.08249806508433334,
+      "ece10": 0.27615529327461436,
+      "calibrationBins": [
+        {
+          "lower": 0.1,
+          "n": 10,
+          "meanScore": 0.15783282971559018,
+          "observedBotFraction": 0.0
+        },
+        {
+          "lower": 0.2,
+          "n": 31,
+          "meanScore": 0.26009234753637755,
+          "observedBotFraction": 0.0
+        },
+        {
+          "lower": 0.3,
+          "n": 16,
+          "meanScore": 0.32610062041705584,
+          "observedBotFraction": 0.0
+        },
+        {
+          "lower": 0.4,
+          "n": 5,
+          "meanScore": 0.45256543711391783,
+          "observedBotFraction": 0.0
+        }
+      ],
+      "calibrationSelectedThreshold": 0.46526302138742254,
+      "operatingPoint": {
+        "humanN": 62,
+        "falsePositiveN": 1,
+        "humanFalsePositiveRate": 0.016129032258064516,
+        "humanAcceptance": 0.9838709677419355,
+        "falsePositiveWilson95": [
+          0.0028527936922403963,
+          0.08586923007388922
+        ],
+        "botN": 0,
+        "detectedN": 0,
+        "botDetectionRate": null,
+        "botFalseNegativeRate": null,
+        "detectionWilson95": null
+      }
+    }
+  },
+  "fixedLegacyModelDiagnostics": {
+    "original": {
+      "threshold05": {
+        "humanN": 513,
+        "falsePositiveN": 10,
+        "falsePositiveRate": 0.01949317738791423,
+        "botN": 777,
+        "detectedN": 694,
+        "botDetectionRate": 0.8931788931788932
+      },
+      "threshold09": {
+        "humanN": 513,
+        "falsePositiveN": 10,
+        "falsePositiveRate": 0.01949317738791423,
+        "botN": 777,
+        "detectedN": 687,
+        "botDetectionRate": 0.8841698841698842
+      },
+      "rocAuc": 0.9833743517954044,
+      "prAuc": 0.9717582945910554,
+      "brier": 0.048857683537677304,
+      "ece10": 0.061561294172313846,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 498,
+          "meanScore": 0.008637702426027854,
+          "observedBotFraction": 0.0
+        },
+        {
+          "lower": 0.1,
+          "n": 45,
+          "meanScore": 0.1105640844847695,
+          "observedBotFraction": 0.9111111111111111
+        },
+        {
+          "lower": 0.2,
+          "n": 5,
+          "meanScore": 0.2893940801235811,
+          "observedBotFraction": 0.8
+        },
+        {
+          "lower": 0.3,
+          "n": 37,
+          "meanScore": 0.3218683031005737,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.4,
+          "n": 1,
+          "meanScore": 0.4505497532550554,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.5,
+          "n": 3,
+          "meanScore": 0.5820661605465919,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.6,
+          "n": 1,
+          "meanScore": 0.6700866835381855,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.7,
+          "n": 2,
+          "meanScore": 0.7586695494589497,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.8,
+          "n": 1,
+          "meanScore": 0.8995802792909192,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.9,
+          "n": 697,
+          "meanScore": 0.9981746476153781,
+          "observedBotFraction": 0.9856527977044476
+        }
+      ],
+      "calibrationSelectedThreshold": 0.9,
+      "operatingPoint": {
+        "humanN": 513,
+        "falsePositiveN": 10,
+        "humanFalsePositiveRate": 0.01949317738791423,
+        "humanAcceptance": 0.9805068226120858,
+        "falsePositiveWilson95": [
+          0.010621994240995195,
+          0.03550741949040723
+        ],
+        "botN": 777,
+        "detectedN": 687,
+        "botDetectionRate": 0.8841698841698842,
+        "botFalseNegativeRate": 0.11583011583011582,
+        "detectionWilson95": [
+          0.859753669511836,
+          0.9048060055874414
+        ]
+      }
+    },
+    "resampled32": {
+      "threshold05": {
+        "humanN": 513,
+        "falsePositiveN": 513,
+        "falsePositiveRate": 1.0,
+        "botN": 777,
+        "detectedN": 732,
+        "botDetectionRate": 0.9420849420849421
+      },
+      "threshold09": {
+        "humanN": 513,
+        "falsePositiveN": 261,
+        "falsePositiveRate": 0.5087719298245614,
+        "botN": 777,
+        "detectedN": 684,
+        "botDetectionRate": 0.8803088803088803
+      },
+      "rocAuc": 0.8627951259530207,
+      "prAuc": 0.9154225403057005,
+      "brier": 0.34924768976844844,
+      "ece10": 0.397533913716678,
+      "calibrationBins": [
+        {
+          "lower": 0.2,
+          "n": 41,
+          "meanScore": 0.2430051513164296,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.4,
+          "n": 4,
+          "meanScore": 0.4496893551814094,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.5,
+          "n": 41,
+          "meanScore": 0.5574024211485165,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.6,
+          "n": 3,
+          "meanScore": 0.643513547003602,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.7,
+          "n": 15,
+          "meanScore": 0.7721892892024547,
+          "observedBotFraction": 0.13333333333333333
+        },
+        {
+          "lower": 0.8,
+          "n": 241,
+          "meanScore": 0.8626654681694439,
+          "observedBotFraction": 0.008298755186721992
+        },
+        {
+          "lower": 0.9,
+          "n": 945,
+          "meanScore": 0.982941312233271,
+          "observedBotFraction": 0.7238095238095238
+        }
+      ],
+      "calibrationSelectedThreshold": 0.9,
+      "operatingPoint": {
+        "humanN": 513,
+        "falsePositiveN": 261,
+        "humanFalsePositiveRate": 0.5087719298245614,
+        "humanAcceptance": 0.49122807017543857,
+        "falsePositiveWilson95": [
+          0.4656063597204922,
+          0.5518070992580419
+        ],
+        "botN": 777,
+        "detectedN": 684,
+        "botDetectionRate": 0.8803088803088803,
+        "botFalseNegativeRate": 0.11969111969111967,
+        "detectionWilson95": [
+          0.8555931707659716,
+          0.9012824874981371
+        ]
+      }
+    },
+    "resampledKeepingOriginalTiming": {
+      "threshold05": {
+        "humanN": 513,
+        "falsePositiveN": 10,
+        "falsePositiveRate": 0.01949317738791423,
+        "botN": 777,
+        "detectedN": 689,
+        "botDetectionRate": 0.8867438867438867
+      },
+      "threshold09": {
+        "humanN": 513,
+        "falsePositiveN": 10,
+        "falsePositiveRate": 0.01949317738791423,
+        "botN": 777,
+        "detectedN": 682,
+        "botDetectionRate": 0.8777348777348777
+      },
+      "rocAuc": 0.9821049119294734,
+      "prAuc": 0.9685301283702973,
+      "brier": 0.0509799695905732,
+      "ece10": 0.05648579866316619,
+      "calibrationBins": [
+        {
+          "lower": 0.0,
+          "n": 497,
+          "meanScore": 0.01055953946888862,
+          "observedBotFraction": 0.012072434607645875
+        },
+        {
+          "lower": 0.1,
+          "n": 43,
+          "meanScore": 0.11076970328718257,
+          "observedBotFraction": 0.813953488372093
+        },
+        {
+          "lower": 0.2,
+          "n": 8,
+          "meanScore": 0.26728772044578486,
+          "observedBotFraction": 0.625
+        },
+        {
+          "lower": 0.3,
+          "n": 41,
+          "meanScore": 0.31674323169852614,
+          "observedBotFraction": 0.975609756097561
+        },
+        {
+          "lower": 0.4,
+          "n": 2,
+          "meanScore": 0.4916385344554759,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.5,
+          "n": 2,
+          "meanScore": 0.5463029194581512,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.7,
+          "n": 2,
+          "meanScore": 0.7781320490168777,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.8,
+          "n": 3,
+          "meanScore": 0.8783937568827241,
+          "observedBotFraction": 1.0
+        },
+        {
+          "lower": 0.9,
+          "n": 692,
+          "meanScore": 0.9989450450470895,
+          "observedBotFraction": 0.9855491329479769
+        }
+      ],
+      "calibrationSelectedThreshold": 0.9,
+      "operatingPoint": {
+        "humanN": 513,
+        "falsePositiveN": 10,
+        "humanFalsePositiveRate": 0.01949317738791423,
+        "humanAcceptance": 0.9805068226120858,
+        "falsePositiveWilson95": [
+          0.010621994240995195,
+          0.03550741949040723
+        ],
+        "botN": 777,
+        "detectedN": 682,
+        "botDetectionRate": 0.8777348777348777,
+        "botFalseNegativeRate": 0.12226512226512232,
+        "detectionWilson95": [
+          0.8528237078709344,
+          0.898929272503062
+        ]
+      }
+    },
+    "note": "Phase 2 687->92 compared refitted models, not a single model perturbed in place."
+  }
+}

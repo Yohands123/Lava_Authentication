@@ -1,5 +1,9 @@
 # CLAUDE.md: LavaAuth
 
+**Phase 4 / 4B owner scope, 2026-10-17:** implement security hardening, optional disabled-by-default Turnstile, actual linting, bounded observability, controlled local load tests, staging drafts and defensible ML engineering. The optional provider authorizes only a feature-gated `challenges.cloudflare.com` script/frame CSP exception; default CSP stays restrictive. Preserve the approved UI, physics and mandatory passkeys. Do not deploy, merge, create remote resources, request production credentials, or enable production model enforcement. Current reports are docs/LAVAGUARD_PHASE4_RESULTS.md and docs/LAVAGUARD_ML_PHASE4_RESULTS.md. These requests authorize the corresponding development/test tools and supersede earlier phase-only restrictions.
+
+**LavaGuard scope update, authorized by the owner 2026-10-17:** the complete implementation and Phase 2 validation supersede the older phase-only workflow, gesture-only access and no-gradient-result restrictions below. After four human retries in the automated demo browser, normal localhost development enforces protocol controls while movement and WebDriver hints remain advisory; its experimental model is disabled. Strict model refusals belong only to isolated localhost research tests. Production remains off; model activation is prohibited outside localhost. Local evaluation sends disclosed aggregates, never raw paths. Optional research exports require explicit consent before an attempt and stay local. Accessible server attempts require separate passkey authentication. Do not deploy, merge, or enable production collection/enforcement. All original cryptographic passkey/randomness/session protections remain mandatory. Current findings: docs/LAVAGUARD_PHASE2_RESULTS.md.
+
 Instructions for Claude Code working in this repository. Read this file completely at the start of every session. When this file and your own defaults disagree, this file wins.
 
 ---
@@ -44,7 +48,7 @@ These rules are never broken, even if a task seems to call for it. If a request 
 4. **Challenges are single-use.** Read and delete in the same Durable Object request. A failed verification still consumes the challenge.
 5. **Challenges expire** after `CHALLENGE_TTL_SECONDS` (default 60).
 6. **Verify origin, RP ID, user verification flag and signature counter** on every assertion using `@simplewebauthn/server`.
-7. **Raw pointer data and camera frames never leave the browser.** Only 32-byte SHA-256 digests are sent. Never add analytics, logging or telemetry that transmits raw input.
+7. **Raw pointer paths and camera frames never leave the browser.** Production LavaGuard is off and sends only entropy digests. The owner-authorized local shadow preview may send disclosed bounded feature summaries, with short-lived hashes/outcomes and deletion controls. Never add raw-input uploads or production behavioral collection without explicit owner approval.
 8. **Session cookies** are always `HttpOnly; Secure; SameSite=Strict; Path=/` and contain only an opaque random ID. Session data lives in `SessionStore`.
 9. **No secrets in the repo.** No API keys, tokens or credentials in code, tests, fixtures or commits.
 10. **No password fallback**, no "magic link" fallback, no security questions. Passkeys only.
@@ -76,7 +80,7 @@ These rules are never broken, even if a task seems to call for it. If a request 
 ### 2.3 Accessibility rules
 
 1. Respect `prefers-reduced-motion: reduce` everywhere: lamp at 15% speed, no bursts or waves (fades only).
-2. **Clearing the ring is required to sign in** (owner's decision, 2026-10-11). The user stirs all the wax out of the entropy ring with a pointer; only then does Sign in appear. There is no skip and no keyboard alternative. This knowingly excludes keyboard-only, screen-reader and some motor-impaired users; revisit before any public launch. It is a ritual, not a security control: never describe it as bot protection.
+2. **Offer an accessible passkey route without stirring** (owner's LavaGuard request, 2026-10-17, superseding the gesture-only decision). The normal experience still clears wax from the ring and shows one server verdict inside it. The alternative uses explicit server issuance and independent abuse controls; both paths require separate verified WebAuthn authentication. Gesture classification is probabilistic and cannot prove humanity or identity.
 3. Every action except clearing the ring is reachable by keyboard.
 4. The canvas is `aria-hidden="true"`. State changes are announced through a single polite `aria-live` region.
 5. All text meets WCAG AA contrast against the brightest area the lamp can produce behind it. Glass panels behind text carry a dark tint to guarantee this.

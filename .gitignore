@@ -8,3 +8,9 @@ docs/media/*.mov
 docs/media/*.mp4
 test-results/
 playwright-report/
+.venv/
+.cache/
+ml/private/
+ml/datasets/raw/
+ml/datasets/normalized/
+__pycache__/

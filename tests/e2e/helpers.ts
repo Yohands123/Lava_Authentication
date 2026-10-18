@@ -66,20 +66,24 @@ export const ringIsClear = (page: Page) => page.locator("[data-screen=stir].is-c
 
 /** Wobbly, irregular circles around the ring, the way a person stirs, until the ring is clear. */
 export async function clearRing(page: Page, timeoutMs = 30_000): Promise<void> {
-  const { width, height } = page.viewportSize()!;
-  const cx = width / 2;
-  const cy = height / 2;
-  const short = Math.min(width, height);
+  await expect(page.locator("[data-screen=stir]")).toHaveAttribute("data-guard-state", "STIRRING");
+  const box = (await page.locator("[data-ring-arc]").boundingBox())!;
+  const cx = box.x + box.width / 2;
+  const cy = box.y + box.height / 2;
+  const short = box.width / .6624;
+  let seed = 42;
+  const rng = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 4294967296; };
   const start = Date.now();
   let a = 0;
-  while (!(await ringIsClear(page).count())) {
+  while ((await page.locator("[data-screen=stir]").getAttribute("data-guard-state")) === "STIRRING") {
     if (Date.now() - start > timeoutMs) throw new Error("ring not cleared in time");
     for (let i = 0; i < 40; i++) {
-      a += 0.12 + Math.random() * 0.1; // test input only
-      const r = short * (0.08 + 0.3 * Math.abs(Math.sin(a * 0.31)) + Math.random() * 0.03);
+      a += 0.12 + rng() * 0.1;
+      const r = short * (0.08 + 0.3 * Math.abs(Math.sin(a * 0.31)) + rng() * 0.03);
       await page.mouse.move(cx + Math.cos(a) * r, cy + Math.sin(a * 1.17) * r);
     }
   }
+  await expect(page.locator("[data-screen=stir]")).toHaveAttribute("data-guard-state", /CLEAR|FLAG|BLOCK/);
 }
 
 /** From the choose screen's Sign in: clear the ring, then press Sign in. */

@@ -49,8 +49,27 @@
           <p class="readout mono"><span data-bits>0</span> bits <span class="quiet">(conservative estimate)</span></p>
           <p class="hint">Push all the wax out of the ring to sign in.</p>
           <div class="actions actions-centre">
-            <button class="glass button button-passkey" type="button" data-action="passkey" aria-hidden="true" inert>Sign in</button>
             <button class="button button-quiet" type="button" data-action="back" data-autofocus>Back</button>
+          </div>
+          <button class="button button-quiet guard-alternative" type="button" data-action="guard-accessible">Use a passkey without stirring</button>
+          <p class="guard-notice" data-guard-notice></p>
+        </div>
+        <p class="guard-pending" data-guard-pending role="status" hidden></p>
+        <div class="verdict" data-verdict hidden inert>
+          <div class="verdict-fluid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="verdict-content">
+            <div class="verdict-icon" aria-hidden="true">
+              <svg class="icon-human" viewBox="0 0 100 100"><circle cx="50" cy="33" r="12"/><path d="M27 76v-6c0-23 46-23 46 0v6"/></svg>
+              <svg class="icon-flag" viewBox="0 0 100 100"><path d="M44 16c3-6 9-6 12 0l33 60c3 6 0 11-7 11H18c-7 0-10-5-7-11Z"/><path d="M50 34v23m0 14v1"/></svg>
+              <svg class="icon-block" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"/><path d="m35 35 30 30m0-30L35 65"/></svg>
+            </div>
+            <h2 data-verdict-title id="verdict-title"></h2>
+            <p data-verdict-copy></p>
+            <button class="button verdict-button" type="button" data-verdict-action data-action="passkey" aria-hidden="true" inert></button>
+            <button class="button button-quiet verdict-alternative" type="button" data-verdict-alternative data-action="guard-accessible">Use a passkey instead</button>
+            <p class="verdict-note" data-verdict-note></p>
+            <button class="button button-quiet" type="button" data-guard-verify data-action="guard-verify" hidden>Additional verification</button>
+            <div data-guard-widget aria-label="Additional verification" hidden></div>
           </div>
         </div>
       </section>

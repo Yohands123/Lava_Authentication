@@ -1,0 +1,141 @@
+{
+  "meaning": "Original StirMeter crediting, not visual ring completion or human detection. Assumes trusted public samples for comparability; provenance is not event attestation.",
+  "byGroup": {
+    "circles_bot_gan": {
+      "n": 697,
+      "humanN": 0,
+      "botN": 697,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.0350497668579627
+    },
+    "circles_bot_naturalmousemotion": {
+      "n": 234,
+      "humanN": 0,
+      "botN": 234,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 92,
+      "meanProgress": 0.7693810096153846
+    },
+    "circles_bot_pyhm": {
+      "n": 55,
+      "humanN": 0,
+      "botN": 55,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.13345170454545455
+    },
+    "circles_bot_pynput": {
+      "n": 381,
+      "humanN": 0,
+      "botN": 381,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.24515050853018372
+    },
+    "circles_human_fast": {
+      "n": 9,
+      "humanN": 9,
+      "botN": 0,
+      "humanMeterCompleteN": 8,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.9192708333333334
+    },
+    "circles_human_pc1": {
+      "n": 187,
+      "humanN": 187,
+      "botN": 0,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.14223345588235295
+    },
+    "circles_human_pc2": {
+      "n": 451,
+      "humanN": 451,
+      "botN": 0,
+      "humanMeterCompleteN": 1,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.18568112527716185
+    },
+    "circles_human_pc2_pad": {
+      "n": 62,
+      "humanN": 62,
+      "botN": 0,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.12109375
+    },
+    "circles_human_tel": {
+      "n": 95,
+      "humanN": 95,
+      "botN": 0,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.1277138157894737
+    },
+    "circles_human_vm": {
+      "n": 140,
+      "humanN": 140,
+      "botN": 0,
+      "humanMeterCompleteN": 1,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.15630580357142856
+    },
+    "local-linear": {
+      "n": 40,
+      "humanN": 0,
+      "botN": 40,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0
+    },
+    "local-circle": {
+      "n": 40,
+      "humanN": 0,
+      "botN": 40,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0
+    },
+    "local-random": {
+      "n": 40,
+      "humanN": 0,
+      "botN": 40,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.90234375
+    },
+    "local-bezier": {
+      "n": 40,
+      "humanN": 0,
+      "botN": 40,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.1171875
+    },
+    "local-variable-speed": {
+      "n": 40,
+      "humanN": 0,
+      "botN": 40,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.83984375
+    },
+    "local-corrections": {
+      "n": 40,
+      "humanN": 0,
+      "botN": 40,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.90234375
+    },
+    "local-lognormal": {
+      "n": 40,
+      "humanN": 0,
+      "botN": 40,
+      "humanMeterCompleteN": 0,
+      "botMeterCompleteN": 0,
+      "meanProgress": 0.21875
+    }
+  }
+}

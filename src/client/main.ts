@@ -4,6 +4,10 @@ import "@fontsource/inter-tight/400.css";
 import "@fontsource/inter-tight/500.css";
 import "@fontsource/jetbrains-mono/400.css";
 import "./ui/styles.css";
+import "./ui/verdict.css";
+import { LavaGuard } from "./guard/session";
+import { LavaObserver } from "./guard/observer";
+import { GuardLab } from "./guard/lab";
 
 import { Lamp } from "./lamp/lamp";
 import { LAMP, STIR } from "./lamp/constants";
@@ -86,6 +90,27 @@ const stir = lamp
     })
   : null;
 
+const guardLab = new GuardLab();
+void guardLab.init().catch(() => {});
+const bubbleIds = new WeakMap<object, number>();
+let nextBubbleId = 0;
+const observer = new LavaObserver(ringArc, (x, y) => {
+  if (!lamp) return { distance: 1, remaining: 0 };
+  const p = lamp.renderer.toWorld(x, y), physics = lamp.physics;
+  const diameter = (physics.ring?.radius ?? .3) * 2;
+  const nearest = physics.blobs.filter(b => !physics.ring?.isOut(b)).sort((a, b) => Math.hypot(a.x - p.x, a.y - p.y) - Math.hypot(b.x - p.x, b.y - p.y))[0];
+  if (nearest && !bubbleIds.has(nearest)) bubbleIds.set(nearest, nextBubbleId++);
+  const bounds = ringArc.getBoundingClientRect();
+  const worldPerPixel = lamp.renderer.toWorld(1, 0).x;
+  return { distance: Math.max(0, Math.min(diameter, ...physics.blobs.map(b => Math.hypot(b.x - p.x, b.y - p.y) - b.r))) / diameter,
+    remaining: physics.blobs.filter(b => !physics.ring?.isOut(b)).length,
+    targetX: nearest ? (x - bounds.left + (nearest.x - p.x) / worldPerPixel) / bounds.width : undefined,
+    targetY: nearest ? (y - bounds.top - (nearest.y - p.y) / worldPerPixel) / bounds.height : undefined,
+    targetId: nearest ? bubbleIds.get(nearest) : undefined };
+});
+const guard = new LavaGuard(stir, observer, () => wax.fillRing(ringArc), (summary, decision, samples) => guardLab.report(summary, decision, samples), () => guardLab.begin());
+window.addEventListener("pagehide", () => { guard.cancel(); guardLab.clear(); });
+
 if (lamp) {
   lamp.onStep = (dt) => {
     if (screen === "landing" && cursor) lamp!.physics.heatAt(cursor.x, cursor.y, dt);
@@ -111,7 +136,7 @@ function go(next: typeof screen): void {
 }
 
 // Clear the ring: Sign in only appears once all the wax is out.
-let passkeyPressed: (() => void) | null = null;
+let authBusy = false;
 
 function setLampPaused(paused: boolean): void {
   if (!lamp) return;
@@ -131,22 +156,15 @@ const waitingText = $("[data-waiting-text]");
 const signupForm = $("[data-form=signup]") as HTMLFormElement;
 const usernameInput = $("#username") as HTMLInputElement;
 
-async function startSignIn(): Promise<void> {
+async function startSignIn(accessible = false): Promise<void> {
+  if (authBusy) return;
   go("stir");
-  ring.showClear(false);
   if (lamp?.isPaused) setLampPaused(false); // a paused lamp can't be stirred
-  wax.fillRing(ringArc);
   announce("Stir all the wax out of the ring to sign in.");
-  // No WebGL means no wax to clear: Sign in is available straight away.
-  const result = stir ? await stir.run() : { digest: null };
-  if (screen !== "stir") return; // cancelled
+  const result = await guard.run(accessible || !stir ? "accessible" : "gesture");
+  if (screen !== "stir" || !result) return;
   lab.stirFinished(!stir);
-
-  ring.showClear(true);
-  announce("Ring clear. Press Sign in.");
-  await new Promise<void>((resolve) => (passkeyPressed = resolve));
-  passkeyPressed = null;
-  if (screen !== "stir") return; // cancelled
+  authBusy = true;
 
   // The wax gathers back before the passkey prompt.
   wax.gather(STIR.RETURN_SECONDS * 1000);
@@ -158,17 +176,21 @@ async function startSignIn(): Promise<void> {
     const lampDigest = await takeSnapshot();
     const digests = { stir: result.digest, lamp: lampDigest, camera: await cameraControl.digest() };
     lab.sent(digests);
-    const user = await login(digests);
+    const user = await login(digests, result.clearance);
     wax.warmUp();
     signedIn(user);
   } catch (err) {
     wax.fail(err);
     showStatus(messageFor(err));
     go("choose");
+  } finally {
+    authBusy = false;
   }
 }
 
 async function startSignUp(username: string): Promise<void> {
+  if (authBusy) return;
+  authBusy = true;
   waitingText.textContent = "Confirm with your device to create your passkey";
   go("waiting");
   wax.portal();
@@ -185,6 +207,8 @@ async function startSignUp(username: string): Promise<void> {
     showStatus(messageFor(err));
     go("choose");
     signupForm.hidden = false;
+  } finally {
+    authBusy = false;
   }
 }
 
@@ -207,12 +231,21 @@ document.addEventListener("click", (e) => {
       usernameInput.focus();
       break;
     case "passkey":
-      passkeyPressed?.();
+      guard.continue();
+      break;
+    case "guard-retry":
+      void startSignIn();
+      break;
+      case "guard-verify":
+        void guard.verify();
+        break;
+    case "guard-accessible":
+      wax.releaseRing();
+      void startSignIn(true);
       break;
     case "back":
-      stir?.cancel();
+      guard.cancel();
       go("choose");
-      passkeyPressed?.();
       break;
     case "signout":
       void logout().finally(() => {

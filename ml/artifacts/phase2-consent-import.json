@@ -1,0 +1,9 @@
+{
+  "syntheticDeclaredAutomationOnly": true,
+  "validExportAccepted": true,
+  "missingConsentRejected": true,
+  "unlabeledRejected": true,
+  "missingStudyCodeRejected": true,
+  "emptyTraceRejected": true,
+  "persistedApplicationRows": false
+}

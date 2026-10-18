@@ -1,0 +1,262 @@
+{
+  "version": "lava-attacks-v2",
+  "seed": 42,
+  "origin": "http://localhost:8787",
+  "configuration": {
+    "mode": "enforce",
+    "lab": true,
+    "experimentalModel": false,
+    "featureVersion": "lava-features-v1",
+    "retentionSeconds": 600
+  },
+  "classificationIsExperimental": true,
+  "realHumanSamples": 0,
+  "cases": [
+    {
+      "family": "linear",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerStatus": null,
+      "actualServerVerdict": null,
+      "clearanceIssued": false,
+      "protectedOptionsStatus": 403,
+      "experimentalModel": null,
+      "actualEvidence": [],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported",
+        "joint_regular_path"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 16872.356
+    },
+    {
+      "family": "circle",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerStatus": null,
+      "actualServerVerdict": null,
+      "clearanceIssued": false,
+      "protectedOptionsStatus": 403,
+      "experimentalModel": null,
+      "actualEvidence": [],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 18661.7741
+    },
+    {
+      "family": "random",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "CLEAR",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "protectedOptionsStatus": 200,
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.9904053603863033,
+        "enabled": false
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 3002.6717999999964
+    },
+    {
+      "family": "bezier",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "CLEAR",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "protectedOptionsStatus": 200,
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.10368398044646975,
+        "enabled": false
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 15309.455699999999
+    },
+    {
+      "family": "variable-speed",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "CLEAR",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "protectedOptionsStatus": 200,
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.5557608455035901,
+        "enabled": false
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 6626.5350000000035
+    },
+    {
+      "family": "corrections",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "CLEAR",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "protectedOptionsStatus": 200,
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.8878520790861086,
+        "enabled": false
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 4522.405200000008
+    },
+    {
+      "family": "lognormal",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerStatus": null,
+      "actualServerVerdict": null,
+      "clearanceIssued": false,
+      "protectedOptionsStatus": 403,
+      "experimentalModel": null,
+      "actualEvidence": [],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 15452.085500000001
+    },
+    {
+      "family": "dom-synthetic",
+      "driver": "dom",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerStatus": null,
+      "actualServerVerdict": null,
+      "clearanceIssued": false,
+      "protectedOptionsStatus": 403,
+      "experimentalModel": null,
+      "actualEvidence": [],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "synthetic_event_hint",
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 16183.871499999994
+    },
+    {
+      "family": "ghost-cursor",
+      "driver": "playwright",
+      "seed": 42,
+      "browserState": "CLEAR",
+      "clearsRing": true,
+      "actualServerStatus": 200,
+      "actualServerVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "protectedOptionsStatus": 200,
+      "experimentalModel": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.9975582393246168,
+        "enabled": false
+      },
+      "actualEvidence": [
+        "browser_automation_reported"
+      ],
+      "offlineShadowVerdict": "CLEAR",
+      "offlineEnforceVerdict": "CLEAR",
+      "offlineEvidence": [
+        "browser_automation_reported"
+      ],
+      "sessionStatus": 401,
+      "bypassesAuthentication": false,
+      "durationMs": 7619.507199999993
+    },
+    {
+      "family": "puppeteer-corrections",
+      "driver": "puppeteer-core",
+      "seed": 42,
+      "browserState": "STIRRING",
+      "clearsRing": false,
+      "actualServerVerdict": null,
+      "experimentalModel": null,
+      "clearanceIssued": false,
+      "protectedOptionsStatus": 403,
+      "sessionStatus": 401,
+      "bypassesAuthentication": false
+    },
+    {
+      "family": "direct-api",
+      "status": 403,
+      "protectedEndpointBypass": false,
+      "sessionStatus": 401
+    },
+    {
+      "family": "forged-verdict",
+      "status": 400,
+      "protectedEndpointBypass": false,
+      "sessionStatus": 401
+    }
+  ]
+}

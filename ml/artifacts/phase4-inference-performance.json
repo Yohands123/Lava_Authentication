@@ -1,0 +1,21 @@
+{
+  "runtime": "v24.13.0",
+  "notes": "Local Node implementation, not Cloudflare edge CPU. Heap change includes module import, JIT and allocation noise.",
+  "moduleHeapDeltaBytes": 2129568,
+  "portableBundleBytes": 11911,
+  "candidateJsonBytes": 2674,
+  "results": {
+    "lava-logistic-experimental-v1": {
+      "iterations": 10000,
+      "p50Ms": 0.0004999999999881766,
+      "p95Ms": 0.0006999999999379725,
+      "p99Ms": 0.0012000000000398359
+    },
+    "lava-robust-logistic-v2": {
+      "iterations": 10000,
+      "p50Ms": 0.0012000000000398359,
+      "p95Ms": 0.0019000000000914952,
+      "p99Ms": 0.003199999999992542
+    }
+  }
+}

@@ -21,8 +21,8 @@ export default defineConfig({
   webServer: {
     command: [
       `node -e "require('fs').rmSync('.wrangler/e2e',{recursive:true,force:true})"`,
-      "npx vite build",
-      `npx wrangler dev --port ${PORT} --persist-to .wrangler/e2e --var ORIGIN:${ORIGIN} --var CHALLENGE_TTL_SECONDS:${CHALLENGE_TTL_SECONDS}`,
+      "npx vite build --outDir .cache/e2e-assets-shadow",
+      `npx wrangler dev --port ${PORT} --assets .cache/e2e-assets-shadow --persist-to .wrangler/e2e --var ORIGIN:${ORIGIN} --var CHALLENGE_TTL_SECONDS:${CHALLENGE_TTL_SECONDS} --var LAVAGUARD_MODE:shadow --var LAVAGUARD_EXPERIMENTAL_MODEL:0`,
     ].join(" && "),
     url: `${ORIGIN}/api/health`,
     reuseExistingServer: false,

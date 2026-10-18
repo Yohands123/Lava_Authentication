@@ -6,12 +6,13 @@ import { clientIp, fail, json, readBody } from "../lib/http";
 import { challenges, challengeTtl, sessions, sessionTtl, users, type Env } from "../env";
 import { presentSources } from "../entropy/stats";
 import { challengeFromResponse, consumeFailure, rateLimit } from "./shared";
+import { requireClearance } from "./lavaguard";
 
 export async function loginOptions(request: Request, env: Env): Promise<Response> {
   const limited = await rateLimit(env, `ip:${clientIp(request)}:login-options`, 20, 60);
   if (limited) return limited;
 
-  const body = await readBody(request, ["digests"]);
+  const body = await readBody(request, ["digests", "clearance"]);
   if (!body) return fail("bad_request", 400, "Expected { digests }.");
 
   let digests;
@@ -22,6 +23,8 @@ export async function loginOptions(request: Request, env: Env): Promise<Response
     throw err;
   }
 
+  const guardFailure = await requireClearance(request, env, body.clearance);
+  if (guardFailure) return guardFailure;
   const challenge = await buildChallenge(digests);
   const options = await generateAuthenticationOptions({
     rpID: env.RP_ID,

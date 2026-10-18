@@ -1,0 +1,17 @@
+{
+  "actualLocalWorker": true,
+  "initialStatuses": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    429
+  ],
+  "waitMs": 62000,
+  "afterExpiryStatus": 200,
+  "sessionStatus": 401
+}

@@ -8,7 +8,11 @@ test("too many login attempts are rate limited with 429", async ({ page }) => {
   for (let i = 0; i < 25 && !limited; i++) {
     const res = await post(page, "/api/login/options", { digests: {} });
     if (res.status() === 429) limited = res;
-    else expect(res.status()).toBe(200);
+    else {
+      // Unguarded API calls now fail closed, and still count toward the IP limit.
+      expect(res.status()).toBe(403);
+      expect((await res.json()).error.code).toBe("guard_required");
+    }
   }
   expect(limited, "no 429 within 25 requests").not.toBeNull();
   expect((await limited!.json()).error.code).toBe("rate_limited");

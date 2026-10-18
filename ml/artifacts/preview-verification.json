@@ -1,0 +1,30 @@
+{
+  "mode": "enforce",
+  "actualServerStatus": 200,
+  "decision": {
+    "verdict": "FLAG",
+    "retryAfter": 0,
+    "alternative": true,
+    "assessment": "evaluated",
+    "lab": {
+      "risk": 1,
+      "uncertainty": 0.8,
+      "reasons": [
+        "browser_automation_reported",
+        "experimental_model_anomaly"
+      ],
+      "modelVersion": "lava-heuristic-v2",
+      "fingerprint": "pjbWIcUGCr3kW4W7O31eMdelK3Ss7g9y9sK0CN8ZBbQ",
+      "geometryHash": "uGUOWioNp7Sfy7gLCMk8CtifEIJZ0eGSoWK9mI8uQYY",
+      "experimental": {
+        "version": "lava-logistic-experimental-v1",
+        "experimentalRisk": 0.9999990889846386,
+        "enabled": true
+      },
+      "elapsedMs": 1856
+    }
+  },
+  "clearanceIssued": false,
+  "automationReported": true,
+  "screenshot": "docs/media/lavaguard/preview-automation.png"
+}

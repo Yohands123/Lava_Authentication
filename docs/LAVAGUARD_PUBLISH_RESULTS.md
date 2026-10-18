@@ -2,6 +2,8 @@
 
 This is the README/media publication follow-up, with the subsequently owner-requested Phase 5 **offline starter**. The existing Phase 4 commit `2ec7d3a` and owner-merged PR #1 (`main` at `19aff1b`) were already on GitHub when publication work resumed. Their history was preserved. This follow-up is proposed from `feature/lavaguard` into `main`; no automatic merge or Cloudflare deployment is part of this work.
 
+Published [branch](https://github.com/Yohands123/Lava_Authentication/tree/feature/lavaguard) and [PR #2](https://github.com/Yohands123/Lava_Authentication/pull/2). The PR is open, unmerged and has no automatic merge enabled.
+
 ## README claims and corrections
 
 The supplied README remains the main draft. Source and both Phase 4 reports were checked against the authentication routes, randomness, observer, policy/configuration, inference, privacy/export path, package scripts and measured artifacts.
@@ -16,6 +18,12 @@ The supplied README remains the main draft. Source and both Phase 4 reports were
 - Replaced stale real-result images that said “Human detected” with new real-Worker **shadow** captures saying “Interaction recorded.” Provenance: [capture summary](../ml/artifacts/capture-current.json). A separate fresh real research refusal is in [preview summary](../ml/artifacts/preview-publish.json).
 
 The README's held-out 511/513 accepted human rows, 34/777 logistic detections and 211/777 RF detections match the frozen Phase 4 artifacts. These are corpus rows, not independent application users. No Phase 4 model was refitted or promoted during publication.
+
+## GitHub rendering verification after push
+
+The actual public GitHub branch page was opened in Chromium at 1440px and 390px widths. At each width all eight README images loaded, the three outcome columns fit, the explicit top anchor existed, and the page had no horizontal overflow. The Mermaid flowchart rendered successfully in GitHub's diagram iframe. The expandable gallery was opened to verify its images too.
+
+All eight embedded PNG URLs returned HTTP 200 with `image/png`; downloaded bytes matched the inspected local files by SHA-256. GitHub's GFM API also rendered the README successfully. Local Markdown file/heading/image checks found no missing screenshots or broken local links. The old top fragment was corrected as described above. Browser verification screenshots and its JSON log remain local under ignored `.cache/`.
 
 ## Actual verification in this follow-up
 

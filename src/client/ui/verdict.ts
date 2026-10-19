@@ -1,18 +1,25 @@
 import type { GuardDecision, GuardState } from "../../shared/lavaguard";
 import { announce } from "../a11y/announce";
 import { $ } from "./dom";
+import { verdictActions } from "./verdict-actions";
 
 export class VerdictView {
   private readonly screen = $("[data-screen=stir]");
   private readonly result = $("[data-verdict]");
   private readonly original = $(".stir-copy");
   state: GuardState = "IDLE";
-  set(state: GuardState, decision?: GuardDecision): void {
+  set(state: GuardState, decision?: GuardDecision, permission = false): void {
     this.state = state; this.screen.dataset.guardState = state;
     const action = $("[data-verdict-action]") as HTMLButtonElement;
-    action.inert = !["CLEAR", "FLAG", "BLOCK", "ERROR"].includes(state);
+    const controls = verdictActions(state, permission);
+    action.inert = !controls.visible || controls.disabled;
     action.setAttribute("aria-hidden", String(action.inert));
-    const visible = ["CLEAR", "FLAG", "BLOCK", "ERROR"].includes(state);
+    const visible = controls.visible;
+    const back = $("[data-verdict-back]");
+    back.hidden = !controls.back; back.inert = !controls.back;
+    back.setAttribute("aria-hidden", String(!controls.back));
+    $("[data-guard-verify]").hidden = !visible || !decision?.stepUp;
+    $("[data-guard-widget]").hidden = true;
     this.result.hidden = !visible; this.result.inert = !visible;
     this.original.hidden = visible; this.original.inert = visible;
     this.screen.classList.toggle("has-verdict", visible);
@@ -26,12 +33,9 @@ export class VerdictView {
     $("[data-verdict-title]").textContent = title;
     const clearCopy = decision?.assessment === "shadow" ? "Observation mode hasn't verified this interaction. Your passkey is still required." : decision?.assessment === "accessible" ? "Movement analysis was skipped. Your passkey is still required." : "You can continue with your passkey.";
     $("[data-verdict-copy]").textContent = state === "CLEAR" ? clearCopy : state === "FLAG" ? "We couldn't verify this interaction." : state === "BLOCK" ? "This attempt has been restricted." : "Your lamp is ready. Please reconnect and try again.";
-    action.textContent = state === "CLEAR" ? "Continue to sign in  →" : state === "BLOCK" ? "Back" : "Try again  ↻";
-    action.dataset.action = state === "CLEAR" ? "passkey" : state === "BLOCK" ? "back" : "guard-retry";
-    action.disabled = false;
-    $("[data-guard-verify]").hidden = !decision?.stepUp;
-    $("[data-guard-widget]").hidden = true;
-    $("[data-verdict-alternative]").hidden = state === "CLEAR" || state === "BLOCK" || decision?.alternative === false;
+    action.textContent = controls.label;
+    action.dataset.action = controls.action;
+    action.disabled = controls.disabled;
     $("[data-verdict-note]").textContent = state === "BLOCK" && decision?.retryAfter ? `Please wait ${decision.retryAfter} seconds before another attempt.` : "";
     announce(title + ". " + $("[data-verdict-copy]").textContent);
     action.focus({ preventScroll: true });

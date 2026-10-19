@@ -2,13 +2,14 @@ import { FEATURE_KEYS, FEATURE_VERSION, type FeatureSummary, type Features } fro
 import { experimentalInference } from "./inference";
 import { parseRobust, ROBUST_VERSION } from "../../shared/robust-features";
 import { estimateRisk, candidateResearchThreshold, type RiskEstimate } from "./risk-estimator";
+import { parseAutomationEnvironment, assessAutomationEnvironment } from "../../shared/automation-environment";
 
-export interface Detection { risk: number; enforcementRisk: number; uncertainty: number; reasons: string[]; modelVersion: string; fingerprint: string; geometryHash: string; estimator?: RiskEstimate; experimental?: { version: string; experimentalRisk: number } }
+export interface Detection { risk: number; enforcementRisk: number; uncertainty: number; reasons: string[]; modelVersion: string; fingerprint: string; geometryHash: string; estimator?: RiskEstimate; experimental?: { version: string; experimentalRisk: number }; automationEnvironment?: ReturnType<typeof assessAutomationEnvironment> }
 export interface DetectorOptions { experimentalModel?: boolean; computeModel?: boolean; modelVersion?: string }
 export function parseSummary(value: unknown): FeatureSummary | null {
   if (!value || typeof value !== "object" || Array.isArray(value)) return null;
   const s = value as Record<string, unknown>;
-  if (Object.keys(s).some(k => !["version", "features", "fingerprint", "geometryHash", "signals", "robust"].includes(k)) || s.version !== FEATURE_VERSION) return null;
+  if (Object.keys(s).some(k => !["version", "features", "fingerprint", "geometryHash", "signals", "robust", "automationEnvironment"].includes(k)) || s.version !== FEATURE_VERSION) return null;
   if (typeof s.fingerprint !== "string" || !/^[\w-]{43}$/.test(s.fingerprint) || typeof s.geometryHash !== "string" || !/^[\w-]{43}$/.test(s.geometryHash)) return null;
   if (!s.features || typeof s.features !== "object" || Array.isArray(s.features)) return null;
   const f = s.features as Record<string, unknown>;
@@ -31,12 +32,14 @@ export function parseSummary(value: unknown): FeatureSummary | null {
     const parsed = parseRobust(r.features); if (!parsed) return null;
     robust = { version: ROBUST_VERSION, features: parsed };
   }
-  return { version: FEATURE_VERSION, features: f as Features, fingerprint: s.fingerprint, geometryHash: s.geometryHash, signals, robust };
+  // Optional context must never turn a valid behavioral request into refusal.
+  const environment = parseAutomationEnvironment(s.automationEnvironment);
+  return { version: FEATURE_VERSION, features: f as Features, fingerprint: s.fingerprint, geometryHash: s.geometryHash, signals, robust, ...(environment ? { automationEnvironment: environment } : {}) };
 }
 
 /** Experimental evidence, never a calibrated probability or identity proof. */
 export class LavaDetector {
-  static readonly version = "lava-heuristic-v3";
+  static readonly version = "lava-heuristic-v4";
   evaluate(summary: FeatureSummary, elapsedMs: number, duplicate: boolean, options: DetectorOptions = {}): Detection {
     const f = summary.features, reasons: string[] = [];
     let risk = 0, enforcementRisk = 0;
@@ -48,7 +51,7 @@ export class LavaDetector {
     add(f.invalidTiming > 0, .4, "invalid_timing");
     add(f.untrustedRatio > .1, .4, "synthetic_event_hint");
     // A human can take over a WebDriver browser. This is context, not operator identity.
-    add(summary.signals?.webdriver === true, .8, "browser_automation_reported");
+    const automationEnvironment = assessAutomationEnvironment(summary.automationEnvironment ?? null, summary.signals?.webdriver);
     // Joint evidence only: smooth paths and missing pressure are ordinary.
     add(f.efficiency > .995 && f.speedCv < .015 && f.dtCv < .015, .55, "joint_regular_path");
     add(duplicate && f.samples >= 12, .5, "recent_path_recurrence");
@@ -65,6 +68,6 @@ export class LavaDetector {
       enforcementRisk = Math.max(enforcementRisk, .65); reasons.push("research_candidate_anomaly");
     }
     // Unvalidated regularity, recurrence, device hints and sample counts stay advisory.
-    return { risk: Math.min(1, risk), enforcementRisk, uncertainty: .8, reasons, modelVersion: LavaDetector.version, fingerprint: summary.fingerprint, geometryHash: summary.geometryHash, experimental, estimator };
+    return { risk: Math.min(1, risk), enforcementRisk, uncertainty: .8, reasons, modelVersion: LavaDetector.version, fingerprint: summary.fingerprint, geometryHash: summary.geometryHash, experimental, estimator, automationEnvironment };
   }
 }

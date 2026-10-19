@@ -1,3 +1,5 @@
+> **Historical starter reference, superseded October 18, 2026.** The current implementation is documented in [Phase 5 architecture](LAVAGUARD_PHASE5_ARCHITECTURE.md), [collection protocol](LAVAGUARD_PHASE5_DATA_COLLECTION.md), [measured results](LAVAGUARD_PHASE5_ML_RESULTS.md) and [handoff](LAVAGUARD_PHASE5_HANDOFF.md). Do not copy the old starter over the current modules. Split behavior, schemas, model inventory and commands below describe the earlier starter only.
+
 # LavaGuard Phase 5 — Application-Specific ML Research
 
 **State:** Phase 5 starter implementation; not a completed human study, not an independently validated anti-bot detector, and not deployed. Built after reviewing `main` branch on October 18, 2026.

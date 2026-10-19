@@ -4,7 +4,7 @@ export async function automatedStir(page, origin, seedValue = 42, options = {}) 
   const capture = response => {
     if (response.url().endsWith('/api/lavaguard/evaluate')) {
       summary = response.request().postDataJSON().summary;
-      evaluated = response.json().then(decision => ({ status: response.status(), decision }));
+      evaluated = response.json().then(decision => ({ status: response.status(), decision }), () => ({ error: 'Evaluation response disconnected; classification unknown.' }));
     }
   };
   page.on('response', capture);
@@ -29,6 +29,8 @@ export async function automatedStir(page, origin, seedValue = 42, options = {}) 
     }
     await page.waitForFunction(() => ['CLEAR', 'FLAG', 'BLOCK'].includes(document.querySelector('[data-screen=stir]').dataset.guardState));
     if (!evaluated) throw new Error('The result did not come from a server evaluation.');
-    return { ...await evaluated, summary };
+    const result = await evaluated;
+    if (result.error) throw new Error(result.error);
+    return { ...result, summary };
   } finally { page.off('response', capture); }
 }

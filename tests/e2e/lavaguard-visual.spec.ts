@@ -30,6 +30,7 @@ for (const viewport of [{ width: 1440, height: 1000 }, { width: 390, height: 844
       expect(geometry).toEqual({ sameCircle: true, inside: true, overflow: false });
       await page.waitForTimeout(900);
       await page.screenshot({ path: `docs/media/lavaguard/${verdict.toLowerCase()}-${viewport.width}.png` });
+      await page.screenshot({ path: `docs/media/lavaguard/phase7-${verdict.toLowerCase()}-${viewport.width}.png` });
       if (verdict === "FLAG") {
         const issued = page.waitForResponse(r => r.url().endsWith("/api/lavaguard/challenge"));
         await page.getByRole("button", { name: /Try again/ }).click();
@@ -70,8 +71,11 @@ test("reduced motion keeps the verdict still and the fallback remains keyboard a
   await expect(page.getByRole("heading", { name: "Let's try that again" })).toBeVisible();
   const motion = await page.locator(".verdict-fluid i").first().evaluate(e => getComputedStyle(e).animationName);
   expect(motion).toBe("none");
-  await page.getByRole("button", { name: "Use a passkey instead" }).focus();
-  await expect(page.getByRole("button", { name: "Use a passkey instead" })).toBeFocused();
+  await expect(page.getByRole("button", { name: "Use a passkey instead" })).toHaveCount(0);
+  await page.getByRole("button", { name: "Back to sign-in" }).press("Enter");
+  await page.getByRole("button", { name: "Sign in", exact: true }).press("Enter");
+  await page.getByRole("button", { name: "Use a passkey without stirring" }).focus();
+  await expect(page.getByRole("button", { name: "Use a passkey without stirring" })).toBeFocused();
 });
 
 test("a real shadow decision is never presented as human detection", async ({ page }) => {

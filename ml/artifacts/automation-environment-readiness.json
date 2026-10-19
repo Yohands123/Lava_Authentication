@@ -1,0 +1,70 @@
+{
+  "schema": "lava-automation-environment-readiness-v1",
+  "datasetHash": "b384bc4f27a9dc321f8b29f0d62ecc827e0fbad497aad2b6699b4cd44c9b0425",
+  "applicationReadiness": "NOT_READY_NO_OPT_IN_DATA",
+  "applicationAttempts": 30,
+  "eligibleAttempts": 20,
+  "declaredHumanAttempts": 0,
+  "declaredBotAttempts": 30,
+  "automationEnvironment": {
+    "version": "lava-automation-environment-v1",
+    "authority": "advisory",
+    "policyContribution": 0,
+    "recordsWithEvidence": 0,
+    "missingEvidenceRecords": 30,
+    "missingEvidenceIsHuman": false,
+    "environmentLabelsAreDeclarations": true,
+    "productionBehaviorPredictorsChanged": false,
+    "signalCounts": {
+      "webdriver": {
+        "available": 0,
+        "positive": 0
+      },
+      "headlessUserAgent": {
+        "available": 0,
+        "positive": 0
+      },
+      "headlessBrand": {
+        "available": 0,
+        "positive": 0
+      }
+    },
+    "cells": [],
+    "declaredHumanAttemptsWithEvidence": 0,
+    "declaredHumanAttemptsWithPositiveHints": 0,
+    "humanPopulationExposureRate": null,
+    "humanPopulationFpr": null,
+    "humanEvidenceStatus": "NOT_ESTABLISHED_NO_HUMAN_ENVIRONMENT_DATA",
+    "limitations": [
+      "No browser hint establishes who moves the pointer or detects an AI agent.",
+      "A human using an automation browser can expose the same signals.",
+      "VM and remote desktop status is not collected or inferred.",
+      "Unavailable and false signals are not evidence of humanity."
+    ]
+  },
+  "automationEnvironmentComparison": {
+    "status": "NOT_RUN_REQUIRES_ELIGIBLE_MATCHED_DATA_AND_EXPERIMENTS",
+    "productionInfluence": false,
+    "artifactExported": false,
+    "scope": "Primary fitting cohort only; final cohorts excluded"
+  },
+  "controlledBrowserConfigurationsMeasured": 10,
+  "syntheticDiagnosticVariantsExecuted": [
+    "behavior-only",
+    "environment-only",
+    "behavior-plus-environment"
+  ],
+  "humanPopulationExposureRate": null,
+  "humanPopulationFpr": null,
+  "actualHumanControlledBrowserTrials": 0,
+  "vmOrRemoteDesktopInference": false,
+  "aiIdentityDetectionClaim": false,
+  "productionEnforcementEnabled": false,
+  "finalTestEvaluated": false,
+  "applicationModelPromoted": false,
+  "limitations": [
+    "Controlled configuration observations are not independent people or population prevalence.",
+    "No genuine-human data establishes whether adding these hints improves application risk assessment.",
+    "Old records remain missing; no environment context or consent was reconstructed."
+  ]
+}

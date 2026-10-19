@@ -1,0 +1,164 @@
+{
+  "schema": "lava-phase6-ml-engineering-v1",
+  "application": {
+    "datasetHash": "b384bc4f27a9dc321f8b29f0d62ecc827e0fbad497aad2b6699b4cd44c9b0425",
+    "attempts": 30,
+    "eligible": 20,
+    "declaredHumanAttempts": 0,
+    "declaredHumanCodes": 0,
+    "declaredBotAttempts": 30,
+    "audit": {
+      "invalidRecords": 0,
+      "incompleteRecords": 10,
+      "duplicateAttempts": 0,
+      "duplicateVectors": 0,
+      "duplicateTrajectories": 0,
+      "conflictingLabels": 0,
+      "exclusions": {
+        "incomplete_task": 10
+      }
+    },
+    "status": "NOT_READY_NO_OPT_IN_DATA",
+    "humanPopulationFpr": null,
+    "calibratedApplicationProbability": null,
+    "participantGeneralization": null,
+    "independentlyVettedHumanParticipants": 0
+  },
+  "syntheticEngineering": {
+    "syntheticOnly": true,
+    "notStudyEvidence": true,
+    "modelCosts": {
+      "regularizedLogistic": {
+        "trainingMs": 54.67680003494024,
+        "serializedPythonBytes": 1704,
+        "pythonTrackedPeakBytes": 401027,
+        "pythonSingleInferenceMs": {
+          "p50": 0.36020000698044896,
+          "p95": 0.5267999629722904,
+          "n": 30
+        },
+        "nativeMemoryIncluded": false
+      },
+      "randomForest": {
+        "trainingMs": 1077.4454000056721,
+        "serializedPythonBytes": 106535,
+        "pythonTrackedPeakBytes": 536331,
+        "pythonSingleInferenceMs": {
+          "p50": 13.164550007786602,
+          "p95": 20.556069983285845,
+          "n": 30
+        },
+        "nativeMemoryIncluded": false
+      },
+      "histGradientBoosting": {
+        "trainingMs": 130.6536999763921,
+        "serializedPythonBytes": 41668,
+        "pythonTrackedPeakBytes": 302639,
+        "pythonSingleInferenceMs": {
+          "p50": 0.7570500019937754,
+          "p95": 0.7821399805834517,
+          "n": 30
+        },
+        "nativeMemoryIncluded": false
+      },
+      "isolationForestDiagnostics": {
+        "trainingMs": 1339.8317000246607,
+        "serializedPythonBytes": 1343985,
+        "pythonTrackedPeakBytes": 624773,
+        "pythonSingleInferenceMs": null,
+        "nativeMemoryIncluded": false
+      }
+    },
+    "negativeControls": {
+      "seed": 6101,
+      "splitHash": "907f96b3763f69ae8b05f8906bc77865e6e989097dd747248ac45b3c46d86a17",
+      "counts": {
+        "train": 114,
+        "calibration": 33,
+        "test": 33
+      },
+      "controls": {
+        "behavior": {
+          "syntheticOnly": true,
+          "generatedDevelopmentRows": 33,
+          "generatedLabelFlags": 21,
+          "scoreMinimum": 0.009047646614400912,
+          "scoreMaximum": 0.9889932911259134,
+          "thresholdFrozenFromDevelopmentCalibration": true,
+          "learnedSourceCategories": null,
+          "applicationAccuracy": null
+        },
+        "behavior-plus-response-v3": {
+          "syntheticOnly": true,
+          "generatedDevelopmentRows": 33,
+          "generatedLabelFlags": 21,
+          "scoreMinimum": 0.006910797313759595,
+          "scoreMaximum": 0.9916051629397642,
+          "thresholdFrozenFromDevelopmentCalibration": true,
+          "learnedSourceCategories": null,
+          "applicationAccuracy": null
+        },
+        "cadence-only": {
+          "syntheticOnly": true,
+          "generatedDevelopmentRows": 33,
+          "generatedLabelFlags": 0,
+          "scoreMinimum": 0.4545126449539625,
+          "scoreMaximum": 0.4545126449539625,
+          "thresholdFrozenFromDevelopmentCalibration": true,
+          "learnedSourceCategories": null,
+          "applicationAccuracy": null
+        },
+        "browser-config-only": {
+          "syntheticOnly": true,
+          "generatedDevelopmentRows": 33,
+          "generatedLabelFlags": 15,
+          "scoreMinimum": 0.02926296585185652,
+          "scoreMaximum": 0.9648317748298096,
+          "thresholdFrozenFromDevelopmentCalibration": true,
+          "learnedSourceCategories": null,
+          "applicationAccuracy": null
+        },
+        "source-id-only": {
+          "syntheticOnly": true,
+          "generatedDevelopmentRows": 33,
+          "generatedLabelFlags": 15,
+          "scoreMinimum": 0.019853255420888817,
+          "scoreMaximum": 0.9762275826601546,
+          "thresholdFrozenFromDevelopmentCalibration": true,
+          "learnedSourceCategories": 2,
+          "applicationAccuracy": null
+        },
+        "label-shuffled-fitting": {
+          "syntheticOnly": true,
+          "generatedDevelopmentRows": 33,
+          "generatedLabelFlags": 21,
+          "scoreMinimum": 0.405209798923032,
+          "scoreMaximum": 0.5135180053263064,
+          "thresholdFrozenFromDevelopmentCalibration": true,
+          "learnedSourceCategories": null,
+          "applicationAccuracy": null
+        }
+      },
+      "productionInfluence": false
+    },
+    "environmentComparisonStatus": "DIAGNOSTIC_ONLY_NOT_VALIDATED",
+    "environmentVariantsExecuted": [
+      "behavior-only",
+      "environment-only",
+      "behavior-plus-environment"
+    ],
+    "applicationModelFit": false,
+    "finalApplicationCohortAccessed": false,
+    "portableCandidateExported": false,
+    "familyAndShiftTests": "Existing Phase 5 grouped/family/perturbation regression suite; new live seed 6102 is declared bot engineering only"
+  },
+  "productionEligibility": false,
+  "modelPromoted": false,
+  "python": "3.14.2",
+  "unknowns": [
+    "Matched genuine human acquisition/device/assistive cases",
+    "Independent agent/participant evaluation",
+    "Untouched prospective final cohorts"
+  ],
+  "deepModel": "NOT_JUSTIFIED_WITHOUT_DATA"
+}

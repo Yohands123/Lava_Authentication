@@ -1,3 +1,5 @@
+> **Current Phase 5 protocol:** use the [versioned collection/import/withdrawal guide](LAVAGUARD_PHASE5_DATA_COLLECTION.md). Current exports are `lava-consent-v3`; records live in `ml/private/phase5/`. The Phase 2 workflow below is historical. Unlabeled/incomplete v3 exports are retained but excluded from fitting; old v2 exports require explicit migration. There are zero genuine application-human attempts.
+
 # Local consenting LavaGuard study
 
 Normal localhost development uses protocol enforcement with movement classification advisory. Production remains off. The experimental classifier must not reject study participants: leave `LAVAGUARD_EXPERIMENTAL_MODEL=0`. Use a regular browser for participant trials. A Playwright demo browser reports WebDriver even when a person takes over; that hint now remains advisory.

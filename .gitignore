@@ -2,6 +2,10 @@ node_modules/
 dist/
 .wrangler/
 .dev.vars
+.dev.vars.*
+.env
+.env.*
+.vercel/
 *.log
 .DS_Store
 docs/media/*.mov

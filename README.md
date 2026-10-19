@@ -15,7 +15,13 @@ An interactive WebGL lava lamp meets passkey authentication, Cloudflare's edge p
 </div>
 
 > [!IMPORTANT]
-> **Two release states:** The linked public demo currently runs the original **LavaAuth** experience. **LavaGuard is implemented and tested locally on `feature/lavaguard`, but has not been deployed.** This README and its new screenshots describe the *repository implementation*, not a claim that ML bot detection is already protecting the live site. Production ML enforcement remains **off**.
+> **Two release states:** The linked public demo runs the original **LavaAuth** experience. **LavaGuard research engineering is being published from `feature/lavaguard-phase5` and has not been deployed.** These screenshots describe the repository implementation. Production ML enforcement remains **off**; genuine-human false-positive rates remain unknown.
+
+## Test it locally, repeatedly
+
+Phase 6 local research now includes a bounded browser/API adversarial harness, private observation-only registry, dynamic-target diagnostics, leakage controls, actual local Worker benchmarks and a sharding prototype. Client-side behavior remains forgeable; passkeys provide identity security. Genuine-human validation and production eligibility remain unavailable. [Phase 6 handoff and reproduction](docs/LAVAGUARD_PHASE6_HANDOFF.md).
+
+Run `npm run test:live` or double-click `Start-LavaGuard-Testing.cmd`, then open **http://localhost:8792**. The local panel runs 16 visible automation patterns, compares normal/advisory and older-model research profiles, supports repeat/stop, and shows actual verdicts, clearance, passkey HTTP outcomes and screenshots. It does not train or validate a Phase 5 model. [Testing guide](docs/LAVAGUARD_LOCAL_TESTING.md).
 
 ## Take a look
 
@@ -37,13 +43,13 @@ After clearing the circle, the **same ring** becomes the result display. No new 
     <th align="center">BLOCK</th>
   </tr>
   <tr>
-    <td width="33%"><img src="docs/media/lavaguard/clear-390.png" width="260" alt="CLEAR: Ready to sign in, displayed within the glowing ring" /></td>
-    <td width="33%"><img src="docs/media/lavaguard/flag-390.png" width="260" alt="FLAG: In-circle request to try again or choose an accessible alternative" /></td>
-    <td width="33%"><img src="docs/media/lavaguard/block-390.png" width="260" alt="BLOCK: In-circle restricted-attempt state with neutral wording" /></td>
+    <td width="33%"><img src="docs/media/lavaguard/phase7-clear-390.png" width="260" alt="CLEAR: Continue with passkey inside the glowing ring" /></td>
+    <td width="33%"><img src="docs/media/lavaguard/phase7-flag-390.png" width="260" alt="FLAG: Try again or return to sign-in inside the ring" /></td>
+    <td width="33%"><img src="docs/media/lavaguard/phase7-block-390.png" width="260" alt="BLOCK: In-circle restricted-attempt state with neutral wording" /></td>
   </tr>
   <tr>
     <td align="center">Ready to sign in</td>
-    <td align="center">Try again / alternate path</td>
+    <td align="center">Try again / back to sign-in</td>
     <td align="center">Attempt restricted</td>
   </tr>
 </table>
@@ -79,7 +85,7 @@ The inspiration: [Cloudflare's physical lava lamps](https://www.cloudflare.com/l
 | You choose sign-in | Wax gathers inside the ring | Prepares a time-limited LavaGuard attempt when enabled |
 | You stir | Bubbles move out of the ring | Client extracts bounded features; Worker validates the untrusted summary |
 | **CLEAR** | **Ready to sign in**, inside the original ring | Issues a scoped, expiring, single-use clearance for passkey options |
-| **FLAG** | Calm **try again** state or accessible alternative | Withholds this attempt's clearance or requests an approved additional check |
+| **FLAG** | Calm **try again** state or back to sign-in | Withholds this attempt's clearance or requests an approved additional check |
 | **BLOCK / restricted** | **Attempt restricted**, in the ring | Applies protocol/rate restrictions; not a permanent movement-based ban |
 | You continue | Platform passkey prompt | Verifies WebAuthn challenge, origin, relying party, signature and user verification |
 | Valid passkey | Signed-in experience | Creates a revocable secure session |
@@ -97,7 +103,7 @@ flowchart TD
   D --> E["Advisory behavioral model + abuse controls"]
   E --> F{"Policy result"}
   F -->|CLEAR| G["One-use scoped clearance"]
-  F -->|FLAG| H["Retry or accessible/approved alternative"]
+  F -->|FLAG| H["Fresh retry or approved verification"]
   F -->|BLOCK| I["Temporary restriction / rate limit"]
   H -->|approved| G
   G --> J["Passkey options"]
@@ -142,7 +148,7 @@ LavaGuard includes a reproducible offline Python pipeline, pinned research-sourc
 
 Read [Behavioral ML: Phase 4 results](docs/LAVAGUARD_ML_PHASE4_RESULTS.md) for the fixed-model sampling sensitivity, generator-family holdouts, evaluation splits, calibration and caveats.
 
-The [Phase 5 offline starter](docs/LAVAGUARD_PHASE5_IMPLEMENTATION.md) adds grouped data-readiness evaluation. Its six synthetic integrity tests pass; the real local run reports **`NOT_READY_NO_OPT_IN_DATA`**, with zero human study codes and zero bot families. It does not collect participants, export a Worker model or enable enforcement; its report stays in ignored `ml/private/`.
+The [Phase 5 engineering system](docs/LAVAGUARD_PHASE5_ARCHITECTURE.md) adds strict consent/provenance, local study exports, grouped leakage controls, three classifier baselines, calibration, disabled portable inference and withdrawal. Status: **`ENGINEERING_READY_RESEARCH_DATA_PENDING`** / **`NOT_READY_NO_OPT_IN_DATA`**. Current private data contains **0 human attempts and 30 declared browser-automation attempts** (20 complete, 10 excluded incomplete). All 110 TypeScript, 37 Python and 49 browser-profile tests pass, plus 17 importer checks. Application accuracy is unknown; production ML remains off. See the [measured results](docs/LAVAGUARD_PHASE5_ML_RESULTS.md) and [full handoff](docs/LAVAGUARD_PHASE5_HANDOFF.md). Phase 5 work remains local on `feature/lavaguard-phase5`; no new push, PR or deployment.
 
 ## Testing and actual results
 
@@ -250,7 +256,7 @@ docs/media/lavaguard/    # Captured UI screenshots (publish safe images only)
 
 ## What's next?
 
-The runtime implementation is at the **end of Phase 4**, with the Phase 5 offline readiness starter added. No genuine-user study has begun. Before moving beyond the research stage:
+The authentication runtime preserves Phase 4 controls; **Phase 5 research engineering is implemented locally**, with empirical human validation pending. No genuine-user study has begun. Before moving beyond the research stage:
 
 1. **Phase 5 — Consenting real-user study:** collect genuine bubble-interaction sessions across devices and independent participants, measure acceptance, retries, and accessibility.
 2. **Improve ML generalization:** use matched human and bot instrumentation, independent generator families, calibrated operating points, and meaningful false-positive constraints.
@@ -262,6 +268,7 @@ There is no claim that LavaGuard is currently a production-grade CAPTCHA. Its va
 
 ## Documentation
 
+- [Phase 5 Automation Environment Evidence: measured coverage, spoofability and shortcut risks](docs/LAVAGUARD_AUTOMATION_ENVIRONMENT.md) — local, consented advisory hints; no AI identity or population accuracy claim.
 - [Phase 4 security, threat model and load/staging results](docs/LAVAGUARD_PHASE4_RESULTS.md)
 - [Phase 4 behavioral ML results](docs/LAVAGUARD_ML_PHASE4_RESULTS.md)
 - [Human study protocol](docs/LAVAGUARD_HUMAN_STUDY.md)

@@ -1,0 +1,198 @@
+{
+  "schema": "lava-local-testing-verification-v1",
+  "reviewDate": "2026-10-18",
+  "timezone": "America/New_York",
+  "localOnly": true,
+  "genuineHumanStudySamples": 0,
+  "applicationModelFit": false,
+  "productionSettingsChanged": false,
+  "deployed": false,
+  "pushed": false,
+  "checks": {
+    "typescriptUnitTestsPassed": 110,
+    "consoleSecurityQueueTestsPassed": 15,
+    "typecheck": "passed",
+    "lint": "passed",
+    "failed": 0
+  },
+  "initialProfileComparison": [
+    {
+      "profile": "normal",
+      "verdict": "CLEAR",
+      "options": 200,
+      "session": 401,
+      "modelMode": "shadow",
+      "taskComplete": true,
+      "reasons": [
+        "browser_automation_reported"
+      ]
+    },
+    {
+      "profile": "research",
+      "verdict": "CLEAR",
+      "options": 200,
+      "session": 401,
+      "modelMode": "research_enforce",
+      "taskComplete": true,
+      "reasons": [
+        "browser_automation_reported"
+      ]
+    }
+  ],
+  "researchSuite": {
+    "passed": true,
+    "patternsExecuted": 16,
+    "completed": 13,
+    "incomplete": 3,
+    "clear": 0,
+    "flag": 13,
+    "block": 0,
+    "authenticatedSessions": 0,
+    "stopVerified": true,
+    "rerunAfterStop": true,
+    "restartHistoryPreserved": true,
+    "frontendErrors": 0,
+    "rows": [
+      {
+        "pattern": "original-demo",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "linear",
+        "verdict": null,
+        "ringCompleted": false,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "constant-speed",
+        "verdict": null,
+        "ringCompleted": false,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "random",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "bezier",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "variable-velocity",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "corrections",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "pauses",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "ghost-cursor",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "puppeteer",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "reactive",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "synthetic-replay",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "dom-synthetic",
+        "verdict": null,
+        "ringCompleted": false,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "cadence16",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "cadence64",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      },
+      {
+        "pattern": "scaled",
+        "verdict": "FLAG",
+        "ringCompleted": true,
+        "optionsStatus": 403,
+        "sessionStatus": 401
+      }
+    ]
+  },
+  "finalServerReadOnlyVerification": {
+    "passed": true,
+    "verificationMode": "Read-only; operator job left uninterrupted",
+    "restartHistoryPreserved": true,
+    "retainedHistoryAtCheck": 30,
+    "operatorQueueActive": true,
+    "patterns": 16,
+    "desktop": true,
+    "mobile390": true,
+    "frontendErrors": 0,
+    "downloadRedacted": true,
+    "screenshotEndpoint": true
+  },
+  "limitations": [
+    "Older experimental corpus model, not a Phase 5 human-trained detector.",
+    "Three incomplete rings are not credited as detection.",
+    "Initial seed-812 corrections automation received clearance in both profiles; false negatives are retained.",
+    "Operator runs and a retained browser-crash record remain in local history; they are separate from the controlled 16-pattern verification suite.",
+    "No human acceptance, population accuracy, or generalization rate can be established."
+  ],
+  "sourcePublicationReview": {
+    "status": "passed",
+    "filesReviewed": 282,
+    "textFilesScanned": 253,
+    "localLinksChecked": 188,
+    "requiredScreenshotsValidated": 8,
+    "findings": 0
+  }
+}

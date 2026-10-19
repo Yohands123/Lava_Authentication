@@ -1,5 +1,7 @@
 # Datasets, provenance and reproduction
 
+Current Phase 5 local study data uses strict `lava-consent-v3` / `lava-study-record-v3`, canonical byte-hashed manifests, explicit bot family/run/replay lineage, participant-aware frozen cohorts and withdrawal revocations. See the [current protocol](LAVAGUARD_PHASE5_DATA_COLLECTION.md) and [dataset audit](LAVAGUARD_PHASE5_ML_RESULTS.md). Actual local data: 30 declared automation exports, 20 eligible, 10 incomplete; **0 real-human attempts**. Raw/derived data stays in ignored `ml/private/phase5/`. The public-corpus and Phase 2 details below remain historical; that corpus has not been relabeled or imported as application-human evidence.
+
 `ml/datasets/manifest.json` contains inspected sources, label semantics, access/license notes, revision, byte counts and SHA-256 hashes. Restricted/unclear sources have no raw download loader. Training inputs and optional consenting exports are excluded from Git under `ml/private/`.
 
 DELBOT revision `712a00ea994738b680b0b11bb4b518979385d07b` supplies `python/dataset.tar.gz` and `python/sessions.json`. The MIT repository license is retained in `ml/THIRD_PARTY_NOTICES.md`. No separate dataset-specific grant was located: this experiment interprets the repository grant for local research, does not redistribute its raw data, and makes no claim about suitability for commercial biometric processing. Review dataset permissions before any broader use.

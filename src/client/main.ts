@@ -107,8 +107,9 @@ const observer = new LavaObserver(ringArc, (x, y) => {
     targetX: nearest ? (x - bounds.left + (nearest.x - p.x) / worldPerPixel) / bounds.width : undefined,
     targetY: nearest ? (y - bounds.top - (nearest.y - p.y) / worldPerPixel) / bounds.height : undefined,
     targetId: nearest ? bubbleIds.get(nearest) : undefined };
-});
-const guard = new LavaGuard(stir, observer, () => wax.fillRing(ringArc), (summary, decision, samples) => guardLab.report(summary, decision, samples), () => guardLab.begin());
+}, sample => guardLab.live(sample));
+guardLab.onResearchWithdraw = () => observer.forgetEnvironment();
+const guard = new LavaGuard(stir, observer, () => wax.fillRing(ringArc), (summary, decision, samples) => guardLab.report(summary, decision, samples), config => guardLab.begin(config), (status, samples) => guardLab.interrupted(status, samples));
 window.addEventListener("pagehide", () => { guard.cancel(); guardLab.clear(); });
 
 if (lamp) {
@@ -180,6 +181,7 @@ async function startSignIn(accessible = false): Promise<void> {
     wax.warmUp();
     signedIn(user);
   } catch (err) {
+    guard.cancel();
     wax.fail(err);
     showStatus(messageFor(err));
     go("choose");

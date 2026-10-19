@@ -1,0 +1,260 @@
+{
+  "schema": "lava-phase6-inference-performance-v1",
+  "syntheticOnly": true,
+  "notStudyEvidence": true,
+  "candidateHash": "05126c87196c0bb90001417c1ae52746b1a3b453968449e4bc911afdac042dc2",
+  "node": {
+    "node": "v24.13.0",
+    "platform": "win32",
+    "registryPreparationMs": 0.7928000000001703,
+    "validatedEachCall": {
+      "n": 5000,
+      "p50Ms": 0.006499999999959982,
+      "p95Ms": 0.00839999999993779,
+      "p99Ms": 0.015599999999949432
+    },
+    "portablePrepared": {
+      "n": 5000,
+      "p50Ms": 0.0019999999999527063,
+      "p95Ms": 0.005200000000058935,
+      "p99Ms": 0.005699999999933425
+    },
+    "registryPrepared": {
+      "n": 5000,
+      "p50Ms": 0.0013000000001284207,
+      "p95Ms": 0.0024000000000796717,
+      "p99Ms": 0.003499999999803549
+    },
+    "off": {
+      "n": 5000,
+      "p50Ms": 0.0015999999998257408,
+      "p95Ms": 0.002200000000129876,
+      "p99Ms": 0.0024000000000796717
+    },
+    "unsupported": {
+      "n": 2000,
+      "p50Ms": 0.003000000000156433,
+      "p95Ms": 0.003400000000056025,
+      "p99Ms": 0.00430000000005748
+    },
+    "max1024": {
+      "v1": {
+        "n": 100,
+        "p50Ms": 1.9988000000000739,
+        "p95Ms": 2.527900000000045,
+        "p99Ms": 2.8740999999999985
+      },
+      "robust": {
+        "n": 100,
+        "p50Ms": 0.2678000000000793,
+        "p95Ms": 0.2929999999998927,
+        "p99Ms": 0.3469000000000051
+      },
+      "responseV3": {
+        "n": 100,
+        "p50Ms": 3.0796000000000276,
+        "p95Ms": 3.818000000000211,
+        "p99Ms": 3.935699999999997
+      },
+      "dynamicV4": {
+        "n": 100,
+        "p50Ms": 0.06280000000015207,
+        "p95Ms": 0.21669999999994616,
+        "p99Ms": 0.2678000000000793
+      }
+    },
+    "processBefore": {
+      "rss": 194465792,
+      "heapTotal": 136515584,
+      "heapUsed": 69929376,
+      "external": 5224148,
+      "arrayBuffers": 1137007
+    },
+    "processAfter": {
+      "rss": 202416128,
+      "heapTotal": 139923456,
+      "heapUsed": 101389104,
+      "external": 4615839,
+      "arrayBuffers": 528690
+    },
+    "aggregateCpuMicros": {
+      "user": 1344000,
+      "system": 125000
+    },
+    "modelBytes": 2051,
+    "candidateBytes": 2611,
+    "registryBundleBytes": 7487
+  },
+  "workerd": {
+    "manifest": {
+      "run": "763c95cb-3002-4cd7-963b-03646b12c4f5",
+      "origin": "http://localhost:8808",
+      "localOnly": true,
+      "workerSha256": "8fd87764a8df24aaefb34333386962e00b90fc028b9ce07059a38c2bf3011102",
+      "configSha256": "45e1c53afbace95d502bfce88084c14f70b87eae7e15440992af20e6844f271a",
+      "assetsSha256": "c6e05001e0685e82db3700aa9636102b51adee55611cc32c85113174aa5705f6",
+      "node": "v24.13.0",
+      "productionFlagsChanged": false
+    },
+    "coldRequestWallMs": 11.567200000000412,
+    "coldPreparationReportedWallMs": 1,
+    "batches": [
+      {
+        "method": "parse-each-call",
+        "mode": "off",
+        "iterationsPerRequest": 1000,
+        "http": {
+          "n": 30,
+          "p50Ms": 15.874300000000403,
+          "p95Ms": 23.018699999999626,
+          "p99Ms": 24.804000000000087
+        },
+        "workerReportedWall": {
+          "n": 30,
+          "p50Ms": 7,
+          "p95Ms": 10,
+          "p99Ms": 10
+        },
+        "observedNonzeroWorkerTimers": 30
+      },
+      {
+        "method": "parse-each-call",
+        "mode": "shadow",
+        "iterationsPerRequest": 1000,
+        "http": {
+          "n": 30,
+          "p50Ms": 14.819499999999607,
+          "p95Ms": 21.70719999999983,
+          "p99Ms": 22.28520000000026
+        },
+        "workerReportedWall": {
+          "n": 30,
+          "p50Ms": 8,
+          "p95Ms": 10,
+          "p99Ms": 10
+        },
+        "observedNonzeroWorkerTimers": 30
+      },
+      {
+        "method": "prepared",
+        "mode": "off",
+        "iterationsPerRequest": 1000,
+        "http": {
+          "n": 30,
+          "p50Ms": 15.280999999999949,
+          "p95Ms": 20.22320000000036,
+          "p99Ms": 20.393699999999626
+        },
+        "workerReportedWall": {
+          "n": 30,
+          "p50Ms": 7,
+          "p95Ms": 12,
+          "p99Ms": 12
+        },
+        "observedNonzeroWorkerTimers": 30
+      },
+      {
+        "method": "prepared",
+        "mode": "shadow",
+        "iterationsPerRequest": 1000,
+        "http": {
+          "n": 30,
+          "p50Ms": 16.937400000000707,
+          "p95Ms": 22.237100000000282,
+          "p99Ms": 24.012300000000323
+        },
+        "workerReportedWall": {
+          "n": 30,
+          "p50Ms": 10,
+          "p95Ms": 14,
+          "p99Ms": 14
+        },
+        "observedNonzeroWorkerTimers": 30
+      }
+    ],
+    "fallbacks": {
+      "ood": [
+        "client_claims_forgeable",
+        "application_domain_unvalidated",
+        "out_of_distribution"
+      ],
+      "unsupported": [
+        "client_claims_forgeable",
+        "application_domain_unvalidated",
+        "unsupported_device"
+      ],
+      "missing": [
+        "client_claims_forgeable",
+        "application_domain_unvalidated",
+        "missing_features"
+      ],
+      "revoked": [
+        "candidate_revoked"
+      ],
+      "withdrawn": [
+        "client_claims_forgeable",
+        "application_domain_unvalidated",
+        "dataset_unavailable_or_withdrawn"
+      ],
+      "unavailable": [
+        "revocation_state_unavailable"
+      ],
+      "throw": [
+        "inference_error"
+      ],
+      "stall": [
+        "inference_timeout"
+      ]
+    },
+    "hostProcessBefore": {
+      "CPU": 0.09375,
+      "WorkingSet64": 78516224,
+      "PeakWorkingSet64": 78516224
+    },
+    "hostProcessAfter": {
+      "CPU": 0.515625,
+      "WorkingSet64": 91635712,
+      "PeakWorkingSet64": 91635712
+    },
+    "actualEdgeCpuMs": null,
+    "timerCaveat": "workerd timers may be frozen/quantized during CPU work; zero means unresolved, not zero CPU. HTTP includes IPC and wrapper overhead. Host CPU is aggregate process CPU."
+  },
+  "browserFeatures": {
+    "browserBuild": "156.0.8078.4",
+    "samples": 1024,
+    "measurements": {
+      "v1": {
+        "n": 120,
+        "p50Ms": 1.600000023841858,
+        "p95Ms": 2.300000011920929,
+        "p99Ms": 3.5
+      },
+      "robust": {
+        "n": 120,
+        "p50Ms": 0.19999998807907104,
+        "p95Ms": 0.40000003576278687,
+        "p99Ms": 0.800000011920929
+      },
+      "responseV3": {
+        "n": 120,
+        "p50Ms": 2.599999964237213,
+        "p95Ms": 3.799999952316284,
+        "p99Ms": 4.900000035762787
+      },
+      "dynamicV4": {
+        "n": 120,
+        "p50Ms": 0.10000002384185791,
+        "p95Ms": 0.30000001192092896,
+        "p99Ms": 1
+      }
+    },
+    "dynamicParity": true,
+    "syntheticOnly": true
+  },
+  "limitations": [
+    "Local Node, browser and workerd are different measurements, not Cloudflare edge CPU or capacity.",
+    "Heap deltas include GC/noise and are not allocation-per-inference or native peak guarantees.",
+    "No empirical application model or accuracy comparison.",
+    "Prepared scoring remains linear in a fixed at-most-28-feature vector; not a cryptographic constant-time guarantee."
+  ]
+}

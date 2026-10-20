@@ -12,5 +12,5 @@
     "skipLibCheck": true,
     "noEmit": true
   },
-  "include": ["src/client", "src/worker/entropy", "src/worker/lib/base64url.ts", "src/worker/lib/cookies.ts", "tests", "vite.config.ts"]
+  "include": ["src/client", "src/worker/entropy", "src/worker/lib/base64url.ts", "src/worker/lib/cookies.ts", "tests", "vite.config.ts", "site", "vite.site.config.ts"]
 }

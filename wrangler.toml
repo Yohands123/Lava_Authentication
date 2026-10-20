@@ -44,11 +44,13 @@ new_sqlite_classes = ["ChallengeStore", "RateLimiter", "SessionStore", "UserStor
 name = "lavaauth"
 
 [env.production.vars]
-LAVAGUARD_MODE = "off"
+LAVAGUARD_MODE = "enforce"
 LAVAGUARD_LAB = "0"
 LAVAGUARD_EXPERIMENTAL_MODEL = "0"
 LAVAGUARD_ML_MODE = "off"
-LAVAGUARD_STEP_UP = "off"
+LAVAGUARD_STEP_UP = "turnstile"
+# Public Turnstile widget key; the secret is a Worker secret, never in Git.
+TURNSTILE_SITE_KEY = "0x4AAAAAAFdqnjS28moJULRq"
 LAVAGUARD_METRICS = "0"
 RP_NAME = "LavaAuth"
 RP_ID = "lavaauth.yohance611.workers.dev"

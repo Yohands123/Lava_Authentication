@@ -57,11 +57,11 @@ describe("untrusted summary validation", () => {
 });
 describe("probabilistic evidence and proportionate policy", () => {
   const detector = new LavaDetector(), policy = new LavaPolicy();
-  it("recognizes joint regularity without claiming calibrated probability", () => {
+  it("withholds clearance for a machine-regular path without claiming calibrated probability", () => {
     const d = detector.evaluate(summary(), 4000, false);
-    expect(d.reasons).toContain("joint_regular_path"); expect(d.uncertainty).toBeGreaterThan(.5);
+    expect(d.reasons).toContain("joint_regular_path"); expect(d.reasons).toContain("machine_regular_path"); expect(d.uncertainty).toBeGreaterThan(.5);
     expect(policy.decide("shadow", d, false)).toBe("CLEAR");
-    expect(policy.decide("enforce", d, false)).toBe("CLEAR");
+    expect(policy.decide("enforce", d, false)).toBe("FLAG");
   });
   it("only corroborated protocol restriction can BLOCK", () => {
     const d = { ...detector.evaluate(summary(), 4000, true), risk: 1, enforcementRisk: .6 };
@@ -76,22 +76,23 @@ describe("probabilistic evidence and proportionate policy", () => {
   it("records recurrence and impossible duration as hints, not proof", () => {
     expect(detector.evaluate(summary(), 100, true).reasons).toEqual(expect.arrayContaining(["time_inconsistent", "recent_path_recurrence"]));
   });
-  it("does not reject a human taking over a WebDriver browser on the browser hint alone", () => {
+  it("a WebDriver browser gets FLAG (retry/step-up) in enforce, never BLOCK, and nothing in shadow", () => {
     const s = { ...summary(path().map((p, i) => ({ ...p, x: (i / 100) ** 2 }))), signals: { webdriver: true } };
     const result = detector.evaluate(s, 5000, false);
     expect(result.automationEnvironment?.positiveSignals).toContain("webdriver");
-    expect(result.reasons).not.toContain("browser_automation_reported");
-    expect(policy.decide("enforce", result, false)).toBe("CLEAR");
+    expect(result.reasons).toContain("automation_webdriver");
+    expect(policy.decide("enforce", result, false)).toBe("FLAG");
     expect(policy.decide("shadow", result, false)).toBe("CLEAR");
-    expect(policy.decide("enforce", result, false)).not.toBe("BLOCK");
+    const human = detector.evaluate({ ...s, signals: { webdriver: false } }, 5000, false);
+    expect(human.reasons).not.toContain("automation_webdriver");
   });
-  it("repeated ordinary input cannot become a movement ban or retry loop", () => {
+  it("repeated WebDriver attempts stay FLAG, never escalate to a movement ban", () => {
     const captured = parseSummary(JSON.parse(readFileSync(new URL("../fixtures/automated-preview-summary.json", import.meta.url), "utf8")))!;
     for (let i = 0; i < 4; i++) {
       const result = detector.evaluate({ ...captured, signals: { webdriver: true } }, 10000, i > 0);
       expect(result.automationEnvironment?.positiveSignals).toContain("webdriver");
-      expect(result.reasons).not.toContain("browser_automation_reported");
-      expect(policy.decide("enforce", result, false)).toBe("CLEAR");
+      expect(result.reasons).toContain("automation_webdriver");
+      expect(policy.decide("enforce", result, false)).toBe("FLAG");
     }
   });
   it("catches the real passing preview's behavior when its automation hint is hidden", () => {

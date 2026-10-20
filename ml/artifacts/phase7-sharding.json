@@ -1,0 +1,1002 @@
+{
+  "schema": "lava-phase7-sharding-v1",
+  "node": "v24.13.0",
+  "runtimeSha256": "360cefaac0aed31d9de2db00e9af58ea9028295a5cda7b9706a31ee498ee4816",
+  "runtime": "Single-process Node SQLite with production LavaEnforcer, SessionStore and UserStore methods; DO base stub only",
+  "measurements": [
+    {
+      "shards": 1,
+      "skew": "spread",
+      "syntheticOperations": 256,
+      "distribution": [
+        256
+      ],
+      "successfulGuardRedemptions": 256,
+      "replayRejected": 1792,
+      "sessionRevocations": 256,
+      "credentialReads": 256,
+      "n": 256,
+      "p50Ms": 2.2649999999999295,
+      "p95Ms": 2.8605999999999767,
+      "p99Ms": 3.087000000000046,
+      "wallMs": 619.2102,
+      "nodeCpuMicros": {
+        "user": 656000,
+        "system": 109000
+      },
+      "nodeRssBytes": 78422016,
+      "metrics": {
+        "policy": "lava-routing-prototype-v1",
+        "model": "off",
+        "capacity": 1024,
+        "droppedEventsSinceInstanceStart": 0,
+        "rows": [
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "issued",
+            "count": 256
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "redeemed",
+            "count": 256
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "replay",
+            "count": 256
+          }
+        ]
+      }
+    },
+    {
+      "shards": 1,
+      "skew": "80-percent-hot-context",
+      "syntheticOperations": 256,
+      "distribution": [
+        256
+      ],
+      "successfulGuardRedemptions": 256,
+      "replayRejected": 1792,
+      "sessionRevocations": 256,
+      "credentialReads": 256,
+      "n": 256,
+      "p50Ms": 2.3163999999999305,
+      "p95Ms": 3.439000000000078,
+      "p99Ms": 3.7894999999998618,
+      "wallMs": 643.7162,
+      "nodeCpuMicros": {
+        "user": 797000,
+        "system": 125000
+      },
+      "nodeRssBytes": 86622208,
+      "metrics": {
+        "policy": "lava-routing-prototype-v1",
+        "model": "off",
+        "capacity": 1024,
+        "droppedEventsSinceInstanceStart": 0,
+        "rows": [
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "issued",
+            "count": 256
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "redeemed",
+            "count": 256
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "replay",
+            "count": 256
+          }
+        ]
+      }
+    },
+    {
+      "shards": 4,
+      "skew": "spread",
+      "syntheticOperations": 256,
+      "distribution": [
+        53,
+        69,
+        74,
+        60
+      ],
+      "successfulGuardRedemptions": 256,
+      "replayRejected": 1792,
+      "sessionRevocations": 256,
+      "credentialReads": 256,
+      "n": 256,
+      "p50Ms": 2.102999999999838,
+      "p95Ms": 3.0249999999998636,
+      "p99Ms": 3.196100000000115,
+      "wallMs": 585.9083,
+      "nodeCpuMicros": {
+        "user": 672000,
+        "system": 94000
+      },
+      "nodeRssBytes": 87035904,
+      "metrics": {
+        "policy": "lava-routing-prototype-v1",
+        "model": "off",
+        "capacity": 1024,
+        "droppedEventsSinceInstanceStart": 0,
+        "rows": [
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "issued",
+            "count": 69
+          },
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "redeemed",
+            "count": 69
+          },
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "replay",
+            "count": 69
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "issued",
+            "count": 74
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "redeemed",
+            "count": 74
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "replay",
+            "count": 74
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "issued",
+            "count": 53
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "redeemed",
+            "count": 53
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "replay",
+            "count": 53
+          },
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "issued",
+            "count": 60
+          },
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "redeemed",
+            "count": 60
+          },
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "replay",
+            "count": 60
+          }
+        ]
+      }
+    },
+    {
+      "shards": 4,
+      "skew": "80-percent-hot-context",
+      "syntheticOperations": 256,
+      "distribution": [
+        8,
+        215,
+        17,
+        16
+      ],
+      "successfulGuardRedemptions": 256,
+      "replayRejected": 1792,
+      "sessionRevocations": 256,
+      "credentialReads": 256,
+      "n": 256,
+      "p50Ms": 2.124200000000201,
+      "p95Ms": 2.938000000000102,
+      "p99Ms": 3.236199999999826,
+      "wallMs": 579.6475,
+      "nodeCpuMicros": {
+        "user": 578000,
+        "system": 94000
+      },
+      "nodeRssBytes": 87818240,
+      "metrics": {
+        "policy": "lava-routing-prototype-v1",
+        "model": "off",
+        "capacity": 1024,
+        "droppedEventsSinceInstanceStart": 0,
+        "rows": [
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "issued",
+            "count": 16
+          },
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "redeemed",
+            "count": 16
+          },
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "replay",
+            "count": 16
+          },
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "issued",
+            "count": 215
+          },
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "redeemed",
+            "count": 215
+          },
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "replay",
+            "count": 215
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "issued",
+            "count": 17
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "redeemed",
+            "count": 17
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "replay",
+            "count": 17
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "issued",
+            "count": 8
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "redeemed",
+            "count": 8
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "replay",
+            "count": 8
+          }
+        ]
+      }
+    },
+    {
+      "shards": 16,
+      "skew": "spread",
+      "syntheticOperations": 256,
+      "distribution": [
+        14,
+        9,
+        17,
+        17,
+        18,
+        24,
+        22,
+        13,
+        18,
+        14,
+        16,
+        15,
+        19,
+        15,
+        11,
+        14
+      ],
+      "successfulGuardRedemptions": 256,
+      "replayRejected": 1792,
+      "sessionRevocations": 256,
+      "credentialReads": 256,
+      "n": 256,
+      "p50Ms": 3.8797999999997046,
+      "p95Ms": 8.845700000000306,
+      "p99Ms": 19.08660000000009,
+      "wallMs": 1198.3753000000002,
+      "nodeCpuMicros": {
+        "user": 828000,
+        "system": 94000
+      },
+      "nodeRssBytes": 91840512,
+      "metrics": {
+        "policy": "lava-routing-prototype-v1",
+        "model": "off",
+        "capacity": 1024,
+        "droppedEventsSinceInstanceStart": 0,
+        "rows": [
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "issued",
+            "count": 17
+          },
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "redeemed",
+            "count": 17
+          },
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "replay",
+            "count": 17
+          },
+          {
+            "hour": 497900,
+            "shard": 4,
+            "event": "issued",
+            "count": 18
+          },
+          {
+            "hour": 497900,
+            "shard": 4,
+            "event": "redeemed",
+            "count": 18
+          },
+          {
+            "hour": 497900,
+            "shard": 4,
+            "event": "replay",
+            "count": 18
+          },
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "issued",
+            "count": 9
+          },
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "redeemed",
+            "count": 9
+          },
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "replay",
+            "count": 9
+          },
+          {
+            "hour": 497900,
+            "shard": 8,
+            "event": "issued",
+            "count": 18
+          },
+          {
+            "hour": 497900,
+            "shard": 8,
+            "event": "redeemed",
+            "count": 18
+          },
+          {
+            "hour": 497900,
+            "shard": 8,
+            "event": "replay",
+            "count": 18
+          },
+          {
+            "hour": 497900,
+            "shard": 7,
+            "event": "issued",
+            "count": 13
+          },
+          {
+            "hour": 497900,
+            "shard": 7,
+            "event": "redeemed",
+            "count": 13
+          },
+          {
+            "hour": 497900,
+            "shard": 7,
+            "event": "replay",
+            "count": 13
+          },
+          {
+            "hour": 497900,
+            "shard": 13,
+            "event": "issued",
+            "count": 15
+          },
+          {
+            "hour": 497900,
+            "shard": 13,
+            "event": "redeemed",
+            "count": 15
+          },
+          {
+            "hour": 497900,
+            "shard": 13,
+            "event": "replay",
+            "count": 15
+          },
+          {
+            "hour": 497900,
+            "shard": 10,
+            "event": "issued",
+            "count": 16
+          },
+          {
+            "hour": 497900,
+            "shard": 10,
+            "event": "redeemed",
+            "count": 16
+          },
+          {
+            "hour": 497900,
+            "shard": 10,
+            "event": "replay",
+            "count": 16
+          },
+          {
+            "hour": 497900,
+            "shard": 15,
+            "event": "issued",
+            "count": 14
+          },
+          {
+            "hour": 497900,
+            "shard": 15,
+            "event": "redeemed",
+            "count": 14
+          },
+          {
+            "hour": 497900,
+            "shard": 15,
+            "event": "replay",
+            "count": 14
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "issued",
+            "count": 14
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "redeemed",
+            "count": 14
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "replay",
+            "count": 14
+          },
+          {
+            "hour": 497900,
+            "shard": 12,
+            "event": "issued",
+            "count": 19
+          },
+          {
+            "hour": 497900,
+            "shard": 12,
+            "event": "redeemed",
+            "count": 19
+          },
+          {
+            "hour": 497900,
+            "shard": 12,
+            "event": "replay",
+            "count": 19
+          },
+          {
+            "hour": 497900,
+            "shard": 14,
+            "event": "issued",
+            "count": 11
+          },
+          {
+            "hour": 497900,
+            "shard": 14,
+            "event": "redeemed",
+            "count": 11
+          },
+          {
+            "hour": 497900,
+            "shard": 14,
+            "event": "replay",
+            "count": 11
+          },
+          {
+            "hour": 497900,
+            "shard": 9,
+            "event": "issued",
+            "count": 14
+          },
+          {
+            "hour": 497900,
+            "shard": 9,
+            "event": "redeemed",
+            "count": 14
+          },
+          {
+            "hour": 497900,
+            "shard": 9,
+            "event": "replay",
+            "count": 14
+          },
+          {
+            "hour": 497900,
+            "shard": 6,
+            "event": "issued",
+            "count": 22
+          },
+          {
+            "hour": 497900,
+            "shard": 6,
+            "event": "redeemed",
+            "count": 22
+          },
+          {
+            "hour": 497900,
+            "shard": 6,
+            "event": "replay",
+            "count": 22
+          },
+          {
+            "hour": 497900,
+            "shard": 5,
+            "event": "issued",
+            "count": 24
+          },
+          {
+            "hour": 497900,
+            "shard": 5,
+            "event": "redeemed",
+            "count": 24
+          },
+          {
+            "hour": 497900,
+            "shard": 5,
+            "event": "replay",
+            "count": 24
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "issued",
+            "count": 17
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "redeemed",
+            "count": 17
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "replay",
+            "count": 17
+          },
+          {
+            "hour": 497900,
+            "shard": 11,
+            "event": "issued",
+            "count": 15
+          },
+          {
+            "hour": 497900,
+            "shard": 11,
+            "event": "redeemed",
+            "count": 15
+          },
+          {
+            "hour": 497900,
+            "shard": 11,
+            "event": "replay",
+            "count": 15
+          }
+        ]
+      }
+    },
+    {
+      "shards": 16,
+      "skew": "80-percent-hot-context",
+      "syntheticOperations": 256,
+      "distribution": [
+        3,
+        207,
+        3,
+        2,
+        5,
+        2,
+        2,
+        4,
+        3,
+        6,
+        7,
+        4,
+        3,
+        2,
+        2,
+        1
+      ],
+      "successfulGuardRedemptions": 256,
+      "replayRejected": 1792,
+      "sessionRevocations": 256,
+      "credentialReads": 256,
+      "n": 256,
+      "p50Ms": 4.411999999999807,
+      "p95Ms": 7.048999999999978,
+      "p99Ms": 9.934100000000399,
+      "wallMs": 1272.5980999999997,
+      "nodeCpuMicros": {
+        "user": 1063000,
+        "system": 125000
+      },
+      "nodeRssBytes": 92831744,
+      "metrics": {
+        "policy": "lava-routing-prototype-v1",
+        "model": "off",
+        "capacity": 1024,
+        "droppedEventsSinceInstanceStart": 0,
+        "rows": [
+          {
+            "hour": 497900,
+            "shard": 15,
+            "event": "issued",
+            "count": 1
+          },
+          {
+            "hour": 497900,
+            "shard": 15,
+            "event": "redeemed",
+            "count": 1
+          },
+          {
+            "hour": 497900,
+            "shard": 15,
+            "event": "replay",
+            "count": 1
+          },
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "issued",
+            "count": 207
+          },
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "redeemed",
+            "count": 207
+          },
+          {
+            "hour": 497900,
+            "shard": 1,
+            "event": "replay",
+            "count": 207
+          },
+          {
+            "hour": 497900,
+            "shard": 9,
+            "event": "issued",
+            "count": 6
+          },
+          {
+            "hour": 497900,
+            "shard": 9,
+            "event": "redeemed",
+            "count": 6
+          },
+          {
+            "hour": 497900,
+            "shard": 9,
+            "event": "replay",
+            "count": 6
+          },
+          {
+            "hour": 497900,
+            "shard": 10,
+            "event": "issued",
+            "count": 7
+          },
+          {
+            "hour": 497900,
+            "shard": 10,
+            "event": "redeemed",
+            "count": 7
+          },
+          {
+            "hour": 497900,
+            "shard": 10,
+            "event": "replay",
+            "count": 7
+          },
+          {
+            "hour": 497900,
+            "shard": 7,
+            "event": "issued",
+            "count": 4
+          },
+          {
+            "hour": 497900,
+            "shard": 7,
+            "event": "redeemed",
+            "count": 4
+          },
+          {
+            "hour": 497900,
+            "shard": 7,
+            "event": "replay",
+            "count": 4
+          },
+          {
+            "hour": 497900,
+            "shard": 11,
+            "event": "issued",
+            "count": 4
+          },
+          {
+            "hour": 497900,
+            "shard": 11,
+            "event": "redeemed",
+            "count": 4
+          },
+          {
+            "hour": 497900,
+            "shard": 11,
+            "event": "replay",
+            "count": 4
+          },
+          {
+            "hour": 497900,
+            "shard": 6,
+            "event": "issued",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 6,
+            "event": "redeemed",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 6,
+            "event": "replay",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 14,
+            "event": "issued",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 14,
+            "event": "redeemed",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 14,
+            "event": "replay",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "issued",
+            "count": 3
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "redeemed",
+            "count": 3
+          },
+          {
+            "hour": 497900,
+            "shard": 0,
+            "event": "replay",
+            "count": 3
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "issued",
+            "count": 3
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "redeemed",
+            "count": 3
+          },
+          {
+            "hour": 497900,
+            "shard": 2,
+            "event": "replay",
+            "count": 3
+          },
+          {
+            "hour": 497900,
+            "shard": 4,
+            "event": "issued",
+            "count": 5
+          },
+          {
+            "hour": 497900,
+            "shard": 4,
+            "event": "redeemed",
+            "count": 5
+          },
+          {
+            "hour": 497900,
+            "shard": 4,
+            "event": "replay",
+            "count": 5
+          },
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "issued",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "redeemed",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 3,
+            "event": "replay",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 13,
+            "event": "issued",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 13,
+            "event": "redeemed",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 13,
+            "event": "replay",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 8,
+            "event": "issued",
+            "count": 3
+          },
+          {
+            "hour": 497900,
+            "shard": 8,
+            "event": "redeemed",
+            "count": 3
+          },
+          {
+            "hour": 497900,
+            "shard": 8,
+            "event": "replay",
+            "count": 3
+          },
+          {
+            "hour": 497900,
+            "shard": 5,
+            "event": "issued",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 5,
+            "event": "redeemed",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 5,
+            "event": "replay",
+            "count": 2
+          },
+          {
+            "hour": 497900,
+            "shard": 12,
+            "event": "issued",
+            "count": 3
+          },
+          {
+            "hour": 497900,
+            "shard": 12,
+            "event": "redeemed",
+            "count": 3
+          },
+          {
+            "hour": 497900,
+            "shard": 12,
+            "event": "replay",
+            "count": 3
+          }
+        ]
+      }
+    }
+  ],
+  "migration": {
+    "disposableSqlCopies": 2,
+    "duplicateRowCopied": true,
+    "wrongEpochRejected": true,
+    "oldAuthoritySingleWinner": true,
+    "duplicateDirectoryIdRejected": true,
+    "coldRestartRevocationPreserved": true,
+    "malformedSqlDoesNotGrantSession": true,
+    "actualProductionMigration": false
+  },
+  "realHumanParticipants": 0,
+  "productionRoutingChanged": false,
+  "directoryCapacityPerExperiment": 4096,
+  "globalBudgetEquivalence": false,
+  "actualEdgeCpu": null,
+  "capacity10kUsers": null,
+  "limitations": [
+    "Sequential operations with Promise races do not measure distributed shard throughput.",
+    "The authoritative SQL directory is a potential central bottleneck; production cutover requires a scalable consistency design.",
+    "Independent per-shard caps multiply capacity unless reserved budgets or global admission are designed.",
+    "Synthetic credential bytes exercise SQL lookups only, not cryptographic authentication."
+  ]
+}

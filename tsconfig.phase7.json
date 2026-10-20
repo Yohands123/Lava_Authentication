@@ -1,0 +1,4 @@
+{
+  "extends": "./tsconfig.worker.json",
+  "include": ["scripts/phase7/worker.ts"]
+}

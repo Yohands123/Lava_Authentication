@@ -93,8 +93,11 @@ def portable_candidate(model, calibrator, threshold, fit_rows, dataset_hash, spl
 
 @threadpool_limits.wrap(limits=1)
 def train_and_score(parts, keys=ROBUST_KEYS, dataset_hash='0'*64, split_hash='0'*64, evaluate_test=True):
-    train, cal, held = (parts[k] for k in ('train', 'calibration', 'test'))
-    if any(not rows or len(set(labels(rows))) != 2 for rows in (train, cal, held)): raise ValueError('independent cohorts need both labels')
+    train, cal = parts['train'], parts['calibration']
+    # Development callers need not supply or expose final rows at all.
+    held = parts['test'] if evaluate_test else []
+    checked_cohorts = (train, cal, held) if evaluate_test else (train, cal)
+    if any(not rows or len(set(labels(rows))) != 2 for rows in checked_cohorts): raise ValueError('independent cohorts need both labels')
     x, cx = matrix(train, keys), matrix(cal, keys)
     tx = matrix(held, keys) if evaluate_test else np.empty((0, len(keys)))
     y, cy = labels(train), labels(cal)

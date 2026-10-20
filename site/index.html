@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>LavaAuth + LavaGuard</title>
+    <meta name="description" content="A WebGL lava lamp you stir to sign in, backed by server-verified passkeys, with LavaGuard behavioural anti-automation research on Cloudflare Workers." />
+    <meta name="theme-color" content="#05030c" />
+    <meta property="og:title" content="LavaAuth + LavaGuard" />
+    <meta property="og:description" content="Stir the lava, then sign in with a passkey. Behavioural security research with honest results." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3CradialGradient id='g' cx='.4' cy='.35'%3E%3Cstop offset='0' stop-color='%23ff5a6e'/%3E%3Cstop offset='.55' stop-color='%23ff2bd6'/%3E%3Cstop offset='1' stop-color='%237b2cff'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%2305030c'/%3E%3Ccircle cx='16' cy='17' r='9' fill='url(%23g)'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <canvas id="lamp" aria-hidden="true"></canvas>
+    <div class="scrim" aria-hidden="true"></div>
+    <a class="skip" href="#how">Skip to content</a>
+
+    <header class="topbar">
+      <span class="wordmark">LavaAuth</span>
+      <nav aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#live">Live guard</a>
+        <a href="#security">Security</a>
+        <a href="#research">Research</a>
+        <a href="#results">Results</a>
+        <a href="https://github.com/Yohands123/Lava_Authentication">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <p class="eyebrow mono">WebGL 2 · WebAuthn · Cloudflare Workers · Durable Objects</p>
+        <h1 id="hero-title">Stir the lava.<br />Sign in with a passkey.</h1>
+        <p class="lede">LavaAuth is passwordless authentication with an interactive lava lamp for its interface. LavaGuard is the research layer that watches how the wax is stirred and tries to tell people from scripts. The wax is just the interface. A server-verified passkey is what actually signs you in.</p>
+        <div class="actions">
+          <a class="cta" href="https://lavaauth.yohance611.workers.dev/">Try LavaAuth <span aria-hidden="true">→</span></a>
+          <a class="quiet-link" href="https://github.com/Yohands123/Lava_Authentication">Read the code</a>
+        </div>
+        <p class="hint mono" aria-hidden="true"><span class="hint-pointer">Drag anywhere to stir the wax.</span><span class="hint-touch">This is the real lamp engine, running live.</span></p>
+      </section>
+
+      <section id="how" class="band" aria-labelledby="how-title">
+        <h2 id="how-title">One ring. Three outcomes. Then a passkey.</h2>
+        <ol class="steps">
+          <li>
+            <span class="step-n mono">01</span>
+            <h3>Clear the ring</h3>
+            <p>Wax gathers inside a glowing circle. You push it out. A bounded observer turns the motion into a short feature summary: speed variation, curvature, pauses, corrections. It never uploads a raw trace.</p>
+          </li>
+          <li>
+            <span class="step-n mono">02</span>
+            <h3>LavaGuard decides</h3>
+            <p>The Worker checks a server nonce, the context binding and replay history, then returns <strong>CLEAR</strong>, <strong>FLAG</strong> or <strong>BLOCK</strong>, all inside the same ring. CLEAR issues a scoped, single-use permission that lasts 90 seconds.</p>
+          </li>
+          <li>
+            <span class="step-n mono">03</span>
+            <h3>The passkey authenticates</h3>
+            <p>Face ID, Touch ID, Windows Hello or a security key signs a 32-byte server challenge that expires after 60 seconds. Only a verified WebAuthn assertion creates a session. Stirring alone never does.</p>
+          </li>
+        </ol>
+
+        <figure class="pair">
+          <img src="../docs/media/clear-the-ring.png" width="618" height="739" loading="lazy" alt="The original LavaAuth screen with glowing magenta and violet wax inside a stirring ring" />
+          <img src="../docs/media/ring-cleared.png" width="597" height="735" loading="lazy" alt="The same screen after the wax has been stirred out of the ring" />
+          <figcaption>The original experience: move the blobs out of the circle, then continue to a passkey.</figcaption>
+        </figure>
+
+        <div class="verdicts">
+          <figure>
+            <img src="../docs/media/lavaguard/phase7-clear-390.png" width="390" height="844" loading="lazy" alt="CLEAR verdict: Continue with passkey, inside the glowing ring" />
+            <figcaption><span class="tag clear">CLEAR</span> Continue with passkey, only while the permission is still valid.</figcaption>
+          </figure>
+          <figure>
+            <img src="../docs/media/lavaguard/phase7-flag-390.png" width="390" height="844" loading="lazy" alt="FLAG verdict: try again or go back, inside the ring" />
+            <figcaption><span class="tag flag">FLAG</span> A fresh retry or Back. No skip button.</figcaption>
+          </figure>
+          <figure>
+            <img src="../docs/media/lavaguard/phase7-block-390.png" width="390" height="844" loading="lazy" alt="BLOCK verdict: attempt restricted, in neutral wording, inside the ring" />
+            <figcaption><span class="tag block">BLOCK</span> Back, with a temporary cooldown. Never a permanent ban.</figcaption>
+          </figure>
+        </div>
+        <p class="note">These screenshots are visual regression fixtures with mocked verdicts and real rendering. They show the interface, not a model judging a real person.</p>
+      </section>
+
+      <section id="security" class="band" aria-labelledby="security-title">
+        <h2 id="security-title">Passkeys are the security boundary.</h2>
+        <p class="section-lede">Mouse movement, timestamps and client-computed features can all be forged. The design treats LavaGuard as advisory and puts identity on WebAuthn, which the server verifies on every sign-in.</p>
+        <div class="split">
+          <div>
+            <h3 class="mono label">The Worker verifies</h3>
+            <ul class="checks">
+              <li>Credential signatures against stored public keys</li>
+              <li>Challenges from a secure server generator: 32 bytes, 60-second expiry, one use only</li>
+              <li>Exact origin and relying-party ID</li>
+              <li>Required user verification</li>
+              <li>Revocable sessions, with "sign out everywhere"</li>
+              <li>Same-origin checks on every state-changing request</li>
+              <li>Rate limits on issuance, evaluation and sign-in</li>
+              <li>Atomic, single-use LavaGuard permissions with replay rejection</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="mono label">Deliberately not claimed</h3>
+            <ul class="caveats">
+              <li>The simulated lamp is not a random-number generator. Challenges come from the Worker.</li>
+              <li>CLEAR means permitted to continue, not certified human.</li>
+              <li>Browser automation hints are spoofable. They can hold back a permission; they never ban anyone.</li>
+              <li>A keyboard passkey route stays one Tab away, and no-WebGL browsers use it automatically. It goes through Cloudflare Turnstile.</li>
+              <li>A failed attempt never creates a session or ends an existing valid one.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="live" class="band" aria-labelledby="live-title">
+        <h2 id="live-title">Live now: catching scripted stirring.</h2>
+        <p class="section-lede">The live app runs LavaGuard in enforce mode. Attempts that show hard automation evidence don't get a permission. They go to Cloudflare Turnstile instead. The ML model stays off.</p>
+        <dl class="stats">
+          <div><dt class="mono">Recorded app attacks flagged before</dt><dd>0 / 64</dd></div>
+          <div><dt class="mono">Recorded app attacks flagged now</dt><dd>33 / 64</dd></div>
+          <div><dt class="mono">Public research humans flagged</dt><dd>0 / 944</dd></div>
+        </dl>
+        <div class="split">
+          <div>
+            <h3 class="mono label">What withholds a permission</h3>
+            <ul class="checks">
+              <li>The browser reports <span class="mono">navigator.webdriver</span>, as default Playwright, Puppeteer and Selenium do</li>
+              <li>Pointer events dispatched by script (<span class="mono">isTrusted</span> false)</li>
+              <li>A machine-perfect path: straight, with constant speed and timing</li>
+              <li>Too little movement to have cleared the ring</li>
+              <li>Any use of the no-stir route, since a script could ask for it without moving at all</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="mono label">What still gets through</h3>
+            <ul class="caveats">
+              <li>A stealth bot that hides the webdriver flag and moves like a person still gets CLEAR. It needs a passkey to sign in.</li>
+              <li>Believable forged movement summaries are still accepted. Tests keep that gap visible.</li>
+              <li>The human figure comes from public mouse data, not from people stirring this lamp. Real-user false-flag rates are unmeasured.</li>
+            </ul>
+          </div>
+        </div>
+        <figure class="wide">
+          <img src="../docs/media/lavaguard/live-turnstile-step-up.png" width="1280" height="900" loading="lazy" alt="The live app after a scripted Playwright stir: the ring shows Let's try that again with Cloudflare's Verify you are human check inside it" />
+          <figcaption>A default Playwright bot stirring the live lamp. It gets FLAG, no permission and no session, and is sent to Cloudflare's check inside the ring.</figcaption>
+        </figure>
+      </section>
+
+      <section id="research" class="band" aria-labelledby="research-title">
+        <h2 id="research-title">Attacked on purpose.</h2>
+        <p class="section-lede">LavaGuard was tested against Playwright, Puppeteer, Ghost Cursor, Bézier and lognormal cursors, replays, timing jitter, DOM-reading target pursuit and forged API summaries. All of it ran locally against real Workers.</p>
+        <dl class="stats">
+          <div><dt class="mono">Adversarial cases initiated</dt><dd>44</dd></div>
+          <div><dt class="mono">Declared automation families</dt><dd>18</dd></div>
+          <div><dt class="mono">Bot attempts that got through</dt><dd class="warn">24</dd></div>
+          <div><dt class="mono">Authenticated sessions obtained</dt><dd>0</dd></div>
+        </dl>
+        <p>That third number is the honest headline. Automation often <em>does</em> get past the stirring check, and a schema-valid forged summary can get CLEAR without touching the ring at all. None of it produced a session, because a passkey is still required. Those are Phase 6 local results, broken down in the <a href="https://github.com/Yohands123/Lava_Authentication/blob/main/docs/LAVAGUARD_PHASE6_ADVERSARIAL_RESULTS.md">adversarial report</a>.</p>
+        <figure class="wide">
+          <img src="../docs/media/lavaguard/preview-automation.png" width="1280" height="900" loading="lazy" alt="Local LavaGuard test bench running a visible automated cursor against the lamp" />
+          <figcaption>The local test bench runs 16 visible automation patterns against a real Worker and records actual verdicts and HTTP outcomes.</figcaption>
+        </figure>
+
+        <h3 class="sub">The ML pipeline, without the hype</h3>
+        <p>An offline Python pipeline compares logistic regression, random forests and anomaly detection. It holds out whole generator families, keeps participants out of overlapping cohorts, and exports a compact model the Worker can run. On a public research corpus, the best candidate caught 211 of 777 generated bot rows. That is not a production detection rate.</p>
+        <p>The consent-first human study infrastructure is built: explicit consent before collection, withdrawal, and isolated final-evaluation data. It currently has <strong>zero participants</strong>. So human accuracy, false-positive rates and calibration are unknown, and <strong>ML enforcement is off in production</strong>.</p>
+      </section>
+
+      <section id="architecture" class="band" aria-labelledby="arch-title">
+        <h2 id="arch-title">Architecture</h2>
+        <figure class="diagram">
+          <svg viewBox="0 0 880 420" role="img" aria-labelledby="arch-desc">
+            <desc id="arch-desc">The browser runs the WebGL lamp and stirring observer and talks only to its own origin. A Cloudflare Worker serves the assets and API routes and calls four Durable Objects: ChallengeStore, RateLimiter, SessionStore and UserStore. An offline Python pipeline produces a portable model that stays disabled in production.</desc>
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="currentColor" /></marker>
+            </defs>
+            <g class="node"><rect x="20" y="40" width="250" height="150" rx="14" /><text x="40" y="74" class="t">Browser</text><text x="40" y="104">WebGL 2 lamp + physics</text><text x="40" y="128">Bounded stir observer</text><text x="40" y="152">WebAuthn client</text><text x="40" y="176" class="m">same-origin /api/*</text></g>
+            <g class="node hot"><rect x="330" y="40" width="250" height="150" rx="14" /><text x="350" y="74" class="t">Cloudflare Worker</text><text x="350" y="104">Static assets</text><text x="350" y="128">Passkey + session routes</text><text x="350" y="152">LavaGuard policy</text><text x="350" y="176" class="m">origin check · rate limits</text></g>
+            <g class="node"><rect x="640" y="20" width="220" height="44" rx="10" /><text x="656" y="48" class="m">ChallengeStore</text></g>
+            <g class="node"><rect x="640" y="76" width="220" height="44" rx="10" /><text x="656" y="104" class="m">RateLimiter</text></g>
+            <g class="node"><rect x="640" y="132" width="220" height="44" rx="10" /><text x="656" y="160" class="m">SessionStore</text></g>
+            <g class="node"><rect x="640" y="188" width="220" height="44" rx="10" /><text x="656" y="216" class="m">UserStore</text></g>
+            <text x="652" y="254" class="cap">Durable Objects (SQLite)</text>
+            <g class="node cool"><rect x="330" y="270" width="250" height="120" rx="14" /><text x="350" y="304" class="t">Offline ML</text><text x="350" y="334">Python · scikit-learn</text><text x="350" y="358">Grouped, consent-gated splits</text><text x="350" y="380" class="m">portable model: OFF in prod</text></g>
+            <g class="edges">
+              <path d="M270 115H326" marker-end="url(#arrow)" />
+              <path d="M580 90C610 90 610 42 636 42" marker-end="url(#arrow)" />
+              <path d="M580 105C612 105 612 98 636 98" marker-end="url(#arrow)" />
+              <path d="M580 125C612 125 612 154 636 154" marker-end="url(#arrow)" />
+              <path d="M580 145C610 145 610 210 636 210" marker-end="url(#arrow)" />
+              <path d="M455 270V194" marker-end="url(#arrow)" stroke-dasharray="5 6" />
+            </g>
+          </svg>
+          <figcaption>A single origin serves the page and the API, so passkeys stay bound to <span class="mono">lavaauth.yohance611.workers.dev</span>. That's why this showcase links to the app instead of hosting a login.</figcaption>
+        </figure>
+      </section>
+
+      <section id="results" class="band" aria-labelledby="results-title">
+        <h2 id="results-title">Measured, with the denominators.</h2>
+        <dl class="stats">
+          <div><dt class="mono">Distinct passing tests (local)</dt><dd>300</dd></div>
+          <div><dt class="mono">Browser E2E suites</dt><dd>5</dd></div>
+          <div><dt class="mono">Python ML integrity tests</dt><dd>57</dd></div>
+          <div><dt class="mono">Known dependency vulnerabilities</dt><dd>0</dd></div>
+        </dl>
+        <p>The browser tests use Chromium's virtual WebAuthn authenticator. Real-device passkey trials with phones and hardware keys still have to be run by hand.</p>
+
+        <h3 class="sub">Local load: one desktop, synthetic callers</h3>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Phase 7B local load results">
+          <table>
+            <thead><tr><th scope="col">Concurrency</th><th scope="col">Issue 200 / sent</th><th scope="col">Issue 503</th><th scope="col">Evaluate 200 / sent</th><th scope="col">Accepted p95 (issue / eval)</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>32 / 32</td><td>0</td><td>32 / 32</td><td>46 / 37 ms</td></tr>
+              <tr><td>4</td><td>32 / 32</td><td>0</td><td>32 / 32</td><td>136 / 81 ms</td></tr>
+              <tr><td>16</td><td>32 / 32</td><td>0</td><td>32 / 32</td><td>418 / 274 ms</td></tr>
+              <tr class="bad"><td>64</td><td>44 / 64</td><td>20</td><td>17 / 44</td><td>1093 / 381 ms</td></tr>
+              <tr class="bad"><td>128</td><td>35 / 128</td><td>93</td><td>25 / 35</td><td>1297 / 582 ms</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">From local workerd and SQLite. A 503 counts as an availability failure, never as served traffic. Every level recovered after the pressure drained, and eight competing redemptions of one permission produced exactly one winner. None of this measures Cloudflare edge capacity.</p>
+      </section>
+
+      <section id="milestones" class="band" aria-labelledby="milestones-title">
+        <h2 id="milestones-title">Milestones</h2>
+        <ol class="timeline">
+          <li><span class="mono when">Phases 1–5</span><div><h3>LavaAuth</h3><p>The design system, the metaball lamp engine, pointer stirring, the entropy display, mandatory user-verified passkeys, revocable sessions and Lab mode.</p></div></li>
+          <li><span class="mono when">LavaGuard 1–2</span><div><h3>Behavioural layer</h3><p>The observer, detector, reputation, policy and enforcer modules, all inside the existing ChallengeStore. Single-use scoped permissions and an accessible route.</p></div></li>
+          <li><span class="mono when">Phase 4</span><div><h3>Hardening</h3><p>Atomic rate counters, request caps and overload admission. Optional Turnstile step-up (off by default). Robust features and generator-family holdouts.</p></div></li>
+          <li><span class="mono when">Phase 5</span><div><h3>Research infrastructure</h3><p>Consent and provenance tracking, leakage-controlled splits, three classifier baselines with calibration, withdrawal, and a portable model that stays disabled.</p></div></li>
+          <li><span class="mono when">Phase 6</span><div><h3>Adversarial study</h3><p>44 browser and API attack cases, a private observation registry, a sharding prototype, and safer failed-sign-in recovery.</p></div></li>
+          <li><span class="mono when">Phase 7</span><div><h3>Study readiness and scale</h3><p>A preregistration draft, consent-gated review, withdrawal and cohort locks, signed shard routing, local load measurements, and a slow-client ingress diagnosis.</p></div></li>
+          <li><span class="mono when">Live guard</span><div><h3>Enforcement on Cloudflare</h3><p>Hard automation evidence now holds back the permission. Cloudflare Turnstile verifies flagged attempts and the no-stir route. Measured on recorded attacks before going live.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="band closing" aria-labelledby="closing-title">
+        <h2 id="closing-title">See it for yourself.</h2>
+        <p class="section-lede">The working app runs on Cloudflare with your own passkey. LavaGuard enforcement and Turnstile are on; the ML model is off.</p>
+        <div class="actions">
+          <a class="cta" href="https://lavaauth.yohance611.workers.dev/">Try LavaAuth <span aria-hidden="true">→</span></a>
+          <a class="quiet-link" href="https://github.com/Yohands123/Lava_Authentication">Yohands123/Lava_Authentication</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot mono">
+      <span>LavaAuth + LavaGuard · MIT licence</span>
+      <span>This page has no login. Authentication lives on the Cloudflare app.</span>
+    </footer>
+
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+{
+  "schema": "lava-phase7-publication-images-v1",
+  "branch": "feature/lavaguard-phase7",
+  "results": [
+    {
+      "path": "docs/media/clear-the-ring.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/ring-cleared.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/clear-390.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/flag-390.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/block-390.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/after-landing-desktop.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/after-stir-desktop.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/real-clear-desktop.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/phase7-clear-390.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/phase7-clear-1440.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/phase7-flag-390.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/phase7-flag-1440.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/phase7-block-390.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    },
+    {
+      "path": "docs/media/lavaguard/phase7-block-1440.png",
+      "httpStatus": 200,
+      "contentType": "image/png",
+      "valid": true
+    }
+  ],
+  "readmePageStatus": 200,
+  "newReadmeImageNamesPresent": true,
+  "broken": []
+}

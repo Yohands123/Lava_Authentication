@@ -1,3 +1,4 @@
+import { forgedPlausibleFeatures } from "../fixtures/forged";
 import { test, expect } from "@playwright/test";
 import { extractFeatures } from "../../src/shared/features";
 import { FEATURE_VERSION } from "../../src/shared/lavaguard";
@@ -24,8 +25,8 @@ test("real enforcement: missing features, altered IDs and impossible time cannot
 test("fabricated plausible aggregates can obtain options but cannot authenticate", async ({ request, browser }) => {
   const post = (path: string, data: unknown) => request.post(path, { data, headers: { Origin: origin } });
   const c = await (await post("/api/lavaguard/challenge", { kind: "gesture" })).json();
-  // Known generated straight path, not a human sample; no ring was visited.
-  const summary = { version: FEATURE_VERSION, fingerprint: "h".repeat(43), geometryHash: "i".repeat(43), signals: { webdriver: false }, features: extractFeatures(Array.from({ length: 40 }, (_, i) => ({ x: .8 * i / 39, y: .5, t: 32 * i }))) };
+  // Generated non-regular path, not a human sample; no ring was visited.
+  const summary = { version: FEATURE_VERSION, fingerprint: "h".repeat(43), geometryHash: "i".repeat(43), signals: { webdriver: false }, features: forgedPlausibleFeatures() };
   const d = await (await post("/api/lavaguard/evaluate", { id: c.id, nonce: c.nonce, summary })).json();
   expect(d.verdict).toBe("CLEAR"); expect(d.clearance).toHaveLength(43);
   // Binding checks must not let a thief consume the legitimate owner's token.

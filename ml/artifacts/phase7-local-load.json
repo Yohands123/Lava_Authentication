@@ -1,0 +1,1057 @@
+{
+  "schema": "lava-phase7-local-load-v1",
+  "runtime": "Frozen local workerd/SQLite through bounded loopback proxy; not edge or Vercel capacity",
+  "levels": [
+    1,
+    4,
+    16,
+    64,
+    128
+  ],
+  "phases": [
+    {
+      "concurrency": 1,
+      "manifest": {
+        "run": "2fd19090-ce3b-48e1-862f-124425bd241b",
+        "origin": "http://localhost:8810",
+        "publicOrigin": "http://localhost:8812",
+        "localOnly": true,
+        "workerSha256": "ef94d031eea3b95dac08c9ceec310082ae4c16060cf88d0b82a93bde8548e16b",
+        "configSha256": "45e1c53afbace95d502bfce88084c14f70b87eae7e15440992af20e6844f271a",
+        "assetsSha256": "736dc7f909cd78eb55ce0384b24a6565a0b792c8d0e91f275c5789e7ca83df6a",
+        "node": "v24.13.0",
+        "productionFlagsChanged": false,
+        "observedConfiguration": {
+          "mode": "enforce",
+          "lab": true,
+          "experimentalModel": false,
+          "featureVersion": "lava-features-v1",
+          "retentionSeconds": 600,
+          "modelMode": "shadow",
+          "modelVersion": "lava-logistic-experimental-v1",
+          "policyVersion": "lava-policy-v4"
+        }
+      },
+      "issuance": {
+        "attempted": 32,
+        "actualRequests": 32,
+        "skipped": 0,
+        "statuses": {
+          "200": 32
+        },
+        "accepted": 32,
+        "rejected429": 0,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 1129.6245,
+        "successfulRequestsPerSecond": 28.327997489431226,
+        "latencyAccepted": {
+          "n": 32,
+          "p50Ms": 33.860999999999876,
+          "p95Ms": 46.32389999999987,
+          "p99Ms": 50.66999999999962
+        },
+        "n": 32,
+        "p50Ms": 33.860999999999876,
+        "p95Ms": 46.32389999999987,
+        "p99Ms": 50.66999999999962
+      },
+      "evaluation": {
+        "attempted": 32,
+        "actualRequests": 32,
+        "skipped": 0,
+        "statuses": {
+          "200": 32
+        },
+        "accepted": 32,
+        "rejected429": 0,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 859.9611999999997,
+        "successfulRequestsPerSecond": 37.21098114659127,
+        "latencyAccepted": {
+          "n": 32,
+          "p50Ms": 24.336200000000645,
+          "p95Ms": 36.67979999999989,
+          "p99Ms": 37.79399999999987
+        },
+        "n": 32,
+        "p50Ms": 24.336200000000645,
+        "p95Ms": 36.67979999999989,
+        "p99Ms": 37.79399999999987
+      },
+      "parallelRedemption": {
+        "attempted": 8,
+        "actualRequests": 8,
+        "skipped": 0,
+        "statuses": {
+          "200": 1,
+          "403": 7
+        },
+        "accepted": 1,
+        "rejected429": 0,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 89.40999999999985,
+        "successfulRequestsPerSecond": 11.184431271669855,
+        "latencyAccepted": {
+          "n": 1,
+          "p50Ms": 55.824499999999716,
+          "p95Ms": 55.824499999999716,
+          "p99Ms": 55.824499999999716
+        },
+        "n": 8,
+        "p50Ms": 73.26290000000063,
+        "p95Ms": 87.60329999999976,
+        "p99Ms": 87.60329999999976
+      },
+      "abusiveCookieResetsSameNetwork": {
+        "attempted": 35,
+        "actualRequests": 35,
+        "skipped": 0,
+        "statuses": {
+          "200": 30,
+          "429": 5
+        },
+        "accepted": 30,
+        "rejected429": 5,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 924.4272000000001,
+        "successfulRequestsPerSecond": 32.45252844139592,
+        "latencyAccepted": {
+          "n": 30,
+          "p50Ms": 196.90909999999985,
+          "p95Ms": 327.52720000000045,
+          "p99Ms": 344.0506000000005
+        },
+        "n": 35,
+        "p50Ms": 196.48570000000018,
+        "p95Ms": 327.52720000000045,
+        "p99Ms": 344.0506000000005
+      },
+      "recoveryStatus": 200,
+      "unauthenticatedSessionStatus": 401,
+      "streaming": {
+        "oversized": {
+          "status": 400,
+          "elapsedMs": 44.92159999999967
+        },
+        "externalSlowBridge": {
+          "status": 0,
+          "httpStatus": null,
+          "timeout": true,
+          "errorCode": "Error",
+          "elapsedMs": 6005.4389
+        },
+        "boundedProxySlowBody": {
+          "status": 400,
+          "elapsedMs": 3022.0895
+        },
+        "directWorkerSlowBody": {
+          "status": 400,
+          "elapsedMs": 3024.386699999999
+        },
+        "externalSlowStatus": "UNRESOLVED_LOCAL_PROXY_FAILURE",
+        "developmentTrace": []
+      },
+      "hostBefore": {
+        "CPU": 0.109375,
+        "WorkingSet64": 59310080,
+        "PeakWorkingSet64": 59310080
+      },
+      "hostAfter": {
+        "CPU": 0.578125,
+        "WorkingSet64": 88227840,
+        "PeakWorkingSet64": 88227840
+      },
+      "storage": {
+        "rate_window": 134,
+        "guard_attempts": 30,
+        "guard_clearances": 32,
+        "guard_history": 33,
+        "guard_metrics": 8
+      },
+      "metrics": {
+        "policyVersion": "lava-policy-v4",
+        "retentionHours": 24,
+        "counts": [
+          {
+            "hour": 497900,
+            "event": "CLEAR",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 33
+          },
+          {
+            "hour": 497900,
+            "event": "issued",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 63
+          },
+          {
+            "hour": 497900,
+            "event": "latency_10",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 2
+          },
+          {
+            "hour": 497900,
+            "event": "latency_200",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 29
+          },
+          {
+            "hour": 497900,
+            "event": "latency_50",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 70
+          },
+          {
+            "hour": 497900,
+            "event": "rate_limited",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 5
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 4,
+      "manifest": {
+        "run": "7a797a6f-b789-46fe-a157-f9b2d3ef48d6",
+        "origin": "http://localhost:8810",
+        "publicOrigin": "http://localhost:8812",
+        "localOnly": true,
+        "workerSha256": "ef94d031eea3b95dac08c9ceec310082ae4c16060cf88d0b82a93bde8548e16b",
+        "configSha256": "45e1c53afbace95d502bfce88084c14f70b87eae7e15440992af20e6844f271a",
+        "assetsSha256": "736dc7f909cd78eb55ce0384b24a6565a0b792c8d0e91f275c5789e7ca83df6a",
+        "node": "v24.13.0",
+        "productionFlagsChanged": false,
+        "observedConfiguration": {
+          "mode": "enforce",
+          "lab": true,
+          "experimentalModel": false,
+          "featureVersion": "lava-features-v1",
+          "retentionSeconds": 600,
+          "modelMode": "shadow",
+          "modelVersion": "lava-logistic-experimental-v1",
+          "policyVersion": "lava-policy-v4"
+        }
+      },
+      "issuance": {
+        "attempted": 32,
+        "actualRequests": 32,
+        "skipped": 0,
+        "statuses": {
+          "200": 32
+        },
+        "accepted": 32,
+        "rejected429": 0,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 798.6057000000001,
+        "successfulRequestsPerSecond": 40.06983671666756,
+        "latencyAccepted": {
+          "n": 32,
+          "p50Ms": 94.58130000000165,
+          "p95Ms": 135.61809999999969,
+          "p99Ms": 138.24950000000172
+        },
+        "n": 32,
+        "p50Ms": 94.58130000000165,
+        "p95Ms": 135.61809999999969,
+        "p99Ms": 138.24950000000172
+      },
+      "evaluation": {
+        "attempted": 32,
+        "actualRequests": 32,
+        "skipped": 0,
+        "statuses": {
+          "200": 32
+        },
+        "accepted": 32,
+        "rejected429": 0,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 555.1962999999996,
+        "successfulRequestsPerSecond": 57.637271718129284,
+        "latencyAccepted": {
+          "n": 32,
+          "p50Ms": 69.4403999999995,
+          "p95Ms": 81.48110000000088,
+          "p99Ms": 81.60729999999967
+        },
+        "n": 32,
+        "p50Ms": 69.4403999999995,
+        "p95Ms": 81.48110000000088,
+        "p99Ms": 81.60729999999967
+      },
+      "parallelRedemption": {
+        "attempted": 8,
+        "actualRequests": 8,
+        "skipped": 0,
+        "statuses": {
+          "200": 1,
+          "403": 7
+        },
+        "accepted": 1,
+        "rejected429": 0,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 48.02700000000186,
+        "successfulRequestsPerSecond": 20.8216211714236,
+        "latencyAccepted": {
+          "n": 1,
+          "p50Ms": 25.019100000001345,
+          "p95Ms": 25.019100000001345,
+          "p99Ms": 25.019100000001345
+        },
+        "n": 8,
+        "p50Ms": 32.7358000000022,
+        "p95Ms": 46.96549999999843,
+        "p99Ms": 46.96549999999843
+      },
+      "abusiveCookieResetsSameNetwork": {
+        "attempted": 35,
+        "actualRequests": 35,
+        "skipped": 0,
+        "statuses": {
+          "200": 30,
+          "429": 5
+        },
+        "accepted": 30,
+        "rejected429": 5,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 835.3688000000002,
+        "successfulRequestsPerSecond": 35.91228209624299,
+        "latencyAccepted": {
+          "n": 30,
+          "p50Ms": 200.29430000000139,
+          "p95Ms": 274.85949999999866,
+          "p99Ms": 275.34820000000036
+        },
+        "n": 35,
+        "p50Ms": 197.52939999999944,
+        "p95Ms": 274.85949999999866,
+        "p99Ms": 275.34820000000036
+      },
+      "recoveryStatus": 200,
+      "unauthenticatedSessionStatus": 401,
+      "streaming": null,
+      "hostBefore": {
+        "CPU": 0.15625,
+        "WorkingSet64": 59326464,
+        "PeakWorkingSet64": 59326464
+      },
+      "hostAfter": {
+        "CPU": 0.375,
+        "WorkingSet64": 73572352,
+        "PeakWorkingSet64": 73572352
+      },
+      "storage": {
+        "rate_window": 133,
+        "guard_attempts": 30,
+        "guard_clearances": 32,
+        "guard_history": 33,
+        "guard_metrics": 5
+      },
+      "metrics": {
+        "policyVersion": "lava-policy-v4",
+        "retentionHours": 24,
+        "counts": [
+          {
+            "hour": 497900,
+            "event": "CLEAR",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 33
+          },
+          {
+            "hour": 497900,
+            "event": "issued",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 63
+          },
+          {
+            "hour": 497900,
+            "event": "latency_200",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 39
+          },
+          {
+            "hour": 497900,
+            "event": "latency_50",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 62
+          },
+          {
+            "hour": 497900,
+            "event": "rate_limited",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 5
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 16,
+      "manifest": {
+        "run": "173139e6-6aad-4c72-a5ba-71f0525b3930",
+        "origin": "http://localhost:8810",
+        "publicOrigin": "http://localhost:8812",
+        "localOnly": true,
+        "workerSha256": "ef94d031eea3b95dac08c9ceec310082ae4c16060cf88d0b82a93bde8548e16b",
+        "configSha256": "45e1c53afbace95d502bfce88084c14f70b87eae7e15440992af20e6844f271a",
+        "assetsSha256": "736dc7f909cd78eb55ce0384b24a6565a0b792c8d0e91f275c5789e7ca83df6a",
+        "node": "v24.13.0",
+        "productionFlagsChanged": false,
+        "observedConfiguration": {
+          "mode": "enforce",
+          "lab": true,
+          "experimentalModel": false,
+          "featureVersion": "lava-features-v1",
+          "retentionSeconds": 600,
+          "modelMode": "shadow",
+          "modelVersion": "lava-logistic-experimental-v1",
+          "policyVersion": "lava-policy-v4"
+        }
+      },
+      "issuance": {
+        "attempted": 32,
+        "actualRequests": 32,
+        "skipped": 0,
+        "statuses": {
+          "200": 32
+        },
+        "accepted": 32,
+        "rejected429": 0,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 788.8407999999981,
+        "successfulRequestsPerSecond": 40.565853084678274,
+        "latencyAccepted": {
+          "n": 32,
+          "p50Ms": 380.7497999999978,
+          "p95Ms": 417.8621999999996,
+          "p99Ms": 420.51090000000113
+        },
+        "n": 32,
+        "p50Ms": 380.7497999999978,
+        "p95Ms": 417.8621999999996,
+        "p99Ms": 420.51090000000113
+      },
+      "evaluation": {
+        "attempted": 32,
+        "actualRequests": 32,
+        "skipped": 0,
+        "statuses": {
+          "200": 32
+        },
+        "accepted": 32,
+        "rejected429": 0,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 534.6163000000015,
+        "successfulRequestsPerSecond": 59.856012620640094,
+        "latencyAccepted": {
+          "n": 32,
+          "p50Ms": 257.2037000000055,
+          "p95Ms": 274.02509999999893,
+          "p99Ms": 274.3124000000025
+        },
+        "n": 32,
+        "p50Ms": 257.2037000000055,
+        "p95Ms": 274.02509999999893,
+        "p99Ms": 274.3124000000025
+      },
+      "parallelRedemption": {
+        "attempted": 8,
+        "actualRequests": 8,
+        "skipped": 0,
+        "statuses": {
+          "200": 1,
+          "403": 7
+        },
+        "accepted": 1,
+        "rejected429": 0,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 52.461300000002666,
+        "successfulRequestsPerSecond": 19.061670221667196,
+        "latencyAccepted": {
+          "n": 1,
+          "p50Ms": 23.667300000000978,
+          "p95Ms": 23.667300000000978,
+          "p99Ms": 23.667300000000978
+        },
+        "n": 8,
+        "p50Ms": 50.60529999999562,
+        "p95Ms": 51.44159999999829,
+        "p99Ms": 51.44159999999829
+      },
+      "abusiveCookieResetsSameNetwork": {
+        "attempted": 35,
+        "actualRequests": 35,
+        "skipped": 0,
+        "statuses": {
+          "200": 30,
+          "429": 5
+        },
+        "accepted": 30,
+        "rejected429": 5,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 849.5099000000046,
+        "successfulRequestsPerSecond": 35.31447956050876,
+        "latencyAccepted": {
+          "n": 30,
+          "p50Ms": 164.27560000000085,
+          "p95Ms": 323.1719000000012,
+          "p99Ms": 324.2982999999949
+        },
+        "n": 35,
+        "p50Ms": 164.27560000000085,
+        "p95Ms": 323.1719000000012,
+        "p99Ms": 324.2982999999949
+      },
+      "recoveryStatus": 200,
+      "unauthenticatedSessionStatus": 401,
+      "streaming": null,
+      "hostBefore": {
+        "CPU": 0.125,
+        "WorkingSet64": 59318272,
+        "PeakWorkingSet64": 59318272
+      },
+      "hostAfter": {
+        "CPU": 0.375,
+        "WorkingSet64": 75677696,
+        "PeakWorkingSet64": 75677696
+      },
+      "storage": {
+        "rate_window": 133,
+        "guard_attempts": 30,
+        "guard_clearances": 32,
+        "guard_history": 33,
+        "guard_metrics": 6
+      },
+      "metrics": {
+        "policyVersion": "lava-policy-v4",
+        "retentionHours": 24,
+        "counts": [
+          {
+            "hour": 497900,
+            "event": "CLEAR",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 33
+          },
+          {
+            "hour": 497900,
+            "event": "issued",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 63
+          },
+          {
+            "hour": 497900,
+            "event": "latency_1000",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 15
+          },
+          {
+            "hour": 497900,
+            "event": "latency_200",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 73
+          },
+          {
+            "hour": 497900,
+            "event": "latency_50",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 13
+          },
+          {
+            "hour": 497900,
+            "event": "rate_limited",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 5
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 64,
+      "manifest": {
+        "run": "714fa756-1cc6-4cb6-8247-0540d467701c",
+        "origin": "http://localhost:8810",
+        "publicOrigin": "http://localhost:8812",
+        "localOnly": true,
+        "workerSha256": "ef94d031eea3b95dac08c9ceec310082ae4c16060cf88d0b82a93bde8548e16b",
+        "configSha256": "45e1c53afbace95d502bfce88084c14f70b87eae7e15440992af20e6844f271a",
+        "assetsSha256": "736dc7f909cd78eb55ce0384b24a6565a0b792c8d0e91f275c5789e7ca83df6a",
+        "node": "v24.13.0",
+        "productionFlagsChanged": false,
+        "observedConfiguration": {
+          "mode": "enforce",
+          "lab": true,
+          "experimentalModel": false,
+          "featureVersion": "lava-features-v1",
+          "retentionSeconds": 600,
+          "modelMode": "shadow",
+          "modelVersion": "lava-logistic-experimental-v1",
+          "policyVersion": "lava-policy-v4"
+        }
+      },
+      "issuance": {
+        "attempted": 64,
+        "actualRequests": 64,
+        "skipped": 0,
+        "statuses": {
+          "200": 44,
+          "503": 20
+        },
+        "accepted": 44,
+        "rejected429": 0,
+        "rejected503": 20,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 1094.9781999999977,
+        "successfulRequestsPerSecond": 40.18344840107327,
+        "latencyAccepted": {
+          "n": 44,
+          "p50Ms": 699.3066000000035,
+          "p95Ms": 1092.6013999999996,
+          "p99Ms": 1093.001900000003
+        },
+        "n": 64,
+        "p50Ms": 701.3896999999997,
+        "p95Ms": 1092.4254,
+        "p99Ms": 1093.001900000003
+      },
+      "evaluation": {
+        "attempted": 64,
+        "actualRequests": 44,
+        "skipped": 20,
+        "statuses": {
+          "200": 17,
+          "503": 27
+        },
+        "accepted": 17,
+        "rejected429": 0,
+        "rejected503": 27,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 383.9256999999998,
+        "successfulRequestsPerSecond": 44.279400936170745,
+        "latencyAccepted": {
+          "n": 17,
+          "p50Ms": 380.5457000000024,
+          "p95Ms": 381.2421000000031,
+          "p99Ms": 381.2421000000031
+        },
+        "n": 44,
+        "p50Ms": 366.7404999999999,
+        "p95Ms": 381.06559999999445,
+        "p99Ms": 381.2421000000031
+      },
+      "parallelRedemption": {
+        "attempted": 8,
+        "actualRequests": 8,
+        "skipped": 0,
+        "statuses": {
+          "200": 1,
+          "403": 7
+        },
+        "accepted": 1,
+        "rejected429": 0,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 54.80879999999888,
+        "successfulRequestsPerSecond": 18.24524528907804,
+        "latencyAccepted": {
+          "n": 1,
+          "p50Ms": 26.32279999999446,
+          "p95Ms": 26.32279999999446,
+          "p99Ms": 26.32279999999446
+        },
+        "n": 8,
+        "p50Ms": 51.6478000000061,
+        "p95Ms": 52.82860000000073,
+        "p99Ms": 52.82860000000073
+      },
+      "abusiveCookieResetsSameNetwork": {
+        "attempted": 35,
+        "actualRequests": 35,
+        "skipped": 0,
+        "statuses": {
+          "200": 30,
+          "429": 5
+        },
+        "accepted": 30,
+        "rejected429": 5,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 551.586000000003,
+        "successfulRequestsPerSecond": 54.388617550118816,
+        "latencyAccepted": {
+          "n": 30,
+          "p50Ms": 128.08770000000368,
+          "p95Ms": 176.2132999999958,
+          "p99Ms": 182.19429999999556
+        },
+        "n": 35,
+        "p50Ms": 127.50330000000395,
+        "p95Ms": 176.2132999999958,
+        "p99Ms": 182.19429999999556
+      },
+      "recoveryStatus": 200,
+      "unauthenticatedSessionStatus": 401,
+      "streaming": null,
+      "hostBefore": {
+        "CPU": 0.171875,
+        "WorkingSet64": 59121664,
+        "PeakWorkingSet64": 59121664
+      },
+      "hostAfter": {
+        "CPU": 0.609375,
+        "WorkingSet64": 100610048,
+        "PeakWorkingSet64": 100610048
+      },
+      "storage": {
+        "rate_window": 142,
+        "guard_attempts": 57,
+        "guard_clearances": 17,
+        "guard_history": 18,
+        "guard_metrics": 8
+      },
+      "metrics": {
+        "policyVersion": "lava-policy-v4",
+        "retentionHours": 24,
+        "counts": [
+          {
+            "hour": 497900,
+            "event": "CLEAR",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 18
+          },
+          {
+            "hour": 497900,
+            "event": "issued",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 75
+          },
+          {
+            "hour": 497900,
+            "event": "latency_10",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 2
+          },
+          {
+            "hour": 497900,
+            "event": "latency_1000",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 32
+          },
+          {
+            "hour": 497900,
+            "event": "latency_200",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 45
+          },
+          {
+            "hour": 497900,
+            "event": "latency_50",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 19
+          },
+          {
+            "hour": 497900,
+            "event": "overload_pulse",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 2
+          },
+          {
+            "hour": 497900,
+            "event": "rate_limited",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 5
+          }
+        ]
+      }
+    },
+    {
+      "concurrency": 128,
+      "manifest": {
+        "run": "40b7b288-8580-42cf-adcc-ac1843cac327",
+        "origin": "http://localhost:8810",
+        "publicOrigin": "http://localhost:8812",
+        "localOnly": true,
+        "workerSha256": "ef94d031eea3b95dac08c9ceec310082ae4c16060cf88d0b82a93bde8548e16b",
+        "configSha256": "45e1c53afbace95d502bfce88084c14f70b87eae7e15440992af20e6844f271a",
+        "assetsSha256": "736dc7f909cd78eb55ce0384b24a6565a0b792c8d0e91f275c5789e7ca83df6a",
+        "node": "v24.13.0",
+        "productionFlagsChanged": false,
+        "observedConfiguration": {
+          "mode": "enforce",
+          "lab": true,
+          "experimentalModel": false,
+          "featureVersion": "lava-features-v1",
+          "retentionSeconds": 600,
+          "modelMode": "shadow",
+          "modelVersion": "lava-logistic-experimental-v1",
+          "policyVersion": "lava-policy-v4"
+        }
+      },
+      "issuance": {
+        "attempted": 128,
+        "actualRequests": 128,
+        "skipped": 0,
+        "statuses": {
+          "200": 35,
+          "503": 93
+        },
+        "accepted": 35,
+        "rejected429": 0,
+        "rejected503": 93,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 1312.9202000000005,
+        "successfulRequestsPerSecond": 26.6581320022344,
+        "latencyAccepted": {
+          "n": 35,
+          "p50Ms": 717.1690000000017,
+          "p95Ms": 1297.3870000000024,
+          "p99Ms": 1297.415700000005
+        },
+        "n": 128,
+        "p50Ms": 1288.954700000002,
+        "p95Ms": 1309.2419999999984,
+        "p99Ms": 1309.5686999999962
+      },
+      "evaluation": {
+        "attempted": 128,
+        "actualRequests": 35,
+        "skipped": 93,
+        "statuses": {
+          "200": 25,
+          "503": 10
+        },
+        "accepted": 25,
+        "rejected429": 0,
+        "rejected503": 10,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 584.2909999999974,
+        "successfulRequestsPerSecond": 42.78689899382347,
+        "latencyAccepted": {
+          "n": 25,
+          "p50Ms": 570.9182000000001,
+          "p95Ms": 581.4819000000061,
+          "p99Ms": 581.5979999999981
+        },
+        "n": 35,
+        "p50Ms": 568.5109999999986,
+        "p95Ms": 581.4819000000061,
+        "p99Ms": 581.5979999999981
+      },
+      "parallelRedemption": {
+        "attempted": 8,
+        "actualRequests": 8,
+        "skipped": 0,
+        "statuses": {
+          "200": 1,
+          "403": 7
+        },
+        "accepted": 1,
+        "rejected429": 0,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 82.64510000000155,
+        "successfulRequestsPerSecond": 12.099930909394281,
+        "latencyAccepted": {
+          "n": 1,
+          "p50Ms": 81.53759999999602,
+          "p95Ms": 81.53759999999602,
+          "p99Ms": 81.53759999999602
+        },
+        "n": 8,
+        "p50Ms": 78.72939999999653,
+        "p95Ms": 81.21489999999903,
+        "p99Ms": 81.21489999999903
+      },
+      "abusiveCookieResetsSameNetwork": {
+        "attempted": 35,
+        "actualRequests": 35,
+        "skipped": 0,
+        "statuses": {
+          "200": 30,
+          "429": 5
+        },
+        "accepted": 30,
+        "rejected429": 5,
+        "rejected503": 0,
+        "unexpected5xx": 0,
+        "transportErrors": 0,
+        "timeouts": 0,
+        "durationMs": 856.3106999999945,
+        "successfulRequestsPerSecond": 35.03401277129924,
+        "latencyAccepted": {
+          "n": 30,
+          "p50Ms": 232.55309999999736,
+          "p95Ms": 309.66649999999936,
+          "p99Ms": 310.85289999999804
+        },
+        "n": 35,
+        "p50Ms": 226.15320000000065,
+        "p95Ms": 309.66649999999936,
+        "p99Ms": 310.85289999999804
+      },
+      "recoveryStatus": 200,
+      "unauthenticatedSessionStatus": 401,
+      "streaming": null,
+      "hostBefore": {
+        "CPU": 0.109375,
+        "WorkingSet64": 59260928,
+        "PeakWorkingSet64": 59260928
+      },
+      "hostAfter": {
+        "CPU": 0.578125,
+        "WorkingSet64": 100696064,
+        "PeakWorkingSet64": 100696064
+      },
+      "storage": {
+        "rate_window": 132,
+        "guard_attempts": 40,
+        "guard_clearances": 25,
+        "guard_history": 26,
+        "guard_metrics": 8
+      },
+      "metrics": {
+        "policyVersion": "lava-policy-v4",
+        "retentionHours": 24,
+        "counts": [
+          {
+            "hour": 497900,
+            "event": "CLEAR",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 26
+          },
+          {
+            "hour": 497900,
+            "event": "issued",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 66
+          },
+          {
+            "hour": 497900,
+            "event": "latency_10",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 1
+          },
+          {
+            "hour": 497900,
+            "event": "latency_1000",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 48
+          },
+          {
+            "hour": 497900,
+            "event": "latency_200",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 37
+          },
+          {
+            "hour": 497900,
+            "event": "latency_50",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 11
+          },
+          {
+            "hour": 497900,
+            "event": "overload_pulse",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 1
+          },
+          {
+            "hour": 497900,
+            "event": "rate_limited",
+            "model": "none",
+            "policy": "lava-policy-v4",
+            "n": 5
+          }
+        ]
+      }
+    }
+  ],
+  "syntheticClientHeaders": true,
+  "noHumanSubjects": true,
+  "actualEdgeCpuMs": null,
+  "capacity10kUsers": null,
+  "capacity100kUsers": null,
+  "productionChanged": false,
+  "complete": true
+}

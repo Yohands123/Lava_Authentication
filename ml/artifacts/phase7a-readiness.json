@@ -1,0 +1,38 @@
+{
+  "schema": "lava-phase7a-readiness-v1",
+  "status": "NOT_READY_NO_OPT_IN_DATA",
+  "genuineHumanParticipants": 0,
+  "declaredHumanAttempts": 0,
+  "applicationAttempts": 0,
+  "datasetHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "datasetAudit": {
+    "invalidRecords": 0,
+    "incompleteRecords": 0,
+    "duplicateAttempts": 0,
+    "duplicateVectors": 0,
+    "duplicateTrajectories": 0,
+    "conflictingLabels": 0,
+    "exclusions": {}
+  },
+  "humanFalseFlagRate": null,
+  "accuracy": null,
+  "calibration": null,
+  "finalTestEvaluated": false,
+  "productionEligible": false,
+  "supervisedAttestationsAreNotIdentityProof": true,
+  "modelPromoted": false,
+  "currentAppSourceHashForOwnerReview": "11c5574adc682c069df266f7754c8540c81c6f9c2bda5d2a7499fb3af76c177d",
+  "supervisionAudit": {
+    "issues": [
+      "missing_or_mismatched_supervision_manifest",
+      "study_design_not_approved",
+      "supervision_dataset_hash_mismatch"
+    ],
+    "exclusions": {},
+    "devices": {},
+    "pilotAttempts": 0,
+    "supervisedDeclaredHumanCodes": 0,
+    "protocolHash": "782012cb39fa280f3d74e5b4491348091f3a83324925a8ee74b9c5e90bf3ab55"
+  },
+  "supervisedDeclaredHumanCodes": 0
+}

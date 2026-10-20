@@ -76,13 +76,14 @@ describe("SQL challenge/clearance lifecycle", () => {
     guard.sweep(now + 600001);
     expect(database.prepare("SELECT COUNT(*) AS n FROM guard_history").get()!.n).toBe(0);
   });
-  it("finds repeated geometry across fresh challenges, without BLOCKing model evidence", () => {
+  it("finds repeated geometry across fresh challenges, without BLOCKing", () => {
     const { guard } = enforcer();
     const summary: FeatureSummary = { version: FEATURE_VERSION, features: extractFeatures(Array.from({ length: 20 }, (_, i) => ({ x: i / 20, y: .5, t: i * 32 }))), fingerprint: "f".repeat(43), geometryHash: "g".repeat(43) };
     const a = issue(guard, "gesture");
     guard.evaluate(context, origin, a.id, a.nonce, summary, "shadow");
     const b = issue(guard, "gesture"), result = guard.evaluate(context, origin, b.id, b.nonce, summary, "enforce");
-    expect(result).toHaveProperty("verdict", "CLEAR");
+    // A straight constant-speed path is machine-regular: FLAG, never BLOCK.
+    expect(result).toHaveProperty("verdict", "FLAG");
     if (!("error" in result)) expect(result.debug?.reasons).toContain("recent_path_recurrence");
   });
   it("schedules actual retention expiry rather than delaying cleanup behind auth challenges", () => {

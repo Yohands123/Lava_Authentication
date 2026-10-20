@@ -153,7 +153,9 @@ export class ChallengeStore extends DurableObject<Env> {
     const result = this.guard.evaluate(context, origin, id, nonce, summary, mode, Date.now(), { experimentalModel: experimentalModelAllowed(this.env), computeModel: mlMode(this.env) !== "off", modelVersion: this.env.LAVAGUARD_MODEL_VERSION ?? "lava-logistic-experimental-v1" });
     if (!("error" in result)) {
       const protocolHistory = this.guard.reputation.recent(context, Date.now()).some(h => h.protocol === 1);
-      const needs = stepUpEnabled(this.env) && result.verdict !== "BLOCK" && (result.verdict === "FLAG" || this.stepups.required(context) || protocolHistory || (result.assessment !== "accessible" && result.elapsedMs < 200));
+      // The accessible route has no movement evidence at all, so a script can
+      // request it directly; with step-up on it always needs the provider check.
+      const needs = stepUpEnabled(this.env) && result.verdict !== "BLOCK" && (result.verdict === "FLAG" || result.assessment === "accessible" || this.stepups.required(context) || protocolHistory || result.elapsedMs < 200);
       if (needs) {
         if (result.clearance) this.guard.revoke(result.clearance);
         result.clearance = undefined; result.expiresAt = undefined; result.verdict = "FLAG";

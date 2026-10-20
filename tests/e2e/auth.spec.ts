@@ -118,20 +118,26 @@ test("an expired challenge is rejected with 410", async ({ page }) => {
 });
 
 test("sign out everywhere revokes every session", async ({ browser }) => {
-  const laptop = await (await browser.newContext()).newPage();
+  const laptopContext = await browser.newContext();
+  let laptop = await laptopContext.newPage();
   const phone = await (await browser.newContext()).newPage();
   const laptopKey = await addAuthenticator(laptop);
   const phoneKey = await addAuthenticator(phone);
 
   await register(laptop);
   await copyPasskeys(laptopKey, phoneKey); // the same passkey, synced to a second device
+  // Software-rendered CI runners cannot drive two lamps at once: only the
+  // phone renders while it stirs. The laptop's session lives in its context.
+  await laptop.close();
   await phone.goto("/");
-  // The lamp pauses in background tabs; make sure the phone page is the one rendering.
   await phone.bringToFront();
   await signIn(phone);
-  expect((await session(laptop)).status()).toBe(200);
+  expect((await laptopContext.request.get("/api/session")).status()).toBe(200);
   expect((await session(phone)).status()).toBe(200);
 
+  laptop = await laptopContext.newPage();
+  await laptop.goto("/");
+  await expect(laptop.getByRole("heading", { name: "You're in" })).toBeVisible();
   await laptop.getByRole("button", { name: "Sign out everywhere" }).click();
   await expect(laptop.getByRole("heading", { name: "LavaAuth" })).toBeVisible();
   expect((await session(laptop)).status()).toBe(401);

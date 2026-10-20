@@ -1,0 +1,14 @@
+{
+  "schema": "lava-phase7-hosting-assessment-v1",
+  "observedDate": "2026-10-19",
+  "repository": "https://github.com/Yohands123/Lava_Authentication",
+  "query": "Connected Vercel list_projects filtered by repoUrl in available account scope",
+  "matchingProjectsReturned": 0,
+  "projectCreated": false,
+  "previewDeployed": false,
+  "actualVercelUrl": null,
+  "functionalVercelSignInTested": false,
+  "cloudflareDeployed": false,
+  "productionMLActivated": false,
+  "scope": "commit/push/PR only; no merge, deployment, hosting resources or spending"
+}

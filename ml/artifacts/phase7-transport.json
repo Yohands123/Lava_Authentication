@@ -1,0 +1,99 @@
+{
+  "schema": "lava-phase7-transport-v1",
+  "manifest": {
+    "run": "1d263dae-6170-4987-b7be-718d848fad05",
+    "origin": "http://localhost:8810",
+    "publicOrigin": "http://localhost:8812",
+    "localOnly": true,
+    "workerSha256": "e6b441d15e9333db9c923251b90df4521724408ebf5a36421cb5501e4441d8d7",
+    "configSha256": "45e1c53afbace95d502bfce88084c14f70b87eae7e15440992af20e6844f271a",
+    "assetsSha256": "736dc7f909cd78eb55ce0384b24a6565a0b792c8d0e91f275c5789e7ca83df6a",
+    "node": "v24.13.0",
+    "productionFlagsChanged": false,
+    "observedConfiguration": {
+      "mode": "enforce",
+      "lab": true,
+      "experimentalModel": false,
+      "featureVersion": "lava-features-v1",
+      "retentionSeconds": 600,
+      "modelMode": "shadow",
+      "modelVersion": "lava-logistic-experimental-v1",
+      "policyVersion": "lava-policy-v4"
+    }
+  },
+  "observations": [
+    {
+      "target": "direct",
+      "kind": "unfinished",
+      "httpStatus": null,
+      "timeout": true,
+      "clientAborted": false,
+      "elapsedMs": 6516.2591999999995,
+      "applicationEntries": 1,
+      "applicationReturns": 1,
+      "applicationReturnDetails": [
+        {
+          "httpStatus": 400,
+          "handlerMs": 3032
+        }
+      ]
+    },
+    {
+      "target": "proxy",
+      "kind": "unfinished",
+      "httpStatus": 400,
+      "timeout": false,
+      "elapsedMs": 3021.6116,
+      "applicationEntries": 0,
+      "applicationReturns": 0,
+      "applicationReturnDetails": []
+    },
+    {
+      "target": "direct",
+      "kind": "finished-slow",
+      "httpStatus": 400,
+      "timeout": false,
+      "elapsedMs": 4518.139499999999,
+      "applicationEntries": 1,
+      "applicationReturns": 1,
+      "applicationReturnDetails": [
+        {
+          "httpStatus": 400,
+          "handlerMs": 3010
+        }
+      ]
+    },
+    {
+      "target": "proxy",
+      "kind": "finished-slow",
+      "httpStatus": 400,
+      "timeout": false,
+      "elapsedMs": 3008.039099999998,
+      "applicationEntries": 0,
+      "applicationReturns": 0,
+      "applicationReturnDetails": []
+    },
+    {
+      "target": "proxy",
+      "kind": "aborted",
+      "httpStatus": null,
+      "timeout": false,
+      "clientAborted": true,
+      "elapsedMs": 64.39550000000236,
+      "applicationEntries": 0,
+      "applicationReturns": 0,
+      "applicationReturnDetails": []
+    }
+  ],
+  "internalReader": {
+    "httpStatus": 400,
+    "elapsedMs": 3046.176199999998
+  },
+  "sessionStatus": 401,
+  "priorPhase6ExternalStatus": 500,
+  "currentExternalFailureRetained": true,
+  "mitigation": "Bounded 32KB/three-second ingress in isolated loopback proxy; not deployed or asserted to be Vercel/Cloudflare edge behavior",
+  "productionChanged": false,
+  "externalRuntimeFixed": false,
+  "platformServingPathTested": false
+}

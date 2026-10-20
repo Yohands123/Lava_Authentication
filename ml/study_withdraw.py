@@ -26,8 +26,11 @@ def withdraw(private_root, participant, apply=False):
         try: data = json.loads(file.read_text(encoding='utf-8'))
         except (ValueError, UnicodeError): continue
         if not isinstance(data, dict): continue
-        if data.get('schema') in ('lava-phase5-report-v3', 'lava-portable-logistic-v3', 'lava-observation-candidate-v1', 'lava-phase6-report-v1', 'lava-phase6-private-views-v1', 'lava-phase6-bot-derived-v1', 'lava-cohorts-v3'):
+        if data.get('schema') in ('lava-phase5-report-v3', 'lava-portable-logistic-v3', 'lava-observation-candidate-v1', 'lava-phase6-report-v1', 'lava-phase6-private-views-v1', 'lava-phase6-bot-derived-v1', 'lava-cohorts-v3', 'lava-phase7a-readiness-v1', 'lava-phase7a-development-v1', 'lava-phase7-cohort-proposal-v1', 'lava-supervised-study-v1'):
             changes[file] = None; extra_invalidated.append(file.name)
+        if data.get('schema') == 'lava-local-session-v1' and isinstance(data.get('attempts'), list):
+            kept = [r for r in data['attempts'] if isinstance(r, dict) and r.get('participant') != participant]
+            if len(kept) != len(data['attempts']): changes[file] = canonical({**data, 'attempts': kept})+'\n' if kept else None
         if data.get('schema') in ('lava-consent-v2', 'lava-consent-v3') and data.get('participant') == participant:
             changes[file] = None; raw_count += 1; removed_ids.add(data.get('attempt', ''))
         elif data.get('schema') == 'lava-consent-batch-v1' and isinstance(data.get('exports'), list):
@@ -53,11 +56,17 @@ def withdraw(private_root, participant, apply=False):
     ledger = json.loads(ledger_path.read_text()) if ledger_path.exists() else {'schema': 'lava-withdrawals-v1', 'participantHashes': [], 'attemptHashes': [], 'revokedDatasetHashes': []}
     old_manifest = json.loads((folder/'manifest.json').read_text()) if (folder/'manifest.json').exists() else None
     if old_manifest and old_manifest.get('datasetHash'): ledger['revokedDatasetHashes'] = sorted(set(ledger.get('revokedDatasetHashes', []) + [old_manifest['datasetHash']]))
+    phase7_manifest = root/'phase7a/manifest.json'
+    if phase7_manifest.exists():
+        checked(phase7_manifest, root)
+        phase7_hash = json.loads(phase7_manifest.read_text(encoding='utf-8')).get('datasetHash')
+        if phase7_hash: ledger['revokedDatasetHashes'] = sorted(set(ledger.get('revokedDatasetHashes', []) + [phase7_hash]))
     ledger['participantHashes'] = sorted(set(ledger['participantHashes'] + [digest(participant)]))
     ledger['attemptHashes'] = sorted(set(ledger['attemptHashes'] + [digest(v) for v in removed_ids if v]))
     # Keep the prior final-test lock so withdrawal cannot reset "untouched" status.
     report = {'schema': 'lava-withdrawal-audit-v1', 'applied': apply, 'rawAttemptsRemoved': raw_count, 'derivedRowsRemoved': row_count,
-              'invalidatedArtifacts': sorted(invalidated), 'externalCopiesDeleted': False, 'requiresRetraining': True, 'finalEvaluationLockPreserved': True}
+              'invalidatedArtifacts': sorted(invalidated), 'externalCopiesDeleted': False, 'requiresRetraining': True, 'finalEvaluationLockPreserved': True,
+              'cleanupStatus': 'DRY_RUN', 'failedWrites': 0, 'failedPathHashes': []}
     if not apply: return report
     for file in [*changes, ledger_path, folder/'manifest.json', folder/'last-withdrawal-audit.json']: checked(file, root)
     folder.mkdir(parents=True, exist_ok=True)
@@ -67,14 +76,22 @@ def withdraw(private_root, participant, apply=False):
     ledger_temp.write_text(canonical(ledger)+'\n', encoding='utf-8')
     ledger_temp.replace(ledger_path)
     for file, content in changes.items():
-        if content is None: file.unlink()
-        else: file.write_text(content, encoding='utf-8')
+        try:
+            if content is None: file.unlink()
+            else: file.write_text(content, encoding='utf-8')
+        except OSError:
+            report['failedWrites'] += 1
+            report['failedPathHashes'].append(digest(str(file.relative_to(root))))
     records = folder/'records.jsonl'
     if records.exists():
         manifest = {**(old_manifest or {}), 'schema': 'lava-dataset-manifest-v3', 'datasetHash': digest(records.read_bytes()),
                     'datasetVersion': 'phase5-' + digest(records.read_bytes())[:16], 'records': sum(bool(s.strip()) for s in records.read_text().splitlines()),
                     'sourceHashes': [], 'withdrawalApplied': True}
         (folder/'manifest.json').write_text(canonical(manifest)+'\n', encoding='utf-8')
+    report['cleanupStatus'] = 'PARTIAL_CLEANUP_REVOKED' if report['failedWrites'] else 'SUPPORTED_LOCAL_COPIES_REMOVED'
+    if report['failedWrites']:
+        report['plannedRawAttemptsRemoved'], report['plannedDerivedRowsRemoved'] = report['rawAttemptsRemoved'], report['derivedRowsRemoved']
+        report['rawAttemptsRemoved'], report['derivedRowsRemoved'] = None, None
     (folder/'last-withdrawal-audit.json').write_text(canonical(report)+'\n', encoding='utf-8')
     return report
 

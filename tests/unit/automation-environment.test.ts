@@ -48,7 +48,8 @@ describe("environment never becomes behavior or refusal authority", () => {
       const baseline = detector.evaluate(s, 10000, false, options);
       for (let bits = 0; bits < 8; bits++) {
         const env = { ...evidence(), signals: Object.fromEntries(ENVIRONMENT_SIGNALS.map((k, i) => [k, Boolean(bits & (1 << i))])) } as ReturnType<typeof evidence>;
-        const result = detector.evaluate({ ...s, signals: { webdriver: Boolean(bits & 1) }, automationEnvironment: env }, 10000, false, options);
+        // Consented research evidence stays advisory; the page's own webdriver signal is tested separately.
+        const result = detector.evaluate({ ...s, automationEnvironment: env }, 10000, false, options);
         expect(result.risk).toBe(baseline.risk); expect(result.enforcementRisk).toBe(baseline.enforcementRisk);
         expect(result.reasons).toEqual(baseline.reasons);
         expect(result.estimator).toEqual(baseline.estimator); expect(result.experimental).toEqual(baseline.experimental);

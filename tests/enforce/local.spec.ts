@@ -11,12 +11,15 @@ for (const masked of [false, true]) {
     await page.getByRole("button", { name: "Sign in", exact: true }).click();
     await clearRing(page, 45000);
     const evaluated = await response, decision = await evaluated.json();
-    expect(decision.verdict).toBe(config.experimentalModel ? "FLAG" : "CLEAR");
-    expect(Boolean(decision.clearance)).toBe(!config.experimentalModel);
+    // Reported WebDriver is withheld; a stealth bot that hides it is a known gap.
+    const flagged = config.experimentalModel || !masked;
+    expect(decision.verdict).toBe(flagged ? "FLAG" : "CLEAR");
+    expect(Boolean(decision.clearance)).toBe(!flagged);
     const summary = evaluated.request().postDataJSON().summary;
     expect(summary.signals.webdriver).toBe(!masked);
     if (config.experimentalModel) expect(decision.lab.reasons).toContain("experimental_model_anomaly");
-    await expect(page.getByRole("heading", { name: config.experimentalModel ? "Let's try that again" : "Ready to sign in" })).toBeVisible();
+    if (!masked && decision.lab) expect(decision.lab.reasons).toContain("automation_webdriver");
+    await expect(page.getByRole("heading", { name: flagged ? "Let's try that again" : "Ready to sign in" })).toBeVisible();
     await expect(page.getByRole("heading", { name: /Likely human|Human detected/ })).toHaveCount(0);
     const options = await page.request.post("/api/login/options", { data: { digests: {} }, headers: { Origin: "http://localhost:8786" } });
     expect(options.status()).toBe(403);

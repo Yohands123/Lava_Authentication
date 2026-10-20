@@ -3,6 +3,7 @@ import { experimentalInference } from "./inference";
 import { parseRobust, ROBUST_VERSION } from "../../shared/robust-features";
 import { estimateRisk, candidateResearchThreshold, type RiskEstimate } from "./risk-estimator";
 import { parseAutomationEnvironment, assessAutomationEnvironment } from "../../shared/automation-environment";
+import { consistentFeatures } from "../../shared/feature-consistency";
 
 export interface Detection { risk: number; enforcementRisk: number; uncertainty: number; reasons: string[]; modelVersion: string; fingerprint: string; geometryHash: string; estimator?: RiskEstimate; experimental?: { version: string; experimentalRisk: number }; automationEnvironment?: ReturnType<typeof assessAutomationEnvironment> }
 export interface DetectorOptions { experimentalModel?: boolean; computeModel?: boolean; modelVersion?: string }
@@ -18,6 +19,7 @@ export function parseSummary(value: unknown): FeatureSummary | null {
   for (const k of ["efficiency", "pauseRatio", "coalescedRatio", "pressureRange", "pressurePresent", "touchRatio", "penRatio", "untrustedRatio"] as const) if ((f[k] as number) > 1) return null;
   if ((f.touchRatio as number) + (f.penRatio as number) > 1.000001) return null;
   for (const k of ["samples", "bursts", "reversals", "corrections", "overshoots", "invalidTiming", "bubbleEncounters", "bubbleChases", "bubbleMisses", "bubbleDisplacements", "strategyChanges"] as const) if (!Number.isInteger(f[k])) return null;
+  if (!consistentFeatures(f as Features)) return null;
   let signals: FeatureSummary["signals"];
   if (s.signals !== undefined) {
     if (!s.signals || typeof s.signals !== "object" || Array.isArray(s.signals)) return null;
@@ -39,7 +41,7 @@ export function parseSummary(value: unknown): FeatureSummary | null {
 
 /** Experimental evidence, never a calibrated probability or identity proof. */
 export class LavaDetector {
-  static readonly version = "lava-heuristic-v4";
+  static readonly version = "lava-heuristic-v5";
   evaluate(summary: FeatureSummary, elapsedMs: number, duplicate: boolean, options: DetectorOptions = {}): Detection {
     const f = summary.features, reasons: string[] = [];
     let risk = 0, enforcementRisk = 0;
@@ -67,7 +69,21 @@ export class LavaDetector {
     if (candidate && options.experimentalModel && estimator?.riskScore != null && !estimator.uncertainty.outOfDistribution && estimator.riskScore >= candidateResearchThreshold) {
       enforcementRisk = Math.max(enforcementRisk, .65); reasons.push("research_candidate_anomaly");
     }
-    // Unvalidated regularity, recurrence, device hints and sample counts stay advisory.
+    // Owner-requested hard evidence (October 20, 2026). Each condition is rare for
+    // a person and withholds only this gesture's clearance (FLAG: fresh retry or
+    // step-up), never BLOCK. A forged summary can still omit all of them.
+    const hard = [
+      // Default Playwright/Puppeteer/Selenium sessions report this; a person
+      // driving an automated browser is the accepted false-positive case.
+      summary.signals?.webdriver === true && "automation_webdriver",
+      // Script-dispatched DOM events carry isTrusted=false; real input cannot.
+      f.untrustedRatio > .1 && "synthetic_events",
+      reasons.includes("joint_regular_path") && "machine_regular_path",
+      // Clearing the ring takes real stirring; this few samples cannot be it.
+      reasons.includes("insufficient_evidence") && "no_real_stirring",
+    ].filter((r): r is string => !!r);
+    if (hard.length) { enforcementRisk = Math.max(enforcementRisk, .65); reasons.push(...hard); }
+    // Recurrence and statistical models stay advisory until validated on people.
     return { risk: Math.min(1, risk), enforcementRisk, uncertainty: .8, reasons, modelVersion: LavaDetector.version, fingerprint: summary.fingerprint, geometryHash: summary.geometryHash, experimental, estimator, automationEnvironment };
   }
 }

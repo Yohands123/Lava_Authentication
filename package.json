@@ -22,6 +22,7 @@
     "ml:phase5:benchmark": "node scripts/benchmark-phase5.mjs",
     "ml:phase5:withdraw": "node scripts/python-local.mjs ml/study_withdraw.py",
     "test:research": "node scripts/check-study-import.mjs",
+    "eval:detection": "node scripts/detection-eval.mjs",
     "test:ml": "node scripts/python-local.mjs -m unittest discover -s ml -p \"test_*.py\" -v",
     "test:automation": "node scripts/verify-automation.mjs",
     "test:environment": "node scripts/environment-probe.mjs",

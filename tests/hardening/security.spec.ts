@@ -1,3 +1,4 @@
+import { forgedPlausibleFeatures } from "../fixtures/forged";
 import { test, expect, type APIRequestContext } from "@playwright/test";
 import { extractFeatures } from "../../src/shared/features";
 import { clearRing, enter } from "../e2e/helpers";
@@ -32,10 +33,19 @@ test("accessible continuation cannot silently drop an existing required verifica
   expect(result.verdict).toBe("FLAG"); expect(result.clearance).toBeUndefined(); expect(result.stepUp).toBeTruthy();
   expect((await post(request, "/api/lavaguard/verify", { id: result.stepUp.id, token: "" })).status()).toBe(400);
 });
+test("with step-up on, a direct no-stir request gets verification, never a free clearance", async ({ playwright }) => {
+  const client = await playwright.request.newContext({ baseURL: origin, extraHTTPHeaders: { "CF-Connecting-IP": "192.0.2.77" } });
+  const c = await (await post(client, "/api/lavaguard/challenge", { kind: "accessible" })).json();
+  const result = await (await post(client, "/api/lavaguard/evaluate", { id: c.id, nonce: c.nonce, summary: null })).json();
+  expect(result.verdict).toBe("FLAG"); expect(result.clearance).toBeUndefined(); expect(result.stepUp.id).toHaveLength(43);
+  expect((await post(client, "/api/login/options", { digests: {} })).status()).toBe(403);
+  await client.dispose();
+});
 test("a delayed fabricated summary remains a documented residual bypass", async ({ request }) => {
   const c = await (await post(request, "/api/lavaguard/challenge", { kind: "gesture" })).json();
   await new Promise(resolve => setTimeout(resolve, 250));
-  const result = await (await post(request, "/api/lavaguard/evaluate", { id: c.id, nonce: c.nonce, summary })).json();
+  const forged = { ...summary, features: forgedPlausibleFeatures() };
+  const result = await (await post(request, "/api/lavaguard/evaluate", { id: c.id, nonce: c.nonce, summary: forged })).json();
   expect(result.verdict).toBe("CLEAR");
   expect((await post(request, "/api/login/options", { digests: {}, clearance: result.clearance })).status()).toBe(200);
   expect((await request.get("/api/session")).status()).toBe(401);

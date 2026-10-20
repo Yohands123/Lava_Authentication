@@ -3,7 +3,7 @@ import { defineConfig, devices } from "@playwright/test";
 const origin = "http://localhost:8786";
 const research = process.env.LAVAGUARD_RESEARCH === "1";
 export default defineConfig({
-  testDir: "tests/enforce", workers: 1, fullyParallel: false, timeout: 60000,
+  testDir: "tests/enforce", workers: 1, fullyParallel: false, timeout: process.env.CI ? 150000 : 60000,
   reporter: "list",
   use: { baseURL: origin, ...devices["Desktop Chrome"], reducedMotion: "no-preference" },
   webServer: {

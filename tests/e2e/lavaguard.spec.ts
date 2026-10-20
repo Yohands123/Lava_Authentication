@@ -59,6 +59,18 @@ test("shadow evaluates actual summaries and repeated geometry without behavioral
   expect((await (await page.request.get("/api/lavaguard/lab")).json()).history.recent).toEqual([]);
 });
 
+test("the no-stir passkey route is hidden from pointer users and revealed by Tab", async ({ page }) => {
+  await page.goto("/"); await enter(page);
+  await page.getByRole("button", { name: "Sign in", exact: true }).click();
+  const alternative = page.getByRole("button", { name: "Use a passkey without stirring" });
+  await expect(page.getByRole("button", { name: "Back", exact: true })).toBeVisible();
+  expect((await alternative.boundingBox())!.width).toBeLessThanOrEqual(1);
+  await page.getByRole("button", { name: "Back", exact: true }).focus();
+  await page.keyboard.press("Tab");
+  await expect(alternative).toBeFocused();
+  expect((await alternative.boundingBox())!.width).toBeGreaterThan(100);
+});
+
 test("keyboard alternative completes separate passkey authentication", async ({ page }) => {
   await addAuthenticator(page); await register(page); await signOut(page); await enter(page);
   await page.getByRole("button", { name: "Sign in", exact: true }).press("Enter");

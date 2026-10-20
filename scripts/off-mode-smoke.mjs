@@ -16,7 +16,7 @@ assert.equal(options.status(), 200); // Explicit off mode preserves the original
 await page.getByRole('button', { name: 'Enter', exact: true }).click();
 await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 const loginRequest = page.waitForRequest(r => r.url().endsWith('/api/login/options'));
-await page.getByRole('button', { name: 'Use a passkey without stirring' }).click();
+await page.getByRole('button', { name: 'Use a passkey without stirring' }).press('Enter');
 await loginRequest;
 assert.ok(requests.length > 0); assert.ok(requests.every(r => r.summary === null));
 const session = await page.request.get(origin + '/api/session'); assert.equal(session.status(), 401);

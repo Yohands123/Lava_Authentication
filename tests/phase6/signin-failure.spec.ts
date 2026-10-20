@@ -7,7 +7,7 @@ for (const verdict of ["FLAG", "BLOCK", "ERROR"] as const) test(`failed ${verdic
   await page.goto("/"); await enter(page);
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
   if (verdict === "ERROR") {
-    await page.getByRole("button", { name: "Use a passkey without stirring" }).click();
+    await page.getByRole("button", { name: "Use a passkey without stirring" }).press("Enter");
   } else await clearRing(page);
   const result = page.locator("[data-verdict]"); await expect(result).toBeVisible();
   await expect(page.locator("[data-screen=stir]")).toHaveAttribute("data-guard-state", verdict);
@@ -41,12 +41,12 @@ test("passkey cancellation returns to sign-in; fresh valid assertion succeeds", 
   await page.evaluate(() => { const get = navigator.credentials.get.bind(navigator.credentials); let first = true;
     navigator.credentials.get = options => { if (first) { first = false; return Promise.reject(new DOMException("Cancelled", "NotAllowedError")); } return get(options); }; });
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
-  await page.getByRole("button", { name: "Use a passkey without stirring" }).click();
+  await page.getByRole("button", { name: "Use a passkey without stirring" }).press("Enter");
   await expect(page.getByRole("heading", { name: "No passwords here" })).toBeVisible();
   expect((await page.request.get("/api/session")).status()).toBe(401);
   const options = page.waitForResponse(r => r.url().endsWith("/api/login/options"));
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
-  await page.getByRole("button", { name: "Use a passkey without stirring" }).click();
+  await page.getByRole("button", { name: "Use a passkey without stirring" }).press("Enter");
   expect((await options).status()).toBe(200); await expect(page.getByRole("heading", { name: "You're in" })).toBeVisible();
 });
 for (const alteration of ["origin", "rp", "uv"] as const) test(`real assertion with invalid ${alteration} never sets an auth cookie`, async ({ page }) => {
@@ -58,7 +58,7 @@ for (const alteration of ["origin", "rp", "uv"] as const) test(`real assertion w
     await route.continue({ postData: JSON.stringify(b) });
   });
   const response = page.waitForResponse(r => r.url().endsWith("/api/login/verify"));
-  await page.getByRole("button", { name: "Sign in", exact: true }).click(); await page.getByRole("button", { name: "Use a passkey without stirring" }).click();
+  await page.getByRole("button", { name: "Sign in", exact: true }).click(); await page.getByRole("button", { name: "Use a passkey without stirring" }).press("Enter");
   const result = await response; expect(result.status()).toBe(401); expect(await result.headerValue("set-cookie")).toBeNull();
   expect((await page.request.get("/api/session")).status()).toBe(401);
   expect((await page.request.post("/api/login/verify", { headers: { Origin: origin }, data: {} })).status()).toBe(400);

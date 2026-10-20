@@ -1,0 +1,104 @@
+name: CI
+
+# Isolated checks only: every Worker runs locally under `wrangler dev` with
+# disposable Durable Object state. No Cloudflare credentials or secrets are used.
+on:
+  pull_request:
+    branches: [main, feature/lavaguard-phase5]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  WRANGLER_SEND_METRICS: "false"
+  CI: "true"
+
+jobs:
+  static:
+    name: Typecheck, lint, unit and storage tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - run: npm run test:console
+      - run: npm run test:phase6:storage
+      # Phase 7 scripts exist only once the Phase 7 branch is integrated.
+      - run: npm run --if-present test:phase7:storage
+      - name: Research importer validation (synthetic fixtures only)
+        run: npm run test:research
+      - run: npm run build
+      - name: Dependency audit
+        run: npm audit --audit-level=high
+      - name: Private-data and secret publication check
+        run: node scripts/check-publish.mjs
+
+  ml:
+    name: Python ML integrity tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: ml/requirements.txt
+      - name: Create project venv
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install -r ml/requirements.txt
+      - run: npm run test:ml
+
+  browser:
+    name: Browser E2E (${{ matrix.suite }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [e2e, enforce, hardening, phase6, phase7]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run suite
+        run: |
+          suite="${{ matrix.suite }}"
+          if [ "$suite" = "e2e" ]; then npx playwright test
+          elif [ -f "playwright.$suite.config.ts" ]; then npx playwright test --config "playwright.$suite.config.ts"
+          else echo "::notice::playwright.$suite.config.ts is not on this branch; suite skipped."; fi
+      # Reports contain only synthetic test sessions on throwaway local state.
+      - name: Upload failure report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-${{ matrix.suite }}
+          path: |
+            test-results/
+            .cache/phase6/browser-results/
+            .cache/phase7/browser-results/
+          retention-days: 7
+          if-no-files-found: ignore

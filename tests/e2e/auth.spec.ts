@@ -126,6 +126,8 @@ test("sign out everywhere revokes every session", async ({ browser }) => {
   await register(laptop);
   await copyPasskeys(laptopKey, phoneKey); // the same passkey, synced to a second device
   await phone.goto("/");
+  // The lamp pauses in background tabs; make sure the phone page is the one rendering.
+  await phone.bringToFront();
   await signIn(phone);
   expect((await session(laptop)).status()).toBe(200);
   expect((await session(phone)).status()).toBe(200);

@@ -8,6 +8,13 @@ async function fastForgery(r: APIRequestContext) {
   const c = await (await post(r, "/api/lavaguard/challenge", { kind: "gesture" })).json();
   return (await post(r, "/api/lavaguard/evaluate", { id: c.id, nonce: c.nonce, summary })).json();
 }
+// Warm the Worker and ChallengeStore from a separate cookie context, so a cold
+// start on a slow runner cannot push the first forgery past the 200 ms window.
+test.beforeAll(async ({ playwright }) => {
+  const warm = await playwright.request.newContext({ baseURL: origin });
+  await post(warm, "/api/lavaguard/challenge", { kind: "gesture" });
+  await warm.dispose();
+});
 test("rapid no-ring forgery requires verification, which remains bound and one-use", async ({ request, playwright }) => {
   const decision = await fastForgery(request);
   expect(decision.verdict).toBe("FLAG"); expect(decision.clearance).toBeUndefined(); expect(decision.stepUp.id).toHaveLength(43);

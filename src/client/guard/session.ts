@@ -106,7 +106,7 @@ export class LavaGuard {
     try {
       this.config = await api<GuardConfig>("/api/lavaguard/config", undefined, signal);
       if (!current()) return;
-      $("[data-guard-notice]").textContent = this.config.mode === "off" ? "Pointer paths stay on this device. Sign-in always requires your passkey." : "Local research preview: movement summaries are evaluated by this server. Raw paths stay on this device. You can use a passkey without stirring.";
+      $("[data-guard-notice]").textContent = this.config.mode === "off" ? "Pointer paths stay on this device. Sign-in always requires your passkey." : "Movement summaries are checked by this server. Raw paths stay on this device. Sign-in always requires your passkey.";
       const research = this.config.lab ? this.beginResearch(this.config) : undefined;
       const challenge = await api<GuardChallenge>("/api/lavaguard/challenge", { kind }, signal);
       if (!current()) return;

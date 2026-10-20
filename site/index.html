@@ -19,6 +19,7 @@
       <span class="wordmark">LavaAuth</span>
       <nav aria-label="Primary">
         <a href="#how">How it works</a>
+        <a href="#live">Live guard</a>
         <a href="#security">Security</a>
         <a href="#research">Research</a>
         <a href="#results">Results</a>
@@ -103,12 +104,46 @@
             <ul class="caveats">
               <li>The simulated lamp is not a random-number generator. Challenges come from the Worker.</li>
               <li>CLEAR means permitted to continue, not certified human.</li>
-              <li>Browser automation hints are spoofable and stay advisory.</li>
-              <li>A keyboard and no-WebGL passkey route is always offered before the challenge.</li>
+              <li>Browser automation hints are spoofable. They can hold back a permission; they never ban anyone.</li>
+              <li>A keyboard passkey route stays one Tab away, and no-WebGL browsers use it automatically. It goes through Cloudflare Turnstile.</li>
               <li>A failed attempt never creates a session or ends an existing valid one.</li>
             </ul>
           </div>
         </div>
+      </section>
+
+      <section id="live" class="band" aria-labelledby="live-title">
+        <h2 id="live-title">Live now: catching scripted stirring.</h2>
+        <p class="section-lede">The live app runs LavaGuard in enforce mode. Attempts that show hard automation evidence don't get a permission. They go to Cloudflare Turnstile instead. The ML model stays off.</p>
+        <dl class="stats">
+          <div><dt class="mono">Recorded app attacks flagged before</dt><dd>0 / 64</dd></div>
+          <div><dt class="mono">Recorded app attacks flagged now</dt><dd>33 / 64</dd></div>
+          <div><dt class="mono">Public research humans flagged</dt><dd>0 / 944</dd></div>
+        </dl>
+        <div class="split">
+          <div>
+            <h3 class="mono label">What withholds a permission</h3>
+            <ul class="checks">
+              <li>The browser reports <span class="mono">navigator.webdriver</span>, as default Playwright, Puppeteer and Selenium do</li>
+              <li>Pointer events dispatched by script (<span class="mono">isTrusted</span> false)</li>
+              <li>A machine-perfect path: straight, with constant speed and timing</li>
+              <li>Too little movement to have cleared the ring</li>
+              <li>Any use of the no-stir route, since a script could ask for it without moving at all</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="mono label">What still gets through</h3>
+            <ul class="caveats">
+              <li>A stealth bot that hides the webdriver flag and moves like a person still gets CLEAR. It needs a passkey to sign in.</li>
+              <li>Believable forged movement summaries are still accepted. Tests keep that gap visible.</li>
+              <li>The human figure comes from public mouse data, not from people stirring this lamp. Real-user false-flag rates are unmeasured.</li>
+            </ul>
+          </div>
+        </div>
+        <figure class="wide">
+          <img src="../docs/media/lavaguard/live-turnstile-step-up.png" width="1280" height="900" loading="lazy" alt="The live app after a scripted Playwright stir: the ring shows Let's try that again with Cloudflare's Verify you are human check inside it" />
+          <figcaption>A default Playwright bot stirring the live lamp. It gets FLAG, no permission and no session, and is sent to Cloudflare's check inside the ring.</figcaption>
+        </figure>
       </section>
 
       <section id="research" class="band" aria-labelledby="research-title">
@@ -195,12 +230,13 @@
           <li><span class="mono when">Phase 5</span><div><h3>Research infrastructure</h3><p>Consent and provenance tracking, leakage-controlled splits, three classifier baselines with calibration, withdrawal, and a portable model that stays disabled.</p></div></li>
           <li><span class="mono when">Phase 6</span><div><h3>Adversarial study</h3><p>44 browser and API attack cases, a private observation registry, a sharding prototype, and safer failed-sign-in recovery.</p></div></li>
           <li><span class="mono when">Phase 7</span><div><h3>Study readiness and scale</h3><p>A preregistration draft, consent-gated review, withdrawal and cohort locks, signed shard routing, local load measurements, and a slow-client ingress diagnosis.</p></div></li>
+          <li><span class="mono when">Live guard</span><div><h3>Enforcement on Cloudflare</h3><p>Hard automation evidence now holds back the permission. Cloudflare Turnstile verifies flagged attempts and the no-stir route. Measured on recorded attacks before going live.</p></div></li>
         </ol>
       </section>
 
       <section class="band closing" aria-labelledby="closing-title">
         <h2 id="closing-title">See it for yourself.</h2>
-        <p class="section-lede">The working app runs on Cloudflare with your own passkey. LavaGuard ML enforcement is off in production.</p>
+        <p class="section-lede">The working app runs on Cloudflare with your own passkey. LavaGuard enforcement and Turnstile are on; the ML model is off.</p>
         <div class="actions">
           <a class="cta" href="https://lavaauth.yohance611.workers.dev/">Try LavaAuth <span aria-hidden="true">→</span></a>
           <a class="quiet-link" href="https://github.com/Yohands123/Lava_Authentication">Yohands123/Lava_Authentication</a>

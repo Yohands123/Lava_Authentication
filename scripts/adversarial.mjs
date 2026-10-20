@@ -7,6 +7,8 @@ import { pathToFileURL } from 'node:url';
 import { generate, families } from './attacks.mjs';
 
 const origin = process.env.LAVAGUARD_LOCAL_ORIGIN ?? 'http://localhost:8787';
+const reportPath = process.env.LAVAGUARD_ADVERSARIAL_REPORT ?? 'ml/artifacts/adversarial-phase4.json';
+if (!/^ml\/artifacts\/[\w-]+\.json$/.test(reportPath)) throw new Error('Write only a local aggregate evaluation artifact.');
 const target = new URL(origin);
 if (target.hostname !== 'localhost' || target.protocol !== 'http:') throw new Error('Adversarial harness is restricted to the project-owned localhost server');
 await mkdir('ml/artifacts', { recursive: true });
@@ -96,6 +98,6 @@ try {
   await context.close();
 } finally {
   await browser.close();
-  await writeFile('ml/artifacts/adversarial-phase4.json', JSON.stringify(report, null, 2) + '\n');
+  await writeFile(reportPath, JSON.stringify(report, null, 2) + '\n');
 }
-console.log(JSON.stringify({ cases: report.cases.length, report: 'ml/artifacts/adversarial-phase4.json' }));
+console.log(JSON.stringify({ cases: report.cases.length, report: reportPath }));

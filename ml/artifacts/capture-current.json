@@ -1,0 +1,40 @@
+{
+  "capturedAt": "2026-10-18T17:33:31.100Z",
+  "origin": "http://localhost:8781",
+  "configuration": {
+    "mode": "shadow",
+    "lab": true,
+    "experimentalModel": false,
+    "featureVersion": "lava-features-v1",
+    "retentionSeconds": 600,
+    "modelMode": "shadow",
+    "modelVersion": "lava-logistic-experimental-v1",
+    "policyVersion": "lava-policy-v4"
+  },
+  "syntheticAutomation": true,
+  "mockedResponses": false,
+  "captures": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "screenshot": "docs/media/lavaguard/real-clear-desktop.png",
+      "status": 200,
+      "verdict": "CLEAR",
+      "assessment": "shadow",
+      "clearanceIssued": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot": "docs/media/lavaguard/real-clear-mobile.png",
+      "status": 200,
+      "verdict": "CLEAR",
+      "assessment": "shadow",
+      "clearanceIssued": true
+    }
+  ]
+}

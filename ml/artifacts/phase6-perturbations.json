@@ -1,0 +1,110 @@
+{
+  "schema": "lava-phase6-perturbations-v1",
+  "datasetHash": "5caa25119ee3e0dd6585cfb5d059644f9153e1fd1539df07a3fe8f3d73752bf7",
+  "audit": {
+    "invalid": 0,
+    "declaredBotExports": 34,
+    "humanExportsNotImported": 0
+  },
+  "originals": 34,
+  "eligibleOriginals": 21,
+  "incompleteOriginals": 13,
+  "source": "Declared browser automation only; not application-human validation",
+  "featureSchema": "lava-dynamic-response-v4",
+  "variants": {
+    "original": {
+      "derivedViews": 34,
+      "insufficientSamples": 1,
+      "nonfinite": 0,
+      "maxDynamicDelta": 0,
+      "maxRobustDelta": 0
+    },
+    "cadence16": {
+      "derivedViews": 34,
+      "insufficientSamples": 0,
+      "nonfinite": 0,
+      "maxDynamicDelta": 1,
+      "maxRobustDelta": 7258.221645000005
+    },
+    "cadence32": {
+      "derivedViews": 34,
+      "insufficientSamples": 0,
+      "nonfinite": 0,
+      "maxDynamicDelta": 1,
+      "maxRobustDelta": 7089.61995
+    },
+    "cadence64": {
+      "derivedViews": 34,
+      "insufficientSamples": 1,
+      "nonfinite": 0,
+      "maxDynamicDelta": 2,
+      "maxRobustDelta": 6660.013822000001
+    },
+    "scaled2": {
+      "derivedViews": 34,
+      "insufficientSamples": 1,
+      "nonfinite": 0,
+      "maxDynamicDelta": 0.6000000000000001,
+      "maxRobustDelta": 0
+    },
+    "translated": {
+      "derivedViews": 34,
+      "insufficientSamples": 1,
+      "nonfinite": 0,
+      "maxDynamicDelta": 0,
+      "maxRobustDelta": 0.016129
+    },
+    "reduced6": {
+      "derivedViews": 34,
+      "insufficientSamples": 34,
+      "nonfinite": 0,
+      "maxDynamicDelta": 20,
+      "maxRobustDelta": 38865.208308999994
+    },
+    "reduced12": {
+      "derivedViews": 34,
+      "insufficientSamples": 1,
+      "nonfinite": 0,
+      "maxDynamicDelta": 13,
+      "maxRobustDelta": 11007.329859999998
+    },
+    "reduced32": {
+      "derivedViews": 34,
+      "insufficientSamples": 1,
+      "nonfinite": 0,
+      "maxDynamicDelta": 5,
+      "maxRobustDelta": 7028.7746130000005
+    },
+    "clockJitter": {
+      "derivedViews": 34,
+      "insufficientSamples": 1,
+      "nonfinite": 0,
+      "maxDynamicDelta": 0.0025210882414343216,
+      "maxRobustDelta": 1495.3034670000052
+    },
+    "spatialJitter": {
+      "derivedViews": 34,
+      "insufficientSamples": 1,
+      "nonfinite": 0,
+      "maxDynamicDelta": 0.05555555555555547,
+      "maxRobustDelta": 500.21927600000026
+    },
+    "variableSpeed": {
+      "derivedViews": 34,
+      "insufficientSamples": 1,
+      "nonfinite": 0,
+      "maxDynamicDelta": 0.011442032134882402,
+      "maxRobustDelta": 10188.176334000003
+    }
+  },
+  "targetObservedTraces": 34,
+  "switchObservedTraces": 32,
+  "dynamicSignalBenefit": null,
+  "empiricalHumanComparisons": "NOT_READY_NO_MATCHED_CONSENTING_HUMANS",
+  "limitations": [
+    "Derived views are not new participants or independent generators.",
+    "Nearest observed bubble targets are forgeable proxies, not intention or canvas attestation.",
+    "Physics seeds do not remove runtime scheduling variation.",
+    "Ring-normalized v4 reacquisition distance is not arbitrary-scale invariant."
+  ]
+}

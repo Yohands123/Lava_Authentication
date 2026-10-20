@@ -1,0 +1,85 @@
+{
+  "schema": "lava-environment-shortcut-smoke-v1",
+  "syntheticOnly": true,
+  "notStudyEvidence": true,
+  "generatedFixtureRows": 180,
+  "actualHumanParticipants": 0,
+  "applicationRowsWritten": false,
+  "productionInfluence": false,
+  "artifactExported": false,
+  "variants": {
+    "behavior-only": {
+      "generatedHumanLabeledTestRows": 27,
+      "generatedBotLabeledTestRows": 12,
+      "counterfactualEnvironmentChanges": {
+        "all-positive": {
+          "decisionFlipN": 0,
+          "maxAbsoluteScoreDelta": 0.0,
+          "humanFlagged": 3,
+          "botMissed": 0
+        },
+        "all-hidden": {
+          "decisionFlipN": 0,
+          "maxAbsoluteScoreDelta": 0.0,
+          "humanFlagged": 3,
+          "botMissed": 0
+        },
+        "unavailable": {
+          "decisionFlipN": 0,
+          "maxAbsoluteScoreDelta": 0.0,
+          "humanFlagged": 3,
+          "botMissed": 0
+        }
+      }
+    },
+    "environment-only": {
+      "generatedHumanLabeledTestRows": 27,
+      "generatedBotLabeledTestRows": 12,
+      "counterfactualEnvironmentChanges": {
+        "all-positive": {
+          "decisionFlipN": 27,
+          "maxAbsoluteScoreDelta": 0.9261888687165657,
+          "humanFlagged": 27,
+          "botMissed": 0
+        },
+        "all-hidden": {
+          "decisionFlipN": 12,
+          "maxAbsoluteScoreDelta": 0.9261888687165657,
+          "humanFlagged": 0,
+          "botMissed": 12
+        },
+        "unavailable": {
+          "decisionFlipN": 12,
+          "maxAbsoluteScoreDelta": 0.9261888687165657,
+          "humanFlagged": 0,
+          "botMissed": 12
+        }
+      }
+    },
+    "behavior-plus-environment": {
+      "generatedHumanLabeledTestRows": 27,
+      "generatedBotLabeledTestRows": 12,
+      "counterfactualEnvironmentChanges": {
+        "all-positive": {
+          "decisionFlipN": 24,
+          "maxAbsoluteScoreDelta": 0.013748158762718624,
+          "humanFlagged": 27,
+          "botMissed": 0
+        },
+        "all-hidden": {
+          "decisionFlipN": 0,
+          "maxAbsoluteScoreDelta": 0.06176145506730857,
+          "humanFlagged": 3,
+          "botMissed": 0
+        },
+        "unavailable": {
+          "decisionFlipN": 0,
+          "maxAbsoluteScoreDelta": 0.06176145506730857,
+          "humanFlagged": 3,
+          "botMissed": 0
+        }
+      }
+    }
+  },
+  "interpretation": "Labels and environment correlation were constructed. Counterfactual flips demonstrate shortcut sensitivity, not real user or AI detection accuracy."
+}

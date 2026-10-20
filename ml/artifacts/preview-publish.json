@@ -1,0 +1,26 @@
+{
+  "capturedAt": "2026-10-18T17:37:14.508Z",
+  "origin": "http://localhost:8785",
+  "configuration": {
+    "mode": "enforce",
+    "lab": true,
+    "experimentalModel": true,
+    "featureVersion": "lava-features-v1",
+    "retentionSeconds": 600,
+    "modelMode": "research_enforce",
+    "modelVersion": "lava-logistic-experimental-v1",
+    "policyVersion": "lava-policy-v4"
+  },
+  "syntheticAutomation": true,
+  "mockedResponses": false,
+  "verdict": "FLAG",
+  "status": 200,
+  "clearanceIssued": false,
+  "reasons": [
+    "browser_automation_reported",
+    "experimental_model_anomaly"
+  ],
+  "optionsStatus": 403,
+  "sessionStatus": 401,
+  "screenshot": "docs/media/lavaguard/preview-automation.png"
+}

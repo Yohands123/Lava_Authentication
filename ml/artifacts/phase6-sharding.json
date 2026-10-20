@@ -1,0 +1,117 @@
+{
+  "schema": "lava-phase6-sharding-simulator-v1",
+  "node": "v24.13.0",
+  "runtime": "Node SQLite using actual LavaEnforcer; no distributed parallelism",
+  "measurements": [
+    {
+      "shards": 1,
+      "generatedContextOperations": 512,
+      "clear": 512,
+      "firstRedemptionWinners": 512,
+      "replaysRejected": 512,
+      "distribution": [
+        512
+      ],
+      "elapsedWallMs": 307.31819999999993,
+      "nodeCpuMicros": {
+        "user": 266000,
+        "system": 47000
+      },
+      "n": 512,
+      "p50Ms": 0.5368000000000848,
+      "p95Ms": 0.9334999999999809,
+      "p99Ms": 1.1443000000000438,
+      "nodeRssBytes": 155451392
+    },
+    {
+      "shards": 4,
+      "generatedContextOperations": 512,
+      "clear": 512,
+      "firstRedemptionWinners": 512,
+      "replaysRejected": 512,
+      "distribution": [
+        127,
+        125,
+        132,
+        128
+      ],
+      "elapsedWallMs": 257.2186999999999,
+      "nodeCpuMicros": {
+        "user": 250000,
+        "system": 16000
+      },
+      "n": 512,
+      "p50Ms": 0.409099999999853,
+      "p95Ms": 0.7902000000001408,
+      "p99Ms": 0.9544000000000779,
+      "nodeRssBytes": 157655040
+    },
+    {
+      "shards": 16,
+      "generatedContextOperations": 512,
+      "clear": 512,
+      "firstRedemptionWinners": 512,
+      "replaysRejected": 512,
+      "distribution": [
+        30,
+        44,
+        31,
+        37,
+        30,
+        24,
+        25,
+        30,
+        35,
+        30,
+        36,
+        35,
+        32,
+        27,
+        40,
+        26
+      ],
+      "elapsedWallMs": 260.42139999999995,
+      "nodeCpuMicros": {
+        "user": 266000,
+        "system": 15000
+      },
+      "n": 512,
+      "p50Ms": 0.3815999999999349,
+      "p95Ms": 0.7520999999999276,
+      "p99Ms": 0.9018999999998414,
+      "nodeRssBytes": 139870208
+    }
+  ],
+  "indexPrototype": {
+    "syntheticSqlRows": 10000,
+    "query": "expiry selection only; no production change",
+    "beforePlan": [
+      "SCAN sessions"
+    ],
+    "afterPlan": [
+      "SEARCH sessions USING INDEX phase6_prototype_sessions_expiry (expires_at<?)"
+    ],
+    "beforeCost": {
+      "n": 30,
+      "p50Ms": 2.5206000000000586,
+      "p95Ms": 3.311999999999898,
+      "p99Ms": 3.380000000000109
+    },
+    "afterCost": {
+      "n": 30,
+      "p50Ms": 2.2125999999998385,
+      "p95Ms": 2.869899999999916,
+      "p99Ms": 3.121699999999919
+    },
+    "selectedRowsUnchanged": 5000
+  },
+  "productionRoutingChanged": false,
+  "globalCapEquivalence": false,
+  "productionCutoverApproved": false,
+  "limitations": [
+    "Public FNV routing is a simulator, not adversarial shard placement protection.",
+    "Per-shard 4096 caps multiply global capacity; global admission and migration are unresolved.",
+    "Node timings are not Durable Object or edge throughput.",
+    "Ten thousand synthetic SQL rows are not ten thousand simultaneous users."
+  ]
+}

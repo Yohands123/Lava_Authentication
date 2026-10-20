@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="console-token" content="__CONSOLE_TOKEN__">
+  <title>LavaGuard · Local test bench</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" type="module"></script>
+</head>
+<body>
+  <main>
+    <header><p class="eyebrow">LAVAAUTH / LOCAL RESEARCH</p><h1>Put the guard<br>to the test.</h1><p class="intro">Try it yourself. Watch a bot. Compare what the server actually decides.</p></header>
+    <nav aria-label="Manual testing"><a href="http://localhost:8787" target="_blank" rel="noopener">Open normal app ↗</a><a href="http://localhost:8791" target="_blank" rel="noopener">Open older-model research app ↗</a><a href="/api/report" download>Download results ↓</a></nav>
+    <p class="scope">Local only. Normal mode observes ML; research mode enforces an older experimental model and can reject people. Neither is a validated Phase 5 classifier. Use your everyday browser for manual trials; the automation window reports itself as automated.</p>
+    <section aria-labelledby="run-heading" class="controls"><div><p class="eyebrow">AUTOMATED ATTEMPTS</p><h2 id="run-heading">Choose a challenge.</h2><p id="pattern-description">Real cursor movement, real physics, real server responses.</p></div>
+      <form id="run-form">
+        <label>Server profile<select id="profile" name="profile"><option value="normal">Normal · ML observation</option><option value="research">Research · older ML enforcement</option></select></label>
+        <label>Bot pattern<select id="pattern" name="pattern"></select></label>
+        <div class="small-fields"><label>Random seed<input id="seed" type="number" min="1" max="1000000" value="812" required></label><label>Repeats<select id="repeats"><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label></div>
+        <div class="actions"><button id="run-selected" type="submit" disabled>Watch this bot →</button><button id="run-suite" type="button" class="quiet" disabled>Run all patterns</button><button id="stop" type="button" class="quiet" disabled>Stop</button></div>
+      </form>
+    </section>
+    <section aria-label="Current run" class="status"><p id="status" role="status" aria-live="polite">Connecting to the local test servers…</p><progress id="progress" value="0" max="1" aria-label="Completed attempts"></progress><p id="configuration" class="muted"></p><p id="error" role="alert"></p></section>
+    <section class="evidence" aria-labelledby="evidence-heading"><div class="section-title"><h2 id="evidence-heading">What actually happened</h2><p id="totals" class="muted">No attempts yet</p></div><p class="muted">An unfinished ring is not successful detection. CLEAR means automation received clearance. Passkey failures do not count as bot detection.</p>
+      <div class="table-scroll"><table><caption class="sr-only">Actual automated attempt results, newest first</caption><thead><tr><th>Pattern / seed</th><th>Profile</th><th>Ring</th><th>Verdict</th><th>Clearance</th><th>Options HTTP</th><th>Session HTTP</th><th>Outcome</th></tr></thead><tbody id="results"></tbody></table></div>
+      <p id="empty">Choose a pattern above to start. Each attempt opens a visible test browser.</p>
+    </section>
+    <section id="details" hidden aria-labelledby="detail-heading"><h2 id="detail-heading">Latest attempt</h2><p id="detail-text"></p><p id="reasons" class="muted"></p><img id="screenshot" alt="Actual localhost result from the latest automated attempt" width="1200" height="900"></section>
+    <footer>Up to 100 redacted results and screenshots stay in this computer's ignored cache. Automation is labeled explicitly. No training, human-study export, upload or deployment. Keep the server terminal open; Ctrl+C stops its managed servers.</footer>
+  </main>
+</body>
+</html>

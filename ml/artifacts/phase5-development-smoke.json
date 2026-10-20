@@ -1,0 +1,10 @@
+{
+  "syntheticOnly": true,
+  "notStudyEvidence": true,
+  "status": "DESCRIPTIVE_DEVELOPMENT_EXPERIMENTS",
+  "ablationsExecuted": 5,
+  "familyFoldsExecuted": 20,
+  "unavailableFolds": 0,
+  "seconds": 119.81640850001713,
+  "applicationRowsWritten": false
+}

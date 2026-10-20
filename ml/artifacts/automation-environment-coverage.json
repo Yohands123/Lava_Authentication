@@ -1,0 +1,385 @@
+{
+  "schema": "lava-automation-environment-coverage-v1",
+  "evidenceVersion": "lava-automation-environment-v1",
+  "generatedAt": "2026-10-19T03:44:40.725Z",
+  "localOnly": true,
+  "browserVersion": "156.0.8078.4",
+  "cases": [
+    {
+      "name": "ordinary-chrome",
+      "declaredEnvironment": "ordinary-chrome",
+      "declaredControl": "unknown",
+      "displayMode": "headed",
+      "evidence": {
+        "version": "lava-automation-environment-v1",
+        "authority": "advisory",
+        "signals": {
+          "webdriver": false,
+          "headlessUserAgent": false,
+          "headlessBrand": false
+        }
+      },
+      "fixedGeneratedBehaviorControl": [
+        {
+          "experimentalModel": false,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        },
+        {
+          "experimentalModel": true,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        }
+      ],
+      "webdriverOrCdpUsed": false,
+      "automationLaunchFlagsUsed": false,
+      "scriptedLaunchOnly": true,
+      "genuineHumanTrial": false,
+      "browserVersion": null
+    },
+    {
+      "name": "headed-playwright",
+      "declaredEnvironment": "headed-playwright",
+      "declaredControl": "scripted",
+      "displayMode": "headed",
+      "evidence": {
+        "version": "lava-automation-environment-v1",
+        "authority": "advisory",
+        "signals": {
+          "webdriver": true,
+          "headlessUserAgent": false,
+          "headlessBrand": false
+        }
+      },
+      "fixedGeneratedBehaviorControl": [
+        {
+          "experimentalModel": false,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        },
+        {
+          "experimentalModel": true,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "webdriverOrCdpUsed": true,
+      "condition": "default",
+      "pointerMoves": 2,
+      "unchangedAfterPointerMovement": true
+    },
+    {
+      "name": "headless-playwright",
+      "declaredEnvironment": "headless-playwright",
+      "declaredControl": "scripted",
+      "displayMode": "headless",
+      "evidence": {
+        "version": "lava-automation-environment-v1",
+        "authority": "advisory",
+        "signals": {
+          "webdriver": true,
+          "headlessUserAgent": true,
+          "headlessBrand": true
+        }
+      },
+      "fixedGeneratedBehaviorControl": [
+        {
+          "experimentalModel": false,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        },
+        {
+          "experimentalModel": true,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "webdriverOrCdpUsed": true,
+      "condition": "default",
+      "pointerMoves": 2,
+      "unchangedAfterPointerMovement": true
+    },
+    {
+      "name": "headed-puppeteer",
+      "declaredEnvironment": "puppeteer",
+      "declaredControl": "scripted",
+      "displayMode": "headed",
+      "evidence": {
+        "version": "lava-automation-environment-v1",
+        "authority": "advisory",
+        "signals": {
+          "webdriver": true,
+          "headlessUserAgent": false,
+          "headlessBrand": false
+        }
+      },
+      "fixedGeneratedBehaviorControl": [
+        {
+          "experimentalModel": false,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        },
+        {
+          "experimentalModel": true,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        }
+      ],
+      "browserVersion": "Chrome/156.0.8078.4",
+      "webdriverOrCdpUsed": true,
+      "condition": "default",
+      "pointerMoves": 2,
+      "unchangedAfterPointerMovement": true
+    },
+    {
+      "name": "headless-puppeteer",
+      "declaredEnvironment": "puppeteer",
+      "declaredControl": "scripted",
+      "displayMode": "headless",
+      "evidence": {
+        "version": "lava-automation-environment-v1",
+        "authority": "advisory",
+        "signals": {
+          "webdriver": true,
+          "headlessUserAgent": true,
+          "headlessBrand": false
+        }
+      },
+      "fixedGeneratedBehaviorControl": [
+        {
+          "experimentalModel": false,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        },
+        {
+          "experimentalModel": true,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        }
+      ],
+      "browserVersion": "Chrome/156.0.8078.4",
+      "webdriverOrCdpUsed": true,
+      "condition": "default",
+      "pointerMoves": 2,
+      "unchangedAfterPointerMovement": true
+    },
+    {
+      "name": "ghost-cursor-headed-playwright",
+      "declaredEnvironment": "ghost-cursor",
+      "declaredControl": "scripted",
+      "displayMode": "headed",
+      "evidence": {
+        "version": "lava-automation-environment-v1",
+        "authority": "advisory",
+        "signals": {
+          "webdriver": true,
+          "headlessUserAgent": false,
+          "headlessBrand": false
+        }
+      },
+      "fixedGeneratedBehaviorControl": [
+        {
+          "experimentalModel": false,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        },
+        {
+          "experimentalModel": true,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "webdriverOrCdpUsed": true,
+      "condition": "default",
+      "pointerMoves": 41,
+      "unchangedAfterPointerMovement": true
+    },
+    {
+      "name": "headless-webdriver-hidden",
+      "declaredEnvironment": "headless-playwright",
+      "declaredControl": "scripted",
+      "displayMode": "headless",
+      "evidence": {
+        "version": "lava-automation-environment-v1",
+        "authority": "advisory",
+        "signals": {
+          "webdriver": false,
+          "headlessUserAgent": true,
+          "headlessBrand": true
+        }
+      },
+      "fixedGeneratedBehaviorControl": [
+        {
+          "experimentalModel": false,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        },
+        {
+          "experimentalModel": true,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "webdriverOrCdpUsed": true,
+      "condition": "webdriver-only",
+      "pointerMoves": 2,
+      "unchangedAfterPointerMovement": true
+    },
+    {
+      "name": "headless-ua-token-overridden",
+      "declaredEnvironment": "headless-playwright",
+      "declaredControl": "scripted",
+      "displayMode": "headless",
+      "evidence": {
+        "version": "lava-automation-environment-v1",
+        "authority": "advisory",
+        "signals": {
+          "webdriver": true,
+          "headlessUserAgent": false,
+          "headlessBrand": true
+        }
+      },
+      "fixedGeneratedBehaviorControl": [
+        {
+          "experimentalModel": false,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        },
+        {
+          "experimentalModel": true,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "webdriverOrCdpUsed": true,
+      "condition": "ua-token-overridden-at-launch",
+      "pointerMoves": 2,
+      "unchangedAfterPointerMovement": true
+    },
+    {
+      "name": "headless-all-hints-forged-false",
+      "declaredEnvironment": "headless-playwright",
+      "declaredControl": "scripted",
+      "displayMode": "headless",
+      "evidence": {
+        "version": "lava-automation-environment-v1",
+        "authority": "advisory",
+        "signals": {
+          "webdriver": false,
+          "headlessUserAgent": false,
+          "headlessBrand": false
+        }
+      },
+      "fixedGeneratedBehaviorControl": [
+        {
+          "experimentalModel": false,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        },
+        {
+          "experimentalModel": true,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "webdriverOrCdpUsed": true,
+      "condition": "all-false",
+      "pointerMoves": 2,
+      "unchangedAfterPointerMovement": true
+    },
+    {
+      "name": "headless-all-hints-unavailable",
+      "declaredEnvironment": "headless-playwright",
+      "declaredControl": "scripted",
+      "displayMode": "headless",
+      "evidence": {
+        "version": "lava-automation-environment-v1",
+        "authority": "advisory",
+        "signals": {
+          "webdriver": null,
+          "headlessUserAgent": null,
+          "headlessBrand": null
+        }
+      },
+      "fixedGeneratedBehaviorControl": [
+        {
+          "experimentalModel": false,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        },
+        {
+          "experimentalModel": true,
+          "riskDelta": 0,
+          "enforcementRiskDelta": 0,
+          "behavioralModelUnchanged": true,
+          "decisionUnchanged": true
+        }
+      ],
+      "browserVersion": "156.0.8078.4",
+      "webdriverOrCdpUsed": true,
+      "condition": "unavailable",
+      "pointerMoves": 2,
+      "unchangedAfterPointerMovement": true
+    }
+  ],
+  "humanParticipants": 0,
+  "humanPopulationExposureRate": null,
+  "humanFalsePositiveRate": null,
+  "humanControlledAutomation": {
+    "status": "NOT_RUN_NO_CONSENTING_HUMAN_OPERATOR",
+    "supportedDeclaration": true
+  },
+  "identityDetectionClaim": false,
+  "vmOrRemoteDesktopDetection": false,
+  "productionEnforcementEnabled": false,
+  "summary": {
+    "measured": 10,
+    "skipped": 0,
+    "positive": 7,
+    "meaning": "Selected controlled configurations, not population prevalence or classifier accuracy. No genuine human or VM/RDP study."
+  }
+}

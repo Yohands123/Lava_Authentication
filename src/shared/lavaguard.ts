@@ -37,5 +37,7 @@ export interface FeatureSummary {
   geometryHash: string;
   /** Self-reported context hint, never a trusted attestation. Absence is normal. */
   signals?: { webdriver?: boolean };
+  /** Optional consented local evidence. Never a behavioral model feature. */
+  automationEnvironment?: import("./automation-environment").AutomationEnvironmentEvidence;
   robust?: { version: "lava-robust-v2"; features: import("./robust-features").RobustFeatures };
 }

@@ -1,0 +1,109 @@
+{
+  "schema": "lava-phase5-readiness-v3",
+  "reviewDate": "2026-10-18",
+  "branch": "feature/lavaguard-phase5",
+  "engineeringStatus": "ENGINEERING_READY_RESEARCH_DATA_PENDING",
+  "status": "NOT_READY_NO_OPT_IN_DATA",
+  "data": {
+    "applicationAttempts": 30,
+    "eligibleAttempts": 20,
+    "declaredHumanAttempts": 0,
+    "declaredBotAttempts": 30,
+    "independentHumanStudyCodes": 0,
+    "allDeclaredBotFamilies": 12,
+    "declaredIndependentBotFamilies": 8,
+    "datasetHash": "b384bc4f27a9dc321f8b29f0d62ecc827e0fbad497aad2b6699b4cd44c9b0425",
+    "datasetVersion": "phase5-b384bc4f27a9dc32",
+    "datasetAudit": {
+      "invalidRecords": 0,
+      "incompleteRecords": 10,
+      "duplicateAttempts": 0,
+      "duplicateVectors": 0,
+      "duplicateTrajectories": 0,
+      "conflictingLabels": 0,
+      "exclusions": {
+        "incomplete_task": 10
+      }
+    }
+  },
+  "cohorts": "NOT_FORMED_NO_HUMAN_DATA",
+  "applicationModelFit": false,
+  "finalTestEvaluated": false,
+  "modelPromoted": false,
+  "productionML": "off",
+  "rawUploaded": false,
+  "realPeopleCollected": false,
+  "pushed": false,
+  "pullRequestCreated": false,
+  "deployed": false,
+  "missingRequirements": [
+    "Genuine consenting application-human attempts across independent study codes/devices",
+    "Prospectively frozen matched human/bot cohorts and broader independent runs; bot-only captures do not establish generalization"
+  ],
+  "verification": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "typescriptTests": {
+      "passed": 110,
+      "failed": 0,
+      "skipped": 0
+    },
+    "pythonTests": {
+      "passed": 37,
+      "failed": 0,
+      "skipped": 0
+    },
+    "browserTests": {
+      "shadow": 29,
+      "normalEnforce": 6,
+      "researchEnforce": 6,
+      "hardening": 8,
+      "failed": 0,
+      "skipped": 0
+    },
+    "importerChecks": {
+      "passed": 17,
+      "failed": 0
+    },
+    "npmAuditVulnerabilities": 0,
+    "sourcePublicationReview": {
+      "status": "passed",
+      "filesReviewed": 268,
+      "textFilesScanned": 239,
+      "localLinksChecked": 180,
+      "requiredPNGScreenshotsChecked": 8,
+      "secretPatternOrPrivatePathFindings": 0,
+      "brokenLocalLinks": 0,
+      "remoteLinksFetched": false
+    },
+    "developmentSmoke": {
+      "command": "node scripts/python-local.mjs ml/check_phase5_development.py",
+      "syntheticOnly": true,
+      "notStudyEvidence": true,
+      "status": "DESCRIPTIVE_DEVELOPMENT_EXPERIMENTS",
+      "ablationsExecuted": 5,
+      "familyFoldsExecuted": 20,
+      "unavailableFolds": 0,
+      "seconds": 119.81640850001713,
+      "applicationRowsWritten": false
+    },
+    "temporaryCaptureServerStopped": true
+  },
+  "browserEvidence": {
+    "initiatedAttempts": 33,
+    "retainedCaptures": 30,
+    "harnessFailures": 3,
+    "taskCompleted": 20,
+    "incomplete": 10,
+    "optionsAllowed": 20,
+    "authenticatedSessions": 0,
+    "incompleteIsNotDetection": true
+  },
+  "limitations": [
+    "Zero consenting genuine application-human attempts: accuracy, FPR and application calibration are unknown.",
+    "Synthetic fixtures and derived perturbations are not independent study evidence.",
+    "Declared codes/families/labels and client motion are forgeable.",
+    "Real touch/pen/assistive hardware, prospective generalization and edge CPU remain untested."
+  ]
+}

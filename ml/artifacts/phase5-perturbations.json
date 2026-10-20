@@ -1,0 +1,136 @@
+{
+  "schema": "lava-phase5-perturbation-summary-v1",
+  "dataScope": "Current consenting application exports, no new independent people",
+  "recordedHumanAttempts": 0,
+  "declaredAutomationAttempts": 30,
+  "originals": 30,
+  "invalidExports": 0,
+  "eligibleOriginals": 20,
+  "variants": {
+    "original": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 0,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 0,
+      "medianAbsoluteFixedModelScoreDelta": 0,
+      "oodViews": 0
+    },
+    "cadence16": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 0,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 206.1784630000002,
+      "medianAbsoluteFixedModelScoreDelta": 0.0014234970065594155,
+      "oodViews": 0
+    },
+    "cadence32": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 0,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 684.7358280000008,
+      "medianAbsoluteFixedModelScoreDelta": 0.0022241922844933315,
+      "oodViews": 0
+    },
+    "cadence64": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 0,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 1249.3782069999997,
+      "medianAbsoluteFixedModelScoreDelta": 0.004716680814261631,
+      "oodViews": 0
+    },
+    "scaled2": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 0,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 0,
+      "medianAbsoluteFixedModelScoreDelta": 0,
+      "oodViews": 0
+    },
+    "translated": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 0,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 0,
+      "medianAbsoluteFixedModelScoreDelta": 0,
+      "oodViews": 0
+    },
+    "reduced6": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 30,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 3514.1966540000003,
+      "medianAbsoluteFixedModelScoreDelta": 0.06721386138586238,
+      "oodViews": 0
+    },
+    "reduced12": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 0,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 4140.16945,
+      "medianAbsoluteFixedModelScoreDelta": 0.01643693751824815,
+      "oodViews": 0
+    },
+    "reduced32": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 0,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 1216.0916529999995,
+      "medianAbsoluteFixedModelScoreDelta": 0.0024800776540359615,
+      "oodViews": 0
+    },
+    "clockJitter": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 0,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 119.00767300000007,
+      "medianAbsoluteFixedModelScoreDelta": 0.0005102867036788084,
+      "oodViews": 0
+    },
+    "spatialJitter": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 0,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 55.25721599999997,
+      "medianAbsoluteFixedModelScoreDelta": 0.0003678618119541399,
+      "oodViews": 0
+    },
+    "variableSpeed": {
+      "traces": 30,
+      "eligibleOriginals": 20,
+      "truncated": 0,
+      "insufficientSampleViews": 0,
+      "nonfiniteFeatureViews": 0,
+      "medianMaxAbsoluteRobustFeatureDelta": 644.2031529999986,
+      "medianAbsoluteFixedModelScoreDelta": 0.006715377365436426,
+      "oodViews": 0
+    }
+  },
+  "inferenceMeaning": "Fixed Phase 4 robust corpus candidate scored offline; not server decisions or validated application accuracy",
+  "datasetHash": "b384bc4f27a9dc321f8b29f0d62ecc827e0fbad497aad2b6699b4cd44c9b0425",
+  "cadenceControlsAreDerivedViews": true,
+  "newApplicationModelFit": false,
+  "status": "DESCRIPTIVE_CAPTURE_PERTURBATIONS_NOT_HUMAN_VALIDATION"
+}

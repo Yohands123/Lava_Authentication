@@ -1,0 +1,13 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+const read=async name=>{try{return JSON.parse(await readFile(`ml/artifacts/phase6-${name}.json`,'utf8'));}catch(error){if(error.code==='ENOENT')return {status:'NOT_RUN'};throw error;}};
+const [adversarial,performance,ml,load]=await Promise.all(['adversarial','inference-performance','ml','local-load'].map(read));
+const escape=value=>String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+const table=rows=>'<table><tbody>'+rows.map(([key,value])=>`<tr><th>${escape(key)}</th><td>${escape(typeof value==='object'?JSON.stringify(value):value)}</td></tr>`).join('')+'</tbody></table>';
+const runs=adversarial.runs??[];
+const html=`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><meta http-equiv="Content-Security-Policy" content="default-src 'none';style-src 'unsafe-inline';base-uri 'none';form-action 'none'"><title>LavaGuard Phase 6 local comparison</title><style>body{font:16px system-ui;background:#100b1e;color:#f4eeff;max-width:1100px;margin:3rem auto;padding:1rem}table{border-collapse:collapse;width:100%}td,th{padding:.7rem;border:1px solid #51465c;text-align:left;overflow-wrap:anywhere}h1{color:#ff9ce7}summary{cursor:pointer;padding:1rem}p{line-height:1.6}</style><h1>Phase 6 observation comparison</h1><p>Local aggregate snapshot only. Scores have no policy authority. CLEAR is permission to continue, and WebAuthn remains mandatory. No real-human accuracy or AI identity is established. Refresh by running <code>node scripts/phase6/view.mjs</code>; this file makes no network requests.</p>
+<details open><summary>Adversarial runs and exclusions</summary>${table(runs.map((r,i)=>['Run '+(i+1),r.summary]))}</details>
+<details><summary>Runtime comparison</summary>${table([['Node registry',performance.node?.registryPrepared??null],['Actual browser extraction',performance.browserFeatures??null],['Local workerd batches',performance.workerd?.batches??null]])}</details>
+<details><summary>Synthetic negative controls and actual data readiness</summary>${table([['Application audit',ml.application??null],['Synthetic controls only',ml.syntheticEngineering?.negativeControls??null]])}</details>
+<details><summary>Load and availability</summary>${table((load.phases??[]).map(p=>['Concurrency '+p.concurrency,{issuance:p.issuance,evaluation:p.evaluation,recovery:p.recoveryStatus,streaming:p.streaming}]))}</details></html>`;
+await mkdir('.cache/phase6',{recursive:true});await writeFile('.cache/phase6/shadow-comparison.html',html);
+console.log('Local view generated: .cache/phase6/shadow-comparison.html (no monitoring or controls)');

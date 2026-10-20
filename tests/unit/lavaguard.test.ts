@@ -79,7 +79,8 @@ describe("probabilistic evidence and proportionate policy", () => {
   it("does not reject a human taking over a WebDriver browser on the browser hint alone", () => {
     const s = { ...summary(path().map((p, i) => ({ ...p, x: (i / 100) ** 2 }))), signals: { webdriver: true } };
     const result = detector.evaluate(s, 5000, false);
-    expect(result.reasons).toContain("browser_automation_reported");
+    expect(result.automationEnvironment?.positiveSignals).toContain("webdriver");
+    expect(result.reasons).not.toContain("browser_automation_reported");
     expect(policy.decide("enforce", result, false)).toBe("CLEAR");
     expect(policy.decide("shadow", result, false)).toBe("CLEAR");
     expect(policy.decide("enforce", result, false)).not.toBe("BLOCK");
@@ -88,7 +89,8 @@ describe("probabilistic evidence and proportionate policy", () => {
     const captured = parseSummary(JSON.parse(readFileSync(new URL("../fixtures/automated-preview-summary.json", import.meta.url), "utf8")))!;
     for (let i = 0; i < 4; i++) {
       const result = detector.evaluate({ ...captured, signals: { webdriver: true } }, 10000, i > 0);
-      expect(result.reasons).toContain("browser_automation_reported");
+      expect(result.automationEnvironment?.positiveSignals).toContain("webdriver");
+      expect(result.reasons).not.toContain("browser_automation_reported");
       expect(policy.decide("enforce", result, false)).toBe("CLEAR");
     }
   });

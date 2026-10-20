@@ -1,0 +1,60 @@
+{
+  "schema": "lava-phase5-runtime-benchmark-v1",
+  "syntheticOnly": true,
+  "notStudyEvidence": true,
+  "node": "v24.13.0",
+  "platform": "win32",
+  "fixtureHash": "eb20ac8cbfedc32f762a0700c16ce99da9e94494ebef622c98039bc828cc94a3",
+  "moduleImportMs": 1.4137000000000057,
+  "modelBytes": 2051,
+  "portableBundleBytes": 31104,
+  "legacy": {
+    "n": 10000,
+    "p50Ms": 0.0004999999999881766,
+    "p95Ms": 0.0009000000000014552,
+    "p99Ms": 0.0010000000000331966
+  },
+  "robustPhase4": {
+    "n": 10000,
+    "p50Ms": 0.0013000000000147338,
+    "p95Ms": 0.002399999999965985,
+    "p99Ms": 0.004900000000020555
+  },
+  "portableValidatedEachCall": {
+    "n": 10000,
+    "p50Ms": 0.004000000000019099,
+    "p95Ms": 0.0049999999999954525,
+    "p99Ms": 0.008100000000013097
+  },
+  "portablePrepared": {
+    "n": 10000,
+    "p50Ms": 0.001099999999951251,
+    "p95Ms": 0.0013000000000147338,
+    "p99Ms": 0.003100000000017644
+  },
+  "featureExtraction1024": {
+    "robust": {
+      "n": 500,
+      "p50Ms": 0.1450000000000955,
+      "p95Ms": 0.20150000000001,
+      "p99Ms": 0.3123000000000502
+    },
+    "response": {
+      "n": 500,
+      "p50Ms": 2.1062999999999192,
+      "p95Ms": 2.7708999999999833,
+      "p99Ms": 3.2769000000000688
+    }
+  },
+  "limitations": [
+    "Local Node timings, not Worker edge CPU or browser FPS",
+    "Heap delta includes JIT, loop allocations and garbage collection noise",
+    "Synthetic model fixture is not a human-trained application candidate"
+  ],
+  "observedHeapDeltaBytes": 28414072,
+  "preparedBatch10000Ms": 9.52599999999984,
+  "freshNodeProcess": {
+    "moduleImportMs": 1.3109000000000002,
+    "firstInferenceMs": 0.5080999999999989
+  }
+}

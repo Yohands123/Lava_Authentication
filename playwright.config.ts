@@ -10,7 +10,8 @@ export default defineConfig({
   // rate-limit test runs last so it can't starve the others.
   workers: 1,
   fullyParallel: false,
-  timeout: 45_000,
+  // Software WebGL on CI runners makes multi-sign-in tests much slower.
+  timeout: process.env.CI ? 180_000 : 45_000,
   reporter: "list",
   use: {
     baseURL: ORIGIN,

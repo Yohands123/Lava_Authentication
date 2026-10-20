@@ -1,0 +1,81 @@
+{
+  "schema": "lava-browser-capture-v3",
+  "realLocalBrowser": true,
+  "generatedAutomationOnly": true,
+  "humanParticipants": 0,
+  "origin": "http://localhost:8791",
+  "configuration": {
+    "mode": "enforce",
+    "lab": true,
+    "experimentalModel": false,
+    "featureVersion": "lava-features-v1",
+    "retentionSeconds": 600,
+    "modelMode": "shadow",
+    "modelVersion": "lava-logistic-experimental-v1",
+    "policyVersion": "lava-policy-v4"
+  },
+  "cases": [
+    {
+      "case": "bezier",
+      "family": "bezier",
+      "seed": 1002,
+      "acquisition": "playwright",
+      "requestedCadenceMs": 32,
+      "sampleCount": 87,
+      "pointerCount": 87,
+      "taskComplete": true,
+      "captureOutcome": "completed",
+      "serverVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "optionsStatus": 200,
+      "sessionStatus": 401,
+      "authenticatedSessionObserved": false,
+      "durationMs": 15512.0077
+    },
+    {
+      "case": "ghost-cursor",
+      "family": "ghost-cursor",
+      "seed": 1002,
+      "acquisition": "playwright",
+      "requestedCadenceMs": 32,
+      "sampleCount": 86,
+      "pointerCount": 86,
+      "taskComplete": true,
+      "captureOutcome": "completed",
+      "serverVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "optionsStatus": 200,
+      "sessionStatus": 401,
+      "authenticatedSessionObserved": false,
+      "durationMs": 14778.031500000001
+    },
+    {
+      "case": "scaled",
+      "family": "corrections",
+      "seed": 1002,
+      "acquisition": "playwright",
+      "requestedCadenceMs": 32,
+      "sampleCount": 59,
+      "pointerCount": 61,
+      "taskComplete": true,
+      "captureOutcome": "completed",
+      "serverVerdict": "CLEAR",
+      "clearanceIssued": true,
+      "optionsStatus": 200,
+      "sessionStatus": 401,
+      "authenticatedSessionObserved": false,
+      "durationMs": 9200.668099999995
+    }
+  ],
+  "noAuthenticationBypassClaim": true,
+  "summary": {
+    "attempts": 3,
+    "taskCompleted": 3,
+    "incomplete": 0,
+    "errors": 0,
+    "optionsAllowed": 3,
+    "authenticatedSessions": 0,
+    "actualHumanStudyRows": 0,
+    "unfinishedRingIsNotDetection": true
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "schema": "lava-phase6-load-first-failure-v1",
+  "manifest": {
+    "run": "165af978-64ef-49b7-bcde-e4aa66acf2b2",
+    "origin": "http://localhost:8807",
+    "localOnly": true,
+    "workerSha256": "8f99223079d294f5a263f8dcb543e1da273fb62b002ec1e7b76b701059abc24f",
+    "configSha256": "45e1c53afbace95d502bfce88084c14f70b87eae7e15440992af20e6844f271a",
+    "assetsSha256": "c6e05001e0685e82db3700aa9636102b51adee55611cc32c85113174aa5705f6",
+    "node": "v24.13.0",
+    "productionFlagsChanged": false
+  },
+  "status": "FAILED_BEFORE_PUBLIC_CHECKPOINT",
+  "concurrency": 1,
+  "assertion": "slow stream HTTP 500 instead of expected 400",
+  "measuredSlowStatus": 500,
+  "requestLatencyAndCounts": null,
+  "notReconstructed": true,
+  "logsRetainedLocally": true
+}

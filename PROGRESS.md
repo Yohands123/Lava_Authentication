@@ -1,6 +1,39 @@
 # Progress
 
-Current phase: LavaGuard Phase 4 security hardening and Phase 4B ML engineering, authorized 2026-10-17
+Current phase: LavaGuard Phase 6 local engineering, authorized 2026-10-19; empirical human validation and production eligibility remain unavailable.
+
+## Phase 6 local engineering, 2026-10-19
+
+- Preserved existing uncommitted Phase 5 work, private dataset hash, UI/physics, WebAuthn, production router and flags.
+- Added browser/API outcome accounting, adversarial/recovery/unseen-seed experiments, response-v4 diagnostics, synthetic nuisance/leakage controls, pinned observation registry, revocation/withdrawal, off-mode fast path and bounded shadow metrics.
+- Measured local Node/browser/workerd inference, five load levels with overload/recovery, real-SQL sharding/index prototype; retained cancellation and external slow-stream failures. No sharding cutover or unsupported capacity claim.
+- [Comprehensive handoff](docs/LAVAGUARD_PHASE6_HANDOFF.md) and machine-readable readiness distinguish actual checks from human/independent/staging blockers. No commit, push, PR, deployment, paid agent, monitoring or production ML activation.
+
+## Reusable local test bench, 2026-10-18
+
+- Owner requested a persistent local testing server plus visible automation based on the research. `npm run test:live` / `Start-LavaGuard-Testing.cmd` opens http://localhost:8792.
+- Normal app on 8787 and isolated older-model research comparison on 8791; 16 patterns, deterministic repeats, stop, redacted history/download and actual screenshots. No Phase 5 model promotion, participant recruitment, raw study import or deployment.
+- New loopback control server has fixed targets, Host/Origin/token checks, bounded body/job/history and 15 security/queue/privacy tests included in `npm run check`. Existing 110 unit tests pass.
+- Full flow verification is documented in [local testing results](docs/LAVAGUARD_LOCAL_TESTING_RESULTS.md); [usage guide](docs/LAVAGUARD_LOCAL_TESTING.md).
+
+## Phase 5 engineering, 2026-10-18
+
+- Strict v3 consent/provenance, functional bounded local Lab recording, incomplete records, private canonical import, revocation/deletion and disabled inference.
+- Frozen connected participant/family/session/run/replay cohorts, robust12 plus experimental response16, LR/RF/histogram boosting and diagnostic anomaly model, isolated calibration/final evaluation, development ablations and family holdout.
+- 30 actual declared-automation browser exports: 20 completed, 10 incomplete; zero humans. Three initial harness failures retained; corrected recovery succeeded. No application model fit or final evaluation.
+- Verified 110 TypeScript tests, 37 Python tests, 49 browser tests and 17 importer checks; synthetic development smoke and local performance measurements. Full commands/limits are in [Phase 5 results](docs/LAVAGUARD_PHASE5_ML_RESULTS.md).
+- Local branch `feature/lavaguard-phase5`; no push/PR/deployment/production collection or ML activation. Approved ring/physics/passkeys unchanged.
+- [Architecture](docs/LAVAGUARD_PHASE5_ARCHITECTURE.md), [protocol](docs/LAVAGUARD_PHASE5_DATA_COLLECTION.md), [security](docs/LAVAGUARD_PHASE5_SECURITY.md), [roadmap](docs/LAVAGUARD_PHASE5_ROADMAP.md), [full handoff](docs/LAVAGUARD_PHASE5_HANDOFF.md).
+
+Earlier entries below preserve the historical state at their dates.
+
+## GitHub publication and Phase 5 offline starter, 2026-10-18
+
+- The owner separately authorized README fact-checking, safe screenshots, commit/push to `feature/lavaguard` and a PR into `main`; no deployment, production activation or automatic merge.
+- Preserved the existing Phase 4 commit and merged PR #1; this publication follow-up keeps that history.
+- Replaced stale human-claim screenshots with fresh actual Worker shadow captures, retained the original screenshots and explicitly mocked CLEAR/FLAG/BLOCK fixtures, and excluded pointer-debug captures from the published tree.
+- Installed the subsequently owner-requested Phase 5 starter: six synthetic tests passed; actual readiness is `NOT_READY_NO_OPT_IN_DATA` (zero human codes/bot families). The generated report remains ignored/private. No recruitment, production collection or model promotion occurred.
+- Current publication verification and media inventory: [publication results](docs/LAVAGUARD_PUBLISH_RESULTS.md).
 
 ## LavaGuard Phase 4 / 4B
 
@@ -116,3 +149,8 @@ below as "built, needs review" until the user has watched it and confirmed.
 - 2026-10-11: Phase 5 closed, Phase 6 started. Filled wax-response gaps (ring flicker, slow rate-limit dim, fizzles for text-only messages, no burst under reduced motion). Moved wax responses to ui/wax.ts.
 - 2026-10-11: Phase 6 closed at user's request, Phase 7 started. Built Lab mode and NIST tests; demo script E2E passes. 41 unit, 9 E2E passing.
 - 2026-10-11: Narrow-screen fix. Clear-the-ring sign-in replaces Skip/Hold Space (owner's decision). 46 unit, 9 E2E passing.
+- 2026-10-18: Added Phase 5 Automation Environment Evidence: three consented advisory booleans, declared control/display context, strict optional research metadata, isolated shortcut comparisons and measured browser coverage. All hints can disappear; no human-population accuracy is established. Production ML remains off. See [extension results](docs/LAVAGUARD_AUTOMATION_ENVIRONMENT.md).
+
+## LavaGuard Phase 7 ? publication baseline, October 19, 2026
+
+Stage 0.5 failure UX is implemented and checked; 274 distinct baseline tests pass plus importer/environment probes. Owner authorizes feature commit/push/PR only; no merge, deployment, production ML, spending or human recruitment. Phase 5/6 historical reports and ignored private datasets are preserved. Review: docs/LAVAGUARD_PHASE7_BASELINE_REVIEW.md.

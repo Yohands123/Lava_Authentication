@@ -65,7 +65,8 @@ export const passkeyButton = (page: Page) => page.locator("[data-action=passkey]
 export const ringIsClear = (page: Page) => page.locator("[data-screen=stir].is-clear");
 
 /** Wobbly, irregular circles around the ring, the way a person stirs, until the ring is clear. */
-export async function clearRing(page: Page, timeoutMs = 30_000): Promise<void> {
+/** CI runners render WebGL in software, so stirring there needs a longer deadline. */
+export async function clearRing(page: Page, timeoutMs = process.env.CI ? 75_000 : 30_000): Promise<void> {
   await expect(page.locator("[data-screen=stir]")).toHaveAttribute("data-guard-state", "STIRRING");
   const box = (await page.locator("[data-ring-arc]").boundingBox())!;
   const cx = box.x + box.width / 2;

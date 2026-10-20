@@ -151,6 +151,8 @@ below as "built, needs review" until the user has watched it and confirmed.
 - 2026-10-11: Narrow-screen fix. Clear-the-ring sign-in replaces Skip/Hold Space (owner's decision). 46 unit, 9 E2E passing.
 - 2026-10-18: Added Phase 5 Automation Environment Evidence: three consented advisory booleans, declared control/display context, strict optional research metadata, isolated shortcut comparisons and measured browser coverage. All hints can disappear; no human-population accuracy is established. Production ML remains off. See [extension results](docs/LAVAGUARD_AUTOMATION_ENVIRONMENT.md).
 
-## LavaGuard Phase 7 ? publication baseline, October 19, 2026
+## LavaGuard Phase 7 — publication baseline, October 19, 2026
 
 Stage 0.5 failure UX is implemented and checked; 274 distinct baseline tests pass plus importer/environment probes. Owner authorizes feature commit/push/PR only; no merge, deployment, production ML, spending or human recruitment. Phase 5/6 historical reports and ignored private datasets are preserved. Review: docs/LAVAGUARD_PHASE7_BASELINE_REVIEW.md.
+
+Phase 5/6 baseline committed and pushed as 3e87aae with PR #3. Phase 7A/7B engineering is on feature/lavaguard-phase7: supervised study gates and local review/history/withdrawal, signed authoritative routing prototype, real local proxy passkeys, transport diagnosis, SQL/index/load benchmarks and staging/hosting drafts. Actual counts, publication and unresolved evidence gates are recorded in docs/LAVAGUARD_PHASE7_HANDOFF.md. Genuine participants remain zero; production flags remain off.

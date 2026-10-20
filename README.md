@@ -19,6 +19,8 @@ An interactive WebGL lava lamp meets passkey authentication, Cloudflare's edge p
 
 ## Test it locally, repeatedly
 
+Phase 7 adds safer failed-sign-in controls, local study review/withdrawal engineering, signed routing prototypes and a tested local same-origin passkey proxy. It has **zero human study participants**, remains unvalidated for production ML, and has not been deployed. [Phase 7 handoff, tests and remaining gates](docs/LAVAGUARD_PHASE7_HANDOFF.md).
+
 Phase 6 local research now includes a bounded browser/API adversarial harness, private observation-only registry, dynamic-target diagnostics, leakage controls, actual local Worker benchmarks and a sharding prototype. Client-side behavior remains forgeable; passkeys provide identity security. Genuine-human validation and production eligibility remain unavailable. [Phase 6 handoff and reproduction](docs/LAVAGUARD_PHASE6_HANDOFF.md).
 
 Run `npm run test:live` or double-click `Start-LavaGuard-Testing.cmd`, then open **http://localhost:8792**. The local panel runs 16 visible automation patterns, compares normal/advisory and older-model research profiles, supports repeat/stop, and shows actual verdicts, clearance, passkey HTTP outcomes and screenshots. It does not train or validate a Phase 5 model. [Testing guide](docs/LAVAGUARD_LOCAL_TESTING.md).

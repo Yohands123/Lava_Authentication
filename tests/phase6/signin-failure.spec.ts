@@ -59,7 +59,7 @@ for (const alteration of ["origin", "rp", "uv"] as const) test(`real assertion w
   });
   const response = page.waitForResponse(r => r.url().endsWith("/api/login/verify"));
   await page.getByRole("button", { name: "Sign in", exact: true }).click(); await page.getByRole("button", { name: "Use a passkey without stirring" }).click();
-  const result = await response; expect(result.status()).toBe(401); expect(result.headers()["set-cookie"]).toBeUndefined();
+  const result = await response; expect(result.status()).toBe(401); expect(await result.headerValue("set-cookie")).toBeNull();
   expect((await page.request.get("/api/session")).status()).toBe(401);
   expect((await page.request.post("/api/login/verify", { headers: { Origin: origin }, data: {} })).status()).toBe(400);
 });

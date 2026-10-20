@@ -1,0 +1,33 @@
+{
+  "schema": "lava-phase7-index-v1",
+  "runtimeSha256": "360cefaac0aed31d9de2db00e9af58ea9028295a5cda7b9706a31ee498ee4816",
+  "runtime": "Local in-memory Node SQLite; no live migration",
+  "syntheticRows": 10000,
+  "selectedRows": 5000,
+  "beforePlan": [
+    "SCAN sessions"
+  ],
+  "afterPlan": [
+    "SEARCH sessions USING INDEX phase7_prototype_sessions_expiry (expires_at<?)"
+  ],
+  "before": {
+    "n": 30,
+    "p50Ms": 1.6777000000000157,
+    "p95Ms": 2.439199999999971,
+    "p99Ms": 2.974900000000048
+  },
+  "after": {
+    "n": 30,
+    "p50Ms": 1.602700000000027,
+    "p95Ms": 2.060800000000029,
+    "p99Ms": 2.1323000000000434
+  },
+  "sessionUserPlan": [
+    "SEARCH sessions USING INDEX sessions_user (user_id=?)"
+  ],
+  "credentialPlan": [
+    "SEARCH credentials USING INDEX sqlite_autoindex_credentials_1 (id=?)"
+  ],
+  "productionSchemaChanged": false,
+  "capacity10kConcurrentUsers": null
+}

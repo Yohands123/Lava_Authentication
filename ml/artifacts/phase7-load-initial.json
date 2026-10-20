@@ -1,0 +1,10 @@
+{
+  "schema": "lava-phase7-load-initial-v1",
+  "command": "node scripts/phase7/load.mjs",
+  "complete": false,
+  "exitCode": 1,
+  "failure": "Local stream test timeout after six seconds; initial harness threw before checkpointing first phase",
+  "normalPhaseResultsAvailable": false,
+  "errorNotCountedAsPass": true,
+  "sourceSha256": "065d472890c829a7689368e7b160c5813ef6dd2855eca681becb9a568a6ac1f4"
+}

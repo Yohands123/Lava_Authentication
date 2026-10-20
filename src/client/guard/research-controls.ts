@@ -25,6 +25,9 @@ export class ResearchControls {
       <button type="button" class="button button-quiet" data-decline-research>Decline / withdraw local research</button>
       <button type="button" class="button button-quiet" data-export-research disabled>Export latest local attempt</button>
       <button type="button" class="button button-quiet" data-export-research-all disabled>Export study session</button>
+      <button type="button" class="button button-quiet" data-export-study-manifest disabled>Export local session manifest</button>
+      <details><summary>Review latest local attempt before exporting</summary><pre data-study-preview>No retained attempt.</pre></details>
+      <details><summary>Local attempt history</summary><pre data-study-history>No retained attempts.</pre></details>
       <button type="button" class="button button-quiet" data-forget-guard>Delete research and attempt history</button>
       <p role="status" data-study-quality>No research retained. Participation is optional.</p>`;
     panel.append(setup);
@@ -37,6 +40,9 @@ export class ResearchControls {
     this.el("data-decline-research").addEventListener("click", () => this.clear());
     this.el("data-export-research").addEventListener("click", () => this.download(false));
     this.el("data-export-research-all").addEventListener("click", () => this.download(true));
+    this.el("data-export-study-manifest").addEventListener("click", () => {
+      if (this.consent && this.recorder.count) this.save(this.recorder.sessionManifest(), "lavaguard-local-session-manifest.json");
+    });
   }
   private el<T extends HTMLElement = HTMLElement>(attribute: string): T { return this.panel.querySelector<T>(`[${attribute}]`)!; }
   private get consent(): boolean { return this.el<HTMLInputElement>("data-research-consent").checked; }
@@ -69,14 +75,20 @@ export class ResearchControls {
     const latest = this.recorder.latest(), enabled = this.consent && latest !== null;
     this.el<HTMLButtonElement>("data-export-research").disabled = !enabled;
     this.el<HTMLButtonElement>("data-export-research-all").disabled = !enabled;
+    this.el<HTMLButtonElement>("data-export-study-manifest").disabled = !enabled;
+    this.el("data-study-preview").textContent = latest ? JSON.stringify(latest, null, 2) : "No retained attempt.";
+    this.el("data-study-history").textContent = this.recorder.count ? JSON.stringify(this.recorder.sessionManifest(), null, 2) : "No retained attempts.";
     const issues = latest ? validateResearchExport(latest).issues.map(i => i.code) : [];
     this.el("data-study-quality").textContent = latest ? `${this.recorder.count}/32 local attempts; latest ${latest.outcome.status}, ${latest.samples.length} samples. ${issues.join(", ") || "Schema complete; labels remain declarations, not attestation."}` : "No research retained. Participation is optional.";
     if (!this.recorder.recording) delete this.panel.dataset.studyTarget;
   }
   private download(all: boolean): void {
     if (!this.consent || !this.recorder.count) return;
-    const blob = new Blob([JSON.stringify(all ? this.recorder.batch() : this.recorder.latest())], { type: "application/json" });
+    this.save(all ? this.recorder.batch() : this.recorder.latest(), all ? "lavaguard-study-session.json" : "lavaguard-consenting-research.json");
+  }
+  private save(value: unknown, filename: string): void {
+    const blob = new Blob([JSON.stringify(value)], { type: "application/json" });
     const url = URL.createObjectURL(blob), a = document.createElement("a");
-    a.href = url; a.download = all ? "lavaguard-study-session.json" : "lavaguard-consenting-research.json"; a.click(); URL.revokeObjectURL(url);
+    a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url);
   }
 }

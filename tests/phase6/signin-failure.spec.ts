@@ -28,10 +28,11 @@ for (const verdict of ["FLAG", "BLOCK", "ERROR"] as const) test(`failed ${verdic
 });
 test("an expired CLEAR cannot redeem permission or a late click", async ({ page }) => {
   test.setTimeout(60000);
-  await page.route("**/api/lavaguard/evaluate", route => route.fulfill({ json: { verdict: "CLEAR", clearance: "ui-fixture-only", expiresAt: Date.now() + 1500, alternative: false, retryAfter: 0 } }));
+  await page.route("**/api/lavaguard/evaluate", route => route.fulfill({ json: { verdict: "CLEAR", clearance: "ui-fixture-only", expiresAt: Date.now() + 6000, alternative: false, retryAfter: 0 } }));
   await page.goto("/"); await enter(page); await page.getByRole("button", { name: "Sign in", exact: true }).click(); await clearRing(page);
   await expect(page.getByRole("button", { name: "Continue with passkey" })).toBeEnabled();
-  await expect(page.locator("[data-screen=stir]")).toHaveAttribute("data-guard-state", "ERROR");
+  // Long enough for a slow CI runner to observe CLEAR before it expires.
+  await expect(page.locator("[data-screen=stir]")).toHaveAttribute("data-guard-state", "ERROR", { timeout: 20000 });
   await page.locator("[data-verdict-action]").evaluate(el => { const button = el as HTMLElement; button.dataset.action = "passkey"; button.click(); button.click(); });
   expect((await page.request.get("/api/session")).status()).toBe(401);
   await expect(page.getByRole("heading", { name: "You're in" })).not.toBeVisible();

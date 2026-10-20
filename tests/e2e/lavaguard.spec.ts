@@ -68,7 +68,7 @@ test("the no-stir passkey route is hidden from pointer users and revealed by Tab
   await page.getByRole("button", { name: "Back", exact: true }).focus();
   await page.keyboard.press("Tab");
   await expect(alternative).toBeFocused();
-  expect((await alternative.boundingBox())!.width).toBeGreaterThan(100);
+  await expect.poll(async () => (await alternative.boundingBox())?.width ?? 0).toBeGreaterThan(100);
 });
 
 test("keyboard alternative completes separate passkey authentication", async ({ page }) => {

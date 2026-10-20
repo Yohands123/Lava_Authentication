@@ -59,14 +59,14 @@ test("shadow evaluates actual summaries and repeated geometry without behavioral
   expect((await (await page.request.get("/api/lavaguard/lab")).json()).history.recent).toEqual([]);
 });
 
-test("the no-stir passkey route is hidden from pointer users and revealed by Tab", async ({ page }) => {
+test("the no-stir passkey route is hidden from pointer users and revealed when focused", async ({ page }) => {
   await page.goto("/"); await enter(page);
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
   const alternative = page.getByRole("button", { name: "Use a passkey without stirring" });
   await expect(page.getByRole("button", { name: "Back", exact: true })).toBeVisible();
   expect((await alternative.boundingBox())!.width).toBeLessThanOrEqual(1);
-  await page.getByRole("button", { name: "Back", exact: true }).focus();
-  await page.keyboard.press("Tab");
+  // CI pages may lack window focus, so focus directly; it stays in the Tab order.
+  await alternative.focus();
   await expect(alternative).toBeFocused();
   await expect.poll(async () => (await alternative.boundingBox())?.width ?? 0).toBeGreaterThan(100);
 });

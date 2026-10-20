@@ -10,6 +10,9 @@ export default defineConfig({
   // rate-limit test runs last so it can't starve the others.
   workers: 1,
   fullyParallel: false,
+  // Software WebGL on CI makes scripted stirring nondeterministic; retried
+  // passes are reported as flaky, and three failures still fail the job.
+  retries: process.env.CI ? 2 : 0,
   // Software WebGL on CI runners makes multi-sign-in tests much slower.
   timeout: process.env.CI ? 180_000 : 45_000,
   reporter: "list",

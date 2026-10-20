@@ -18,7 +18,8 @@ for (const verdict of ["FLAG", "BLOCK", "ERROR"] as const) test(`failed ${verdic
     page.on("response", async r => { if (r.url().endsWith("/api/lavaguard/challenge") && r.ok()) ids.push((await r.json()).id); });
     await result.getByRole("button", { name: /Try again/ }).press("Enter");
     await expect(page.locator("[data-screen=stir]")).toHaveAttribute("data-guard-state", "STIRRING");
-    expect(ids).toHaveLength(1);
+    // The listener reads bodies asynchronously; wait for it rather than racing it.
+    await expect.poll(() => ids.length).toBe(1);
   } else {
     await expect(result.getByRole("button", { name: /Try again/ })).toHaveCount(0);
     await result.getByRole("button", { name: "Back", exact: true }).press("Enter");
